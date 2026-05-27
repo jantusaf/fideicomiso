@@ -1,0 +1,7816 @@
+{
+  "type": "FeatureCollection",
+  "name": "area3",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-1"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7831026542,
+              -27.5440331828,
+              0
+            ],
+            [
+              -58.78419757980001,
+              -27.5441122541,
+              0
+            ],
+            [
+              -58.78414564639999,
+              -27.5446836441,
+              0
+            ],
+            [
+              -58.7830507077,
+              -27.5446046541,
+              0
+            ],
+            [
+              -58.7831026542,
+              -27.5440331828,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-2"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78406751720001,
+              -27.5438745777,
+              0
+            ],
+            [
+              -58.784218193,
+              -27.54388545839999,
+              0
+            ],
+            [
+              -58.78419757980001,
+              -27.5441122541,
+              0
+            ],
+            [
+              -58.7840718068,
+              -27.54410317170001,
+              0
+            ],
+            [
+              -58.78406751720001,
+              -27.5438745777,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-3"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7839276048,
+              -27.5438644741,
+              0
+            ],
+            [
+              -58.78406751720001,
+              -27.5438745777,
+              0
+            ],
+            [
+              -58.7840718068,
+              -27.54410317170001,
+              0
+            ],
+            [
+              -58.7839307552,
+              -27.5440929858,
+              0
+            ],
+            [
+              -58.7839276048,
+              -27.5438644741,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-4"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7837644643,
+              -27.543852693,
+              0
+            ],
+            [
+              -58.7839276048,
+              -27.5438644741,
+              0
+            ],
+            [
+              -58.7839307552,
+              -27.5440929858,
+              0
+            ],
+            [
+              -58.7837679956,
+              -27.5440812322,
+              0
+            ],
+            [
+              -58.7837644643,
+              -27.543852693,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-5"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7836583424,
+              -27.5438450293,
+              0
+            ],
+            [
+              -58.7837644643,
+              -27.543852693,
+              0
+            ],
+            [
+              -58.7837679956,
+              -27.5440812322,
+              0
+            ],
+            [
+              -58.7836553552,
+              -27.5440730978,
+              0
+            ],
+            [
+              -58.7836583424,
+              -27.5438450293,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-6"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7835568045,
+              -27.5438376966,
+              0
+            ],
+            [
+              -58.7836583424,
+              -27.5438450293,
+              0
+            ],
+            [
+              -58.7836553552,
+              -27.5440730978,
+              0
+            ],
+            [
+              -58.7835561947,
+              -27.5440659368,
+              0
+            ],
+            [
+              -58.7835568045,
+              -27.5438376966,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-7"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78344291,
+              -27.5438294714,
+              0
+            ],
+            [
+              -58.7835568045,
+              -27.5438376966,
+              0
+            ],
+            [
+              -58.7835561947,
+              -27.5440659368,
+              0
+            ],
+            [
+              -58.7834353766,
+              -27.5440572116,
+              0
+            ],
+            [
+              -58.78344291,
+              -27.5438294714,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-8"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7833420164,
+              -27.5438221851,
+              0
+            ],
+            [
+              -58.78344291,
+              -27.5438294714,
+              0
+            ],
+            [
+              -58.7834353766,
+              -27.5440572116,
+              0
+            ],
+            [
+              -58.7833214014,
+              -27.5440489805,
+              0
+            ],
+            [
+              -58.7833420164,
+              -27.5438221851,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-9"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78324112280001,
+              -27.5438148986,
+              0
+            ],
+            [
+              -58.7833420164,
+              -27.5438221851,
+              0
+            ],
+            [
+              -58.7833214014,
+              -27.5440489805,
+              0
+            ],
+            [
+              -58.7832205076,
+              -27.5440416941,
+              0
+            ],
+            [
+              -58.78324112280001,
+              -27.5438148986,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-10"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7831232696,
+              -27.5438063873,
+              0
+            ],
+            [
+              -58.78324112280001,
+              -27.5438148986,
+              0
+            ],
+            [
+              -58.7832205076,
+              -27.5440416941,
+              0
+            ],
+            [
+              -58.7831026542,
+              -27.5440331828,
+              0
+            ],
+            [
+              -58.7831232696,
+              -27.5438063873,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-11"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7844394384,
+              -27.5431272418,
+              0
+            ],
+            [
+              -58.784635743,
+              -27.5431430432,
+              0
+            ],
+            [
+              -58.78469248790001,
+              -27.5431457844,
+              0
+            ],
+            [
+              -58.7846902287,
+              -27.5432620365,
+              0
+            ],
+            [
+              -58.7845776053,
+              -27.5432875428,
+              0
+            ],
+            [
+              -58.7845788917,
+              -27.5433111368,
+              0
+            ],
+            [
+              -58.7844238678,
+              -27.5432985629,
+              0
+            ],
+            [
+              -58.7844394384,
+              -27.5431272418,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-12"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7846681391,
+              -27.5428362463,
+              0
+            ],
+            [
+              -58.7847993826,
+              -27.5428409064,
+              0
+            ],
+            [
+              -58.7847923837,
+              -27.542959666,
+              0
+            ],
+            [
+              -58.7847811627,
+              -27.5431500682,
+              0
+            ],
+            [
+              -58.784635743,
+              -27.5431430432,
+              0
+            ],
+            [
+              -58.7846681391,
+              -27.5428362463,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-13"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78479234390001,
+              -27.5435836629,
+              0
+            ],
+            [
+              -58.7850265451,
+              -27.5436005739,
+              0
+            ],
+            [
+              -58.78501778890001,
+              -27.5436786822,
+              0
+            ],
+            [
+              -58.78478266370001,
+              -27.5436617045,
+              0
+            ],
+            [
+              -58.78479234390001,
+              -27.5435836629,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-14"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78446653630001,
+              -27.5428290876,
+              0
+            ],
+            [
+              -58.7846681391,
+              -27.5428362463,
+              0
+            ],
+            [
+              -58.784635743,
+              -27.5431430432,
+              0
+            ],
+            [
+              -58.7844394384,
+              -27.5431272418,
+              0
+            ],
+            [
+              -58.78446653630001,
+              -27.5428290876,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-15"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7847993826,
+              -27.5428409064,
+              0
+            ],
+            [
+              -58.7851104677,
+              -27.5428519518,
+              0
+            ],
+            [
+              -58.7850984028,
+              -27.542959576,
+              0
+            ],
+            [
+              -58.7847923837,
+              -27.542959666,
+              0
+            ],
+            [
+              -58.7847993826,
+              -27.5428409064,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-16"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7847254101,
+              -27.5434167506,
+              0
+            ],
+            [
+              -58.78504354390001,
+              -27.5434489394,
+              0
+            ],
+            [
+              -58.7850354142,
+              -27.5435214585,
+              0
+            ],
+            [
+              -58.7848032935,
+              -27.5434953884,
+              0
+            ],
+            [
+              -58.7847312887,
+              -27.5434945915,
+              0
+            ],
+            [
+              -58.7847254101,
+              -27.5434167506,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-17"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78478266370001,
+              -27.5436617045,
+              0
+            ],
+            [
+              -58.78501778890001,
+              -27.5436786822,
+              0
+            ],
+            [
+              -58.7850090316,
+              -27.5437567998,
+              0
+            ],
+            [
+              -58.7847729822,
+              -27.5437397553,
+              0
+            ],
+            [
+              -58.78478266370001,
+              -27.5436617045,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-18"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7846157079,
+              -27.5435138217,
+              0
+            ],
+            [
+              -58.7847312887,
+              -27.5434945915,
+              0
+            ],
+            [
+              -58.7848032935,
+              -27.5434953884,
+              0
+            ],
+            [
+              -58.78479234390001,
+              -27.5435836629,
+              0
+            ],
+            [
+              -58.7847729822,
+              -27.5437397553,
+              0
+            ],
+            [
+              -58.7846021384,
+              -27.5437274189,
+              0
+            ],
+            [
+              -58.7846059313,
+              -27.5436337758,
+              0
+            ],
+            [
+              -58.7846075603,
+              -27.5435935567,
+              0
+            ],
+            [
+              -58.7846157079,
+              -27.5435138217,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-19"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7847923837,
+              -27.542959666,
+              0
+            ],
+            [
+              -58.7850984028,
+              -27.542959576,
+              0
+            ],
+            [
+              -58.78508870670001,
+              -27.5430460697,
+              0
+            ],
+            [
+              -58.7847861455,
+              -27.5430655174,
+              0
+            ],
+            [
+              -58.7847923837,
+              -27.542959666,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-20"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7847861455,
+              -27.5430655174,
+              0
+            ],
+            [
+              -58.78508870670001,
+              -27.5430460697,
+              0
+            ],
+            [
+              -58.7850791957,
+              -27.5431309115,
+              0
+            ],
+            [
+              -58.7847811627,
+              -27.5431500682,
+              0
+            ],
+            [
+              -58.7847861455,
+              -27.5430655174,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-21"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7848032935,
+              -27.5434953884,
+              0
+            ],
+            [
+              -58.7850354142,
+              -27.5435214585,
+              0
+            ],
+            [
+              -58.7850265451,
+              -27.5436005739,
+              0
+            ],
+            [
+              -58.78479234390001,
+              -27.5435836629,
+              0
+            ],
+            [
+              -58.7848032935,
+              -27.5434953884,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-22"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7844238678,
+              -27.5432985629,
+              0
+            ],
+            [
+              -58.7845788917,
+              -27.5433111368,
+              0
+            ],
+            [
+              -58.7846157079,
+              -27.5435138217,
+              0
+            ],
+            [
+              -58.7844031701,
+              -27.5435262944,
+              0
+            ],
+            [
+              -58.7844238678,
+              -27.5432985629,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-23"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7844031701,
+              -27.5435262944,
+              0
+            ],
+            [
+              -58.7846157079,
+              -27.5435138217,
+              0
+            ],
+            [
+              -58.7846075603,
+              -27.5435935567,
+              0
+            ],
+            [
+              -58.7846059313,
+              -27.5436337758,
+              0
+            ],
+            [
+              -58.7843947873,
+              -27.5436185291,
+              0
+            ],
+            [
+              -58.7844031701,
+              -27.5435262944,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-24"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7843947873,
+              -27.5436185291,
+              0
+            ],
+            [
+              -58.7846059313,
+              -27.5436337758,
+              0
+            ],
+            [
+              -58.7846021384,
+              -27.5437274189,
+              0
+            ],
+            [
+              -58.7843863071,
+              -27.54371183370001,
+              0
+            ],
+            [
+              -58.7843947873,
+              -27.5436185291,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-25"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7845788917,
+              -27.5433111368,
+              0
+            ],
+            [
+              -58.7845776053,
+              -27.5432875428,
+              0
+            ],
+            [
+              -58.7846902287,
+              -27.5432620365,
+              0
+            ],
+            [
+              -58.7848992147,
+              -27.543222577,
+              0
+            ],
+            [
+              -58.7850697319,
+              -27.5432153327,
+              0
+            ],
+            [
+              -58.78506672059999,
+              -27.5432421941,
+              0
+            ],
+            [
+              -58.7849015982,
+              -27.543246885,
+              0
+            ],
+            [
+              -58.784715511,
+              -27.5432856735,
+              0
+            ],
+            [
+              -58.7847312887,
+              -27.5434945915,
+              0
+            ],
+            [
+              -58.7846157079,
+              -27.5435138217,
+              0
+            ],
+            [
+              -58.7845788917,
+              -27.5433111368,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-26"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.784715511,
+              -27.5432856735,
+              0
+            ],
+            [
+              -58.7849015982,
+              -27.543246885,
+              0
+            ],
+            [
+              -58.78506672059999,
+              -27.5432421941,
+              0
+            ],
+            [
+              -58.78504354390001,
+              -27.5434489394,
+              0
+            ],
+            [
+              -58.7847254101,
+              -27.5434167506,
+              0
+            ],
+            [
+              -58.784715511,
+              -27.5432856735,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-27"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78469248790001,
+              -27.5431457844,
+              0
+            ],
+            [
+              -58.7847811627,
+              -27.5431500682,
+              0
+            ],
+            [
+              -58.7850791957,
+              -27.5431309115,
+              0
+            ],
+            [
+              -58.7850697319,
+              -27.5432153327,
+              0
+            ],
+            [
+              -58.7848992147,
+              -27.543222577,
+              0
+            ],
+            [
+              -58.7846902287,
+              -27.5432620365,
+              0
+            ],
+            [
+              -58.78469248790001,
+              -27.5431457844,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-28"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78395855620001,
+              -27.5428352434,
+              0
+            ],
+            [
+              -58.7840516032,
+              -27.5428143529,
+              0
+            ],
+            [
+              -58.7843146939,
+              -27.5428236957,
+              0
+            ],
+            [
+              -58.784288048,
+              -27.5431168731,
+              0
+            ],
+            [
+              -58.783934585,
+              -27.5430989821,
+              0
+            ],
+            [
+              -58.78395855620001,
+              -27.5428352434,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-29"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.784070809,
+              -27.5436092474,
+              0
+            ],
+            [
+              -58.78424217260001,
+              -27.54362162210001,
+              0
+            ],
+            [
+              -58.784236312,
+              -27.5436861034,
+              0
+            ],
+            [
+              -58.78407113550001,
+              -27.5436741756,
+              0
+            ],
+            [
+              -58.784070809,
+              -27.5436092474,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-30"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78407113550001,
+              -27.5436741756,
+              0
+            ],
+            [
+              -58.784236312,
+              -27.5436861034,
+              0
+            ],
+            [
+              -58.78423045360001,
+              -27.5437505602,
+              0
+            ],
+            [
+              -58.7840714619,
+              -27.543739079,
+              0
+            ],
+            [
+              -58.78407113550001,
+              -27.5436741756,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-31"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.783972189,
+              -27.5435565047,
+              0
+            ],
+            [
+              -58.7840704825,
+              -27.5435443193,
+              0
+            ],
+            [
+              -58.784070809,
+              -27.5436092474,
+              0
+            ],
+            [
+              -58.78407113550001,
+              -27.5436741756,
+              0
+            ],
+            [
+              -58.7840714619,
+              -27.543739079,
+              0
+            ],
+            [
+              -58.7839716036,
+              -27.5437318679,
+              0
+            ],
+            [
+              -58.783972189,
+              -27.5435565047,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-32"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.783751164,
+              -27.5435750531,
+              0
+            ],
+            [
+              -58.7838338804,
+              -27.5435678333,
+              0
+            ],
+            [
+              -58.78384266609999,
+              -27.5437225567,
+              0
+            ],
+            [
+              -58.7837602324,
+              -27.5437166038,
+              0
+            ],
+            [
+              -58.783751164,
+              -27.5435750531,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-33"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78315188079999,
+              -27.54349162520001,
+              0
+            ],
+            [
+              -58.7833627321,
+              -27.5435068527,
+              0
+            ],
+            [
+              -58.7833624512,
+              -27.5436010688,
+              0
+            ],
+            [
+              -58.7831437062,
+              -27.5435815572,
+              0
+            ],
+            [
+              -58.78315188079999,
+              -27.54349162520001,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-34"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7831662769,
+              -27.5433332484,
+              0
+            ],
+            [
+              -58.7833701087,
+              -27.5433215865,
+              0
+            ],
+            [
+              -58.7833627321,
+              -27.5435068527,
+              0
+            ],
+            [
+              -58.78315188079999,
+              -27.54349162520001,
+              0
+            ],
+            [
+              -58.7831662769,
+              -27.5433332484,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-35"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7833701087,
+              -27.5433215865,
+              0
+            ],
+            [
+              -58.7834785052,
+              -27.5433153846,
+              0
+            ],
+            [
+              -58.78349797069999,
+              -27.5435947976,
+              0
+            ],
+            [
+              -58.7834492628,
+              -27.5435985959,
+              0
+            ],
+            [
+              -58.7833624512,
+              -27.5436010688,
+              0
+            ],
+            [
+              -58.7833627321,
+              -27.5435068527,
+              0
+            ],
+            [
+              -58.7833701087,
+              -27.5433215865,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-36"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7834785052,
+              -27.5433153846,
+              0
+            ],
+            [
+              -58.7836462184,
+              -27.5433057888,
+              0
+            ],
+            [
+              -58.7836594636,
+              -27.5433880401,
+              0
+            ],
+            [
+              -58.7836784522,
+              -27.5435807234,
+              0
+            ],
+            [
+              -58.78349797069999,
+              -27.5435947976,
+              0
+            ],
+            [
+              -58.7834785052,
+              -27.5433153846,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-37"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7836537893,
+              -27.5432224946,
+              0
+            ],
+            [
+              -58.7836547387,
+              -27.5432120491,
+              0
+            ],
+            [
+              -58.7839140729,
+              -27.5432307771,
+              0
+            ],
+            [
+              -58.7839097413,
+              -27.5432529042,
+              0
+            ],
+            [
+              -58.7838580383,
+              -27.5433021368,
+              0
+            ],
+            [
+              -58.7836765833,
+              -27.5433052653,
+              0
+            ],
+            [
+              -58.7836537893,
+              -27.5432224946,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-38"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7836629128,
+              -27.5431221171,
+              0
+            ],
+            [
+              -58.78393072439999,
+              -27.5431414572,
+              0
+            ],
+            [
+              -58.7839140729,
+              -27.5432307771,
+              0
+            ],
+            [
+              -58.7836547387,
+              -27.5432120491,
+              0
+            ],
+            [
+              -58.7836629128,
+              -27.5431221171,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-39"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7836723292,
+              -27.5430185189,
+              0
+            ],
+            [
+              -58.7839391929,
+              -27.5430482848,
+              0
+            ],
+            [
+              -58.78393072439999,
+              -27.5431414572,
+              0
+            ],
+            [
+              -58.7836629128,
+              -27.5431221171,
+              0
+            ],
+            [
+              -58.7836723292,
+              -27.5430185189,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-40"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7836800786,
+              -27.5429332597,
+              0
+            ],
+            [
+              -58.7839478897,
+              -27.5429525998,
+              0
+            ],
+            [
+              -58.7839391929,
+              -27.5430482848,
+              0
+            ],
+            [
+              -58.7836723292,
+              -27.5430185189,
+              0
+            ],
+            [
+              -58.7836800786,
+              -27.5429332597,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-41"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7836833719,
+              -27.5428970261,
+              0
+            ],
+            [
+              -58.78395855620001,
+              -27.5428352434,
+              0
+            ],
+            [
+              -58.7839478897,
+              -27.5429525998,
+              0
+            ],
+            [
+              -58.7836800786,
+              -27.5429332597,
+              0
+            ],
+            [
+              -58.7836833719,
+              -27.5428970261,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-42"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7834240576,
+              -27.5429552451,
+              0
+            ],
+            [
+              -58.7835589672,
+              -27.5429249564,
+              0
+            ],
+            [
+              -58.7835453894,
+              -27.5430743373,
+              0
+            ],
+            [
+              -58.7834104797,
+              -27.5431046259,
+              0
+            ],
+            [
+              -58.7834240576,
+              -27.5429552451,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-43"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7834104797,
+              -27.5431046259,
+              0
+            ],
+            [
+              -58.7835453894,
+              -27.5430743373,
+              0
+            ],
+            [
+              -58.78353217320001,
+              -27.5432197395,
+              0
+            ],
+            [
+              -58.78339932550001,
+              -27.5432273404,
+              0
+            ],
+            [
+              -58.7834104797,
+              -27.5431046259,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-44"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7833100198,
+              -27.5429808478,
+              0
+            ],
+            [
+              -58.7834240576,
+              -27.5429552451,
+              0
+            ],
+            [
+              -58.7834104797,
+              -27.5431046259,
+              0
+            ],
+            [
+              -58.78339932550001,
+              -27.5432273404,
+              0
+            ],
+            [
+              -58.78328703059999,
+              -27.5432337652,
+              0
+            ],
+            [
+              -58.7833100198,
+              -27.5429808478,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A2<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-45"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78319598189999,
+              -27.5430064503,
+              0
+            ],
+            [
+              -58.7833100198,
+              -27.5429808478,
+              0
+            ],
+            [
+              -58.78328703059999,
+              -27.5432337652,
+              0
+            ],
+            [
+              -58.78317473569999,
+              -27.54324019,
+              0
+            ],
+            [
+              -58.78319598189999,
+              -27.5430064503,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-46"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ],
+            [
+              -58.783048746,
+              -27.5430395021,
+              0
+            ],
+            [
+              -58.7830401066,
+              -27.5431345464,
+              0
+            ],
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ],
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-47"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ],
+            [
+              -58.7830401066,
+              -27.5431345464,
+              0
+            ],
+            [
+              -58.78303146719999,
+              -27.5432295907,
+              0
+            ],
+            [
+              -58.7828592442,
+              -27.5432682558,
+              0
+            ],
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-48"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828592442,
+              -27.5432682558,
+              0
+            ],
+            [
+              -58.78303146719999,
+              -27.5432295907,
+              0
+            ],
+            [
+              -58.7830238386,
+              -27.5433135156,
+              0
+            ],
+            [
+              -58.782881416,
+              -27.5433458496,
+              0
+            ],
+            [
+              -58.7828592442,
+              -27.5432682558,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-49"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828888422,
+              -27.5433718386,
+              0
+            ],
+            [
+              -58.782881416,
+              -27.5433458496,
+              0
+            ],
+            [
+              -58.7830238386,
+              -27.5433135156,
+              0
+            ],
+            [
+              -58.7829920745,
+              -27.5436629588,
+              0
+            ],
+            [
+              -58.7829732617,
+              -27.5436672772,
+              0
+            ],
+            [
+              -58.7828888422,
+              -27.5433718386,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-50"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7827081356,
+              -27.5431159712,
+              0
+            ],
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ],
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ],
+            [
+              -58.7828592442,
+              -27.5432682558,
+              0
+            ],
+            [
+              -58.782881416,
+              -27.5433458496,
+              0
+            ],
+            [
+              -58.7828888422,
+              -27.5433718386,
+              0
+            ],
+            [
+              -58.7827878019,
+              -27.5433947775,
+              0
+            ],
+            [
+              -58.7827081356,
+              -27.5431159712,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-51"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78246593030001,
+              -27.5431703471,
+              0
+            ],
+            [
+              -58.7826105615,
+              -27.543137877,
+              0
+            ],
+            [
+              -58.7826371781,
+              -27.5432310271,
+              0
+            ],
+            [
+              -58.7824567317,
+              -27.5432715379,
+              0
+            ],
+            [
+              -58.78246593030001,
+              -27.5431703471,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-52"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7824567317,
+              -27.5432715379,
+              0
+            ],
+            [
+              -58.7826371781,
+              -27.5432310271,
+              0
+            ],
+            [
+              -58.7826637358,
+              -27.5433239708,
+              0
+            ],
+            [
+              -58.7824475535,
+              -27.5433725044,
+              0
+            ],
+            [
+              -58.7824567317,
+              -27.5432715379,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-53"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78243831619999,
+              -27.5434741198,
+              0
+            ],
+            [
+              -58.7824958217,
+              -27.5434610647,
+              0
+            ],
+            [
+              -58.782580506,
+              -27.5437574335,
+              0
+            ],
+            [
+              -58.78240898249999,
+              -27.543796806,
+              0
+            ],
+            [
+              -58.78243831619999,
+              -27.5434741198,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-54"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7824958217,
+              -27.5434610647,
+              0
+            ],
+            [
+              -58.7826072382,
+              -27.5434357703,
+              0
+            ],
+            [
+              -58.7826918474,
+              -27.5437318755,
+              0
+            ],
+            [
+              -58.782580506,
+              -27.5437574335,
+              0
+            ],
+            [
+              -58.7824958217,
+              -27.5434610647,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-55"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7826072382,
+              -27.5434357703,
+              0
+            ],
+            [
+              -58.7827023946,
+              -27.5434141673,
+              0
+            ],
+            [
+              -58.7827869397,
+              -27.5437100472,
+              0
+            ],
+            [
+              -58.7826918474,
+              -27.5437318755,
+              0
+            ],
+            [
+              -58.7826072382,
+              -27.5434357703,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-56"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7827023946,
+              -27.5434141673,
+              0
+            ],
+            [
+              -58.7827878019,
+              -27.5433947775,
+              0
+            ],
+            [
+              -58.78287228950001,
+              -27.5436904553,
+              0
+            ],
+            [
+              -58.7827869397,
+              -27.5437100472,
+              0
+            ],
+            [
+              -58.7827023946,
+              -27.5434141673,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-57"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7827878019,
+              -27.5433947775,
+              0
+            ],
+            [
+              -58.7828888422,
+              -27.5433718386,
+              0
+            ],
+            [
+              -58.7829732617,
+              -27.5436672772,
+              0
+            ],
+            [
+              -58.78287228950001,
+              -27.5436904553,
+              0
+            ],
+            [
+              -58.7827878019,
+              -27.5433947775,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-58"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ],
+            [
+              -58.783048746,
+              -27.5430395021,
+              0
+            ],
+            [
+              -58.7830401066,
+              -27.5431345464,
+              0
+            ],
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ],
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-59"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7824475535,
+              -27.5433725044,
+              0
+            ],
+            [
+              -58.7826637358,
+              -27.5433239708,
+              0
+            ],
+            [
+              -58.7826902936,
+              -27.5434169146,
+              0
+            ],
+            [
+              -58.78243831619999,
+              -27.5434741198,
+              0
+            ],
+            [
+              -58.7824475535,
+              -27.5433725044,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-60"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ],
+            [
+              -58.783048746,
+              -27.5430395021,
+              0
+            ],
+            [
+              -58.7830401066,
+              -27.5431345464,
+              0
+            ],
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ],
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-61"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ],
+            [
+              -58.7830401066,
+              -27.5431345464,
+              0
+            ],
+            [
+              -58.78303146719999,
+              -27.5432295907,
+              0
+            ],
+            [
+              -58.7828592442,
+              -27.5432682558,
+              0
+            ],
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-62"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828592442,
+              -27.5432682558,
+              0
+            ],
+            [
+              -58.78303146719999,
+              -27.5432295907,
+              0
+            ],
+            [
+              -58.7830238386,
+              -27.5433135156,
+              0
+            ],
+            [
+              -58.782881416,
+              -27.5433458496,
+              0
+            ],
+            [
+              -58.7828592442,
+              -27.5432682558,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-63"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828888422,
+              -27.5433718386,
+              0
+            ],
+            [
+              -58.782881416,
+              -27.5433458496,
+              0
+            ],
+            [
+              -58.7830238386,
+              -27.5433135156,
+              0
+            ],
+            [
+              -58.7829920745,
+              -27.5436629588,
+              0
+            ],
+            [
+              -58.7829732617,
+              -27.5436672772,
+              0
+            ],
+            [
+              -58.7828888422,
+              -27.5433718386,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-64"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7827081356,
+              -27.5431159712,
+              0
+            ],
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ],
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ],
+            [
+              -58.7828592442,
+              -27.5432682558,
+              0
+            ],
+            [
+              -58.782881416,
+              -27.5433458496,
+              0
+            ],
+            [
+              -58.7828888422,
+              -27.5433718386,
+              0
+            ],
+            [
+              -58.7827878019,
+              -27.5433947775,
+              0
+            ],
+            [
+              -58.7827081356,
+              -27.5431159712,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-65"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78246593030001,
+              -27.5431703471,
+              0
+            ],
+            [
+              -58.7826105615,
+              -27.543137877,
+              0
+            ],
+            [
+              -58.7826371781,
+              -27.5432310271,
+              0
+            ],
+            [
+              -58.7824567317,
+              -27.5432715379,
+              0
+            ],
+            [
+              -58.78246593030001,
+              -27.5431703471,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-66"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7824567317,
+              -27.5432715379,
+              0
+            ],
+            [
+              -58.7826371781,
+              -27.5432310271,
+              0
+            ],
+            [
+              -58.7826637358,
+              -27.5433239708,
+              0
+            ],
+            [
+              -58.7824475535,
+              -27.5433725044,
+              0
+            ],
+            [
+              -58.7824567317,
+              -27.5432715379,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-67"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78243831619999,
+              -27.5434741198,
+              0
+            ],
+            [
+              -58.7824958217,
+              -27.5434610647,
+              0
+            ],
+            [
+              -58.782580506,
+              -27.5437574335,
+              0
+            ],
+            [
+              -58.78240898249999,
+              -27.543796806,
+              0
+            ],
+            [
+              -58.78243831619999,
+              -27.5434741198,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-68"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7824958217,
+              -27.5434610647,
+              0
+            ],
+            [
+              -58.7826072382,
+              -27.5434357703,
+              0
+            ],
+            [
+              -58.7826918474,
+              -27.5437318755,
+              0
+            ],
+            [
+              -58.782580506,
+              -27.5437574335,
+              0
+            ],
+            [
+              -58.7824958217,
+              -27.5434610647,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-69"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7826072382,
+              -27.5434357703,
+              0
+            ],
+            [
+              -58.7827023946,
+              -27.5434141673,
+              0
+            ],
+            [
+              -58.7827869397,
+              -27.5437100472,
+              0
+            ],
+            [
+              -58.7826918474,
+              -27.5437318755,
+              0
+            ],
+            [
+              -58.7826072382,
+              -27.5434357703,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-70"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7827023946,
+              -27.5434141673,
+              0
+            ],
+            [
+              -58.7827878019,
+              -27.5433947775,
+              0
+            ],
+            [
+              -58.78287228950001,
+              -27.5436904553,
+              0
+            ],
+            [
+              -58.7827869397,
+              -27.5437100472,
+              0
+            ],
+            [
+              -58.7827023946,
+              -27.5434141673,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-71"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7827878019,
+              -27.5433947775,
+              0
+            ],
+            [
+              -58.7828888422,
+              -27.5433718386,
+              0
+            ],
+            [
+              -58.7829732617,
+              -27.5436672772,
+              0
+            ],
+            [
+              -58.78287228950001,
+              -27.5436904553,
+              0
+            ],
+            [
+              -58.7827878019,
+              -27.5433947775,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-72"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ],
+            [
+              -58.783048746,
+              -27.5430395021,
+              0
+            ],
+            [
+              -58.7830401066,
+              -27.5431345464,
+              0
+            ],
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ],
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-73"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7824475535,
+              -27.5433725044,
+              0
+            ],
+            [
+              -58.7826637358,
+              -27.5433239708,
+              0
+            ],
+            [
+              -58.7826902936,
+              -27.5434169146,
+              0
+            ],
+            [
+              -58.78243831619999,
+              -27.5434741198,
+              0
+            ],
+            [
+              -58.7824475535,
+              -27.5433725044,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-74"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ],
+            [
+              -58.783048746,
+              -27.5430395021,
+              0
+            ],
+            [
+              -58.7830401066,
+              -27.5431345464,
+              0
+            ],
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ],
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-75"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ],
+            [
+              -58.7830401066,
+              -27.5431345464,
+              0
+            ],
+            [
+              -58.78303146719999,
+              -27.5432295907,
+              0
+            ],
+            [
+              -58.7828592442,
+              -27.5432682558,
+              0
+            ],
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-76"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828592442,
+              -27.5432682558,
+              0
+            ],
+            [
+              -58.78303146719999,
+              -27.5432295907,
+              0
+            ],
+            [
+              -58.7830238386,
+              -27.5433135156,
+              0
+            ],
+            [
+              -58.782881416,
+              -27.5433458496,
+              0
+            ],
+            [
+              -58.7828592442,
+              -27.5432682558,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-77"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828888422,
+              -27.5433718386,
+              0
+            ],
+            [
+              -58.782881416,
+              -27.5433458496,
+              0
+            ],
+            [
+              -58.7830238386,
+              -27.5433135156,
+              0
+            ],
+            [
+              -58.7829920745,
+              -27.5436629588,
+              0
+            ],
+            [
+              -58.7829732617,
+              -27.5436672772,
+              0
+            ],
+            [
+              -58.7828888422,
+              -27.5433718386,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-78"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7827081356,
+              -27.5431159712,
+              0
+            ],
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ],
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ],
+            [
+              -58.7828592442,
+              -27.5432682558,
+              0
+            ],
+            [
+              -58.782881416,
+              -27.5433458496,
+              0
+            ],
+            [
+              -58.7828888422,
+              -27.5433718386,
+              0
+            ],
+            [
+              -58.7827878019,
+              -27.5433947775,
+              0
+            ],
+            [
+              -58.7827081356,
+              -27.5431159712,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-79"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78246593030001,
+              -27.5431703471,
+              0
+            ],
+            [
+              -58.7826105615,
+              -27.543137877,
+              0
+            ],
+            [
+              -58.7826371781,
+              -27.5432310271,
+              0
+            ],
+            [
+              -58.7824567317,
+              -27.5432715379,
+              0
+            ],
+            [
+              -58.78246593030001,
+              -27.5431703471,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-80"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7824567317,
+              -27.5432715379,
+              0
+            ],
+            [
+              -58.7826371781,
+              -27.5432310271,
+              0
+            ],
+            [
+              -58.7826637358,
+              -27.5433239708,
+              0
+            ],
+            [
+              -58.7824475535,
+              -27.5433725044,
+              0
+            ],
+            [
+              -58.7824567317,
+              -27.5432715379,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-81"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78243831619999,
+              -27.5434741198,
+              0
+            ],
+            [
+              -58.7824958217,
+              -27.5434610647,
+              0
+            ],
+            [
+              -58.782580506,
+              -27.5437574335,
+              0
+            ],
+            [
+              -58.78240898249999,
+              -27.543796806,
+              0
+            ],
+            [
+              -58.78243831619999,
+              -27.5434741198,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-82"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7824958217,
+              -27.5434610647,
+              0
+            ],
+            [
+              -58.7826072382,
+              -27.5434357703,
+              0
+            ],
+            [
+              -58.7826918474,
+              -27.5437318755,
+              0
+            ],
+            [
+              -58.782580506,
+              -27.5437574335,
+              0
+            ],
+            [
+              -58.7824958217,
+              -27.5434610647,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-83"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7826072382,
+              -27.5434357703,
+              0
+            ],
+            [
+              -58.7827023946,
+              -27.5434141673,
+              0
+            ],
+            [
+              -58.7827869397,
+              -27.5437100472,
+              0
+            ],
+            [
+              -58.7826918474,
+              -27.5437318755,
+              0
+            ],
+            [
+              -58.7826072382,
+              -27.5434357703,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-84"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7827023946,
+              -27.5434141673,
+              0
+            ],
+            [
+              -58.7827878019,
+              -27.5433947775,
+              0
+            ],
+            [
+              -58.78287228950001,
+              -27.5436904553,
+              0
+            ],
+            [
+              -58.7827869397,
+              -27.5437100472,
+              0
+            ],
+            [
+              -58.7827023946,
+              -27.5434141673,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-85"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7827878019,
+              -27.5433947775,
+              0
+            ],
+            [
+              -58.7828888422,
+              -27.5433718386,
+              0
+            ],
+            [
+              -58.7829732617,
+              -27.5436672772,
+              0
+            ],
+            [
+              -58.78287228950001,
+              -27.5436904553,
+              0
+            ],
+            [
+              -58.7827878019,
+              -27.5433947775,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-86"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ],
+            [
+              -58.783048746,
+              -27.5430395021,
+              0
+            ],
+            [
+              -58.7830401066,
+              -27.5431345464,
+              0
+            ],
+            [
+              -58.7828342441,
+              -27.5431807638,
+              0
+            ],
+            [
+              -58.7828092441,
+              -27.5430932718,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_A3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-87"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7824475535,
+              -27.5433725044,
+              0
+            ],
+            [
+              -58.7826637358,
+              -27.5433239708,
+              0
+            ],
+            [
+              -58.7826902936,
+              -27.5434169146,
+              0
+            ],
+            [
+              -58.78243831619999,
+              -27.5434741198,
+              0
+            ],
+            [
+              -58.7824475535,
+              -27.5433725044,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-88"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828819142,
+              -27.543828002,
+              0
+            ],
+            [
+              -58.7829791,
+              -27.5438056931,
+              0
+            ],
+            [
+              -58.78295647100001,
+              -27.5440546377,
+              0
+            ],
+            [
+              -58.7828619335,
+              -27.5440478101,
+              0
+            ],
+            [
+              -58.7828819142,
+              -27.543828002,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-89"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7827847284,
+              -27.5438503108,
+              0
+            ],
+            [
+              -58.7828819142,
+              -27.543828002,
+              0
+            ],
+            [
+              -58.7828619335,
+              -27.5440478101,
+              0
+            ],
+            [
+              -58.782767396,
+              -27.5440409824,
+              0
+            ],
+            [
+              -58.7827847284,
+              -27.5438503108,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-90"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7826875538,
+              -27.5438726169,
+              0
+            ],
+            [
+              -58.7827847284,
+              -27.5438503108,
+              0
+            ],
+            [
+              -58.782767396,
+              -27.5440409824,
+              0
+            ],
+            [
+              -58.7826728695,
+              -27.5440341554,
+              0
+            ],
+            [
+              -58.7826875538,
+              -27.5438726169,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-91"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7825903679,
+              -27.5438949256,
+              0
+            ],
+            [
+              -58.7826875538,
+              -27.5438726169,
+              0
+            ],
+            [
+              -58.78266632950001,
+              -27.544106101,
+              0
+            ],
+            [
+              -58.782571792,
+              -27.5440992731,
+              0
+            ],
+            [
+              -58.7825903679,
+              -27.5438949256,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-92"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.782493182,
+              -27.5439172343,
+              0
+            ],
+            [
+              -58.7825903679,
+              -27.5438949256,
+              0
+            ],
+            [
+              -58.782571792,
+              -27.5440992731,
+              0
+            ],
+            [
+              -58.7824772545,
+              -27.5440924452,
+              0
+            ],
+            [
+              -58.782493182,
+              -27.5439172343,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-93"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7823960073,
+              -27.5439395402,
+              0
+            ],
+            [
+              -58.782493182,
+              -27.5439172343,
+              0
+            ],
+            [
+              -58.7824772545,
+              -27.5440924452,
+              0
+            ],
+            [
+              -58.782382728,
+              -27.544085618,
+              0
+            ],
+            [
+              -58.7823960073,
+              -27.5439395402,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-94"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.782382728,
+              -27.544085618,
+              0
+            ],
+            [
+              -58.78266632950001,
+              -27.544106101,
+              0
+            ],
+            [
+              -58.78265978939999,
+              -27.5441780466,
+              0
+            ],
+            [
+              -58.7823761878,
+              -27.5441575636,
+              0
+            ],
+            [
+              -58.782382728,
+              -27.544085618,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-95"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7823761878,
+              -27.5441575636,
+              0
+            ],
+            [
+              -58.78265978939999,
+              -27.5441780466,
+              0
+            ],
+            [
+              -58.7826532493,
+              -27.5442499922,
+              0
+            ],
+            [
+              -58.7823696475,
+              -27.5442295092,
+              0
+            ],
+            [
+              -58.7823761878,
+              -27.5441575636,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-96"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7823696475,
+              -27.5442295092,
+              0
+            ],
+            [
+              -58.7826532493,
+              -27.5442499922,
+              0
+            ],
+            [
+              -58.7826467092,
+              -27.5443219377,
+              0
+            ],
+            [
+              -58.7823631072,
+              -27.5443014548,
+              0
+            ],
+            [
+              -58.7823696475,
+              -27.5442295092,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-97"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7823631072,
+              -27.5443014548,
+              0
+            ],
+            [
+              -58.7826467092,
+              -27.5443219377,
+              0
+            ],
+            [
+              -58.7826401691,
+              -27.5443938833,
+              0
+            ],
+            [
+              -58.7823565669,
+              -27.5443734003,
+              0
+            ],
+            [
+              -58.7823631072,
+              -27.5443014548,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-98"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7823565669,
+              -27.5443734003,
+              0
+            ],
+            [
+              -58.7824510937,
+              -27.5443802275,
+              0
+            ],
+            [
+              -58.7824347431,
+              -27.5445600915,
+              0
+            ],
+            [
+              -58.78234021619999,
+              -27.5445532642,
+              0
+            ],
+            [
+              -58.7823565669,
+              -27.5443734003,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-99"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7824510937,
+              -27.5443802275,
+              0
+            ],
+            [
+              -58.7825456314,
+              -27.5443870555,
+              0
+            ],
+            [
+              -58.7825292809,
+              -27.5445669194,
+              0
+            ],
+            [
+              -58.7824347431,
+              -27.5445600915,
+              0
+            ],
+            [
+              -58.7824510937,
+              -27.5443802275,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-100"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7825456314,
+              -27.5443870555,
+              0
+            ],
+            [
+              -58.7826401691,
+              -27.5443938833,
+              0
+            ],
+            [
+              -58.7826238188,
+              -27.5445737473,
+              0
+            ],
+            [
+              -58.7825292809,
+              -27.5445669194,
+              0
+            ],
+            [
+              -58.7825456314,
+              -27.5443870555,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-101"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7826401691,
+              -27.5443938833,
+              0
+            ],
+            [
+              -58.7827346959,
+              -27.5444007103,
+              0
+            ],
+            [
+              -58.78271834579999,
+              -27.5445805743,
+              0
+            ],
+            [
+              -58.7826238188,
+              -27.5445737473,
+              0
+            ],
+            [
+              -58.7826401691,
+              -27.5443938833,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-102"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7827346959,
+              -27.5444007103,
+              0
+            ],
+            [
+              -58.7828292337,
+              -27.5444075381,
+              0
+            ],
+            [
+              -58.78281288369999,
+              -27.5445874021,
+              0
+            ],
+            [
+              -58.78271834579999,
+              -27.5445805743,
+              0
+            ],
+            [
+              -58.7827346959,
+              -27.5444007103,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-103"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7828292337,
+              -27.5444075381,
+              0
+            ],
+            [
+              -58.7829237715,
+              -27.5444143658,
+              0
+            ],
+            [
+              -58.7829074216,
+              -27.5445942298,
+              0
+            ],
+            [
+              -58.78281288369999,
+              -27.5445874021,
+              0
+            ],
+            [
+              -58.7828292337,
+              -27.5444075381,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-104"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7826467092,
+              -27.5443219377,
+              0
+            ],
+            [
+              -58.78293031139999,
+              -27.5443424201,
+              0
+            ],
+            [
+              -58.7829237715,
+              -27.5444143658,
+              0
+            ],
+            [
+              -58.7826401691,
+              -27.5443938833,
+              0
+            ],
+            [
+              -58.7826467092,
+              -27.5443219377,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-105"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7826532493,
+              -27.5442499922,
+              0
+            ],
+            [
+              -58.7829368513,
+              -27.5442704745,
+              0
+            ],
+            [
+              -58.78293031139999,
+              -27.5443424201,
+              0
+            ],
+            [
+              -58.7826467092,
+              -27.5443219377,
+              0
+            ],
+            [
+              -58.7826532493,
+              -27.5442499922,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-106"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78265978939999,
+              -27.5441780466,
+              0
+            ],
+            [
+              -58.7829433912,
+              -27.5441985289,
+              0
+            ],
+            [
+              -58.7829368513,
+              -27.5442704745,
+              0
+            ],
+            [
+              -58.7826532493,
+              -27.5442499922,
+              0
+            ],
+            [
+              -58.78265978939999,
+              -27.5441780466,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-107"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78266632950001,
+              -27.544106101,
+              0
+            ],
+            [
+              -58.7829499311,
+              -27.5441265833,
+              0
+            ],
+            [
+              -58.7829433912,
+              -27.5441985289,
+              0
+            ],
+            [
+              -58.78265978939999,
+              -27.5441780466,
+              0
+            ],
+            [
+              -58.78266632950001,
+              -27.544106101,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B3<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-108"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7826728695,
+              -27.5440341554,
+              0
+            ],
+            [
+              -58.78295647100001,
+              -27.5440546377,
+              0
+            ],
+            [
+              -58.7829499311,
+              -27.5441265833,
+              0
+            ],
+            [
+              -58.78266632950001,
+              -27.544106101,
+              0
+            ],
+            [
+              -58.7826728695,
+              -27.5440341554,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-109"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7846635431,
+              -27.5438676364,
+              0
+            ],
+            [
+              -58.7850193569,
+              -27.5438933289,
+              0
+            ],
+            [
+              -58.7850118087,
+              -27.5439606612,
+              0
+            ],
+            [
+              -58.7846558279,
+              -27.5439364563,
+              0
+            ],
+            [
+              -58.7846635431,
+              -27.5438676364,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-110"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7846558279,
+              -27.5439364563,
+              0
+            ],
+            [
+              -58.7850118087,
+              -27.5439606612,
+              0
+            ],
+            [
+              -58.7849998487,
+              -27.5440673474,
+              0
+            ],
+            [
+              -58.7846440501,
+              -27.5440415143,
+              0
+            ],
+            [
+              -58.7846558279,
+              -27.5439364563,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-111"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7846440501,
+              -27.5440415143,
+              0
+            ],
+            [
+              -58.7849998487,
+              -27.5440673474,
+              0
+            ],
+            [
+              -58.7849875317,
+              -27.5441772179,
+              0
+            ],
+            [
+              -58.78463173269999,
+              -27.5441513848,
+              0
+            ],
+            [
+              -58.7846440501,
+              -27.5440415143,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-112"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78463173269999,
+              -27.5441513848,
+              0
+            ],
+            [
+              -58.7849875317,
+              -27.5441772179,
+              0
+            ],
+            [
+              -58.78497520539999,
+              -27.5442871715,
+              0
+            ],
+            [
+              -58.78461940609999,
+              -27.54426133839999,
+              0
+            ],
+            [
+              -58.78463173269999,
+              -27.5441513848,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-113"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7844835583,
+              -27.5442514748,
+              0
+            ],
+            [
+              -58.78497520539999,
+              -27.5442871715,
+              0
+            ],
+            [
+              -58.78496504590001,
+              -27.5443777957,
+              0
+            ],
+            [
+              -58.7845742988,
+              -27.5443476966,
+              0
+            ],
+            [
+              -58.7844774423,
+              -27.5443459338,
+              0
+            ],
+            [
+              -58.7844835583,
+              -27.5442514748,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-114"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7844774423,
+              -27.5443459338,
+              0
+            ],
+            [
+              -58.7845742988,
+              -27.5443476966,
+              0
+            ],
+            [
+              -58.78496504590001,
+              -27.5443777957,
+              0
+            ],
+            [
+              -58.7849556304,
+              -27.5444617841,
+              0
+            ],
+            [
+              -58.7844759173,
+              -27.5444316778,
+              0
+            ],
+            [
+              -58.7844774423,
+              -27.5443459338,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-115"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7846677539,
+              -27.5444437175,
+              0
+            ],
+            [
+              -58.7849556304,
+              -27.5444617841,
+              0
+            ],
+            [
+              -58.784945585,
+              -27.5445513903,
+              0
+            ],
+            [
+              -58.78466497130001,
+              -27.5445337795,
+              0
+            ],
+            [
+              -58.7846677539,
+              -27.5444437175,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-116"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78466497130001,
+              -27.5445337795,
+              0
+            ],
+            [
+              -58.784945585,
+              -27.5445513903,
+              0
+            ],
+            [
+              -58.7849304873,
+              -27.5446860646,
+              0
+            ],
+            [
+              -58.7846501681,
+              -27.5446658234,
+              0
+            ],
+            [
+              -58.78466497130001,
+              -27.5445337795,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-117"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7845693591,
+              -27.5444375422,
+              0
+            ],
+            [
+              -58.7846677539,
+              -27.5444437175,
+              0
+            ],
+            [
+              -58.78466497130001,
+              -27.5445337795,
+              0
+            ],
+            [
+              -58.7846501681,
+              -27.5446658234,
+              0
+            ],
+            [
+              -58.7845492736,
+              -27.5446585379,
+              0
+            ],
+            [
+              -58.7845693591,
+              -27.5444375422,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-118"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7844379901,
+              -27.5444292975,
+              0
+            ],
+            [
+              -58.7845693591,
+              -27.5444375422,
+              0
+            ],
+            [
+              -58.7845492736,
+              -27.5446585379,
+              0
+            ],
+            [
+              -58.7844180165,
+              -27.5446490598,
+              0
+            ],
+            [
+              -58.7844379901,
+              -27.5444292975,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-119"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7843217616,
+              -27.5444220028,
+              0
+            ],
+            [
+              -58.7844379901,
+              -27.5444292975,
+              0
+            ],
+            [
+              -58.7844180165,
+              -27.5446490598,
+              0
+            ],
+            [
+              -58.7843018869,
+              -27.544640674,
+              0
+            ],
+            [
+              -58.7843217616,
+              -27.5444220028,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-120"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7843380209,
+              -27.544243109,
+              0
+            ],
+            [
+              -58.7844835583,
+              -27.5442514748,
+              0
+            ],
+            [
+              -58.7844774423,
+              -27.5443459338,
+              0
+            ],
+            [
+              -58.7844759173,
+              -27.5444316778,
+              0
+            ],
+            [
+              -58.7843217616,
+              -27.5444220028,
+              0
+            ],
+            [
+              -58.7843380209,
+              -27.544243109,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-121"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7843455709,
+              -27.5441600401,
+              0
+            ],
+            [
+              -58.7846284597,
+              -27.5441805802,
+              0
+            ],
+            [
+              -58.78461940609999,
+              -27.54426133839999,
+              0
+            ],
+            [
+              -58.7844835583,
+              -27.5442514748,
+              0
+            ],
+            [
+              -58.7843380209,
+              -27.544243109,
+              0
+            ],
+            [
+              -58.7843455709,
+              -27.5441600401,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-122"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.784352926,
+              -27.5440791148,
+              0
+            ],
+            [
+              -58.78463751820001,
+              -27.5440997785,
+              0
+            ],
+            [
+              -58.78463173269999,
+              -27.5441513848,
+              0
+            ],
+            [
+              -58.7846284597,
+              -27.5441805802,
+              0
+            ],
+            [
+              -58.7843455709,
+              -27.5441600401,
+              0
+            ],
+            [
+              -58.784352926,
+              -27.5440791148,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-123"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7843603344,
+              -27.5439976028,
+              0
+            ],
+            [
+              -58.7846466424,
+              -27.5440183911,
+              0
+            ],
+            [
+              -58.78463751820001,
+              -27.5440997785,
+              0
+            ],
+            [
+              -58.784352926,
+              -27.5440791148,
+              0
+            ],
+            [
+              -58.7843603344,
+              -27.5439976028,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-124"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78452313519999,
+              -27.5438574977,
+              0
+            ],
+            [
+              -58.7846635431,
+              -27.5438676364,
+              0
+            ],
+            [
+              -58.7846466424,
+              -27.5440183911,
+              0
+            ],
+            [
+              -58.78450941780001,
+              -27.54400842760001,
+              0
+            ],
+            [
+              -58.78452313519999,
+              -27.5438574977,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_B1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-125"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7843740466,
+              -27.5438467319,
+              0
+            ],
+            [
+              -58.78452313519999,
+              -27.5438574977,
+              0
+            ],
+            [
+              -58.78450941780001,
+              -27.54400842760001,
+              0
+            ],
+            [
+              -58.7843603344,
+              -27.5439976028,
+              0
+            ],
+            [
+              -58.7843740466,
+              -27.5438467319,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-126"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7846043103,
+              -27.5449308111,
+              0
+            ],
+            [
+              -58.7849480046,
+              -27.5449477426,
+              0
+            ],
+            [
+              -58.7849254322,
+              -27.5451712939,
+              0
+            ],
+            [
+              -58.784760638,
+              -27.5451643558,
+              0
+            ],
+            [
+              -58.7845751447,
+              -27.5451374218,
+              0
+            ],
+            [
+              -58.7846043103,
+              -27.5449308111,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-127"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7842420576,
+              -27.544858965,
+              0
+            ],
+            [
+              -58.7843264847,
+              -27.5448647835,
+              0
+            ],
+            [
+              -58.7846043103,
+              -27.5449308112,
+              0
+            ],
+            [
+              -58.7845889068,
+              -27.54503993020001,
+              0
+            ],
+            [
+              -58.784331254,
+              -27.5449756622,
+              0
+            ],
+            [
+              -58.78423213559999,
+              -27.5449681297,
+              0
+            ],
+            [
+              -58.7842420576,
+              -27.544858965,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-128"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.784224184,
+              -27.5450556157,
+              0
+            ],
+            [
+              -58.78423213559999,
+              -27.5449681297,
+              0
+            ],
+            [
+              -58.784331254,
+              -27.5449756622,
+              0
+            ],
+            [
+              -58.7845889068,
+              -27.54503993020001,
+              0
+            ],
+            [
+              -58.7845751447,
+              -27.5451374218,
+              0
+            ],
+            [
+              -58.784522312,
+              -27.5451346065,
+              0
+            ],
+            [
+              -58.784224184,
+              -27.5450556157,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-129"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.784214844,
+              -27.5451583774,
+              0
+            ],
+            [
+              -58.784224184,
+              -27.5450556157,
+              0
+            ],
+            [
+              -58.784522312,
+              -27.5451346065,
+              0
+            ],
+            [
+              -58.7845098937,
+              -27.5452154841,
+              0
+            ],
+            [
+              -58.784214844,
+              -27.5451583774,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-130"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7845098937,
+              -27.5452154841,
+              0
+            ],
+            [
+              -58.7849123406,
+              -27.545300949,
+              0
+            ],
+            [
+              -58.7849067362,
+              -27.545356453,
+              0
+            ],
+            [
+              -58.7847212761,
+              -27.5453524975,
+              0
+            ],
+            [
+              -58.7844973067,
+              -27.5453205422,
+              0
+            ],
+            [
+              -58.7845098937,
+              -27.5452154841,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-131"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.784224184,
+              -27.5450556157,
+              0
+            ],
+            [
+              -58.784522312,
+              -27.5451346065,
+              0
+            ],
+            [
+              -58.7845098937,
+              -27.5452154841,
+              0
+            ],
+            [
+              -58.784214844,
+              -27.5451583774,
+              0
+            ],
+            [
+              -58.784224184,
+              -27.5450556157,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-132"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.784214844,
+              -27.5451583774,
+              0
+            ],
+            [
+              -58.7845098937,
+              -27.5452154841,
+              0
+            ],
+            [
+              -58.7844973067,
+              -27.5453205422,
+              0
+            ],
+            [
+              -58.7842032093,
+              -27.5452863859,
+              0
+            ],
+            [
+              -58.784214844,
+              -27.5451583774,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-133"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7847212761,
+              -27.5453524975,
+              0
+            ],
+            [
+              -58.7849067362,
+              -27.545356453,
+              0
+            ],
+            [
+              -58.78489814190001,
+              -27.5454415684,
+              0
+            ],
+            [
+              -58.7847986886,
+              -27.5454383716,
+              0
+            ],
+            [
+              -58.78479907069999,
+              -27.5454341684,
+              0
+            ],
+            [
+              -58.7847124994,
+              -27.5454262636,
+              0
+            ],
+            [
+              -58.7847212761,
+              -27.5453524975,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-134"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7847124994,
+              -27.5454262636,
+              0
+            ],
+            [
+              -58.78479907069999,
+              -27.5454341684,
+              0
+            ],
+            [
+              -58.7847986886,
+              -27.5454383716,
+              0
+            ],
+            [
+              -58.78489814190001,
+              -27.5454415684,
+              0
+            ],
+            [
+              -58.7848701787,
+              -27.5455807563,
+              0
+            ],
+            [
+              -58.78469453419999,
+              -27.545577256,
+              0
+            ],
+            [
+              -58.7847124994,
+              -27.5454262636,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-135"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7842032093,
+              -27.5452863859,
+              0
+            ],
+            [
+              -58.7843000696,
+              -27.5452976353,
+              0
+            ],
+            [
+              -58.784291247,
+              -27.5454113366,
+              0
+            ],
+            [
+              -58.7841923321,
+              -27.5454060592,
+              0
+            ],
+            [
+              -58.7842032093,
+              -27.5452863859,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-136"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.784374641,
+              -27.545415786,
+              0
+            ],
+            [
+              -58.7844855303,
+              -27.5454217021,
+              0
+            ],
+            [
+              -58.78448959519999,
+              -27.54557159020001,
+              0
+            ],
+            [
+              -58.7843666873,
+              -27.545562715,
+              0
+            ],
+            [
+              -58.784374641,
+              -27.545415786,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-137"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.784285298,
+              -27.5454110192,
+              0
+            ],
+            [
+              -58.784374641,
+              -27.545415786,
+              0
+            ],
+            [
+              -58.7843666873,
+              -27.545562715,
+              0
+            ],
+            [
+              -58.7842737567,
+              -27.5455560044,
+              0
+            ],
+            [
+              -58.784285298,
+              -27.5454110192,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-138"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78461627560001,
+              -27.5447991596,
+              0
+            ],
+            [
+              -58.7849604976,
+              -27.544824015,
+              0
+            ],
+            [
+              -58.7849480046,
+              -27.5449477426,
+              0
+            ],
+            [
+              -58.7846043103,
+              -27.5449308111,
+              0
+            ],
+            [
+              -58.78461627560001,
+              -27.5447991596,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-139"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78424989780001,
+              -27.5447727033,
+              0
+            ],
+            [
+              -58.78461627560001,
+              -27.5447991596,
+              0
+            ],
+            [
+              -58.7846043103,
+              -27.5449308111,
+              0
+            ],
+            [
+              -58.7843264847,
+              -27.5448647835,
+              0
+            ],
+            [
+              -58.7842420576,
+              -27.544858965,
+              0
+            ],
+            [
+              -58.78424989780001,
+              -27.5447727033,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-140"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7843000696,
+              -27.5452976353,
+              0
+            ],
+            [
+              -58.7844973067,
+              -27.5453205422,
+              0
+            ],
+            [
+              -58.7844886307,
+              -27.5453902474,
+              0
+            ],
+            [
+              -58.78452064619999,
+              -27.5453950696,
+              0
+            ],
+            [
+              -58.7845198446,
+              -27.5455737745,
+              0
+            ],
+            [
+              -58.78448959519999,
+              -27.54557159020001,
+              0
+            ],
+            [
+              -58.7844855303,
+              -27.5454217021,
+              0
+            ],
+            [
+              -58.784291247,
+              -27.5454113366,
+              0
+            ],
+            [
+              -58.7843000696,
+              -27.5452976353,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-141"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7841923321,
+              -27.5454060592,
+              0
+            ],
+            [
+              -58.784285298,
+              -27.5454110192,
+              0
+            ],
+            [
+              -58.7842737567,
+              -27.5455560044,
+              0
+            ],
+            [
+              -58.7841793233,
+              -27.5455491853,
+              0
+            ],
+            [
+              -58.7841923321,
+              -27.5454060592,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-142"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7845098937,
+              -27.5452154841,
+              0
+            ],
+            [
+              -58.784522312,
+              -27.5451346065,
+              0
+            ],
+            [
+              -58.7845751447,
+              -27.5451374218,
+              0
+            ],
+            [
+              -58.784760638,
+              -27.5451643558,
+              0
+            ],
+            [
+              -58.7849254322,
+              -27.5451712939,
+              0
+            ],
+            [
+              -58.7849123406,
+              -27.545300949,
+              0
+            ],
+            [
+              -58.7845098937,
+              -27.5452154841,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C1<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-143"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78452064619999,
+              -27.5453950696,
+              0
+            ],
+            [
+              -58.7844886307,
+              -27.5453902474,
+              0
+            ],
+            [
+              -58.7844973067,
+              -27.5453205422,
+              0
+            ],
+            [
+              -58.7847212761,
+              -27.5453524975,
+              0
+            ],
+            [
+              -58.7847124994,
+              -27.5454262636,
+              0
+            ],
+            [
+              -58.78469453419999,
+              -27.545577256,
+              0
+            ],
+            [
+              -58.7845198446,
+              -27.5455737745,
+              0
+            ],
+            [
+              -58.78452064619999,
+              -27.5453950696,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MANZANA_C5<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-144"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7823279534,
+              -27.5446881588,
+              0
+            ],
+            [
+              -58.7829333195,
+              -27.5447318804,
+              0
+            ],
+            [
+              -58.78286763340001,
+              -27.545454484,
+              0
+            ],
+            [
+              -58.7822622634,
+              -27.545410762,
+              0
+            ],
+            [
+              -58.7823279534,
+              -27.5446881588,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": null,
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": null,
+        "extrude": null,
+        "visibility": null,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-145"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78409337092555,
+              -27.544815532728588,
+              0
+            ],
+            [
+              -58.78406062572457,
+              -27.54517854536168,
+              0
+            ],
+            [
+              -58.783354358815814,
+              -27.545127545011738,
+              0
+            ],
+            [
+              -58.783321661336196,
+              -27.54548727376873,
+              0
+            ],
+            [
+              -58.783018975999425,
+              -27.545465414099784,
+              0
+            ],
+            [
+              -58.78308466120139,
+              -27.544742810396595,
+              0
+            ],
+            [
+              -58.78409337092555,
+              -27.544815532728588,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": null,
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": null,
+        "extrude": null,
+        "visibility": null,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-146"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78270829592162,
+              -27.5431159426149,
+              0
+            ],
+            [
+              -58.782787801390306,
+              -27.543394776771414,
+              0
+            ],
+            [
+              -58.78269029498371,
+              -27.54341692116126,
+              0
+            ],
+            [
+              -58.78261056006009,
+              -27.543137874792105,
+              0
+            ],
+            [
+              -58.78270829592162,
+              -27.5431159426149,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": null,
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": null,
+        "extrude": null,
+        "visibility": null,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-147"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78397203815783,
+              -27.54355649607265,
+              0
+            ],
+            [
+              -58.783889529880184,
+              -27.543557854233597,
+              0
+            ],
+            [
+              -58.78388986942043,
+              -27.54356770090048,
+              0
+            ],
+            [
+              -58.783833845281286,
+              -27.54356770090048,
+              0
+            ],
+            [
+              -58.783842630884934,
+              -27.543722616133707,
+              0
+            ],
+            [
+              -58.78397165617505,
+              -27.543731826162645,
+              0
+            ],
+            [
+              -58.78397203815783,
+              -27.54355649607265,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": null,
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": null,
+        "extrude": null,
+        "visibility": null,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-148"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78344910374997,
+              -27.54359872638965,
+              0
+            ],
+            [
+              -58.78344749093387,
+              -27.543694137196304,
+              0
+            ],
+            [
+              -58.78313545345586,
+              -27.543671388000412,
+              0
+            ],
+            [
+              -58.783143602421546,
+              -27.54358149472261,
+              0
+            ],
+            [
+              -58.78319708000891,
+              -27.54358633317099,
+              0
+            ],
+            [
+              -58.78336252098949,
+              -27.543601188056357,
+              0
+            ],
+            [
+              -58.78344910374997,
+              -27.54359872638965,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": null,
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": null,
+        "extrude": null,
+        "visibility": null,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-149"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.783449188635075,
+              -27.543598726389636,
+              0
+            ],
+            [
+              -58.78344749093388,
+              -27.54369405231123,
+              0
+            ],
+            [
+              -58.78376033481994,
+              -27.543716589294476,
+              0
+            ],
+            [
+              -58.78375116723353,
+              -27.543575085900624,
+              0
+            ],
+            [
+              -58.783449188635075,
+              -27.543598726389636,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": null,
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": null,
+        "extrude": null,
+        "visibility": null,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-150"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.783857782868,
+              -27.543301331584363,
+              0
+            ],
+            [
+              -58.78387730643165,
+              -27.543417114805248,
+              0
+            ],
+            [
+              -58.78388919033994,
+              -27.543558363543927,
+              0
+            ],
+            [
+              -58.78388950865888,
+              -27.543567212811347,
+              0
+            ],
+            [
+              -58.78383365428986,
+              -27.543567552351583,
+              0
+            ],
+            [
+              -58.783678314631345,
+              -27.543580751978293,
+              0
+            ],
+            [
+              -58.78365955503323,
+              -27.543388529761515,
+              0
+            ],
+            [
+              -58.78364621746829,
+              -27.543305788713127,
+              0
+            ],
+            [
+              -58.783857782868,
+              -27.543301331584363,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": null,
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": null,
+        "extrude": null,
+        "visibility": null,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas3-151"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.78388921752964,
+              -27.543557888718105,
+              0
+            ],
+            [
+              -58.78397223511764,
+              -27.543556233459448,
+              0
+            ],
+            [
+              -58.784070481159866,
+              -27.54354431842903,
+              0
+            ],
+            [
+              -58.784070831310736,
+              -27.543609223667513,
+              0
+            ],
+            [
+              -58.78424217147135,
+              -27.543621620202014,
+              0
+            ],
+            [
+              -58.78428804799786,
+              -27.54311687309654,
+              0
+            ],
+            [
+              -58.78393458506894,
+              -27.543098982016478,
+              0
+            ],
+            [
+              -58.78390974143673,
+              -27.543252904050384,
+              0
+            ],
+            [
+              -58.78385798824485,
+              -27.543302177998882,
+              0
+            ],
+            [
+              -58.78388921752964,
+              -27.543557888718105,
+              0
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

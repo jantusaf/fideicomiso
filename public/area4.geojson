@@ -1,0 +1,708 @@
+{
+  "type": "FeatureCollection",
+  "name": "area4",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DETALLE_MAIPU<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-1"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7732324942,
+              -27.5359157208,
+              0
+            ],
+            [
+              -58.7740325023,
+              -27.5360299937,
+              0
+            ],
+            [
+              -58.7781498937,
+              -27.535845673,
+              0
+            ],
+            [
+              -58.77786945169999,
+              -27.5386056168,
+              0
+            ],
+            [
+              -58.7736446768,
+              -27.5389041634,
+              0
+            ],
+            [
+              -58.7732324942,
+              -27.5359157208,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DETALLE_MAIPU<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-2"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.77812919820001,
+              -27.5390499969,
+              0
+            ],
+            [
+              -58.7813123071,
+              -27.5390231112,
+              0
+            ],
+            [
+              -58.7810339377,
+              -27.5417768401,
+              0
+            ],
+            [
+              -58.7778118799,
+              -27.5421727079,
+              0
+            ],
+            [
+              -58.77812919820001,
+              -27.5390499969,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "0<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-3"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.77823344389999,
+              -27.5380240737,
+              0
+            ],
+            [
+              -58.78141601139999,
+              -27.5379971889,
+              0
+            ],
+            [
+              -58.7813579509,
+              -27.538571571,
+              0
+            ],
+            [
+              -58.7781750803,
+              -27.5385984564,
+              0
+            ],
+            [
+              -58.77823344389999,
+              -27.5380240737,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "0<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-4"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7784561806,
+              -27.5358319567,
+              0
+            ],
+            [
+              -58.7784823801,
+              -27.5358307834,
+              0
+            ],
+            [
+              -58.7816228729,
+              -27.5359506874,
+              0
+            ],
+            [
+              -58.7815194433,
+              -27.5369739383,
+              0
+            ],
+            [
+              -58.77834490480001,
+              -27.5369271176,
+              0
+            ],
+            [
+              -58.7784561806,
+              -27.5358319567,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "0<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-5"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.77834490480001,
+              -27.5369271176,
+              0
+            ],
+            [
+              -58.7815194433,
+              -27.5369739383,
+              0
+            ],
+            [
+              -58.78141601139999,
+              -27.5379971889,
+              0
+            ],
+            [
+              -58.77823344389999,
+              -27.5380240737,
+              0
+            ],
+            [
+              -58.77834490480001,
+              -27.5369271176,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "0<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-6"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.77370649390001,
+              -27.5393523435,
+              0
+            ],
+            [
+              -58.7778231332,
+              -27.53906144,
+              0
+            ],
+            [
+              -58.7776811777,
+              -27.540458404,
+              0
+            ],
+            [
+              -58.77389594810001,
+              -27.5407258841,
+              0
+            ],
+            [
+              -58.77370649390001,
+              -27.5393523435,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "0<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-7"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.77389594810001,
+              -27.5407258841,
+              0
+            ],
+            [
+              -58.7776811777,
+              -27.540458404,
+              0
+            ],
+            [
+              -58.7775031143,
+              -27.5422106393,
+              0
+            ],
+            [
+              -58.77415743390001,
+              -27.5426216053,
+              0
+            ],
+            [
+              -58.77389594810001,
+              -27.5407258841,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "0<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-8"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7756981509,
+              -27.540598546,
+              0
+            ],
+            [
+              -58.7776811777,
+              -27.540458404,
+              0
+            ],
+            [
+              -58.7775031143,
+              -27.5422106393,
+              0
+            ],
+            [
+              -58.7758302768,
+              -27.5424161324,
+              0
+            ],
+            [
+              -58.7756981509,
+              -27.540598546,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "0<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-9"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.77812919820001,
+              -27.5390499969,
+              0
+            ],
+            [
+              -58.7813123071,
+              -27.5390231112,
+              0
+            ],
+            [
+              -58.7811381632,
+              -27.5407458246,
+              0
+            ],
+            [
+              -58.777954145,
+              -27.540772712,
+              0
+            ],
+            [
+              -58.77812919820001,
+              -27.5390499969,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "0<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-10"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.777954145,
+              -27.540772712,
+              0
+            ],
+            [
+              -58.7811381632,
+              -27.5407458246,
+              0
+            ],
+            [
+              -58.7810339377,
+              -27.5417768401,
+              0
+            ],
+            [
+              -58.7778118799,
+              -27.5421727079,
+              0
+            ],
+            [
+              -58.777954145,
+              -27.540772712,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DETALLE_MAIPU<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-11"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.777954145,
+              -27.540772712,
+              0
+            ],
+            [
+              -58.7787886224,
+              -27.5407656723,
+              0
+            ],
+            [
+              -58.77865685059999,
+              -27.5420689008,
+              0
+            ],
+            [
+              -58.7778118799,
+              -27.5421727079,
+              0
+            ],
+            [
+              -58.777954145,
+              -27.540772712,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "0<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-12"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7756981509,
+              -27.540598546,
+              0
+            ],
+            [
+              -58.7776811777,
+              -27.540458404,
+              0
+            ],
+            [
+              -58.7776347621,
+              -27.5409151641,
+              0
+            ],
+            [
+              -58.77573810330001,
+              -27.5411481554,
+              0
+            ],
+            [
+              -58.7756981509,
+              -27.540598546,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "0<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-13"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.77389594810001,
+              -27.5407258841,
+              0
+            ],
+            [
+              -58.7749561296,
+              -27.5406509778,
+              0
+            ],
+            [
+              -58.7750535517,
+              -27.5419912903,
+              0
+            ],
+            [
+              -58.7740799789,
+              -27.5420600771,
+              0
+            ],
+            [
+              -58.77389594810001,
+              -27.5407258841,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "0<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "areasnuevas4-14"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7740799789,
+              -27.5420600771,
+              0
+            ],
+            [
+              -58.7750535517,
+              -27.5419912903,
+              0
+            ],
+            [
+              -58.77509103240001,
+              -27.5425069353,
+              0
+            ],
+            [
+              -58.77415743390001,
+              -27.5426216053,
+              0
+            ],
+            [
+              -58.7740799789,
+              -27.5420600771,
+              0
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

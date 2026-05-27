@@ -1,0 +1,2496 @@
+{
+  "type": "FeatureCollection",
+  "name": "nuevogrupo1",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DISPONIBLE   \n\nSUP: 6000M2\nMEDIDAS:73.52X81.60\npensado para ARBOX",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80310271933467,
+          -27.54227957640401,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Mz= 8\nLote\t1\nSuperficie m2\t10.015,15\nmedidas:   105.14x92.36\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80924782527808,
+          -27.54503815365573,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ= 7\nLote\tav5\nSuperficie m2\t25,040,83\nEstado lote\t A.V.5 disponible\nEmpresa con Boleto A.V.5 \nSin Acceso x \nCon Acceso: Tierra \nCon Acceso: Ripio \nCon Acceso: Pavimento \nAgua \nCloacas \nsumidero y entubado \nCuneta tierra x \nEnergia: MT y BT \nEnergia: Alum. Publ. \nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80365733828426,
+          -27.54527565020791,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ= 9\nLote\t2\nSuperficie m2\t6.615,11\nMEDIDAS: 65*103.30\nEstado lote\tReservado\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-4"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81417811001181,
+          -27.54477364731967,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t9\nLote\t3\nSuperficie m2\t3.598,91\nMEDIDAS: 35X103.30\nEstado lote\tReservado\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \tx\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-5"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81372253234956,
+          -27.54480947386074,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t9\nLote\t4\nSuperficie m2\t3.566,01\nMEDIDAS: 35X102.36\nEstado lote\tReservado\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \tx\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-6"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81333411097032,
+          -27.54484828901384,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t9\nLote\t5\nSuperficie m2\t3.532,94\nMEDIDAS: 35*101.42\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \tx\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-7"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81301025171668,
+          -27.54486744362604,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Lote\t5\nmedidas: 26,91x39,25\nSuperficie m2\t1.147,34\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-8"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80232187929845,
+          -27.54376197560508,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Lote\t6\nmedidas: 29,99x36,92\nSuperficie m2\t1.141,48\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t x \n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t \n Cloacas \t \n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-9"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80199906797078,
+          -27.54368943805516,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Lote\t7\nmedidas: 28,81x36,92\nSuperficie m2\t1.016,78\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t x \n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t \n Cloacas \t \n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.8017114183226,
+          -27.543639780321,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "mz : 6\nLote\t9\nmedidas: 15x40\nSuperficie m2\t600,00\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t x \n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-11"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80169019288169,
+          -27.54394584662539,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ= 6\nLote\t10\nSuperficie m2\t600,00\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t x \n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-12"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80183344120687,
+          -27.54399167327343,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Lote\t8\nmedidas 15x40\nSuperficie m2\t717,60\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t x \n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-13"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80155630802342,
+          -27.54391272852394,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ=   6\nLote\t12\nSuperficie m2\t600,00\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t x \n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-14"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.8021219699376,
+          -27.54402218037684,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ= 7\nLote\t2\nmedidas: 25x30\nSuperficie m2\t750,00\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-15"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80407195662209,
+          -27.54544904965371,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Mz= 6\nLote\t11\nSuperficie m2\t600,00\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t x \n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-16"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80197357049349,
+          -27.54400782488994,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t3\nMedidas             47,47*91,17\nLote\t12\nSuperficie m2\t4.330,44\nZONA INDUSTRIAL\nEstado lote\t   (disponible)\n Empresa con Boleto \t\n Sin Acceso  \t x \n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-17"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80187706073621,
+          -27.5414694029197,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t1 \nLote\t1\nSuperficie m2\t39.096,57\nEstado lote\tReservado\n Empresa con Boleto \t clarg \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t50kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-18"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.8090298510859,
+          -27.5414980682759,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t3\nMedidas             109,78*91,28\nLote\tE.P.4\nSuperficie m2\t9.997,15\nEstado lote\t E.P.4 Disponible\n Empresa con Boleto \t\n Sin Acceso  \t x \n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-19"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80262148084821,
+          -27.54138095417506,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t3\nMedidas            42,75*88,53 más ochava\nLote\tEP3",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-20"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80342535075358,
+          -27.54129660190841,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t2\nLote\tE.P.1\nSuperficie m2\t8.996,82\nEstado lote\t E.P.1 \n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t\nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-21"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80625936848404,
+          -27.54108541290221,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "EP 7 EQUIPAMIENTO DEL PARQUE\nMza 1 \t\nParcela: Ep7\n(159x194) = 31.521,75",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-22"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81537082165329,
+          -27.54125084224938,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ= 9\nLote\tE.P.6\nSuperficie m2\t44.325,53\nMEDIDAS IRREGULAR\nEstado lote\t E.P.6 \n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-23"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81541778018951,
+          -27.54372283802303,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ: 8\nLote\t4\nmedidas: 59,67x100,20 + ochava\nSuperficie m2\t9.828,98\nEstado lote\tdisponible\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-24"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80670905305983,
+          -27.54514029792238,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ:4\nLOTE: 1\nSUP: 162440.91m2\n ZONA CON LITIGIO \nZONA TECNOLOGICA",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-25"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.79999933864073,
+          -27.54277315265102,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Mza: 2\nLote: AV 2\nMedidas: 50*40",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-26"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.8061145136501,
+          -27.54165118587126,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ=4 \nLote\tA.V.4\nSuperficie m2\t16.820,56\nEstado lote\t A.V.4 \n Empresa con Boleto \t\n Sin Acceso  \t x \n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t inaccesible \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-27"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.79872365833655,
+          -27.54334266161968,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t12\nLote\tA.V.6\nSuperficie m2\t4.143,31\nmedidas:      62.7*64.60\nEstado lote\t A.V.6 \n                                                  tanque de agua \n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t-\nConsumo Energ. (Kva)\t-",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-28"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80580425082794,
+          -27.54338358558957,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ= 1\nPC= EV7\nESPACIO VERDE\n\nMEDIDAS: 100*197",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "dis",
+        "path": "C:/Users/pipao/Documents/dis.geojson",
+        "id": "puntosparque-29"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.8119841703584,
+          -27.54151250087498,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "EP2\nSUP: 15641.46M2\n\nFUTURA ESTACIÓN TRANSFORMADORA",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80468147506458,
+          -27.54117161534346,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t2\nMedidas             30x40\nLote\t10Y11\nSuperficie m2\t1200,00\nEstado lote\tno disponible\n Empresa con Boleto \t Martin Arengo \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\tx\npasto alto\tsi\nConsumo Energ. Declarado\t40hp\nConsumo Energ. (Kva)\t50kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-31"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80545999681527,
+          -27.5417203508663,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t3\nMedidas             21,6*30\nLote\tA.V.3\nSuperficie m2\t648,00\nEstado lote\t A.V.3 \n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\tx\npasto alto\t no \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-32"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80361121225539,
+          -27.54178984350419,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t3\nMedidas              10*30\nLote\t7\nSuperficie m2\t300,00\nEstado lote\tNo Disponible\n Empresa con Boleto \tGustavo Defazy - Fabrica MDF\n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \tx\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \tx\n Energia: Alum. Publ. \tx\nFibra Optica\tx\npasto alto\t no \nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t50kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-33"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80364375328895,
+          -27.54192916054717,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t3\nMedidas             30*30\nLote\t6\nSuperficie m2\t900,00\nEstado lote\tNo Disponible\n Empresa con Boleto \t Agua Noble \n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\tx\npasto alto\t no \nConsumo Energ. Declarado\t25 hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-34"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80366605306582,
+          -27.54209263434954,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t3\nMedidas            10*30\nLote\t5\nSuperficie m2\t300,00\nEstado lote\tNo Disponible\n Empresa con Boleto \t Bogado Sebastian \n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\tx\npasto alto\t si \nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-35"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80367705936052,
+          -27.54229930646707,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t3\nMedidas             30*23,50\nLote\t3\nSuperficie m2\t705,00\nEstado lote\tNo Disponible\n Empresa con Boleto \t Bizarro Juan - Bizarro Luis \n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\tx\npasto alto\t si \nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80371026355833,
+          -27.54256093916203,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t3\nLote\t1\nSuperficie m2\t19.866,11\nEstado lote\t No disonible\n Empresa con Boleto \t Plamecor \n Sin Acceso  \t x \n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t50kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-37"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80239760897773,
+          -27.54266454296503,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Lote\ts/n\nmedidas= 100X100\nSuperficie m2\t10.015,0\nEstado lote\tNo Disponible\n Empresa con Usufructo \t WORMS \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia:  \t\n Energia:  \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t--hp\nConsumo Energ. (Kva)\t--kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-38"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80373815287837,
+          -27.54737817777006,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Lote\ts/n\nmedidas= irregular\nSuperficie m2\t400.000\nEstado lote\tNo Disponible\n Empresa con Usufructo \t ENCORSA-CORAL \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t \n Energia:  \tGENERACIÓN FOTOVOLTAICA 20MW\n Energia:  \t\nFibra Optica\t\npasto alto\t NO \nConsumo Energ. Declarado\t--hp\nConsumo Energ. (Kva)\t--kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-39"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80463312837611,
+          -27.55252457755707,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Mz= 6\nLote\t13 a 16\nmedias: 60x40\nSuperficie m2\t2400 m2\nEstado lote\tDisponible\n Empresa con Boleto \t UICORR \n Sin Acceso  \t x \n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-40"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80250122723903,
+          -27.54407840058335,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "TECNORD - JORGE G. CUBILLAS\n\nManzana\t2\nLote\t3\nMedida 40x15\nSuperficie m2\t600.00\nEstado lote\tNo Disponible\nEmpresa con Boleto Tecnord \nSin Acceso \nCon Acceso: Tierra \nCon Acceso: Ripio \nCon Acceso: Pavimento x \nAgua x \nCloacas x \nsumidero y entubado x \nCuneta tierra \nEnergia: MT y BT x \nEnergia: Alum. Publ. x \nFibra Optica\tx\npasto alto\tno\nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-41"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80435487111772,
+          -27.54190201304294,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MARTIN BIKE\n\nManzana\t13\nLote\t9\nSuperficie m2\t1,000.00\nEstado lote\tNo Disponible\nEmpresa con Boleto Martin Bike \nSin Acceso \nCon Acceso: Tierra h \nCon Acceso: Ripio x \nCon Acceso: Pavimento x \nAgua x \nCloacas x \nsumidero y entubado x \nCuneta tierra x \nEnergia: MT y BT \nEnergia: Alum. Publ. x \nFibra Optica\tx\npasto alto\t si \nConsumo Energ. Declarado\t-\nConsumo Energ. (Kva)\t20kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-42"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80457483013212,
+          -27.5423001773178,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t13\nLote\t10y11\nSuperficie m2\t3.251,49\nmedidas: 50*60+ochava\n\nEstado lote\tNo Disponible\n Empresa con Boleto \t Nea Servicios  \n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\tx\npasto alto\t si \nConsumo Energ. Declarado\t-\nConsumo Energ. (Kva)\t20kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-43"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80482855760483,
+          -27.54266626194392,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "JUMAR - MARTIN PUIGBO\n\nManzana\t13\nLote\t19\nSuperficie m2\t2600.00\nmedidas irregular 40x80\nEstado lote\tNo Disponible\nEmpresa con Boleto Puigbo Martin Federico \nSin Acceso \nCon Acceso: Tierra x \nCon Acceso: Ripio \nCon Acceso: Pavimento x \nAgua x \nCloacas x \nsumidero y entubado x \nCuneta tierra \nEnergia: MT y BT x \nEnergia: Alum. Publ. x \nFibra Optica\tx\npasto alto\t si \nConsumo Energ. Declarado\t100hp\nConsumo Energ. (Kva)\t100kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-44"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80512046432279,
+          -27.54249781082658,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Arcle Baterias\n\nManzana\t12\nLote\t1y 6\nSuperficie m2\t10.660,75\nmedidas: 54.02x149.75\n\nEstado lote\tNo Disponible\n Empresa con Boleto \t Acumuladores Arcle SRL \n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\tx\npasto alto\t no \nConsumo Energ. Declarado\t60hp\nConsumo Energ. (Kva)\t200kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-45"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80659291347302,
+          -27.54373268981681,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t3\nMedidas             40*40*Más ochava\nLote\t2\nSuperficie m2\t1.511,52\nEstado lote\tNo Disponible\n Empresa con Boleto \t Enlace \n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\tx\npasto alto\t no \nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t35kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-46"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80368460782917,
+          -27.54281269635838,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Lote\t21\nmedidas: 45x40 irregular\nSuperficie m2\t2089,89\nEstado lote\tDisponible\n Empresa con Boleto \t Cerveceria Morel \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t15hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-47"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80305046484742,
+          -27.54418646784979,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Lote\t20\nmedidas: 50,96x85,66\nSuperficie m2\t4.295,59\nEstado lote\tNo Disponible\n Empresa con Boleto \t Imagen Digital S.A \n Sin Acceso  \t\n Con Acceso: Tierra \t \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t60hp\nConsumo Energ. (Kva)\t85kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-48"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.803741077712,
+          -27.54422299038347,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ= 7\nLote\t5 y 6\nmedidas: 40x30\nSuperficie m2\t700\nEstado lote\tNo Disponible\n Empresa con Boleto \t Gabriel Atilio Massacesi \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-49"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80404180822361,
+          -27.54480979421079,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t12\nLote\t4\nSuperficie m2\t6.639,35\nmedidas: 64.22x98.81\nEstado lote\tNo Disponible\n Empresa con Boleto \t Aguas Aras \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-50"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80520019664186,
+          -27.54415755265467,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t6\nLote\t2\nmedidas=32,16x54,06\nSuperficie m2\t1.564,23\nEstado lote\tNo Disponible\n Empresa con Boleto \t Comytel S.A. \n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t100 hp\nConsumo Energ. (Kva)\t135 kwa",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-51"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.8030799126276,
+          -27.5437931557264,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t12\nLote\t3\nSuperficie m2\t5.461,33\nmedidas: 69.47*64.50 + ochava\nEstado lote\tNo Disponible\n Empresa con Boleto \tFrozen SRL - Xavier Albarracin\n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \tx\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \tx\n Cuneta tierra \t\n Energia: MT y BT \tx\n Energia: Alum. Publ. \tx\nFibra Optica\tx\npasto alto\t no \nConsumo Energ. Declarado\t100kva\nConsumo Energ. (Kva)\t135kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-52"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80507465827384,
+          -27.54355329250344,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ=5\nLote\t29\nSuperficie m2\t17.808,52m2\nEstado lote\tNo Disponible\nEmpresa con Boleto Patagonia Construcciones - Sinat\nSin Acceso x\nCon Acceso: Tierra \nCon Acceso: Ripio \nCon Acceso: Pavimento \nAgua \nCloacas \nsumidero y entubado \nCuneta tierra x\nEnergia: MT y BT \nEnergia: Alum. Publ. \nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado 130kva\nConsumo Energ. (Kva)\t500kva( declarado por el propietario, sabe que debe ponerse su setin)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-53"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80227450446027,
+          -27.54482589882009,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t12\nLote\t5\nSuperficie m2\t5.153,95\nmedidas: 66.32*83.51\nEstado lote\tNo Disponible\n Empresa con Boleto \t Juan Carlos Gaillard \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t no \nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t50kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-54"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80590525688909,
+          -27.54410815602201,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t11\nLote\t4\nSuperficie m2\t5.138,06\nMEDIDAS: 54.91*91.97\nEstado lote\tNo Disponible\n Empresa con Boleto \t Checamba Materiales \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t x \n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t60hp\nConsumo Energ. (Kva)\t85kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-55"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80815688459621,
+          -27.54322941881737,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t11\nLote\t5\nSuperficie m2\t6.761,62\nMEDIDAS: 56.46*91.97 + OCHAVA\nEstado lote\tNo Disponible\n Empresa con Boleto \t Canavesio \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t\nFibra Optica\tx\npasto alto\t no \nConsumo Energ. Declarado\t60hp\nConsumo Energ. (Kva)\t85kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-56"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80754186494432,
+          -27.54335089230511,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t11\nLote\t7\nSuperficie m2\t7.112,82\nMEDIDAS: 78.15*96.67\nEstado lote\tNo Disponible\n Empresa con Boleto \t Logistica Hermanos \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t100hp\nConsumo Energ. (Kva)\t135kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-57"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80838324984082,
+          -27.54396160306116,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ= 8\nLote\t5 al 12\nSuperficie m2\t16.198,89\n\nEstado lote\tNo Disponible\n Empresa con Boleto \t Vica Neumaticos SA \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tNO\nConsumo Energ. Declarado\t100hp\nConsumo Energ. (Kva)\t135kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-58"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80554842591745,
+          -27.54514489211812,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t11\nLote\t8\nMEDIDAS: 51.03*74.59\nSuperficie m2\t7.953,70\nEstado lote\tNo Disponible\n Empresa con Boleto \t Yacare Containers SAS \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tno\nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-59"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80915375537856,
+          -27.54392166527807,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ= 10\nLote\t1\nSuperficie m2\t38.127,24\nMEDIDAS: 160*171.50 IRREGULAR\nEstado lote\tNo Disponible\n Empresa con Boleto \t Urbalog SA \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t100hp\nConsumo Energ. (Kva)\t130kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-60"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81365818810087,
+          -27.54341105522115,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t10\nLote\t12\nMEDIDAS: 87.50X100\nSuperficie m2\t8.750,00\nEstado lote\tNo Disponible\n Empresa con Boleto \t Espindola Pedro Alfredo \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t15hp\nConsumo Energ. (Kva)\t30kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-61"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.8122908292917,
+          -27.54383247734616,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t10\nLote\t3\nSuperficie m2\t8.750,00\nMEDIDAS: 87.50*100\nEstado lote\tNo Disponible\n Empresa con Boleto \t Espindola Jose Bernardo \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t15hp\nConsumo Energ. (Kva)\t30kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-62"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81224503580556,
+          -27.54299535277461,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t10\nLote\t6\nMEDIDAS: 81X100\nSuperficie m2\t10.013,00\nEstado lote\tNo Disponible\n Empresa con Boleto \t Eretz \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\tx\npasto alto\tsi\nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-63"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81066247615799,
+          -27.54315851500235,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t10\nLote\t10\nMEDIDAS: 50X100\nSuperficie m2\t5.000,00\nEstado lote\tNo Disponible\n Empresa con Boleto \t Comercializadora Shuk \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t100hp\nConsumo Energ. (Kva)\t135kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-64"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81109318899793,
+          -27.54390460171939,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t10\nLote\t4Y11\nSuperficie m2\t10.000\nMEDIDAS  50 X 100 C/U\nEstado lote\tNo Disponible\n Empresa con Boleto \t Comercializadora Shuk \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t100hp\nConsumo Energ. (Kva)\t135kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-65"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81156631245858,
+          -27.54340450442127,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t10\nLote\t13\nSuperficie m2\t7515.05\nMEDIDAS: 81X100 IRREGULAR\nEstado lote\tNo Disponible\n Empresa con Boleto \t Oncolitoral \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-66"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81056010410006,
+          -27.54421089123562,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t10\n\nLote\t7\nMEDIDAS: 49X51\nSuperficie m2\t2.499,00\nEstado lote\tNo Disponible\n Empresa con Boleto \t Lasa SA \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\tx\npasto alto\tsi\nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-67"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81009190797452,
+          -27.54375249762243,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t13\nLote\t16y17\nSuperficie m2\t1200\nmedidas: 40*30\nEstado lote\tNo Disponible\n Empresa con Boleto \t Grunen SRL \n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\tx\npasto alto\t no \nConsumo Energ. Declarado\t100hp\nConsumo Energ. (Kva)\t135kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-68"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80613024297712,
+          -27.5425527215844,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t13\nLote\t3y4\nSuperficie m2\t2.000,00\nmedidas: 40*50\nEstado lote\tNo Disponible\n Empresa con Boleto \t             All Matic \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\tx\npasto alto\t si \nConsumo Energ. Declarado\t20hp\nConsumo Energ. (Kva)\t35kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-69"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80588220688935,
+          -27.54224603042811,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t13\nLote\t15\nSuperficie m2\t600,00\nmedidas:20*30\nEstado lote\tNo Disponible\n Empresa con Boleto \t Avena - Tonutti \n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\tx\npasto alto\t si \nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-70"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80585633024014,
+          -27.54259186164443,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "\nMZ= 9\nLote\t12\nSuperficie m2\t10.202,98\nMEDIDAS= 105X95,76\nEstado lote\tNo Disponible\n Empresa con Boleto \tAlbo Distribuciones - Bogado\n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \tx\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t100hp\nConsumo Energ. (Kva)\t60kva (factibilidad dpec)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-71"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81154697958171,
+          -27.54489696764696,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t11\nLote\t1Y2\nSuperficie m2\t8.144,16\n\nEstado lote\tNo Disponible\n Empresa con Boleto \t Cantecor \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t x \n Energia: Alum. Publ. \t\nFibra Optica\tx\npasto alto\t no \nConsumo Energ. Declarado\t60hp\nConsumo Energ. (Kva)\t85kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-72"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80919252888617,
+          -27.54310943906796,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Lote\tE.P.5\nmedidas= 42,56x85,75+ ochava\nSuperficie m2\t5.033,29\nEstado lote\t E.P.5 \n Empresa                       \t CEC \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\tx\npasto alto\t no \nConsumo Energ. Declarado\t sin datos \nConsumo Energ. (Kva)\tsin datos",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-73"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80370800737774,
+          -27.54378435557111,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ= 7\nLote\t7\nmedidas= 40x30\nSuperficie m2\t700\nEstado lote\tNo Disponible\n Empresa con Boleto \t Tricobalto SASU \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t\n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t10hp\nConsumo Energ. (Kva)\t20kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-74"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80405308098283,
+          -27.54512683585339,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Mz= 8 \nLote\t2y3\nmedidas: 109,42x100,83 + ochava\nSuperficie m2\t14180,14\nEstado lote\tNo Disponible\n Empresa con Boleto \t Cloronor SA \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t100hp\nConsumo Energ. (Kva)\t111kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-75"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80782755153046,
+          -27.54497871663259,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ=9 \nLote\t11\nMEDIDAS: 32X94.82\nSuperficie m2\t3.335,02\nEstado lote\tReservado\n Empresa con Boleto \t Rs Argentina - Eugenio Vidal \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-76"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81090028236758,
+          -27.54493755330843,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "MZ= 9\nLote\t7\nSuperficie m2\t3.466,97\nMEDIDAS: 35*99.59\nEstado lote\tNo Disponible\n Empresa con Boleto \t Forestal San Jose Obrero \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t50kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-77"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81229757652428,
+          -27.54488533136577,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Lote\t6\nMZ=9\nMEDIDAS: 35*100.47\nSuperficie m2\t3.499,87\nEstado lote\tDisponible\n Empresa con Boleto \t Expreso Ara Vera \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t\n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-78"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81263620911001,
+          -27.54489281368478,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t13\nLote\t1\nSuperficie m2\t1.815,57\nmedidas: 38.03*50\nEstado lote\tNo Disponible\n Empresa con Boleto \t Inoxidables Norte SAS \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t no \nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t50kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-79"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80645997556415,
+          -27.54211213249677,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t13\nLote\t5,6,13 y 14\nSuperficie m2\t3.200,00\nmedidas: 40x70\nEstado lote\tNo Disponible\n Empresa con Boleto \t Disanco \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\tx\npasto alto\t si \nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-80"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80548626962431,
+          -27.54242216683466,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t2\nLote\t13\nSuperficie m2\t1800\nmedidas: 45x40\nEstado lote\tNo Disponible\n Empresa con Boleto \t Promacon \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\tx\npasto alto\tno\nConsumo Energ. Declarado\t20hp\nConsumo Energ. (Kva)\t35kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-81"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80464764464316,
+          -27.54181293660071,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t2\nLote\t14\nSuperficie m2\t1800\nmedidas: 45x40\nEstado lote\tNo Disponible\n Empresa con Boleto \tGustavo Defazy - Marmoleria\n Sin Acceso  \t\n Con Acceso: Tierra \tx\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\tx\npasto alto\tno\nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t50kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-82"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80509898398081,
+          -27.54176995509517,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t2\nLote\t12\nSuperficie m2\t1000\nmedidas: 25*40\nEstado lote\tNo Disponible\n Empresa con Boleto \t Elgert  \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\tx\npasto alto\tno\nConsumo Energ. Declarado\t25hp\nConsumo Energ. (Kva)\t40kva",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-83"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80577864434769,
+          -27.54167333236194,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "AV1- PLANTA ELEVADORA DE CLOACA\nMEDIDAS: 90.42*92.36\n\nMZ=9\nPC: AV1",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "nodis",
+        "path": "C:/Users/pipao/Documents/nodis.geojson",
+        "id": "puntosparque-84"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81027991155535,
+          -27.5450321660788,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Manzana\t11\nLote\t3\nSuperficie m2\t2.902,70\nMEDIDAS: 32.90X95.17\nEstado lote\tReservado\n DE RESERVA \t JMS TEJIDOS MARCELO SANCHEZ \n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t x \n Energia: MT y BT \t x \n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\tsi\nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "res",
+        "path": "C:/Users/pipao/Documents/res.geojson",
+        "id": "puntosparque-85"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80856947330963,
+          -27.543166064898,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "AMPLIACIÓN CANAVESIO\n\nManzana\t11\nLote\t6\nSuperficie m2\t5.460,47\nMEDIDAS:86.22*76.33\nEstado lote\tReservado A CANAVESIO\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "res",
+        "path": "C:/Users/pipao/Documents/res.geojson",
+        "id": "puntosparque-86"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80765763751933,
+          -27.54401296566849,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Reserva: CLARG\n(211x186,17) = 39.096,57",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "res",
+        "path": "C:/Users/pipao/Documents/res.geojson",
+        "id": "puntosparque-87"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.81367222222222,
+          -27.541325,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Reserva / DELVALLE GROUP - Jose Maria \n\nManzana\t3\nLote\t4\nSuperficie m2\t300,00\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\tx\npasto alto\t no \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "res",
+        "path": "C:/Users/pipao/Documents/res.geojson",
+        "id": "puntosparque-88"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80370430606071,
+          -27.54241121338869,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "PEREZ Y MARFIL\nFraccionador gases ind\n\nManzana\t13\nLote\t18\nSuperficie m2\t1.055,00\nmedidas: 38.03*30+ochava\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t x \n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t x \n Cuneta tierra \t\n Energia: MT y BT \t x \n Energia: Alum. Publ. \t x \nFibra Optica\tx\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "res",
+        "path": "C:/Users/pipao/Documents/res.geojson",
+        "id": "puntosparque-89"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80649321504995,
+          -27.54252630221396,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "AMPLIACIÓN INOX NORTE\nManzana\t13\nLote\t2\nSuperficie m2\t1.000,00\nmedidas: 20*50\nEstado lote\tDisponible\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t x \n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t x \n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\tx\npasto alto\t no \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "res",
+        "path": "C:/Users/pipao/Documents/res.geojson",
+        "id": "puntosparque-90"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80615397064787,
+          -27.54219938942003,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Lote\t3\nmedidas: 32,16x46,33\nSuperficie m2\t1.295,83\nEstado lote\treserva\n Empresa \tFederico Schneebauer\n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "res",
+        "path": "C:/Users/pipao/Documents/res.geojson",
+        "id": "puntosparque-91"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80284851459206,
+          -27.54377270353285,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "Lote\t4\nmedidas: 33,05x46,33\nSuperficie m2\t1.186,35\nEstado lote\treserva  SANTIAGO CARNICER\n Empresa con Boleto \t\n Sin Acceso  \t\n Con Acceso: Tierra \t\n Con Acceso: Ripio \t\n Con Acceso: Pavimento \t\n Agua \t x \n Cloacas \t x \n sumidero y entubado  \t\n Cuneta tierra \t\n Energia: MT y BT \t\n Energia: Alum. Publ. \t\nFibra Optica\t\npasto alto\t si \nConsumo Energ. Declarado\t\nConsumo Energ. (Kva)",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "layer": "res",
+        "path": "C:/Users/pipao/Documents/res.geojson",
+        "id": "puntosparque-92"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.80255651547748,
+          -27.54375028248489,
+          0
+        ]
+      }
+    }
+  ]
+}

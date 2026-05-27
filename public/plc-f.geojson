@@ -1,0 +1,80 @@
+{
+  "type": "FeatureCollection",
+  "name": "plcf",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "plcf-1",
+        "Name": null,
+        "description": null,
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": null,
+        "tessellate": -1,
+        "extrude": 0,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "Layer": "fuelle planta lc",
+        "AREA": 216056
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                -58.8303703908254,
+                -27.5393691157082
+              ],
+              [
+                -58.8314572953329,
+                -27.5434694680531
+              ],
+              [
+                -58.8256739368035,
+                -27.5441443048565
+              ],
+              [
+                -58.8257564188163,
+                -27.5452427171866
+              ],
+              [
+                -58.8334850506564,
+                -27.5452713842699
+              ],
+              [
+                -58.8333745748455,
+                -27.5441952811173
+              ],
+              [
+                -58.8332530661963,
+                -27.5430116913809
+              ],
+              [
+                -58.8328295157699,
+                -27.5414194921428
+              ],
+              [
+                -58.8322553148695,
+                -27.5392609014707
+              ],
+              [
+                -58.8303703908254,
+                -27.5393691157082
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,1035 @@
+.mapa-contenedor {
+  display: flex;
+  width: 100%;
+}
+
+.panel-lateral{
+
+width:260px;
+height:100vh;
+
+background:#ffffff;
+
+border-right:1px solid #e5e7eb;
+
+padding:18px;
+
+overflow-y:auto;
+
+box-shadow:
+4px 0 10px rgba(0,0,0,0.05);
+
+}
+
+.capa-principal {
+  margin-bottom: 10px;
+}
+
+.subcapas {
+  margin-left: 20px;
+  margin-top: 5px;
+  padding-left: 10px;
+  border-left: 2px solid #ccc;
+}
+
+label {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.logo-parcas {
+    max-width: 150px;
+    height: auto;
+}
+
+/* Estilo para las nuevas capas en el panel */
+.capa-principal {
+    margin-bottom: 8px;
+}
+
+.capa-principal label {
+    cursor: pointer;
+    margin-left: 5px;
+}
+.dato1-label {
+    pointer-events: none;
+    text-align: center;
+    font-size: 12px;
+}
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-contenido {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.texto-poligono {
+  font-weight: bold;
+  font-size: 12px;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* fondo oscuro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* más alto que el mapa */
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+
+.tabla-referencias-flotante{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+
+  /* ✅ NO encierres la card */
+  width: auto;
+  max-height: none;
+
+  /* ✅ dejá que el contenido sea la card */
+  overflow: visible;
+
+  /* un look más limpio */
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+
+/* =========================
+   MODALES ESTÉTICOS (Santa Catalina)
+   ========================= */
+
+.sc-modalOverlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 12, 20, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  z-index: 9999;
+}
+
+.sc-modalCard{
+  width: min(880px, 96vw);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.25),
+    0 2px 10px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255,255,255,0.6);
+  overflow: hidden;
+  animation: scPop .14s ease-out;
+}
+
+@keyframes scPop{
+  from { transform: translateY(10px) scale(0.99); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.sc-modalHeader{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.sc-modalTitle{
+  font-size: 16px;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.2px;
+}
+
+.sc-modalSubtitle{
+  margin-top: 6px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(17, 24, 39, 0.75);
+}
+
+.sc-badge{
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.08);
+  font-weight: 700;
+}
+
+.sc-dot{
+  opacity: 0.55;
+}
+
+.sc-muted{
+  opacity: 0.8;
+}
+
+.sc-iconBtn{
+  border: none;
+  background: rgba(2, 6, 23, 0.06);
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: transform .12s ease, background .12s ease;
+}
+.sc-iconBtn:hover{
+  background: rgba(2, 6, 23, 0.10);
+  transform: translateY(-1px);
+}
+
+.sc-modalBody{
+  padding: 18px;
+}
+
+.sc-modalFooter{
+  padding: 14px 18px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  background: rgba(255,255,255,0.7);
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.sc-btn{
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+.sc-btn:active{
+  transform: translateY(1px);
+}
+
+.sc-btnPrimary{
+  color: white;
+  background: linear-gradient(135deg, #111827, #374151);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+}
+.sc-btnPrimary:hover{
+  box-shadow: 0 14px 26px rgba(0,0,0,0.22);
+}
+
+.sc-btnGhost{
+  background: rgba(2, 6, 23, 0.06);
+  color: #111827;
+}
+.sc-btnGhost:hover{
+  background: rgba(2, 6, 23, 0.10);
+}
+
+.sc-grid2{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.sc-span2{ grid-column: span 2; }
+
+.sc-infoItem{
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  padding: 12px 12px;
+}
+
+.sc-infoLabel{
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(17, 24, 39, 0.72);
+  margin-bottom: 6px;
+}
+.sc-infoValue{
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+  word-break: break-word;
+}
+
+.sc-emptyState{
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px dashed rgba(0,0,0,0.18);
+  background: rgba(255,255,255,0.6);
+}
+.sc-emptyTitle{
+  font-weight: 900;
+  color: #111827;
+  margin-bottom: 6px;
+}
+.sc-emptyText{
+  color: rgba(17,24,39,0.75);
+  font-size: 13px;
+}
+
+.sc-formGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.sc-field{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sc-label{
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(17,24,39,0.75);
+}
+
+.sc-input, .sc-select{
+  width: 100%;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.95);
+  outline: none;
+  font-size: 14px;
+}
+.sc-input:focus, .sc-select:focus{
+  border-color: rgba(17,24,39,0.35);
+  box-shadow: 0 0 0 4px rgba(17,24,39,0.10);
+}
+
+.sc-hint{
+  margin-top: 12px;
+  font-size: 12px;
+  color: rgba(17,24,39,0.72);
+  background: rgba(2, 6, 23, 0.05);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+@media (max-width: 720px){
+  .sc-grid2, .sc-formGrid{
+    grid-template-columns: 1fr;
+  }
+  .sc-span2{ grid-column: auto; }
+}
+
+/* =========================
+   REFERENCIAS - CARD MODERNA
+========================= */
+
+.refCard{
+  width: 340px;
+  max-height: 420px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 14px;
+  box-shadow: 0 16px 35px rgba(0,0,0,0.18);
+  border: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.refCard.isExpanded{
+  width: min(720px, calc(100vw - 320px)); /* 320px para no chocar con panel izquierdo */
+  max-height: 75vh;
+}
+
+.refHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.refHeaderLeft{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.refTitle{
+  font-weight: 900;
+  font-size: 13px;
+}
+
+.refSubtitle{
+  font-size: 11px;
+  color: rgba(0,0,0,0.6);
+}
+
+.refBtn{
+  border: none;
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-weight: 800;
+  cursor: pointer;
+  background: #111827;
+  color: white;
+  white-space: nowrap;
+}
+
+.refBody{
+  padding: 10px;
+  overflow-y: auto;      /* ✅ scroll vertical */
+  overflow-x: hidden;    /* ✅ NUNCA horizontal */
+}
+
+.refRow{
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 10px;
+}
+
+.refRow:hover{
+  background: rgba(0,0,0,0.04);
+}
+
+.refSwatch{
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.35);
+  flex-shrink: 0;        /* ✅ NO se aplasta */
+  margin-top: 2px;
+}
+
+.refText{
+  font-size: 12px;
+  line-height: 1.35;
+
+  /* ✅ wrap real */
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  /* ✅ CLAVE para que flex pueda achicarse sin cortar feo */
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.refSectionTitle {
+  margin-bottom: 6px;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: rgba(0,0,0,0.78);
+  border-top: none;
+}
+.texto-poligono {
+  pointer-events: none; /* no tapa clicks en polígonos */
+}
+
+/* Para que el divIcon no herede estilos viejos */
+.sc-labelIcon {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* La burbuja */
+.sc-labelBubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%); /* ✅ centra exacto en el punto */
+  border-radius: 20px;
+  font-weight: 800;
+  white-space: nowrap;
+ 
+  color: #111;
+  pointer-events: none; /* ✅ no molesta el click del polígono */
+}
+
+
+/* =========================
+   CONTENEDOR GENERAL
+========================= */
+
+.mapa-contenedor{
+display:flex;
+width:100%;
+height:100vh;
+position:relative;
+font-family:Segoe UI, Roboto, sans-serif;
+}
+
+
+/* =========================
+   PANEL LATERAL
+========================= */
+
+.panel-lateral{
+width:270px;
+height:100vh;
+background:#f7f9fb;
+padding:18px;
+overflow-y:auto;
+border-right:1px solid #dcdcdc;
+box-shadow:2px 0 8px rgba(0,0,0,0.05);
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo-container{
+display:flex;
+justify-content:center;
+align-items:center;
+margin-bottom:18px;
+}
+
+.logo-parcas{
+width:140px;
+object-fit:contain;
+}
+
+
+/* =========================
+   TITULOS
+========================= */
+
+.panel-titulo{
+font-size:14px;
+font-weight:600;
+margin-top:10px;
+margin-bottom:10px;
+color:#333;
+}
+
+.grupo-titulo{
+
+font-size:12px;
+font-weight:800;
+
+letter-spacing:.5px;
+
+color:#1e88e5;
+
+margin-top:14px;
+margin-bottom:8px;
+
+text-transform:uppercase;
+
+}
+
+
+/* =========================
+   GRUPOS
+========================= */
+
+.grupo-capas{
+margin-bottom:16px;
+}
+
+
+/* =========================
+   ITEMS
+========================= */
+
+.capa-item{
+
+font-size:13px;
+
+padding:6px 4px;
+
+border-radius:6px;
+
+transition:.15s;
+
+}
+
+.capa-item:hover{
+
+background:#f3f4f6;
+
+}
+
+.capa-item label{
+display:flex;
+align-items:center;
+gap:6px;
+cursor:pointer;
+}
+
+.capa-item input{
+cursor:pointer;
+}
+
+
+input[type="checkbox"]{
+
+accent-color:#0f7f86;
+
+cursor:pointer;
+
+}
+
+/* =========================
+   SUBCAPAS
+========================= */
+
+.subcapas{
+
+margin-left:16px;
+padding-left:10px;
+
+border-left:2px solid #e5e7eb;
+
+margin-top:6px;
+
+}
+
+.subcapas label{
+font-size:13px;
+}
+
+
+/* =========================
+   SEPARADOR
+========================= */
+
+.panel-lateral hr{
+margin:14px 0;
+border:none;
+border-top:1px solid #dcdcdc;
+}
+
+
+/* =========================
+   SCROLL DEL PANEL
+========================= */
+
+.panel-lateral::-webkit-scrollbar{
+width:6px;
+}
+
+.panel-lateral::-webkit-scrollbar-thumb{
+background:#c0c0c0;
+border-radius:4px;
+}
+
+.panel-lateral::-webkit-scrollbar-thumb:hover{
+background:#a0a0a0;
+}
+
+
+/* =========================
+   REFERENCIAS FLOTANTES
+========================= */
+
+.tabla-referencias-flotante{
+position:absolute;
+bottom:20px;
+right:20px;
+z-index:1000;
+}
+
+
+/* =========================
+   ETIQUETAS DE POLIGONOS
+========================= */
+
+.sc-labelIcon{
+background:transparent;
+border:none;
+}
+
+
+
+/* =========================
+   MODAL SISTEMA
+========================= */
+
+.modal-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.modal-content{
+
+width:720px;
+max-width:92%;
+
+background:#ffffff;
+border-radius:14px;
+
+box-shadow:
+0 20px 50px rgba(0,0,0,0.25),
+0 2px 10px rgba(0,0,0,0.08);
+
+overflow:hidden;
+
+animation:modalFade .18s ease;
+}
+
+@keyframes modalFade{
+from{
+opacity:0;
+transform:translateY(12px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+
+/* =========================
+   HEADER MODAL
+========================= */
+
+.modal-header{
+
+background:linear-gradient(135deg,#0b3c49,#1c7a82);
+
+color:white;
+
+padding:16px 20px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+font-weight:700;
+font-size:15px;
+}
+
+.modal-close{
+
+cursor:pointer;
+font-size:18px;
+opacity:.8;
+}
+
+.modal-close:hover{
+opacity:1;
+}
+
+
+/* =========================
+   BODY MODAL
+========================= */
+
+.modal-body{
+
+padding:22px;
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+
+}
+
+
+/* =========================
+   CAMPOS
+========================= */
+
+.modal-field{
+
+display:flex;
+flex-direction:column;
+gap:4px;
+
+font-size:12px;
+font-weight:600;
+color:#374151;
+
+}
+
+.modal-field input,
+.modal-field select{
+
+padding:9px 10px;
+
+border-radius:8px;
+
+border:1px solid #d1d5db;
+
+font-size:13px;
+
+outline:none;
+
+transition:.15s;
+
+}
+
+.modal-field input:focus,
+.modal-field select:focus{
+
+border-color:#0f7f86;
+
+box-shadow:0 0 0 3px rgba(15,127,134,.15);
+
+}
+
+
+/* =========================
+   FOOTER MODAL
+========================= */
+
+.modal-footer{
+
+padding:14px 20px;
+
+display:flex;
+justify-content:flex-end;
+gap:10px;
+
+border-top:1px solid #e5e7eb;
+
+}
+
+
+/* =========================
+   BOTONES
+========================= */
+
+.btn-primary{
+
+background:linear-gradient(135deg,#0f7f86,#1c7a82);
+
+color:white;
+
+border:none;
+
+padding:9px 16px;
+
+border-radius:8px;
+
+font-weight:600;
+
+cursor:pointer;
+
+box-shadow:0 6px 14px rgba(0,0,0,0.2);
+
+}
+
+.btn-primary:hover{
+
+transform:translateY(-1px);
+
+box-shadow:0 8px 18px rgba(0,0,0,0.25);
+
+}
+
+
+.btn-secondary{
+
+background:#e5e7eb;
+
+border:none;
+
+padding:9px 16px;
+
+border-radius:8px;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+/* =========================
+   BADGE
+========================= */
+
+.sc-badge{
+background:#e3f2fd;
+color:#1565c0;
+padding:2px 8px;
+border-radius:4px;
+font-size:12px;
+}
+
+.sc-dot{
+margin:0 6px;
+color:#999;
+}
+
+.sc-muted{
+color:#777;
+}
+
+
+
+.btn-tipo-mapa {
+  width: 100%;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #0a3b4f, #148d8d);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-tipo-mapa:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.btn-tipo-mapa:active {
+  transform: scale(0.98);
+}
+
+.mapa-contenedor {
+  display: flex;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-lateral {
+  width: 270px;
+  flex: 0 0 270px;
+  height: 100dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mapa-area {
+  flex: 1;
+  min-width: 0;
+  height: 100dvh;
+  position: relative;
+}
+
+.mapa-leaflet {
+  width: 100%;
+  height: 100%;
+}
+
+.mapa-area .leaflet-container {
+  width: 100%;
+  height: 100%;
+  touch-action: pan-x pan-y;
+}
+
+/* REFERENCIAS */
+.tabla-referencias-flotante {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .mapa-contenedor {
+    flex-direction: column;
+    height: 100dvh;
+  }
+
+  .panel-lateral {
+    width: 100%;
+    flex: 0 0 auto;
+    height: auto;
+    max-height: 34dvh;
+    border-right: none;
+    border-bottom: 1px solid #dcdcdc;
+  }
+
+  .mapa-area {
+    width: 100%;
+    height: 66dvh;
+    min-height: 66dvh;
+  }
+
+  .tabla-referencias-flotante {
+    right: 10px;
+    left: 10px;
+    bottom: 10px;
+  }
+
+  .tabla-referencias-doble {
+    gap: 10px;
+  }
+
+  .refCard {
+    width: 100%;
+    max-height: 28dvh;
+  }
+
+  .refCard.isExpanded {
+    width: 100%;
+    max-height: 38dvh;
+  }
+}
+
+.tabla-referencias-doble {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+
+.capa-item-todas-zonas {
+  background: #1c79803b;
+  border: 1px solid #d7e8ff;
+  margin-bottom: 8px;
+}
+
+.capa-item-todas-zonas:hover {
+  background: #e7f8ff;
+}

@@ -1,0 +1,24 @@
+#mapa {
+    width: 2500px; /* Ajusta el ancho según tus necesidades */
+    height: 1500px; /* Ajusta la altura según tus necesidades */
+  /*    border: 1px solid #ccc;Bordes opcionales para resaltar el área del mapa */
+    /*  position: relative;Establece la posición relativa para que los elementos internos se posicionen correctamente */
+  }
+  
+  #mapa img {
+    width: 100%; /* Hace que la imagen SVG ocupe el 100% del ancho del contenedor */
+    height: 100%; /* Hace que la imagen SVG ocupe el 100% de la altura del contenedor */
+    display: block; /* Elimina cualquier espacio adicional por debajo de la imagen */
+  }
+
+  .mi-path {
+    fill: blue; /* Estilo normal del relleno del path */
+    transition: fill 0.3s ease; /* Agrega una transición suave */
+  
+    /* Otros estilos para el path si es necesario */
+  }
+  
+  .mi-path:hover {
+    fill: gray; /* Estilo del relleno cuando el mouse está sobre el path */
+    cursor: 'pointer'
+  }

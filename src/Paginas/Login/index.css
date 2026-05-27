@@ -1,0 +1,42 @@
+.container-general{
+    background-color: rgb(34, 36, 41);
+    min-height: 100vh;
+  }
+  .form-container {
+    padding-top: 3%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(20px + 3vmin);
+    width:100%;
+  }
+  
+  .logo-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top:6%
+  }
+  
+  .logo-container img{
+      width: 22%;
+      height: 22%;
+      background-color: rgb(34, 36, 41);
+  }
+  
+  .ant-input {
+    background-color: rgb(25, 26, 27);
+    color:white;
+  }
+  
+  .ant-input-affix-wrapper {
+    background-color: rgb(25, 26, 27);
+    border-color:rgb(62, 65, 65)
+  }
+  .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper, .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover{
+    background-color: rgb(25, 26, 27);
+    border-color:rgb(62, 65, 65)
+  }
