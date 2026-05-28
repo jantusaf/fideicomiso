@@ -212,7 +212,7 @@ export default function SelectTextFields(props) {
                       border: "1px solid rgba(20,141,141,0.20)",
                     }}
                   >
-                    <PersonOutlineIcon />
+                    <PersonOutlineOutlinedIcon />
                   </Avatar>
 
                   <Box sx={{ flex: 1 }}>
@@ -246,7 +246,7 @@ export default function SelectTextFields(props) {
                 </Paper>
               ) : (
                 <InfoRow
-                  icon={<PersonOutlineIcon />}
+                  icon={<PersonOutlineOutlinedIcon />}
                   label="Sin titular asignado"
                   value="--"
                 />

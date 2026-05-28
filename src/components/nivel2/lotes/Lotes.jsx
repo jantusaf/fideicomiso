@@ -1,7 +1,22 @@
 import { useState, useEffect } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from '@mui/icons-material/Search';
-
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
+  TextField,
+  MenuItem,
+  Grid,
+  Button,
+  Chip,
+  InputAdornment,
+} from "@mui/material";
 import servicioLotes from '../../../services/lotes'
 import { useNavigate } from "react-router-dom";
 import CargaDeTabla from "../../CargaDeTabla"
@@ -24,6 +39,14 @@ const Lotes = () => {
     //configuracion de Hooks
     const [clients, setClients] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("");
+const [zonaFilter, setZonaFilter] = useState("");
+const [fraccionFilter, setFraccionFilter] = useState("");
+const [parcelaFilter, setParcelaFilter] = useState("");
+const [loteFilter, setLoteFilter] = useState("");
+
+const [page, setPage] = useState(0);
+const [rowsPerPage, setRowsPerPage] = useState(10);
     const navigate = useNavigate();
 
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
@@ -60,7 +83,17 @@ const Lotes = () => {
     useEffect(() => {
         getClients()
     }, [])
+const filteredClients = clients[0]?.filter((item) => {
+    return (
+        (item.nombre?.toLowerCase().includes(search.toLowerCase()) ||
+            item.cuil_cuit?.toLowerCase().includes(search.toLowerCase())) &&
 
+        (zonaFilter === "" || item.zona === zonaFilter) &&
+        (fraccionFilter === "" || item.fraccion === fraccionFilter) &&
+        (parcelaFilter === "" || item.parcela === parcelaFilter) &&
+        (loteFilter === "" || item.lote === loteFilter)
+    );
+}) || [];
     // definimos las columnas
     const columns = [
         {
@@ -303,6 +336,120 @@ const Lotes = () => {
 
 
                         /> */}</Box>
+
+                        <Grid container spacing={2} sx={{ mb: 2 }}>
+  <Grid item xs={12} md={4}>
+    <TextField
+      fullWidth
+      placeholder="Buscar por nombre o cuil"
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <SearchIcon />
+          </InputAdornment>
+        ),
+      }}
+    />
+  </Grid>
+
+  <Grid item xs={6} md={2}>
+    <TextField
+      select
+      fullWidth
+      label="Zona"
+      value={zonaFilter}
+      onChange={(e) => setZonaFilter(e.target.value)}
+    >
+      <MenuItem value="">Todas</MenuItem>
+
+      {[...new Set(clients[0]?.map((x) => x.zona))].map((zona) => (
+        <MenuItem key={zona} value={zona}>
+          {zona}
+        </MenuItem>
+      ))}
+    </TextField>
+  </Grid>
+</Grid>
+<TableContainer component={Paper} sx={{ borderRadius: 3 }}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Ver</TableCell>
+        <TableCell>Zona</TableCell>
+        <TableCell>Fracción</TableCell>
+        <TableCell>Manzana</TableCell>
+        <TableCell>Lote</TableCell>
+        <TableCell>Parcela</TableCell>
+        <TableCell>Superficie</TableCell>
+        <TableCell>Estado</TableCell>
+        <TableCell>Cuil/Cuit</TableCell>
+        <TableCell>Persona</TableCell>
+      </TableRow>
+    </TableHead>
+
+    <TableBody>
+      {filteredClients
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+        .map((item, index) => (
+          <TableRow key={index} hover>
+            <TableCell>
+              <Modaldetalles
+                zona={item.zona}
+                fraccion={item.fraccion}
+                manzana={item.manzana}
+                lote={item.lote}
+                parcela={item.parcela}
+                adrema={item.adrema}
+                superficie={item.superficie}
+                mensura={item.mensura}
+                nombre={item.nombre}
+                cuil_cuit={item.cuil_cuit}
+              />
+            </TableCell>
+
+            <TableCell>{item.zona}</TableCell>
+            <TableCell>{item.fraccion}</TableCell>
+            <TableCell>{item.manzana}</TableCell>
+            <TableCell>{item.lote}</TableCell>
+            <TableCell>{item.parcela}</TableCell>
+            <TableCell>{item.superficie}</TableCell>
+
+            <TableCell>
+              <Chip
+                label={item.estado}
+                color={
+                  item.estado === "Disponible"
+                    ? "success"
+                    : "error"
+                }
+                size="small"
+              />
+            </TableCell>
+
+            <TableCell>{item.cuil_cuit}</TableCell>
+            <TableCell>{item.nombre}</TableCell>
+          </TableRow>
+        ))}
+    </TableBody>
+  </Table>
+
+  <TablePagination
+    component="div"
+    count={filteredClients.length}
+    page={page}
+    onPageChange={(e, newPage) => setPage(newPage)}
+    rowsPerPage={rowsPerPage}
+    onRowsPerPageChange={(e) => {
+      setRowsPerPage(parseInt(e.target.value, 10));
+      setPage(0);
+    }}
+    rowsPerPageOptions={[5, 10, 25, 50]}
+  />
+</TableContainer>
+
+
                     </div>
                 )}
         </>
