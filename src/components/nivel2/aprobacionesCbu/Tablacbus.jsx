@@ -531,7 +531,7 @@ const handleChangeRowsPerPage = (event) => {
     <Table stickyHeader>
         <TableHead>
             <TableRow>
-                <TableCell>CBU</TableCell>
+                <TableCell>CBU </TableCell>
                 <TableCell>Cuil/Cuit Cliente</TableCell>
                 <TableCell>Cuil/Cuit Titular</TableCell>
                 <TableCell>Descripción</TableCell>
