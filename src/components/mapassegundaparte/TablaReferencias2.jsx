@@ -1,4 +1,3 @@
-import React from "react";
 import "./MapaConCapas.css";
 
 const TablaReferencias2 = () => {
@@ -7,7 +6,6 @@ const TablaReferencias2 = () => {
       <div className="refHeader">
         <div className="refHeaderLeft">
           <span className="refTitle">Referencias de disponibilidad</span>
-         
         </div>
       </div>
 
