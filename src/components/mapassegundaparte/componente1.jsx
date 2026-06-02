@@ -9,7 +9,7 @@ import L from "leaflet";
 import serviciolotes from "../../services/lotes";
 import { centerOfMass, pointOnFeature, booleanPointInPolygon } from "@turf/turf";
 import TablaReferencias from "./tablaReferencias";
-import TablaReferencias2 from "./TablaReferencias2.jsx";
+import TablaReferencias2 from "./TablaReferencias2.js";
 
 const MapaConCapas = () => {
     //  Helper: inyecta properties.id si no existe (para area1..4 y cualquier capa que venga sin id)
@@ -79,6 +79,7 @@ const MapaConCapas = () => {
         Mensura30922U: false,
         mensura31548Unuevo: false,
         ib5: false,
+        ib2: false,
         rutas1: false,
     });
 
@@ -96,6 +97,7 @@ const zonasConfig = [
   { key: "ic42", label: "IC4.2" },
   { key: "area5", label: "IB4" },
   { key: "ib5", label: "IB5" },
+  { key: "ib2", label: "IB2" },
   { key: "area6", label: "IB6" },
   { key: "invicoresidencial", label: "Invico - Residencial" },
   { key: "area1", label: "Zona Hípico" },
@@ -274,9 +276,22 @@ const toggleTodasLasZonas = () => {
         "PLC-F": false,
         ZPA: false
     });
-    const esAreaEspecial = ["area1", "area2", "area3", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5", "invicoresidencial", "zonapirayui", "Mensura30922U"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "area3", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2", "invicoresidencial", "zonapirayui", "Mensura30922U"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
+
+
+
+    fetch("/juicios-poligonos.geojson")
+    .then((r) => r.json())
+    .then((data) => {
+        const normalizado = normalizarGeojsonConIds(data, "judicializados");
+        setGeojsonData((prev) => ({
+            ...prev,
+            judicializados: normalizado,
+        }));
+    })
+    .catch(console.error);
     useEffect(() => {
         serviciolotes
             .poligonosguardados()
@@ -404,7 +419,13 @@ const toggleTodasLasZonas = () => {
                 setGeojsonData((prev) => ({ ...prev, ib5: normalizado }));
             })
             .catch(console.error);
-
+   fetch("/ib2.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "ib2");
+                setGeojsonData((prev) => ({ ...prev, ib2: normalizado }));
+            })
+            .catch(console.error);
         fetch("/invicoresidencial.geojson")
             .then((r) => r.json())
             .then((data) => {
@@ -771,7 +792,14 @@ const toggleTodasLasZonas = () => {
             opacity: 1,
         };
     };
+useEffect(() => {
+    if (!mapa) return;
 
+    if (!mapa.getPane("judicializadosPane")) {
+        const pane = mapa.createPane("judicializadosPane");
+        pane.style.zIndex = 1000;
+    }
+}, [mapa]);
     return (
         <div className="mapa-contenedor">
             <div className="panel-lateral">
@@ -798,6 +826,16 @@ const toggleTodasLasZonas = () => {
                             {tipoMapa === "normal" ? "Ver Satélite" : "Ver Mapa"}
                         </button>
                     </div>
+                    <div className="capa-item">
+    <label>
+        <input
+            type="checkbox"
+            checked={!!capasActivas.judicializados}
+            onChange={() => toggleCapaPrincipal("judicializados")}
+        />
+        Judicializados
+    </label>
+</div>
                     <div className="capa-item">
                         <label>
 
@@ -1350,7 +1388,7 @@ const toggleTodasLasZonas = () => {
                             )
                     )}
 
-                    {["area1", "area2", "area3", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "ib5", "Mensura30922U", "zonapirayui"].map(
+                    {["area1", "area2", "area3", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "ib5", "ib2", "Mensura30922U", "zonapirayui"].map(
                         (nombre) => {
                             if (!capasActivas[nombre] || !geojsonData[nombre]) return null;
 
@@ -1463,6 +1501,21 @@ const toggleTodasLasZonas = () => {
                             );
                         }
                     )}
+                   {capasActivas.judicializados &&
+    geojsonData.judicializados && (
+        <GeoJSON
+            key="judicializados"
+            pane="judicializadosPane"
+            data={geojsonData.judicializados}
+            style={{
+                fillOpacity: 0,
+                fillColor: "transparent",
+                color: "#ffff00",
+                weight: 6,
+                opacity: 1,
+            }}
+        />
+)}
                 </MapContainer>
             </div>
 
