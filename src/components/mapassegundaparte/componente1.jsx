@@ -282,7 +282,13 @@ const toggleTodasLasZonas = () => {
     );
     // Carga inicial de datos guardados desde backend
 
-
+useEffect(() => {
+  if (mapa) {
+    setTimeout(() => {
+      mapa.invalidateSize();
+    }, 300);
+  }
+}, [verReferenciasTabla, verReferenciasTabla2]);
 
     fetch("/juicios-poligonos.geojson")
     .then((r) => r.json())
