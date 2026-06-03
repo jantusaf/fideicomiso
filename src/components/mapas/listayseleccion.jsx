@@ -72,13 +72,7 @@ Sin seleccion
 
 
 </>}
-{ mapa === "3" ? <><Usuar/></>:<>
-<br/>
 
-
-
-
-</>}
 { mapa === "4" ? <><MApaterceraparte/></>:<>
 <br/>
 
