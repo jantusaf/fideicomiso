@@ -842,7 +842,7 @@ useEffect(() => {
             checked={!!capasActivas.judicializados}
             onChange={() => toggleCapaPrincipal("judicializados")}
         />
-        Judicializados
+      <b>  Juicios en tramite</b>
     </label>
 </div>
                     <div className="capa-item">
