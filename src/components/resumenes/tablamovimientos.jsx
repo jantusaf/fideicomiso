@@ -23,7 +23,27 @@ import {
 import { Autocomplete } from "@mui/material";
 
 const CONCEPTOS = [];
-
+const categoriasEgresos = [
+  "Honorarios Profesionales",
+  "Servicios de Seguridad",
+  "Servicio Seguridad Adicional",
+  "Reintegro de Sueldos",
+  "Reparación mantenimiento",
+  "Alquileres Oficinas",
+  "Cobranza SC Parque",
+  "Servicios personales",
+  "Otros egresos",
+  "Baños químicos",
+  "Cuotas",
+  "Expensas",
+  "Servicios",
+  "Intereses",
+  "Otros ingresos",
+  "Compra muebles",
+  "Impuestos DGR",
+  "Impuestos AFIP",
+  "Comisiones bancarias"
+];
 export default function MovimientosTabla() {
   const [movimientos, setMovimientos] = useState([]);
   const [search, setSearch] = useState("");
@@ -390,7 +410,8 @@ return (
               "Concepto",
               "Categoría",
               "Saldo", 
-              "Fecha Carga",
+               "Acciones"
+            
             ].map((h) => (
               <TableCell
                 key={h}
@@ -521,15 +542,75 @@ return (
 >
   {formatearMoneda(row.saldo)}
 </TableCell>
-  {/* FECHA CARGA */}
-              <TableCell sx={{ fontSize: 11, width: 110 }}>
-                {formatearFechaHora(row.fechacarga)}
-              </TableCell>
+ <TableCell>
+<Button
+  variant="contained"
+  size="small"
+  onClick={() => abrirDialog(row)}
+  sx={{
+    minWidth: "70px",
+    height: "26px",
+    fontSize: "11px",
+    fontWeight: 600,
+    textTransform: "none",
+    borderRadius: "8px",
+    px: 1.5,
+    boxShadow: "none",
+  }}
+>
+  Editar
+</Button>
+</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+    <Dialog
+  open={openDialog}
+  onClose={cerrarDialog}
+  maxWidth="sm"
+  fullWidth
+>
+  <DialogTitle>
+    Cambiar concepto
+  </DialogTitle>
+
+  <DialogContent>
+ <Autocomplete
+  freeSolo
+  options={categoriasEgresos}
+  value={nuevoConcepto}
+  onChange={(event, newValue) =>
+    setNuevoConcepto(newValue || "")
+  }
+  onInputChange={(event, newInputValue) =>
+    setNuevoConcepto(newInputValue)
+  }
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      label="Concepto"
+      margin="normal"
+      fullWidth
+    />
+  )}
+/>
+  </DialogContent>
+
+  <DialogActions>
+    <Button onClick={cerrarDialog}>
+      Cancelar
+    </Button>
+
+    <Button
+      variant="contained"
+      onClick={guardarConcepto}
+    >
+      Guardar
+    </Button>
+  </DialogActions>
+</Dialog>
   </Box>
 );
 }
