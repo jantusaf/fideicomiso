@@ -81,6 +81,7 @@ const MapaConCapas = () => {
         ib5: false,
         ib2: false,
         ib3: false,
+        zona_municipal: false,
         rutas1: false,
     });
 
@@ -100,7 +101,9 @@ const zonasConfig = [
   { key: "ib5", label: "IB5" },
   { key: "ib2", label: "IB2" },
   { key: "ib3", label: "IB3" },
+
   { key: "area6", label: "IB6" },
+    { key: "zona_municipal", label: "Zona Municipal" },
   { key: "invicoresidencial", label: "Invico - Residencial" },
   { key: "area1", label: "Zona Hípico" },
   { key: "area2", label: "Zona Clubes/Gremio B/Traza" },
@@ -278,7 +281,7 @@ const toggleTodasLasZonas = () => {
         "PLC-F": false,
         ZPA: false
     });
-    const esAreaEspecial = ["area1", "area2", "area3", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "invicoresidencial", "zonapirayui", "Mensura30922U"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "area3", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3","zona_municipal", "invicoresidencial", "zonapirayui", "Mensura30922U"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
 
@@ -435,6 +438,14 @@ const toggleTodasLasZonas = () => {
                 setGeojsonData((prev) => ({ ...prev, ib3: normalizado }));
             })
             .catch(console.error);
+               fetch("/zona_municipal.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "zona_municipal");
+                setGeojsonData((prev) => ({ ...prev, zona_municipal: normalizado }));
+            })
+            .catch(console.error);
+
         fetch("/invicoresidencial.geojson")
             .then((r) => r.json())
             .then((data) => {
@@ -1364,7 +1375,7 @@ useEffect(() => {
                             )
                     )}
 
-                    {["area1", "area2", "area3", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "ib5", "ib2", "ib3", "Mensura30922U", "zonapirayui"].map(
+                    {["area1", "area2", "area3", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "ib5", "ib2", "ib3","zona_municipal", "Mensura30922U", "zonapirayui"].map(
                         (nombre) => {
                             if (!capasActivas[nombre] || !geojsonData[nombre]) return null;
 
