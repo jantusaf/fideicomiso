@@ -9,7 +9,7 @@ import L from "leaflet";
 import serviciolotes from "../../services/lotes";
 import { centerOfMass, pointOnFeature, booleanPointInPolygon } from "@turf/turf";
 import TablaReferencias from "./tablaReferencias";
-import TablaReferencias2 from "./TablaReferencias2";
+import TablaReferencias2 from "./TablaReferencias2.js";
 
 const MapaConCapas = () => {
     //  Helper: inyecta properties.id si no existe (para area1..4 y cualquier capa que venga sin id)
@@ -282,13 +282,7 @@ const toggleTodasLasZonas = () => {
     );
     // Carga inicial de datos guardados desde backend
 
-useEffect(() => {
-  if (mapa) {
-    setTimeout(() => {
-      mapa.invalidateSize();
-    }, 300);
-  }
-}, [verReferenciasTabla, verReferenciasTabla2]);
+
 
     fetch("/juicios-poligonos.geojson")
     .then((r) => r.json())
@@ -737,23 +731,9 @@ useEffect(() => {
             };
         }
 
-        // ✅ MODO PUBLICO / PRIVADO ACTIVADO
-        if (verPublicoPrivado) {
-            if (poligono.privado === "privado") {
-                fillColor = "#d32f2f"; // rojo fuerte
-            } else if (poligono.privado === "publico") {
-                fillColor = "#2e7d32"; // verde fuerte
-            } else {
-                fillColor = "#9e9e9e"; // gris si no tiene dato
-            }
-
-            fillOpacity = 0.85;
-        } else {
-            // ✅ MODO NORMAL POR SUBCLASIFICACION
-            const sub = poligono.subclasificacion;
-            fillColor = coloresPorSubclasificacion[sub] || "gray";
-            fillOpacity = 0.8;
-        }
+        const sub = poligono.subclasificacion;
+        fillColor = coloresPorSubclasificacion[sub] || "gray";
+        fillOpacity = 0.8;
 
         return {
             fillColor,
@@ -848,7 +828,7 @@ useEffect(() => {
             checked={!!capasActivas.judicializados}
             onChange={() => toggleCapaPrincipal("judicializados")}
         />
-      <b>  Juicios en trámite</b>
+        <strong>Juicios en Trámite</strong>
     </label>
 </div>
                     <div className="capa-item">
@@ -1221,43 +1201,30 @@ useEffect(() => {
                                     data={geojsonData[nombre]}
                                     style={(feature) => {
                                         const id = feature.properties?.id;
-
                                         const poligono = poligonosGuardados.find(
                                             (p) => String(p.id_mapa) === String(id)
                                         );
 
-                                        let fillColor = "white";
-                                        let fillOpacity = 0.2;
+                                        const color = poligono
+                                            ? coloresPorSubclasificacion[poligono.subclasificacion] || "gray"
+                                            : "white";
 
-                                        if (poligono) {
-                                            console.log(poligono.privado)
-                                            // 🔴🟢 SI EL TOGGLE ESTÁ ACTIVADO
-                                            if (verPublicoPrivado) {
-                                                if (poligono.privado == "privado") {
-                                                    fillColor = "#d32f2f"; // rojo
-                                                } else if (poligono.privado == "publico") {
-                                                    fillColor = "#2e7d32"; // verde
-                                                } else {
-                                                    fillColor = "#9e9e9e"; // gris si no tiene dato
-                                                }
-
-                                                fillOpacity = 0.85;
-                                            }
-
-                                            // 🎨 MODO NORMAL (como antes)
-                                            else {
-                                                const sub = poligono.subclasificacion;
-                                                fillColor = coloresPorSubclasificacion[sub] || "gray";
-                                                fillOpacity = 0.8;
-                                            }
+                                        if (verPublicoPrivado) {
+                                            return {
+                                                fillColor: "transparent",
+                                                fillOpacity: 0,
+                                                color,
+                                                weight: 3,
+                                                opacity: 1,
+                                            };
                                         }
 
                                         return {
-                                            fillColor,
+                                            fillColor: color,
+                                            fillOpacity: 0.65,
+                                            color: "black",
                                             weight: 1,
                                             opacity: 0.5,
-                                            color: "black",
-                                            fillOpacity,
                                         };
                                     }}
                                     onEachFeature={onEachFeature}
@@ -1274,8 +1241,8 @@ useEffect(() => {
                                 fillColor: "none",
                                 weight: 1,
                                 opacity: 1,
-                                color: "black",
-                                fillOpacity: 0.5,
+                                color: "white",
+                                fillOpacity: 0,
                             })}
                             onEachFeature={onEachFeature}
                         />
@@ -1293,26 +1260,15 @@ useEffect(() => {
                                     (p) => String(p.id_mapa) === String(id)
                                 );
 
-                                let fillColor = "#d32f2f"; // 🔴 rojo por defecto
-                                let fillOpacity = 0.9;
+                                let fillColor = "gray";
+                                let fillOpacity = 0.8;
                                 let borderColor = "black";
                                 let borderOpacity = 1;
 
-                                if (verPublicoPrivado) {
-
-                                    // 🟢 SOLO SI EXISTE Y ES PUBLICO
-                                    if (poligono && poligono.privado === "publico") {
-                                        fillColor = "#2e7d32";
-                                    }
-
-                                    // 🔴 si no existe o es privado queda rojo
-                                }
-                                else {
-                                    if (poligono) {
-                                        const sub = poligono.subclasificacion;
-                                        fillColor = coloresPorSubclasificacion[sub] || "gray";
-                                        fillOpacity = 0.95;
-                                    }
+                                if (poligono) {
+                                    const sub = poligono.subclasificacion;
+                                    fillColor = coloresPorSubclasificacion[sub] || "gray";
+                                    fillOpacity = 0.95;
                                 }
 
                                 return {
@@ -1321,6 +1277,29 @@ useEffect(() => {
                                     weight: 1,
                                     opacity: borderOpacity,
                                     fillOpacity,
+                                };
+                            }}
+                            onEachFeature={onEachFeature}
+                        />
+                    )}
+
+                    {/* Zona Hípico superpuesta en Zonificación */}
+                    {capasActivas["Zonificación Sta Catalina"] && geojsonData.area1 && (
+                        <GeoJSON
+                            key="area1-zonificacion"
+                            data={geojsonData.area1}
+                            style={(feature) => {
+                                const id = feature?.properties?.id;
+                                const poligono = buscarPoligonoDB(poligonosGuardados, id, "area1");
+                                const fillColor = poligono
+                                    ? coloresPorSubclasificacion[poligono.subclasificacion] || "gray"
+                                    : "gray";
+                                return {
+                                    fillColor,
+                                    fillOpacity: 0.95,
+                                    color: "black",
+                                    weight: 1,
+                                    opacity: 1,
                                 };
                             }}
                             onEachFeature={onEachFeature}
@@ -1367,27 +1346,9 @@ useEffect(() => {
                                         let fillOpacity = 0.2;
 
                                         if (poligono) {
-
-                                            // 🔴🟢 SI EL TOGGLE ESTÁ ACTIVADO
-                                            if (verPublicoPrivado) {
-
-                                                if (poligono.privado === "No disponible") {
-                                                    fillColor = "#d32f2f";
-                                                } else if (poligono.privado === "Disponible") {
-                                                    fillColor = "#2e7d32";
-                                                } else {
-                                                    fillColor = "#9e9e9e";
-                                                }
-
-                                                fillOpacity = 0.85;
-                                            }
-
-                                            // 🎨 MODO NORMAL (como lo tenías)
-                                            else {
-                                                const sub = poligono.subclasificacion;
-                                                fillColor = coloresPorSubclasificacion[sub] || "gray";
-                                                fillOpacity = 0.8; // ← tu opacidad original
-                                            }
+                                            const sub = poligono.subclasificacion;
+                                            fillColor = coloresPorSubclasificacion[sub] || "gray";
+                                            fillOpacity = 0.8;
                                         }
 
                                         return {
@@ -1431,14 +1392,14 @@ useEffect(() => {
                                     data={geojsonData[nombre]}
                                     style={(feature) => {
 
-                                        // ⚪ si verPublicoPrivado es false todo blanco
+                                        // ⚪ si verPublicoPrivado es false todo gris claro
                                         if (!verPublicoPrivado) {
                                             return {
-                                                fillColor: "white",
-                                                fillOpacity: 1,
-                                                color: "black",
-                                                weight: 1,
-                                                opacity: 1,
+                                                fillColor: "#e8e8e8",
+                                                fillOpacity: 0.65,
+                                                color: "transparent",
+                                                weight: 0,
+                                                opacity: 0,
                                             };
                                         }
 
@@ -1451,55 +1412,55 @@ useEffect(() => {
                                         // 🔴 no existe
                                         if (!poligono) {
                                             return {
-                                                fillColor: "#d32f2f",
-                                                fillOpacity: 0.85,
-                                                color: "red",
-                                                weight: 3,
-                                                opacity: 1,
+                                                fillColor: "#e05c5c",
+                                                fillOpacity: 0.72,
+                                                color: "transparent",
+                                                weight: 0,
+                                                opacity: 0,
                                             };
                                         }
 
                                         // 🔵 reserva municipal
                                         if (poligono.privado === "reserva municipal") {
                                             return {
-                                                fillColor: "#f38c26",
-                                                fillOpacity: 0.9,
-                                                color: "#c26a06",
-                                                weight: 3,
-                                                opacity: 1,
+                                                fillColor: "#e08c3a",
+                                                fillOpacity: 0.72,
+                                                color: "transparent",
+                                                weight: 0,
+                                                opacity: 0,
                                             };
                                         }
 
                                         // ⚫ equipamiento publico
                                         if (poligono.privado === "equipamiento publico") {
                                             return {
-                                                fillColor: "#faf63bea",
-                                                fillOpacity: 0.9,
-                                                color: "#beb208",
-                                                weight: 3,
-                                                opacity: 1,
+                                                fillColor: "#d4c83a",
+                                                fillOpacity: 0.72,
+                                                color: "transparent",
+                                                weight: 0,
+                                                opacity: 0,
                                             };
                                         }
 
                                         // 🔴 privado
                                         if (poligono.privado === "privado") {
                                             return {
-                                                fillColor: "#f04e4e",
-                                                fillOpacity: 0.9,
-                                                color: "red",
-                                                weight: 3,
-                                                opacity: 1,
+                                                fillColor: "#e05c5c",
+                                                fillOpacity: 0.72,
+                                                color: "transparent",
+                                                weight: 0,
+                                                opacity: 0,
                                             };
                                         }
 
                                         // 🟢 publico
                                         if (poligono.privado === "publico") {
                                             return {
-                                                fillColor: "#61e268",
-                                                fillOpacity: 0.9,
-                                                color: "green",
-                                                weight: 3,
-                                                opacity: 1,
+                                                fillColor: "#5db862",
+                                                fillOpacity: 0.72,
+                                                color: "transparent",
+                                                weight: 0,
+                                                opacity: 0,
                                             };
                                         }
 
