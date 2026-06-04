@@ -548,10 +548,10 @@ return (
   size="small"
   onClick={() => abrirDialog(row)}
   sx={{
-    minWidth: "70px",
+     minWidth: "60px",
     height: "26px",
     fontSize: "11px",
-    fontWeight: 600,
+    fontWeight: 500,
     textTransform: "none",
     borderRadius: "8px",
     px: 1.5,
