@@ -84,8 +84,12 @@ const MapaConCapas = () => {
         "unidad-ejecutora1": false,
         "unidad-ejecutora2": false,
         "unidad-ejecutora3": false,
+        "unidad-ejecutora1y2": false,
         zona_municipal: false,
         rutas1: false,
+        IB: false,
+        otras: false,
+        fraccionIC: false,
     });
 
     const [subCapasActivas, setSubCapasActivas] = useState({
@@ -107,6 +111,7 @@ const zonasConfig = [
   { key: "unidad-ejecutora1", label: "Unidad Ejecutora 1" },
   { key: "unidad-ejecutora2", label: "Unidad Ejecutora 2" },
   { key: "unidad-ejecutora3", label: "Unidad Ejecutora 3" },
+    { key: "unidad-ejecutora1y2", label: "Unidad Ejecutora 1 y 2" },
 
   { key: "area6", label: "IB6" },
     { key: "zona_municipal", label: "Zona Municipal" },
@@ -119,16 +124,23 @@ const zonasConfig = [
   { key: "zonapirayui", label: "Zona Pirayui" },
   { key: "area3", label: "Sin definir" },
 ];
+const clavesZonas = [
+  "ic3", "ic4", "ic42",
+  "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3",
+  "ib2", "ib3", "area5", "ib5", "area6",
+  "invicoresidencial", "zona_municipal", "area1", "area2", "area3", "area4",
+  "mensura31548Unuevo", "Mensura30922U", "zonapirayui",
 
-const clavesZonas = zonasConfig.map((zona) => zona.key);
-
+];
 const todasLasZonasActivas = clavesZonas.every((key) => !!capasActivas[key]);
 
 const toggleTodasLasZonas = () => {
   const nuevoEstado = !todasLasZonasActivas;
-
   setCapasActivas((prev) => ({
     ...prev,
+    fraccionIC: nuevoEstado,
+    IB: nuevoEstado,
+    otras: nuevoEstado,
     ...clavesZonas.reduce((acc, key) => {
       acc[key] = nuevoEstado;
       return acc;
@@ -287,7 +299,7 @@ const toggleTodasLasZonas = () => {
         "PLC-F": false,
         ZPA: false
     });
-    const esAreaEspecial = ["area1", "area2", "area3", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3", "zona_municipal", "invicoresidencial", "zonapirayui", "Mensura30922U"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "area3", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora1y2", "zona_municipal", "invicoresidencial", "zonapirayui", "Mensura30922U"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
 
@@ -461,6 +473,12 @@ const toggleTodasLasZonas = () => {
                 const normalizado = normalizarGeojsonConIds(data, "unidad-ejecutora3");
                 setGeojsonData((prev) => ({ ...prev, "unidad-ejecutora3": normalizado }));
             })
+                  fetch("/unidad-ejecutora1y2.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "unidad-ejecutora1y2");
+                setGeojsonData((prev) => ({ ...prev, "unidad-ejecutora1y2": normalizado }));
+            })
             .catch(console.error);
                fetch("/zona_municipal.geojson")
             .then((r) => r.json())
@@ -630,7 +648,47 @@ const toggleTodasLasZonas = () => {
 
     const toggleCapaPrincipal = (nombre) => {
         const nuevoEstado = !capasActivas[nombre];
-        setCapasActivas((prev) => ({ ...prev, [nombre]: nuevoEstado }));
+
+        setCapasActivas((prev) => {
+            const updates = { ...prev, [nombre]: nuevoEstado };
+
+            if (nombre === "fraccionIC" && nuevoEstado) {
+                updates.ic3 = true;
+                updates.ic4 = true;
+                updates.ic42 = true;
+                updates["unidad-ejecutora1"] = true;
+                updates["unidad-ejecutora2"] = true;
+                updates["unidad-ejecutora3"] = true;
+            }
+            if (nombre === "ic4") {
+                updates.ic42 = nuevoEstado;
+                if (nuevoEstado) {
+                    updates["unidad-ejecutora1"] = true;
+                    updates["unidad-ejecutora2"] = true;
+                    updates["unidad-ejecutora3"] = true;
+                }
+            }
+            if (nombre === "IB" && nuevoEstado) {
+                updates.ib2 = true;
+                updates.ib3 = true;
+                updates.area5 = true;
+                updates.ib5 = true;
+                updates.area6 = true;
+            }
+            if (nombre === "otras" && nuevoEstado) {
+                updates.invicoresidencial = true;
+                updates.zona_municipal = true;
+                updates.area1 = true;
+                updates.area2 = true;
+                updates.area3 = true;
+                updates.area4 = true;
+                updates.mensura31548Unuevo = true;
+                updates.Mensura30922U = true;
+                updates.zonapirayui = true;
+            }
+
+            return updates;
+        });
 
         if (nombre === "Plan Especial") {
             const nuevoEstadoSubcapas = {};
@@ -925,18 +983,125 @@ useEffect(() => {
     </label>
   </div>
 
-  {zonasConfig.map(({ key, label }) => (
-    <div className="capa-item" key={key}>
-      <label>
-        <input
-          type="checkbox"
-          checked={!!capasActivas[key]}
-          onChange={() => toggleCapaPrincipal(key)}
-        />
-        {label}
-      </label>
+  {/* Fracción IC */}
+  <div className="capa-item">
+    <label>
+      <input
+        type="checkbox"
+        checked={!!capasActivas.fraccionIC}
+        onChange={() => toggleCapaPrincipal("fraccionIC")}
+      />
+      <strong>Fracción IC</strong>
+    </label>
+    <div className="subcapas">
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas.ic3}
+            onChange={() => toggleCapaPrincipal("ic3")}
+          />
+          <strong>IC3</strong>
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas.ic4}
+            onChange={() => toggleCapaPrincipal("ic4")}
+          />
+          <strong>IC4</strong>
+        </label>
+        <div className="subcapas">
+          {[
+            { key: "unidad-ejecutora1", label: "Unidad Ejecutora 1" },
+            { key: "unidad-ejecutora2", label: "Unidad Ejecutora 2" },
+            { key: "unidad-ejecutora3", label: "Unidad Ejecutora 3" },
+          ].map(({ key, label }) => (
+            <div key={key}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={!!capasActivas[key]}
+                  onChange={() => toggleCapaPrincipal(key)}
+                />
+                {label}
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
-  ))}
+  </div>
+
+  {/* Fracción IB */}
+  <div className="capa-item">
+    <label>
+      <input
+        type="checkbox"
+        checked={!!capasActivas.IB}
+        onChange={() => toggleCapaPrincipal("IB")}
+      />
+      <strong>Fracción IB</strong>
+    </label>
+    <div className="subcapas">
+      {[
+        { key: "ib2", label: "IB2" },
+        { key: "ib3", label: "IB3" },
+        { key: "area5", label: "IB4" },
+        { key: "ib5", label: "IB5" },
+        { key: "area6", label: "IB6" },
+      ].map(({ key, label }) => (
+        <div key={key}>
+          <label>
+            <input
+              type="checkbox"
+              checked={!!capasActivas[key]}
+              onChange={() => toggleCapaPrincipal(key)}
+            />
+            {label}
+          </label>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Otras con subcapas */}
+  <div className="capa-item">
+    <label>
+      <input
+        type="checkbox"
+        checked={!!capasActivas.otras}
+        onChange={() => toggleCapaPrincipal("otras")}
+      />
+      <strong>Otras</strong>
+    </label>
+    <div className="subcapas">
+      {[
+        { key: "zona_municipal", label: "Zona Municipal" },
+        { key: "invicoresidencial", label: "Invico - Residencial" },
+        { key: "area1", label: "Zona Hípico" },
+        { key: "area2", label: "Zona Clubes/Gremio B/Traza" },
+        { key: "area4", label: "Zona Clubes/Gremio S/Traza" },
+        { key: "mensura31548Unuevo", label: "Mensura 31548-U" },
+        { key: "Mensura30922U", label: "Mensura 30922-U" },
+        { key: "zonapirayui", label: "Zona Pirayui" },
+        { key: "area3", label: "Sin definir" },
+      ].map(({ key, label }) => (
+        <div key={key}>
+          <label>
+            <input
+              type="checkbox"
+              checked={!!capasActivas[key]}
+              onChange={() => toggleCapaPrincipal(key)}
+            />
+            {label}
+          </label>
+        </div>
+      ))}
+    </div>
+  </div>
 </div>
 
 
@@ -1399,9 +1564,12 @@ useEffect(() => {
                             )
                     )}
 
-                    {["area1", "area2", "area3", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","zona_municipal", "Mensura30922U", "zonapirayui"].map(
+                    {["area1", "area2", "area3", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora1y2","zona_municipal", "Mensura30922U", "zonapirayui"].map(
                         (nombre) => {
                             if (!capasActivas[nombre] || !geojsonData[nombre]) return null;
+
+                            // ic4 no se pinta como capa propia; ic42 y las UE cubren sus sub-áreas
+                            if (nombre === "ic4") return null;
 
                             // 🔴 CASO ESPECIAL rutas
                             if (nombre === "rutas1") {
@@ -1435,6 +1603,16 @@ useEffect(() => {
                                                 color: "transparent",
                                                 weight: 0,
                                                 opacity: 0,
+                                            };
+                                        }
+
+                                        if (nombre === "unidad-ejecutora1" || nombre === "unidad-ejecutora2") {
+                                            return {
+                                                fillColor: "#5db862",
+                                                fillOpacity: 0.72,
+                                                color: "red",
+                                                weight: 2,
+                                                opacity: 1,
                                             };
                                         }
 
