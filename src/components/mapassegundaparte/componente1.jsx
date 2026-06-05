@@ -71,6 +71,7 @@ const MapaConCapas = () => {
         area5: false,
         area6: false,
         invicoresidencial: false,
+        invico2: false,
         ic3: false,
         ic4: false,
         ic42: false,
@@ -116,6 +117,7 @@ const zonasConfig = [
   { key: "area6", label: "IB6" },
     { key: "zona_municipal", label: "Zona Municipal" },
   { key: "invicoresidencial", label: "Invico - Residencial" },
+    { key: "invico2", label: "Invico - Otros" },
   { key: "area1", label: "Zona Hípico" },
   { key: "area2", label: "Zona Clubes/Gremio B/Traza" },
   { key: "area4", label: "Zona Clubes/Gremio S/Traza" },
@@ -128,7 +130,7 @@ const clavesZonas = [
   "ic3", "ic4", "ic42",
   "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3", "unidad-ejecutora2y3",
   "ib2", "ib3", "area5", "ib5", "area6",
-  "invicoresidencial", "zona_municipal", "area1", "area2", "area3", "area4",
+  "invicoresidencial", "invico2", "zona_municipal", "area1", "area2", "area3", "area4",
   "mensura31548Unuevo", "Mensura30922U", "zonapirayui",
 ];
 const todasLasZonasActivas = clavesZonas.every((key) => !!capasActivas[key]);
@@ -300,7 +302,7 @@ const toggleTodasLasZonas = () => {
         "PLC-F": false,
         ZPA: false
     });
-    const esAreaEspecial = ["area1", "area2", "area3", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "zonapirayui", "Mensura30922U"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "area3", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "zonapirayui", "Mensura30922U"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
 
@@ -486,6 +488,13 @@ const toggleTodasLasZonas = () => {
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "zona_municipal");
                 setGeojsonData((prev) => ({ ...prev, zona_municipal: normalizado }));
+            })
+            .catch(console.error);
+                       fetch("/invico2.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "invico2");
+                setGeojsonData((prev) => ({ ...prev, invico2: normalizado }));
             })
             .catch(console.error);
 
@@ -701,6 +710,7 @@ const toggleTodasLasZonas = () => {
             }
             if (nombre === "otras" && nuevoEstado) {
                 updates.invicoresidencial = true;
+                updates.invico2 = true;
                 updates.zona_municipal = true;
                 updates.area1 = true;
                 updates.area2 = true;
@@ -866,7 +876,7 @@ const toggleTodasLasZonas = () => {
 
         const poligono = buscarPoligonoDB(poligonosGuardados, id, nombreCapa);
 
-        const pesoBorde = ["ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "restante"].includes(nombreCapa) ? 3 : 2;
+        const pesoBorde = ["ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial","invico2", "restante"].includes(nombreCapa) ? 3 : 2;
 
         // SIN datos en base
         if (!poligono) {
@@ -1105,6 +1115,7 @@ useEffect(() => {
       {[
         { key: "zona_municipal", label: "Zona Municipal" },
         { key: "invicoresidencial", label: "Invico - Residencial" },
+        { key: "invico2", label: "Invico 2 - Otros" },
         { key: "area1", label: "Zona Hípico" },
         { key: "area2", label: "Zona Clubes/Gremio B/Traza" },
         { key: "area4", label: "Zona Clubes/Gremio S/Traza" },
@@ -1578,7 +1589,7 @@ useEffect(() => {
                             )
                     )}
 
-                    {["area1", "area2", "area3", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "zonapirayui"].map(
+                    {["area1", "area2", "area3", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "invico2", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "zonapirayui"].map(
                         (nombre) => {
                             if (!capasActivas[nombre] || !geojsonData[nombre]) return null;
 
