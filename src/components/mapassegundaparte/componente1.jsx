@@ -9,8 +9,8 @@ import L from "leaflet";
 import serviciolotes from "../../services/lotes";
 import { centerOfMass, pointOnFeature, booleanPointInPolygon } from "@turf/turf";
 import TablaReferencias from "./tablaReferencias";
-import TablaReferencias2 from "./TablaReferencias2.js";
-
+import TablaReferencias2 from "./TablaReferencias2";
+ 
 const MapaConCapas = () => {
     //  Helper: inyecta properties.id si no existe (para area1..4 y cualquier capa que venga sin id)
     const normalizarGeojsonConIds = (data, nombreCapa) => {
