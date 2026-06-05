@@ -476,7 +476,7 @@ const toggleTodasLasZonas = () => {
                 const normalizado = normalizarGeojsonConIds(data, "unidad-ejecutora3");
                 setGeojsonData((prev) => ({ ...prev, "unidad-ejecutora3": normalizado }));
             })
-                  fetch("/unidad-ejecutora2y3.geojson")
+                  fetch("/unidad2y3.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "unidad-ejecutora2y3");
@@ -696,10 +696,13 @@ const toggleTodasLasZonas = () => {
                     updates["unidad-ejecutora2y3"] = true;
                 }
             }
-            if (nombre === "unidad-ejecutora1" || nombre === "unidad-ejecutora2") {
-                const ue1 = nombre === "unidad-ejecutora1" ? nuevoEstado : !!prev["unidad-ejecutora1"];
+            if (nombre === "mensura31548Unuevo" && nuevoEstado) {
+                updates.invico2 = true;
+            }
+            if (nombre === "unidad-ejecutora2" || nombre === "unidad-ejecutora3") {
                 const ue2 = nombre === "unidad-ejecutora2" ? nuevoEstado : !!prev["unidad-ejecutora2"];
-                updates["unidad-ejecutora2y3"] = ue1 && ue2;
+                const ue3 = nombre === "unidad-ejecutora3" ? nuevoEstado : !!prev["unidad-ejecutora3"];
+                updates["unidad-ejecutora2y3"] = ue2 && ue3;
             }
             if (nombre === "IB" && nuevoEstado) {
                 updates.ib2 = true;
@@ -710,7 +713,6 @@ const toggleTodasLasZonas = () => {
             }
             if (nombre === "otras" && nuevoEstado) {
                 updates.invicoresidencial = true;
-                updates.invico2 = true;
                 updates.zona_municipal = true;
                 updates.area1 = true;
                 updates.area2 = true;
@@ -1115,7 +1117,6 @@ useEffect(() => {
       {[
         { key: "zona_municipal", label: "Zona Municipal" },
         { key: "invicoresidencial", label: "Invico - Residencial" },
-        { key: "invico2", label: "Invico 2 - Otros" },
         { key: "area1", label: "Zona Hípico" },
         { key: "area2", label: "Zona Clubes/Gremio B/Traza" },
         { key: "area4", label: "Zona Clubes/Gremio S/Traza" },
@@ -1630,9 +1631,13 @@ useEffect(() => {
                                             };
                                         }
 
-                                        if (["unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3"].includes(nombre)) {
+                                        if (nombre === "unidad-ejecutora1") {
+                                            return { fillColor: "#e05c5c", fillOpacity: 0.72, color: "rgba(0,0,0,0.55)", weight: 1.5, opacity: 1 };
+                                        }
+
+                                        if (["unidad-ejecutora2", "unidad-ejecutora3"].includes(nombre)) {
                                             const id = feature?.properties?.id;
-                                            const poligono = poligonosGuardados.find(p => String(p.id_mapa) === String(id));
+                                            const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
                                             const bordeUE = { color: "rgba(0,0,0,0.55)", weight: 1.5, opacity: 1 };
                                             if (poligono?.privado === "reserva municipal")
                                                 return { fillColor: "#e08c3a", fillOpacity: 0.72, ...bordeUE };
@@ -1640,10 +1645,12 @@ useEffect(() => {
                                                 return { fillColor: "#d4c83a", fillOpacity: 0.72, ...bordeUE };
                                             if (poligono?.privado === "privado")
                                                 return { fillColor: "#e05c5c", fillOpacity: 0.72, ...bordeUE };
-                                            return { fillColor: "#5db862", fillOpacity: 0.72, color: "transparent", weight: 0, opacity: 0 };
+                                            if (poligono?.privado === "publico")
+                                                return { fillColor: "#5db862", fillOpacity: 0.72, ...bordeUE };
+                                            return { fillColor: "#5db862", fillOpacity: 0.72, color: "rgba(0,0,0,0.3)", weight: 1, opacity: 1 };
                                         }
 
-                                        if (nombre === "unidad-ejecutora2y3") {
+                                        if (nombre === "unidad-ejecutora2y3" || nombre === "invico2") {
                                             return {
                                                 fillColor: "transparent",
                                                 fillOpacity: 0,
