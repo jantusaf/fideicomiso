@@ -10,7 +10,7 @@ import serviciolotes from "../../services/lotes";
 import { centerOfMass, pointOnFeature, booleanPointInPolygon } from "@turf/turf";
 import TablaReferencias from "./tablaReferencias";
 import TablaReferencias2 from "./TablaReferencias2";
- 
+
 const MapaConCapas = () => {
     //  Helper: inyecta properties.id si no existe (para area1..4 y cualquier capa que venga sin id)
     const normalizarGeojsonConIds = (data, nombreCapa) => {
@@ -81,6 +81,9 @@ const MapaConCapas = () => {
         ib5: false,
         ib2: false,
         ib3: false,
+        "unidad-ejecutora1": false,
+        "unidad-ejecutora2": false,
+        "unidad-ejecutora3": false,
         zona_municipal: false,
         rutas1: false,
     });
@@ -101,6 +104,9 @@ const zonasConfig = [
   { key: "ib5", label: "IB5" },
   { key: "ib2", label: "IB2" },
   { key: "ib3", label: "IB3" },
+  { key: "unidad-ejecutora1", label: "Unidad Ejecutora 1" },
+  { key: "unidad-ejecutora2", label: "Unidad Ejecutora 2" },
+  { key: "unidad-ejecutora3", label: "Unidad Ejecutora 3" },
 
   { key: "area6", label: "IB6" },
     { key: "zona_municipal", label: "Zona Municipal" },
@@ -281,7 +287,7 @@ const toggleTodasLasZonas = () => {
         "PLC-F": false,
         ZPA: false
     });
-    const esAreaEspecial = ["area1", "area2", "area3", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3","zona_municipal", "invicoresidencial", "zonapirayui", "Mensura30922U"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "area3", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3", "zona_municipal", "invicoresidencial", "zonapirayui", "Mensura30922U"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
 
@@ -436,6 +442,24 @@ const toggleTodasLasZonas = () => {
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "ib3");
                 setGeojsonData((prev) => ({ ...prev, ib3: normalizado }));
+            })
+                fetch("/unidad-ejecutora1.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "unidad-ejecutora1");
+                setGeojsonData((prev) => ({ ...prev, "unidad-ejecutora1": normalizado }));
+            })
+                fetch("/unidad-ejecutora2.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "unidad-ejecutora2");
+                setGeojsonData((prev) => ({ ...prev, "unidad-ejecutora2": normalizado }));
+            })
+                fetch("/unidad-ejecutora3.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "unidad-ejecutora3");
+                setGeojsonData((prev) => ({ ...prev, "unidad-ejecutora3": normalizado }));
             })
             .catch(console.error);
                fetch("/zona_municipal.geojson")
@@ -1375,7 +1399,7 @@ useEffect(() => {
                             )
                     )}
 
-                    {["area1", "area2", "area3", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "ib5", "ib2", "ib3","zona_municipal", "Mensura30922U", "zonapirayui"].map(
+                    {["area1", "area2", "area3", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","zona_municipal", "Mensura30922U", "zonapirayui"].map(
                         (nombre) => {
                             if (!capasActivas[nombre] || !geojsonData[nombre]) return null;
 
