@@ -108,14 +108,25 @@ doc.addImage(
     styles: {
       fontSize: 10,
     },
-    body: [
-      ["Nombre", datos.Nombre || ""],
-      ["CUIT/CUIL", datos.cuil_cuit || ""],
-      ["Tipo Cliente", datos.razon || ""],
-      ["Domicilio", datos.domicilio || ""],
-      ["Email", datos.email || ""],
-      ["Teléfono", datos.telefono || ""],
-    ],
+  body: [
+  ["Nombre", datos.Nombre || ""],
+  ["CUIT/CUIL", datos.cuil_cuit || ""],
+  ["Tipo Cliente", datos.razon || ""],
+
+  ...(datos.razon === "Persona"
+    ? [
+        ["Edad", datos.edad || ""],
+        ["Tipo Cliente", datos.tipoCliente || ""],
+      ]
+    : [
+        ["Antigüedad", datos.antiguedad || ""],
+        ["Tipo Cliente Empresa", datos.tipoClienteEmpresa || ""],
+      ]),
+
+  ["Domicilio", datos.domicilio || ""],
+  ["Email", datos.email || ""],
+  ["Teléfono", datos.telefono || ""],
+],
   });
 
   y = doc.lastAutoTable.finalY + 12;
