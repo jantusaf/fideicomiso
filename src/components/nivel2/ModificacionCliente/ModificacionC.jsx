@@ -56,137 +56,179 @@ const ModificacionC = () => {
 const descargarPDF = async () => {
   const doc = new jsPDF();
   const datos = cliente[0];
-const logoBase64 = await getBase64Image(logo);
+  const logoBase64 = await getBase64Image(logo);
 
+  // ===== Paleta =====
+  const BRAND = [1, 86, 124];      // azul institucional
+  const INK = [33, 43, 54];        // texto principal
+  const MUTED = [120, 132, 144];   // texto secundario
+  const LINE = [228, 234, 240];    // líneas / bordes suaves
+  const SOFT = [246, 249, 252];    // fondos suaves
+
+  const pageW = 210;
+  const margin = 14;
+  const contentW = pageW - margin * 2;
 
   let nivelRiesgo = "BAJO";
-  let colorRiesgo = [34, 139, 34];
-
+  let colorRiesgo = [22, 163, 74];   // verde
   if (datos.riesgo > 58 && datos.riesgo <= 70) {
     nivelRiesgo = "MEDIO";
-    colorRiesgo = [255, 140, 0];
+    colorRiesgo = [234, 151, 0];     // ámbar
   } else if (datos.riesgo > 70) {
     nivelRiesgo = "ALTO";
-    colorRiesgo = [220, 20, 60];
+    colorRiesgo = [220, 38, 38];     // rojo
   }
 
-  // CABECERA
-  doc.setFillColor(1, 86, 124);
-  doc.rect(0, 0, 210, 28, "F");
-doc.addImage(
-  logoBase64,
-  "JPEG",
-  160, // izquierda-derecha
-  4,   // arriba-abajo
-  45,  // ancho
-  18   // alto
-);
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(18);
-  doc.text("Perfil del Cliente", 14, 18);
+  // ===== Helpers =====
+  const sectionTitle = (text, y) => {
+    doc.setFillColor(...BRAND);
+    doc.roundedRect(margin, y - 3.6, 3, 4.6, 1, 1, "F");
+    doc.setFont(undefined, "bold");
+    doc.setFontSize(12);
+    doc.setTextColor(...INK);
+    doc.text(text, margin + 6, y);
+  };
 
-  doc.setFontSize(10);
-  doc.text(
-    `Emitido: ${new Date().toLocaleDateString("es-AR")}`,
-    14,
-    25
-  );
+  const infoTable = (startY, body) =>
+    autoTable(doc, {
+      startY,
+      theme: "grid",
+      styles: {
+        fontSize: 9.5,
+        cellPadding: 2.8,
+        lineColor: LINE,
+        lineWidth: 0.1,
+        textColor: INK,
+        valign: "middle",
+      },
+      columnStyles: {
+        0: {
+          cellWidth: 58,
+          fontStyle: "bold",
+          textColor: BRAND,
+          fillColor: SOFT,
+        },
+        1: { textColor: INK },
+      },
+      body,
+    });
 
-  doc.setTextColor(0, 0, 0);
+  // ===== CABECERA (logo sobre fondo blanco) =====
+  doc.addImage(logoBase64, "JPEG", pageW - margin - 44, 11, 44, 18);
 
-  let y = 40;
-
-  doc.setFontSize(13);
   doc.setFont(undefined, "bold");
-  doc.text("DATOS GENERALES", 14, y);
+  doc.setFontSize(22);
+  doc.setTextColor(...BRAND);
+  doc.text("Perfil del Cliente", margin, 22);
 
-  y += 6;
+  doc.setFont(undefined, "normal");
+  doc.setFontSize(9.5);
+  doc.setTextColor(...MUTED);
+  doc.text(`Emitido: ${new Date().toLocaleDateString("es-AR")}`, margin, 28);
 
-  autoTable(doc, {
-    startY: y,
-    theme: "grid",
-    styles: {
-      fontSize: 10,
-    },
-  body: [
-  ["Nombre", datos.Nombre || ""],
-  ["CUIT/CUIL", datos.cuil_cuit || ""],
-  ["Tipo Cliente", datos.razon || ""],
+  // línea de acento bajo la cabecera
+  doc.setDrawColor(...BRAND);
+  doc.setLineWidth(0.8);
+  doc.line(margin, 33, pageW - margin, 33);
+  doc.setLineWidth(0.1);
 
-  ...(datos.razon === "Persona"
-    ? [
-        ["Edad", datos.edad || ""],
-        ["Tipo Cliente", datos.tipoCliente || ""],
-      ]
-    : [
-        ["Antigüedad", datos.antiguedad || ""],
-        ["Tipo Cliente Empresa", datos.tipoClienteEmpresa || ""],
-      ]),
+  let y = 44;
 
-  ["Domicilio", datos.domicilio || ""],
-  ["Email", datos.email || ""],
-  ["Teléfono", datos.telefono || ""],
-],
-  });
+  // ===== DATOS GENERALES =====
+  sectionTitle("DATOS GENERALES", y);
+  y += 5;
+
+  infoTable(y, [
+    ["Nombre", datos.Nombre || ""],
+    ["CUIT/CUIL", datos.cuil_cuit || ""],
+    ["Tipo Cliente", datos.razon || ""],
+    ...(datos.razon === "Persona"
+      ? [
+          ["Edad", datos.edad || ""],
+          ["Tipo Cliente", datos.tipoCliente || ""],
+        ]
+      : [
+          ["Antigüedad", datos.antiguedad || ""],
+          ["Tipo Cliente Empresa", datos.tipoClienteEmpresa || ""],
+        ]),
+    ["Domicilio", datos.domicilio || ""],
+    ["Email", datos.email || ""],
+    ["Teléfono", datos.telefono || ""],
+  ]);
 
   y = doc.lastAutoTable.finalY + 12;
 
-  doc.setFontSize(13);
-  doc.text("INFORMACIÓN COMPLEMENTARIA", 14, y);
+  // ===== INFORMACIÓN COMPLEMENTARIA =====
+  sectionTitle("INFORMACIÓN COMPLEMENTARIA", y);
+  y += 5;
 
-  autoTable(doc, {
-    startY: y + 4,
-    theme: "striped",
-    body: [
-      ["Nacionalidad", datos.nacionalidad || ""],
-      ["Actividad Económica", datos.actividadEconomica || ""],
-      ["Código Postal", datos.cp || ""],
-      ["Volumen Transaccional", datos.volumenTransaccional || ""],
-      ["PEP Extranjero", datos.pep_extranjero || ""],
-      ["Categoría Especial", datos.categoria_especial || ""],
-    ],
-  });
+  infoTable(y, [
+    ["Nacionalidad", datos.nacionalidad || ""],
+    ["Actividad Económica", datos.actividadEconomica || ""],
+    ["Código Postal", datos.cp || ""],
+    ["Volumen Transaccional", datos.volumenTransaccional || ""],
+    ["PEP Extranjero", datos.pep_extranjero || ""],
+    ["Categoría Especial", datos.categoria_especial || ""],
+  ]);
 
-  y = doc.lastAutoTable.finalY + 15;
+  y = doc.lastAutoTable.finalY + 14;
 
-  doc.setFontSize(13);
-  doc.text("EVALUACIÓN DE RIESGO", 14, y);
+  // ===== EVALUACIÓN DE RIESGO =====
+  sectionTitle("EVALUACIÓN DE RIESGO", y);
+  y += 6;
 
-  y += 10;
+  const cardH = 32;
+  doc.setFillColor(...SOFT);
+  doc.setDrawColor(...LINE);
+  doc.roundedRect(margin, y, contentW, cardH, 3, 3, "FD");
 
-  doc.setFillColor(...colorRiesgo);
-  doc.roundedRect(14, y, 180, 18, 3, 3, "F");
+  const inner = margin + 7;
 
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(12);
-
-  doc.text(
-    `Nivel de Riesgo: ${nivelRiesgo} (${datos.riesgo}%)`,
-    20,
-    y + 12
-  );
-
-  doc.setTextColor(0, 0, 0);
-
-  y += 35;
-
-  doc.setDrawColor(180);
-  doc.line(14, y, 195, y);
-
-  y += 10;
-
+  // etiqueta
+  doc.setFont(undefined, "normal");
   doc.setFontSize(9);
-  doc.setTextColor(100);
+  doc.setTextColor(...MUTED);
+  doc.text("NIVEL DE RIESGO", inner, y + 9);
 
+  // nivel (color)
+  doc.setFont(undefined, "bold");
+  doc.setFontSize(15);
+  doc.setTextColor(...colorRiesgo);
+  doc.text(nivelRiesgo, inner, y + 18);
+
+  // porcentaje grande a la derecha
+  doc.setFontSize(22);
+  doc.text(`${datos.riesgo}%`, pageW - margin - 7, y + 16, { align: "right" });
+
+  // barra de progreso proporcional
+  const barX = inner;
+  const barY = y + 24;
+  const barW = contentW - 14;
+  const barH = 3.6;
+  doc.setFillColor(...LINE);
+  doc.roundedRect(barX, barY, barW, barH, 1.8, 1.8, "F");
+
+  const pct = Math.max(0, Math.min(100, Number(datos.riesgo) || 0)) / 100;
+  doc.setFillColor(...colorRiesgo);
+  doc.roundedRect(barX, barY, Math.max(barW * pct, barH), barH, 1.8, 1.8, "F");
+
+  y += cardH + 14;
+
+  // ===== PIE =====
+  doc.setDrawColor(...LINE);
+  doc.line(margin, y, pageW - margin, y);
+  y += 6;
+
+  doc.setFont(undefined, "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(...MUTED);
   doc.text(
     "Documento generado automáticamente por el Sistema de Gestión de Clientes.",
-    14,
+    margin,
     y
   );
 
-  doc.save(
-    `Ficha_${datos.Nombre || datos.cuil_cuit}.pdf`
-  );
+  doc.save(`Ficha_${datos.Nombre || datos.cuil_cuit}.pdf`);
 };
 
 const getBase64Image = (url) => {
