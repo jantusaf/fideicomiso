@@ -916,7 +916,7 @@ const getBase64Image = (url) => {
                       <Grid item xs={12}>
                         <Box display="flex" justifyContent="flex-end" sx={{ mt: 1 }}>
                           <Button type="submit" variant="contained" sx={sxPrimaryBtn}>
-                            GUARDAR
+                            Guardar
                           </Button>
                           <Button
   variant="contained"
@@ -929,7 +929,7 @@ const getBase64Image = (url) => {
     textTransform: "none",
   }}
 >
-  DESCARGAR PDF
+  Descargar PDF
 </Button>
                         </Box>
                       </Grid>
