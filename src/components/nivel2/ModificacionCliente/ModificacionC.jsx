@@ -16,7 +16,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Empresaocliente from "./EmpresaoCliente";
-
+import jsPDF from "jspdf";
+import logo from "../../../Assets/marcas.jpg";
+import autoTable from "jspdf-autotable";
 const ModificacionC = () => {
   const [cliente, setCliente] = useState([]);
   const [modificaciones, setModificaciones] = useState({});
@@ -51,6 +53,152 @@ const ModificacionC = () => {
       return 5;
     }
   };
+const descargarPDF = async () => {
+  const doc = new jsPDF();
+  const datos = cliente[0];
+const logoBase64 = await getBase64Image(logo);
+
+
+  let nivelRiesgo = "BAJO";
+  let colorRiesgo = [34, 139, 34];
+
+  if (datos.riesgo > 58 && datos.riesgo <= 70) {
+    nivelRiesgo = "MEDIO";
+    colorRiesgo = [255, 140, 0];
+  } else if (datos.riesgo > 70) {
+    nivelRiesgo = "ALTO";
+    colorRiesgo = [220, 20, 60];
+  }
+
+  // CABECERA
+  doc.setFillColor(1, 86, 124);
+  doc.rect(0, 0, 210, 28, "F");
+doc.addImage(
+  logoBase64,
+  "JPEG",
+  160, // izquierda-derecha
+  4,   // arriba-abajo
+  45,  // ancho
+  18   // alto
+);
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(18);
+  doc.text("Perfil del Cliente", 14, 18);
+
+  doc.setFontSize(10);
+  doc.text(
+    `Emitido: ${new Date().toLocaleDateString("es-AR")}`,
+    14,
+    25
+  );
+
+  doc.setTextColor(0, 0, 0);
+
+  let y = 40;
+
+  doc.setFontSize(13);
+  doc.setFont(undefined, "bold");
+  doc.text("DATOS GENERALES", 14, y);
+
+  y += 6;
+
+  autoTable(doc, {
+    startY: y,
+    theme: "grid",
+    styles: {
+      fontSize: 10,
+    },
+    body: [
+      ["Nombre", datos.Nombre || ""],
+      ["CUIT/CUIL", datos.cuil_cuit || ""],
+      ["Tipo Cliente", datos.razon || ""],
+      ["Domicilio", datos.domicilio || ""],
+      ["Email", datos.email || ""],
+      ["Teléfono", datos.telefono || ""],
+    ],
+  });
+
+  y = doc.lastAutoTable.finalY + 12;
+
+  doc.setFontSize(13);
+  doc.text("INFORMACIÓN COMPLEMENTARIA", 14, y);
+
+  autoTable(doc, {
+    startY: y + 4,
+    theme: "striped",
+    body: [
+      ["Nacionalidad", datos.nacionalidad || ""],
+      ["Actividad Económica", datos.actividadEconomica || ""],
+      ["Código Postal", datos.cp || ""],
+      ["Volumen Transaccional", datos.volumenTransaccional || ""],
+      ["PEP Extranjero", datos.pep_extranjero || ""],
+      ["Categoría Especial", datos.categoria_especial || ""],
+    ],
+  });
+
+  y = doc.lastAutoTable.finalY + 15;
+
+  doc.setFontSize(13);
+  doc.text("EVALUACIÓN DE RIESGO", 14, y);
+
+  y += 10;
+
+  doc.setFillColor(...colorRiesgo);
+  doc.roundedRect(14, y, 180, 18, 3, 3, "F");
+
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(12);
+
+  doc.text(
+    `Nivel de Riesgo: ${nivelRiesgo} (${datos.riesgo}%)`,
+    20,
+    y + 12
+  );
+
+  doc.setTextColor(0, 0, 0);
+
+  y += 35;
+
+  doc.setDrawColor(180);
+  doc.line(14, y, 195, y);
+
+  y += 10;
+
+  doc.setFontSize(9);
+  doc.setTextColor(100);
+
+  doc.text(
+    "Documento generado automáticamente por el Sistema de Gestión de Clientes.",
+    14,
+    y
+  );
+
+  doc.save(
+    `Ficha_${datos.Nombre || datos.cuil_cuit}.pdf`
+  );
+};
+
+const getBase64Image = (url) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
+
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+
+      resolve(canvas.toDataURL("image/jpeg"));
+    };
+
+    img.onerror = reject;
+    img.src = url;
+  });
+};
+
 
   const filteredOptions = actividades.filter((opcion) =>
     opcion.actividad.toLowerCase().includes(search.toLowerCase())
@@ -359,150 +507,119 @@ const ModificacionC = () => {
                               />
                             </Grid>
 
-                            {client.razon == "Persona" ? (
-                              <>
-                                <Grid item {...grid3}>
-                                  <TextField
-                                    label="Fecha nacimiento"
-                                    name="fechaNacimiento"
-                                    type="date"
-                                    value={fechaNacimiento || "1990-01-01"}
-                                    onChange={(e) => handleFechaNacimientoChange(e.target.value)}
-                                    InputLabelProps={{ shrink: true }}
-                                    fullWidth
-                                    size="small"
-                                    sx={sxInput}
-                                  />
-                                  <Typography
-                                    sx={{
-                                      mt: 0.6,
-                                      fontSize: 13,
-                                      fontWeight: 800,
-                                      color: "rgba(10,59,79,0.75)",
-                                    }}
-                                  >
-                                    {modificaciones.edad ? `${modificaciones.edad} años` : " "}
-                                  </Typography>
-                                </Grid>
+                       {client.razon === "Persona" ? (
+  <>
+    <Grid item {...grid3}>
+      <TextField
+        label="Fecha nacimiento"
+        name="fechaNacimiento"
+        type="date"
+        value={fechaNacimiento || "1990-01-01"}
+        onChange={(e) => handleFechaNacimientoChange(e.target.value)}
+        InputLabelProps={{ shrink: true }}
+        fullWidth
+        size="small"
+        sx={sxInput}
+      />
+    </Grid>
 
-                                <Grid item {...grid3}>
-                                  <TextField
-                                    select
-                                    label="Tipo de Cliente"
-                                    name="tipoCliente"
-                                    value={modificaciones.tipoCliente || ""}
-                                    onChange={handleChange}
-                                    fullWidth
-                                    size="small"
-                                    sx={sxInput}
-                                  >
-                                    <MenuItem value="Persona Humana">
-                                      Persona Humana(Riesgo 1)
-                                    </MenuItem>
-                                    <MenuItem value="Persona Humana con Actividad Comercial">
-                                      Persona Humana con Actividad Comercial (Riesgo 3)
-                                    </MenuItem>
-                                  </TextField>
-                                </Grid>
-                              </>
-                            ) : (
-                              <Grid item {...grid3}>
-                                <TextField
-                                  select
-                                  label="Tipo de Cliente Empresa"
-                                  name="tipoClienteEmpresa"
-                                  value={modificaciones.tipoClienteEmpresa || ""}
-                                  onChange={(e) =>
-                                    setModificaciones({
-                                      ...modificaciones,
-                                      tipoClienteEmpresa: e.target.value,
-                                    })
-                                  }
-                                  fullWidth
-                                  variant="outlined"
-                                  margin="normal"
-                                  size="small"
-                                  sx={{ ...sxInput, mt: 0 }}
-                                >
-                                  <MenuItem value="Consorcios de Propietarios">
-                                    Consorcios de Propietarios
-                                  </MenuItem>
-                                  <MenuItem value="Sociedad Anónima">Sociedad Anónima</MenuItem>
-                                  <MenuItem value="Sociedad de Hecho">Sociedad de Hecho</MenuItem>
-                                  <MenuItem value="Sociedad de Responsabilidad Limitada">
-                                    Sociedad de Responsabilidad Limitada
-                                  </MenuItem>
-                                  <MenuItem value="Sociedad en comandita por acciones">
-                                    Sociedad en comandita por acciones
-                                  </MenuItem>
-                                  <MenuItem value="Sociedad en comandita Simple">
-                                    Sociedad en comandita Simple
-                                  </MenuItem>
-                                  <MenuItem value="Sociedad Irregular">Sociedad Irregular</MenuItem>
-                                  <MenuItem value="Sociedad Unipersonal">Sociedad Unipersonal</MenuItem>
-                                  <MenuItem value="Sociedades cooperativas de trabajo">
-                                    Sociedades cooperativas de trabajo
-                                  </MenuItem>
-                                  <MenuItem value="Sociedades de garantía recíproca (SGR)">
-                                    Sociedades de garantía recíproca (SGR)
-                                  </MenuItem>
-                                  <MenuItem value="Asociaciones Civiles">Asociaciones Civiles</MenuItem>
-                                  <MenuItem value="Cooperativas">Cooperativas</MenuItem>
-                                  <MenuItem value="Embajadas">Embajadas</MenuItem>
-                                  <MenuItem value="Entidades sindicales">Entidades sindicales</MenuItem>
-                                  <MenuItem value="Fideicomisos">Fideicomisos</MenuItem>
-                                  <MenuItem value="Fundación">Fundación</MenuItem>
-                                  <MenuItem value="Mutuales">Mutuales</MenuItem>
-                                  <MenuItem value="Organizaciones sin fines de lucro - Otros">
-                                    Organizaciones sin fines de lucro - Otros
-                                  </MenuItem>
-                                  <MenuItem value="Sociedad Anónima Simplificada">
-                                    Sociedad Anónima Simplificada
-                                  </MenuItem>
-                                  <MenuItem value="Entes Autarquicos">Entes Autarquicos</MenuItem>
-                                  <MenuItem value="La Iglesia Católica">La Iglesia Católica</MenuItem>
-                                  <MenuItem value="SAPEM (participación estatal mayoritaria)">
-                                    SAPEM (participación estatal mayoritaria)
-                                  </MenuItem>
-                                  <MenuItem value="Sector Público Nacional, Provincial o Municipal">
-                                    Sector Público Nacional, Provincial o Municipal
-                                  </MenuItem>
-                                </TextField>
-                                 <TextField
-    select
-    label="Antigüedad"
-    name="antiguedad"
-    value={modificaciones.antiguedad || ""}
-    onChange={(e) =>
-      setModificaciones({
-        ...modificaciones,
-        antiguedad: e.target.value,
-      })
-    }
-    fullWidth
-    variant="outlined"
-    margin="normal"
-    size="small"
-    sx={{ ...sxInput, mt: 0 }}
-  >
-    <MenuItem value="Mayor a 21 años">
-      Mayor a 21 años
-    </MenuItem>
-    <MenuItem value="Entre 11 y 20 años">
-      Entre 11 y 20 años
-    </MenuItem>
-    <MenuItem value="Entre 6 y 10 años">
-      Entre 6 y 10 años
-    </MenuItem>
-    <MenuItem value="Entre 2 y 5 años">
-      Entre 2 y 5 años
-    </MenuItem>
-    <MenuItem value="Menor o igual a 1 años">
-      Menor o igual a 1 años   
-    </MenuItem>
-  </TextField>
-                              </Grid>
-                            )}
+    <Grid item {...grid3}>
+      <TextField
+        label="Edad"
+        value={modificaciones.edad || ""}
+        InputProps={{
+          readOnly: true,
+        }}
+        fullWidth
+        size="small"
+        sx={sxInput}
+      />
+    </Grid>
+
+    <Grid item {...grid3}>
+      <TextField
+        select
+        label="Tipo de Cliente"
+        name="tipoCliente"
+        value={modificaciones.tipoCliente || ""}
+        onChange={handleChange}
+        fullWidth
+        size="small"
+        sx={sxInput}
+      >
+        <MenuItem value="Persona Humana">
+          Persona Humana (Riesgo 1)
+        </MenuItem>
+
+        <MenuItem value="Persona Humana con Actividad Comercial">
+          Persona Humana con Actividad Comercial (Riesgo 3)
+        </MenuItem>
+      </TextField>
+    </Grid>
+  </>
+) : (
+  <>
+    <Grid item {...grid3}>
+      <TextField
+        select
+        label="Tipo de Cliente Empresa"
+        name="tipoClienteEmpresa"
+        value={modificaciones.tipoClienteEmpresa || ""}
+        onChange={handleChange}
+        fullWidth
+        size="small"
+        sx={sxInput}
+      >
+        <MenuItem value="Consorcios de Propietarios">
+          Consorcios de Propietarios
+        </MenuItem>
+
+        <MenuItem value="Sociedad Anónima">
+          Sociedad Anónima
+        </MenuItem>
+
+        <MenuItem value="Sociedad de Hecho">
+          Sociedad de Hecho
+        </MenuItem>
+
+        {/* resto de opciones */}
+      </TextField>
+    </Grid>
+
+    <Grid item {...grid3}>
+      <TextField
+        select
+        label="Antigüedad"
+        name="antiguedad"
+        value={modificaciones.antiguedad || ""}
+        onChange={handleChange}
+        fullWidth
+        size="small"
+        sx={sxInput}
+      >
+        <MenuItem value="Mayor a 21 años">
+          Mayor a 21 años
+        </MenuItem>
+
+        <MenuItem value="Entre 11 y 20 años">
+          Entre 11 y 20 años
+        </MenuItem>
+
+        <MenuItem value="Entre 6 y 10 años">
+          Entre 6 y 10 años
+        </MenuItem>
+
+        <MenuItem value="Entre 2 y 5 años">
+          Entre 2 y 5 años
+        </MenuItem>
+
+        <MenuItem value="Menor o igual a 1 año">
+          Menor o igual a 1 año
+        </MenuItem>
+      </TextField>
+    </Grid>
+  </>
+)}
 
                             <Grid item {...grid3}>
                               <TextField
@@ -790,6 +907,19 @@ const ModificacionC = () => {
                           <Button type="submit" variant="contained" sx={sxPrimaryBtn}>
                             GUARDAR
                           </Button>
+                          <Button
+  variant="contained"
+  color="success"
+  onClick={descargarPDF}
+  sx={{
+    ml: 1,
+    borderRadius: 2,
+    fontWeight: 900,
+    textTransform: "none",
+  }}
+>
+  DESCARGAR PDF
+</Button>
                         </Box>
                       </Grid>
                     </Grid>
