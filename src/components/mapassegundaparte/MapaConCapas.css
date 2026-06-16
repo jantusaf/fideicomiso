@@ -315,6 +315,7 @@ input[type="checkbox"] {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
 }
 
 .sc-label{
@@ -325,12 +326,14 @@ input[type="checkbox"] {
 
 .sc-input, .sc-select{
   width: 100%;
+  box-sizing: border-box;
   border-radius: 12px;
   padding: 10px 12px;
   border: 1px solid rgba(0,0,0,0.12);
   background: rgba(255,255,255,0.95);
   outline: none;
   font-size: 14px;
+  min-width: 0;
 }
 .sc-input:focus, .sc-select:focus{
   border-color: rgba(17,24,39,0.35);
@@ -985,15 +988,80 @@ color:#777;
     width: 100%;
     flex: 0 0 auto;
     height: auto;
-    max-height: 34dvh;
+    max-height: 40dvh;
     border-right: none;
     border-bottom: 1px solid #dcdcdc;
+    transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.2s ease;
+    padding-bottom: 0;
+  }
+
+  /* En mobile el colapso es vertical */
+  .panel-colapsado {
+    width: 100% !important;
+    flex: 0 0 auto !important;
+    max-height: 42px !important;
+    height: auto !important;
+    overflow: hidden !important;
+    opacity: 1 !important;
+    border-bottom: 1px solid #dcdcdc !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  /* El mapa crece cuando el panel está colapsado */
+  .panel-colapsado ~ .mapa-area {
+    height: calc(100dvh - 42px);
+    min-height: calc(100dvh - 42px);
   }
 
   .mapa-area {
     width: 100%;
-    height: 66dvh;
-    min-height: 66dvh;
+    flex: 1;
+    height: 60dvh;
+    min-height: 60dvh;
+  }
+
+  /* Ocultar toggle desktop en mobile */
+  .panel-toggle-desktop {
+    display: none !important;
+  }
+
+  /* Toggle mobile: barra fija al pie del panel */
+  .panel-toggle-mobile {
+    display: flex !important;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(135deg, #0a3b4f, #148d8d);
+    color: white;
+    border: none;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.3px;
+    z-index: 10;
+  }
+
+  /* Touch targets más grandes */
+  .capa-item label {
+    min-height: 36px;
+    padding: 4px 0;
+    gap: 10px;
+  }
+
+  .capa-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .subcapas label {
+    min-height: 34px;
+    padding: 3px 0;
   }
 
   .tabla-referencias-flotante {
@@ -1015,6 +1083,28 @@ color:#777;
     width: 100%;
     max-height: 38dvh;
   }
+
+  /* Modal ocupa más pantalla en mobile */
+  .sc-modalCard {
+    width: 100%;
+    max-height: 92dvh;
+    border-radius: 14px 14px 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+  }
+
+  .sc-modalOverlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+}
+
+/* El toggle mobile está oculto en desktop */
+.panel-toggle-mobile {
+  display: none;
 }
 
 .tabla-referencias-doble {
@@ -1032,4 +1122,154 @@ color:#777;
 
 .capa-item-todas-zonas:hover {
   background: #e7f8ff;
+}
+
+/* =========================
+   PANEL COLAPSABLE
+========================= */
+
+.panel-lateral {
+  transition: width 0.25s ease, padding 0.25s ease, opacity 0.2s ease;
+}
+
+.panel-colapsado {
+  width: 0 !important;
+  flex: 0 0 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  opacity: 0;
+  border-right: none !important;
+  box-shadow: none !important;
+}
+
+.panel-toggle-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1001;
+  width: 22px;
+  height: 52px;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  background: #1e88e5;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 3px 0 10px rgba(0,0,0,0.2);
+  transition: left 0.25s ease, background 0.15s ease;
+  padding: 0;
+  line-height: 1;
+}
+
+.panel-toggle-btn:hover {
+  background: #1565c0;
+}
+
+/* =========================
+   TOGGLE MAPA / SATELITE
+========================= */
+
+.tipo-mapa-toggle {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #d1d5db;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.tipo-mapa-btn {
+  flex: 1;
+  padding: 9px 0;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  background: #f3f4f6;
+  color: #6b7280;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tipo-mapa-btn.activo {
+  background: linear-gradient(135deg, #0a3b4f, #148d8d);
+  color: white;
+}
+
+.tipo-mapa-btn:first-child {
+  border-right: 1px solid #d1d5db;
+}
+
+/* =========================
+   BADGE DE CAPAS ACTIVAS
+========================= */
+
+.grupo-titulo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grupo-badge {
+  background: #1e88e5;
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 999px;
+  min-width: 20px;
+  text-align: center;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.grupo-badge.cero {
+  background: #d1d5db;
+  color: #6b7280;
+}
+
+/* =========================
+   PILL DE DISPONIBILIDAD
+========================= */
+
+.disponibilidad-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pill-verde   { background: #dcfce7; color: #166534; }
+.pill-rojo    { background: #fee2e2; color: #991b1b; }
+.pill-naranja { background: #ffedd5; color: #9a3412; }
+.pill-amarillo{ background: #fef9c3; color: #854d0e; }
+.pill-gris    { background: #f3f4f6; color: #6b7280; }
+
+/* =========================
+   WARNING JUDICIALIZADO
+========================= */
+
+.judicializado-warning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fef3c7;
+  border: 1px solid #fbbf24;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #92400e;
+}
+
+.judicializado-warning-icon {
+  font-size: 16px;
+  flex-shrink: 0;
 }

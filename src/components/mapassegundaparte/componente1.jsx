@@ -134,6 +134,9 @@ const clavesZonas = [
   "mensura31548Unuevo", "Mensura30922U", "zonapirayui",
 ];
 const todasLasZonasActivas = clavesZonas.every((key) => !!capasActivas[key]);
+const zonasActivasCount = clavesZonas.filter((k) => !!capasActivas[k]).length;
+const planEspecialCount = Object.values(subCapasActivas).filter(Boolean).length;
+const otrosCount = ["Barrios", "Manzanas", "Zonificación Sta Catalina", "ZRU Predios La Caja", "Planificación Sección Sur", "rutas1"].filter((k) => !!capasActivas[k]).length;
 
 const toggleTodasLasZonas = () => {
   const nuevoEstado = !todasLasZonasActivas;
@@ -295,6 +298,8 @@ const toggleTodasLasZonas = () => {
     const [privado, setPrivado] = useState("");
     const [superficie, setSuperficie] = useState("");
     const [tipoMapa, setTipoMapa] = useState("satelite");
+    const [panelColapsado, setPanelColapsado] = useState(false);
+    const [geoJsonKey, setGeoJsonKey] = useState(0);
     const [mensura, setMensura] = useState("");
     const [subCapasSur, setSubCapasSur] = useState({
         PIT: false,
@@ -926,7 +931,7 @@ useEffect(() => {
 }, [mapa]);
     return (
         <div className="mapa-contenedor">
-            <div className="panel-lateral">
+            <div className={`panel-lateral${panelColapsado ? " panel-colapsado" : ""}`}>
 
                 {/* LOGO */}
 
@@ -941,14 +946,20 @@ useEffect(() => {
 
                     <div className="grupo-titulo">VISUALIZACIÓN</div>
                     <div className="capa-item">
-                        <button
-                            className="btn-tipo-mapa"
-                            onClick={() =>
-                                setTipoMapa(tipoMapa === "normal" ? "satelite" : "normal")
-                            }
-                        >
-                            {tipoMapa === "normal" ? "Ver Satélite" : "Ver Mapa"}
-                        </button>
+                        <div className="tipo-mapa-toggle">
+                            <button
+                                className={`tipo-mapa-btn${tipoMapa === "normal" ? " activo" : ""}`}
+                                onClick={() => setTipoMapa("normal")}
+                            >
+                                Mapa
+                            </button>
+                            <button
+                                className={`tipo-mapa-btn${tipoMapa === "satelite" ? " activo" : ""}`}
+                                onClick={() => setTipoMapa("satelite")}
+                            >
+                                Satélite
+                            </button>
+                        </div>
                     </div>
                     <div className="capa-item">
     <label>
@@ -962,38 +973,16 @@ useEffect(() => {
 </div>
                     <div className="capa-item">
                         <label>
-
                             <input
                                 type="checkbox"
-                                checked={verPublicoPrivado}
-                                onChange={() => setVerPublicoPrivado(p => !p)}
+                                checked={verReferenciasTabla || verReferenciasTabla2}
+                                onChange={() => {
+                                    const nuevoEstado = !(verReferenciasTabla || verReferenciasTabla2);
+                                    setVerReferenciasTabla(nuevoEstado);
+                                    setVerReferenciasTabla2(nuevoEstado);
+                                }}
                             />
-
-                            <strong>Ver Disponibilidad</strong>
-
-                        </label>
-                    </div>
-
-
-
-                    <div className="capa-item">
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={verReferenciasTabla2}
-                                onChange={() => setVerReferenciasTabla2((p) => !p)}
-                            />
-                            <strong>Ver referencias de disponibilidad</strong>
-                        </label>
-                    </div>
-                    <div className="capa-item">
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={verReferenciasTabla}
-                                onChange={() => setVerReferenciasTabla((p) => !p)}
-                            />
-                            <strong>Ver referencias de zonificación</strong>
+                            <strong>Ver tabla de referencias</strong>
                         </label>
                     </div>
 
@@ -1006,7 +995,7 @@ useEffect(() => {
                 {/* ZONAS */}
 
                <div className="grupo-capas">
-  <div className="grupo-titulo">ZONAS</div>
+  <div className="grupo-titulo">ZONAS <span className={`grupo-badge${zonasActivasCount === 0 ? " cero" : ""}`}>{zonasActivasCount}</span></div>
 
   <div className="capa-item capa-item-todas-zonas">
     <label>
@@ -1145,7 +1134,7 @@ useEffect(() => {
 
                 <div className="grupo-capas">
 
-                    <div className="grupo-titulo">PLAN ESPECIAL</div>
+                    <div className="grupo-titulo">PLAN ESPECIAL <span className={`grupo-badge${planEspecialCount === 0 ? " cero" : ""}`}>{planEspecialCount}</span></div>
 
                     <div className="capa-item">
 
@@ -1198,7 +1187,7 @@ useEffect(() => {
 
                 <div className="grupo-capas">
 
-                    <div className="grupo-titulo">OTROS</div>
+                    <div className="grupo-titulo">OTROS <span className={`grupo-badge${otrosCount === 0 ? " cero" : ""}`}>{otrosCount}</span></div>
 
 
                     <div className="capa-item">
@@ -1358,6 +1347,13 @@ useEffect(() => {
 
                 </div>
 
+                {/* Toggle solo mobile: barra al pie del panel */}
+                <button
+                    className="panel-toggle-mobile"
+                    onClick={() => setPanelColapsado((p) => !p)}
+                >
+                    {panelColapsado ? "▼ Ver opciones" : "▲ Ver mapa completo"}
+                </button>
 
             </div>
 
@@ -1367,6 +1363,16 @@ useEffect(() => {
                     {verReferenciasTabla2 && <TablaReferencias2 />}
                 </div>
             )}
+
+            {/* Toggle desktop: borde derecho del panel */}
+            <button
+                className="panel-toggle-btn panel-toggle-desktop"
+                style={{ left: panelColapsado ? 0 : 270 }}
+                onClick={() => setPanelColapsado((p) => !p)}
+                title={panelColapsado ? "Mostrar panel" : "Ocultar panel"}
+            >
+                {panelColapsado ? "›" : "‹"}
+            </button>
 
             <div className="mapa-area">
                 <MapContainer
@@ -1394,7 +1400,7 @@ useEffect(() => {
                     {/* Manzanas */}
                     {capasActivas.Manzanas && geojsonData.Manzanas && (
                         <GeoJSON
-                            key="Manzanas"
+                            key={`Manzanas-${geoJsonKey}`}
                             data={geojsonData.Manzanas}
                             style={(feature) => {
                                 const id = feature?.properties?.id;
@@ -1423,7 +1429,7 @@ useEffect(() => {
                             activa &&
                             geojsonData[nombre] && (
                                 <GeoJSON
-                                    key={nombre}
+                                    key={`${nombre}-${geoJsonKey}`}
                                     data={geojsonData[nombre]}
                                     style={(feature) => {
                                         const id = feature.properties?.id;
@@ -1461,7 +1467,7 @@ useEffect(() => {
                     {/* Barrios / Calles */}
                     {capasActivas.Barrios && geojsonData.Barrios && (
                         <GeoJSON
-                            key="Barrios"
+                            key={`Barrios-${geoJsonKey}`}
                             data={geojsonData.Barrios}
                             style={() => ({
                                 fillColor: "none",
@@ -1477,7 +1483,7 @@ useEffect(() => {
                     {/* Zonificación Sta Catalina */}
                     {capasActivas["Zonificación Sta Catalina"] && geojsonData["Zonificación Sta Catalina"] && (
                         <GeoJSON
-                            key="Zonificación Sta Catalina"
+                            key={`Zonificación Sta Catalina-${geoJsonKey}`}
                             data={geojsonData["Zonificación Sta Catalina"]}
                             style={(feature) => {
                                 const id = feature.properties?.id;
@@ -1512,7 +1518,7 @@ useEffect(() => {
                     {/* Zona Hípico superpuesta en Zonificación */}
                     {capasActivas["Zonificación Sta Catalina"] && geojsonData.area1 && (
                         <GeoJSON
-                            key="area1-zonificacion"
+                            key={`area1-zonificacion-${geoJsonKey}`}
                             data={geojsonData.area1}
                             style={(feature) => {
                                 const id = feature?.properties?.id;
@@ -1535,7 +1541,7 @@ useEffect(() => {
                     {/* ZRU Predios La Caja */}
                     {capasActivas["ZRU Predios La Caja"] && geojsonData["ZRU Predios La Caja"] && (
                         <GeoJSON
-                            key="ZRU Predios La Caja"
+                            key={`ZRU Predios La Caja-${geoJsonKey}`}
                             data={geojsonData["ZRU Predios La Caja"]}
                             style={(feature) => {
                                 const id = feature.properties?.id;
@@ -1559,7 +1565,7 @@ useEffect(() => {
                             activa &&
                             geojsonData[nombre] && (
                                 <GeoJSON
-                                    key={nombre}
+                                    key={`${nombre}-${geoJsonKey}`}
                                     data={geojsonData[nombre]}
                                     style={(feature) => {
                                         const id = feature.properties?.id;
@@ -1597,11 +1603,31 @@ useEffect(() => {
                             // ic4 no se pinta como capa propia; ic42 y las UE cubren sus sub-áreas
                             if (nombre === "ic4") return null;
 
+                            // Capas de borde/outline: no deben capturar clicks para no interferir con la capa de abajo
+                            if (nombre === "unidad-ejecutora2y3" || nombre === "invico2") {
+                                return (
+                                    <GeoJSON
+                                        key={`${nombre}-${geoJsonKey}`}
+                                        data={geojsonData[nombre]}
+                                        style={{
+                                            fillColor: "transparent",
+                                            fillOpacity: 0,
+                                            color: "red",
+                                            weight: 2,
+                                            opacity: 1,
+                                        }}
+                                        onEachFeature={(feature, layer) => {
+                                            layer.options.interactive = false;
+                                        }}
+                                    />
+                                );
+                            }
+
                             // 🔴 CASO ESPECIAL rutas
                             if (nombre === "rutas1") {
                                 return (
                                     <GeoJSON
-                                        key={nombre}
+                                        key={`${nombre}-${geoJsonKey}`}
                                         data={geojsonData[nombre]}
                                         style={{
                                             fillColor: "red",
@@ -1617,7 +1643,7 @@ useEffect(() => {
 
                             return (
                                 <GeoJSON
-                                    key={nombre}
+                                    key={`${nombre}-${geoJsonKey}`}
                                     data={geojsonData[nombre]}
                                     style={(feature) => {
 
@@ -1631,11 +1657,7 @@ useEffect(() => {
                                             };
                                         }
 
-                                        if (nombre === "unidad-ejecutora1") {
-                                            return { fillColor: "#e05c5c", fillOpacity: 0.72, color: "rgba(0,0,0,0.55)", weight: 1.5, opacity: 1 };
-                                        }
-
-                                        if (["unidad-ejecutora2", "unidad-ejecutora3"].includes(nombre)) {
+                                        if (["unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3"].includes(nombre)) {
                                             const id = feature?.properties?.id;
                                             const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
                                             const bordeUE = { color: "rgba(0,0,0,0.55)", weight: 1.5, opacity: 1 };
@@ -1647,7 +1669,9 @@ useEffect(() => {
                                                 return { fillColor: "#e05c5c", fillOpacity: 0.72, ...bordeUE };
                                             if (poligono?.privado === "publico")
                                                 return { fillColor: "#5db862", fillOpacity: 0.72, ...bordeUE };
-                                            return { fillColor: "#5db862", fillOpacity: 0.72, color: "rgba(0,0,0,0.3)", weight: 1, opacity: 1 };
+                                            // UE1 sin dato = rojo; UE2/3 sin dato = verde (comportamiento original)
+                                            const fallback = nombre === "unidad-ejecutora1" ? "#e05c5c" : "#5db862";
+                                            return { fillColor: fallback, fillOpacity: 0.72, color: "rgba(0,0,0,0.3)", weight: 1, opacity: 1 };
                                         }
 
                                         if (nombre === "unidad-ejecutora2y3" || nombre === "invico2") {
@@ -1657,25 +1681,13 @@ useEffect(() => {
                                                 color: "red",
                                                 weight: 2,
                                                 opacity: 1,
-                                            };
-                                        }
-
-                                        // ⚪ si verPublicoPrivado es false todo gris claro
-                                        if (!verPublicoPrivado) {
-                                            return {
-                                                fillColor: "#e8e8e8",
-                                                fillOpacity: 0.65,
-                                                color: "transparent",
-                                                weight: 0,
-                                                opacity: 0,
+                                                interactive: false,
                                             };
                                         }
 
                                         const id = feature?.properties?.id;
 
-                                        const poligono = poligonosGuardados.find(
-                                            (p) => String(p.id_mapa) === String(id)
-                                        );
+                                        const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
 
                                         const borde = { color: "rgba(0,0,0,0.55)", weight: 1.5, opacity: 1 };
 
@@ -1720,7 +1732,7 @@ useEffect(() => {
                    {capasActivas.judicializados &&
     geojsonData.judicializados && (
         <GeoJSON
-            key="judicializados"
+            key={`judicializados-${geoJsonKey}`}
             pane="judicializadosPane"
             data={geojsonData.judicializados}
             style={{
@@ -1742,11 +1754,6 @@ useEffect(() => {
                         <div className="sc-modalHeader">
                             <div>
                                 <div className="sc-modalTitle">Detalle de zona</div>
-                                <div className="sc-modalSubtitle">
-                                    <span className="sc-badge">ID {idSeleccionado}</span>
-                                    <span className="sc-dot">•</span>
-                                    <span className="sc-muted">{nombreCapaSeleccionada || "Capa"}</span>
-                                </div>
                             </div>
 
                             <button
@@ -1760,6 +1767,12 @@ useEffect(() => {
                         </div>
 
                         <div className="sc-modalBody">
+                            {datosZonaSeleccionada?.judicializado === "Si" && (
+                                <div className="judicializado-warning">
+                                    <span className="judicializado-warning-icon">⚠</span>
+                                    Este polígono tiene un juicio en trámite
+                                </div>
+                            )}
                             {datosZonaSeleccionada ? (
                                 <div className="sc-grid2">
                                     <div className="sc-infoItem">
@@ -1779,11 +1792,21 @@ useEffect(() => {
                                     <div className="sc-infoItem">
                                         <div className="sc-infoLabel">Estado</div>
                                         <div className="sc-infoValue">
-                                            {datosZonaSeleccionada.privado === "publico"
-                                                ? "Disponible"
-                                                : datosZonaSeleccionada.privado === "privado"
-                                                    ? "No disponible"
-                                                    : "-"}
+                                            {datosZonaSeleccionada.privado === "publico" && (
+                                                <span className="disponibilidad-pill pill-verde">● Disponible</span>
+                                            )}
+                                            {datosZonaSeleccionada.privado === "privado" && (
+                                                <span className="disponibilidad-pill pill-rojo">● No disponible</span>
+                                            )}
+                                            {datosZonaSeleccionada.privado === "reserva municipal" && (
+                                                <span className="disponibilidad-pill pill-naranja">● Reserva municipal</span>
+                                            )}
+                                            {datosZonaSeleccionada.privado === "equipamiento publico" && (
+                                                <span className="disponibilidad-pill pill-amarillo">● Equipamiento público</span>
+                                            )}
+                                            {!datosZonaSeleccionada.privado && (
+                                                <span className="disponibilidad-pill pill-gris">— Sin definir</span>
+                                            )}
                                         </div>
                                     </div>
                                     {esAreaEspecial && (
@@ -1818,12 +1841,6 @@ useEffect(() => {
                                             </div>
                                         </>
                                     )}
-                                    <div className="sc-infoItem sc-span2">
-                                        <div className="sc-infoLabel">Capa</div>
-                                        <div className="sc-infoValue">
-                                            {datosZonaSeleccionada.capa || nombreCapaSeleccionada || "-"}
-                                        </div>
-                                    </div>
                                 </div>
                             ) : (
                                 <div className="sc-emptyState">
@@ -2023,6 +2040,7 @@ useEffect(() => {
 
                                         const nuevos = await serviciolotes.poligonosguardados();
                                         setPoligonosGuardados(nuevos);
+                                        setGeoJsonKey((k) => k + 1);
 
                                         const actualizado = buscarPoligonoDB(nuevos, idSeleccionado, nombreCapaSeleccionada);
                                         setDatosZonaSeleccionada(actualizado);
