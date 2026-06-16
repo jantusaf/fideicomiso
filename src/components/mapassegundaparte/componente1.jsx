@@ -220,6 +220,7 @@ const toggleTodasLasZonas = () => {
         "Reserva Municipal 2",
         "Reserva Municipal 3",
         "Reserva Municipal 4",
+        "Reserva Municipal",
 
     ];
 
@@ -270,6 +271,13 @@ const toggleTodasLasZonas = () => {
         "PLC-Planta de Liquidos Cloacales": "#c85b01",
         "PLC-Zona Fuelle": "#f1a465",
         "ZPA-Zona de Proteccion Ambiental-Reserva Natural Santa Catalina": "#034F04",
+        "Reserva Municipal": "#e08c3a",
+        "Reserva Municipal I": "#e08c3a",
+        "Reserva Municipal II": "#e08c3a",
+        "Reserva Municipal 1": "#e08c3a",
+        "Reserva Municipal 2": "#e08c3a",
+        "Reserva Municipal 3": "#e08c3a",
+        "Reserva Municipal 4": "#e08c3a",
         "": "red",
         null: "red",
         undefined: "red",
@@ -301,6 +309,8 @@ const toggleTodasLasZonas = () => {
     const [panelColapsado, setPanelColapsado] = useState(false);
     const [geoJsonKey, setGeoJsonKey] = useState(0);
     const [mensura, setMensura] = useState("");
+    const [vendido, setVendido] = useState(false);
+    const esVendido = (v) => v === true || v === "true" || v === 1 || v === "1";
     const [subCapasSur, setSubCapasSur] = useState({
         PIT: false,
         "PLC-C": false,
@@ -623,6 +633,7 @@ const toggleTodasLasZonas = () => {
         setSuperficie(datosBase?.superficie ?? "");
         setJudicializado(datosBase?.judicializado ?? "");
         setMensura(datosBase?.mensura ?? "");
+        setVendido(esVendido(datosBase?.vendido));
         setModalDetalleAbierto(true);
         setModalAbierto(false);
     };
@@ -1661,6 +1672,15 @@ useEffect(() => {
                                             const id = feature?.properties?.id;
                                             const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
                                             const bordeUE = { color: "rgba(0,0,0,0.55)", weight: 1.5, opacity: 1 };
+
+                                            // UE1: colores por subclasificación de zonificación
+                                            if (nombre === "unidad-ejecutora1") {
+                                                if (!poligono) return { fillColor: "#cccccc", fillOpacity: 0.35, ...bordeUE };
+                                                const fillColor = coloresPorSubclasificacion[poligono.subclasificacion] || "#cccccc";
+                                                return { fillColor, fillOpacity: 0.72, ...bordeUE };
+                                            }
+
+                                            // UE2/3: colores por disponibilidad (privado)
                                             if (poligono?.privado === "reserva municipal")
                                                 return { fillColor: "#e08c3a", fillOpacity: 0.72, ...bordeUE };
                                             if (poligono?.privado === "equipamiento publico")
@@ -1669,9 +1689,7 @@ useEffect(() => {
                                                 return { fillColor: "#e05c5c", fillOpacity: 0.72, ...bordeUE };
                                             if (poligono?.privado === "publico")
                                                 return { fillColor: "#5db862", fillOpacity: 0.72, ...bordeUE };
-                                            // UE1 sin dato = rojo; UE2/3 sin dato = verde (comportamiento original)
-                                            const fallback = nombre === "unidad-ejecutora1" ? "#e05c5c" : "#5db862";
-                                            return { fillColor: fallback, fillOpacity: 0.72, color: "rgba(0,0,0,0.3)", weight: 1, opacity: 1 };
+                                            return { fillColor: "#5db862", fillOpacity: 0.72, color: "rgba(0,0,0,0.3)", weight: 1, opacity: 1 };
                                         }
 
                                         if (nombre === "unidad-ejecutora2y3" || nombre === "invico2") {
@@ -1729,6 +1747,30 @@ useEffect(() => {
                             );
                         }
                     )}
+                    {/* Pines de "vendido" sobre UE1 */}
+                    {capasActivas["unidad-ejecutora1"] && geojsonData["unidad-ejecutora1"] &&
+                        geojsonData["unidad-ejecutora1"].features.map((feature) => {
+                            const id = feature?.properties?.id;
+                            const poligono = buscarPoligonoDB(poligonosGuardados, id, "unidad-ejecutora1");
+                            if (!poligono || !esVendido(poligono.vendido)) return null;
+                            const center = getCentroideAproximado(feature.geometry);
+                            if (!center) return null;
+                            return (
+                                <Marker
+                                    key={`vendido-ue1-${id}-${geoJsonKey}`}
+                                    position={center}
+                                    interactive={false}
+                                    icon={L.divIcon({
+                                        className: "",
+                                        html: `<div style="font-size:18px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.6))">📌</div>`,
+                                        iconSize: [20, 20],
+                                        iconAnchor: [10, 20],
+                                    })}
+                                />
+                            );
+                        })
+                    }
+
                    {capasActivas.judicializados &&
     geojsonData.judicializados && (
         <GeoJSON
@@ -1809,6 +1851,17 @@ useEffect(() => {
                                             )}
                                         </div>
                                     </div>
+                                    {nombreCapaSeleccionada === "unidad-ejecutora1" && (
+                                        <div className="sc-infoItem">
+                                            <div className="sc-infoLabel">Vendido</div>
+                                            <div className="sc-infoValue">
+                                                {esVendido(datosZonaSeleccionada.vendido)
+                                                    ? <span className="disponibilidad-pill pill-rojo">📌 Vendido</span>
+                                                    : <span className="disponibilidad-pill pill-gris">— No vendido</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    )}
                                     {esAreaEspecial && (
                                         <>
                                             {/* Fila 1: Nombre + CUIL/CUIT (en sc-grid2 = 2 cols) */}
@@ -1996,6 +2049,21 @@ useEffect(() => {
                                     />
                                 </div>
                             </div>
+                            {nombreCapaSeleccionada === "unidad-ejecutora1" && (
+                                <div className="sc-field sc-span2" style={{ marginTop: 8 }}>
+                                    <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", fontWeight: 600, fontSize: 13 }}>
+                                        <input
+                                            type="checkbox"
+                                            checked={vendido}
+                                            onChange={(e) => setVendido(e.target.checked)}
+                                            style={{ width: 16, height: 16, accentColor: "#e05c5c", cursor: "pointer" }}
+                                        />
+                                        <span>📌 Vendido</span>
+                                        <span style={{ fontWeight: 400, color: "#888", fontSize: 12 }}>(marca el lote con un pin en el mapa)</span>
+                                    </label>
+                                </div>
+                            )}
+
                             <div className="sc-hint">
                                 Se guardará asociado a <b>{nombreCapaSeleccionada}</b> con ID <b>{idSeleccionado}</b>.
                             </div>
@@ -2034,6 +2102,7 @@ useEffect(() => {
                                             superficie,
                                             judicializado,
                                             mensura,
+                                            vendido,
                                         });
 
 

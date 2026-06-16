@@ -57,6 +57,9 @@ const referencias = [
   { color: "#f1a465", texto: "PLC - Z. Fuelle" },
   { tipo: "titulo", texto: "ZONA DE PROTECCIÓN AMBIENTAL - Santa Catalina" },
   { color: "#034F04", texto: "ZPA" },
+
+  { tipo: "titulo", texto: "RESERVA" },
+  { color: "#e08c3a", texto: "Reserva Municipal" },
 ];
 
 const TablaReferencias = () => {
