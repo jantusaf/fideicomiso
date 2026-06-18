@@ -323,16 +323,18 @@ const toggleTodasLasZonas = () => {
 
 
 
-    fetch("/juicios-poligonos.geojson")
+ useEffect(() => {
+  fetch("/juicios-poligonos.geojson")
     .then((r) => r.json())
     .then((data) => {
-        const normalizado = normalizarGeojsonConIds(data, "judicializados");
-        setGeojsonData((prev) => ({
-            ...prev,
-            judicializados: normalizado,
-        }));
+      const normalizado = normalizarGeojsonConIds(data, "judicializados");
+      setGeojsonData((prev) => ({
+        ...prev,
+        judicializados: normalizado,
+      }));
     })
     .catch(console.error);
+}, []);
     useEffect(() => {
         serviciolotes
             .poligonosguardados()
