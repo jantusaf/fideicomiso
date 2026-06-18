@@ -15,7 +15,17 @@ import Deshabilitar from "./ModalDeshabilitar";
 import Estadisticas from "./Estadisticas";
 import ModalSeguro from "./Modalseguroborrar";
 import ModalEditarDescripcion from "./modaleditarc";
+const thStyle = {
+  padding: "12px",
+  textAlign: "left",
+  borderBottom: "2px solid #ddd",
+  fontWeight: "bold",
+};
 
+const tdStyle = {
+  padding: "12px",
+  borderBottom: "1px solid #eee",
+};
 const LegajoCliente = (props) => {
   const navigate = useNavigate();
   let params = useParams();
@@ -345,14 +355,108 @@ const LegajoCliente = (props) => {
           boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
         }}
       >
-       {/*  {products && (
-          <MUIDataTable
-            title={""}
-            data={products[0]}
-            columns={columns}
-            options={optionss}
-          />
-        )} */}
+     {products && (
+  <div style={{ overflowX: "auto" }}>
+    <table
+      style={{
+        width: "100%",
+        borderCollapse: "collapse",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <thead>
+        <tr style={{ background: "#f1f5f9" }}>
+          <th style={thStyle}>Tipo</th>
+          <th style={thStyle}>Descripción</th>
+          <th style={thStyle}>Fecha</th>
+          <th style={thStyle}>Estado</th>
+          <th style={thStyle}>Editar</th>
+          <th style={thStyle}>Ver</th>
+          <th style={thStyle}>Borrar</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {products[0].map((item, index) => (
+          <tr
+            key={item.id}
+            style={{
+              backgroundColor: index % 2 === 0 ? "#fff" : "#f8fafc",
+            }}
+          >
+            <td style={tdStyle}>{item.tipo}</td>
+
+            <td style={tdStyle}>{item.descripcion}</td>
+
+            <td style={tdStyle}>{item.fecha}</td>
+
+            <td style={tdStyle}>
+              <span
+                style={{
+                  color: "#2e7d32",
+                  fontWeight: "bold",
+                }}
+              >
+                {item.estado}
+              </span>
+            </td>
+
+            <td style={tdStyle}>
+              <Button
+                onClick={() => handleOpenModal(item)}
+                style={{
+                  background: "#1f7a8c",
+                  color: "#fff",
+                  borderRadius: "20px",
+                  textTransform: "none",
+                }}
+              >
+                Editar
+              </Button>
+            </td>
+
+            <td style={tdStyle}>
+              {[
+                "Cbu personal",
+                "Cbu familiar",
+                "Socio/Gerente/Apoderado",
+                "Propio",
+              ].includes(item.tipo) ? (
+                <Modalveronlinecbu id={item.id} />
+              ) : (
+                <Modalveronline id={item.id} />
+              )}
+            </td>
+
+            <td style={tdStyle}>
+              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                <ModalSeguro id={item.id} getData={getData} />
+
+                {item.comprobanteok === "No" && (
+                  <span
+                    style={{
+                      background: "#ffebee",
+                      color: "#c62828",
+                      width: 24,
+                      height: 24,
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    !
+                  </span>
+                )}
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
       </div>
     </div>
   );
