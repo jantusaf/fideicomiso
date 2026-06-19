@@ -13,7 +13,84 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Agregarbenefciarios from "./agregarbeneficiarios";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import logo from "../../../Assets/marcas.jpg";
 
+const descargarComprobante = (client) => {
+  const doc = new jsPDF();
+
+  // Logo
+  try {
+    doc.addImage(logo, "JPEG", 15, 10, 40, 18);
+  } catch (e) {
+    console.log(e);
+  }
+
+  doc.setFontSize(16);
+  doc.setFont("helvetica", "bold");
+  doc.text("COMPROBANTE DE VERIFICACIÓN RePET", 105, 20, {
+    align: "center",
+  });
+
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "normal");
+
+  doc.text(
+    `Fecha de emisión: ${new Date().toLocaleString("es-AR")}`,
+    15,
+    38
+  );
+
+  autoTable(doc, {
+    startY: 48,
+    theme: "grid",
+    head: [["Campo", "Valor"]],
+    body: [
+      ["Nombre / Razón Social", client.Nombre || ""],
+      ["CUIT / CUIL", client.cuil_cuit || ""],
+      ["Tipo de Cliente", client.razon || ""],
+      ["Actividad Económica", client.actividadEconomica || ""],
+      [
+        "Resultado de la consulta",
+        client.repet === "Si"
+          ? "Se registran coincidencias"
+          : "No se registran coincidencias",
+      ],
+      [
+        "Fecha de coincidencia",
+        client.fecha_repet || "Sin información",
+      ],
+    ],
+  });
+
+  const finalY = doc.lastAutoTable.finalY + 12;
+
+  doc.setFontSize(10);
+  doc.text(
+    "La presente constancia deja registro de la verificación efectuada",
+    15,
+    finalY
+  );
+  doc.text(
+    "sobre el Registro Público de Personas y Entidades vinculadas",
+    15,
+    finalY + 6
+  );
+  doc.text(
+    "a actos de Terrorismo y su Financiamiento.",
+    15,
+    finalY + 12
+  );
+
+  doc.text(
+    "Este comprobante refleja el resultado obtenido al momento de la consulta.",
+    15,
+    finalY + 24
+  );
+
+  doc.save(`Comprobante_${client.cuil_cuit}.pdf`);
+};
 const FichaAxios = (props) => {
   const navigate = useNavigate();
   const [cliente, setCliente] = useState([]);
@@ -454,7 +531,23 @@ const FichaAxios = (props) => {
                     >
                       Modificar cliente
                     </Button>
-
+<Button
+  variant="contained"
+  sx={{
+    mb: 2,
+    px: 2.2,
+    py: 1.1,
+    borderRadius: 2,
+    textTransform: "none",
+    fontWeight: 700,
+    backgroundColor: "#01567c",
+    boxShadow: "0 10px 25px rgba(1,86,124,0.25)",
+    "&:hover": { backgroundColor: "#014a6b" },
+  }}
+  onClick={() => descargarComprobante(client)}
+>
+  Descargar comprobante Repet
+</Button>
                     <Ingreso
                       traer={async () => {
                         const cliente = await servicioCliente.cliente(props.cuil_cuit);
