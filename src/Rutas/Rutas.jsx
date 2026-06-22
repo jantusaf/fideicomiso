@@ -51,8 +51,8 @@ import Resumenes3 from '../Paginas/Administracion/resumenes3';
 import Carga1 from '../Paginas/Administracion/carga';
  
 
-
-
+import Resumen1mov2 from '../Paginas/nivel7/resumen1';
+import Cargamov2 from '../Paginas/nivel7/cargas';
 
 
 import Navbar from "../components/Navbar";
@@ -240,8 +240,8 @@ const Rutas = [
 
 { path: '/nivel6/carga', element: <Cargaa1 /> },
 
-
-
+{ path: '/mov2/resumen1', element: <Resumen1mov2 /> },
+{ path: '/mov2/carga', element: <Cargamov2 /> },
 
 	{ path: '*', element: <NOtFound /> },
 
