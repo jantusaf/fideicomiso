@@ -1,448 +1,295 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import servicionivel3 from "../../services/nivel3";
-import SubirExcelMovimientos from "./subierexce";
-//import Tabla from "./tablamovimientos";
 
 import {
   Box,
-  Button,
-  TextField,
   Typography,
-  MenuItem,
-  Card,
-  CardContent,
-  Collapse,
-  Modal,
+  TextField,
+  InputAdornment,
+  Chip,
+  CircularProgress,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from "@mui/material";
 
-export default function FormMovimiento() {
-  const [mostrarForm, setMostrarForm] = useState(false);
-  const [openExcel, setOpenExcel] = useState(false);
+const formatoNumero = (valor, moneda = "USD") => {
+  const numero = Number(valor || 0);
 
-  const [tipo, setTipo] = useState("EGRESO");
-  const [concepto, setConcepto] = useState("");
-  const [monto, setMonto] = useState("");
-  const [medio, setMedio] = useState("");
-  const [detalle, setDetalle] = useState("");
-  const [loading, setLoading] = useState(false);
+  return new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: moneda,
+    minimumFractionDigits: 2,
+  }).format(numero);
+};
 
-  const mediosPago = [
-    "Efectivo",
-    "Transferencia",
-    "Banco",
-    "Tarjeta",
-    "Cheque",
-  ];
+const formatoFecha = (fecha) => {
+  if (!fecha) return "-";
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const fechaObj = new Date(fecha);
 
-    if (!concepto || !monto || !medio) {
-      alert("Complete los campos obligatorios");
-      return;
-    }
+  if (Number.isNaN(fechaObj.getTime())) return fecha;
 
-    setLoading(true);
+  return fechaObj.toLocaleDateString("es-AR", {
+    timeZone: "UTC",
+  });
+};
 
-    const data = {
-      tipo_operacion: tipo,
-      concepto: concepto,
-      monto: Number(monto),
-      medio_pago: medio,
-      descripcion: detalle,
-    };
+export default function TablaVentas() {
+  const [ventas, setVentas] = useState([]);
+  const [busqueda, setBusqueda] = useState("");
+  const [loading, setLoading] = useState(true);
 
+  const traerVentas = async () => {
     try {
-      await servicionivel3.enviarmovimiento(data);
+      setLoading(true);
 
-      alert("Movimiento registrado");
+      const res = await servicionivel3.traerventas2();
 
-      setConcepto("");
-      setMonto("");
-      setMedio("");
-      setDetalle("");
-      setMostrarForm(false);
-    } catch (err) {
-      console.error(err);
-      alert("Error al registrar el movimiento");
+      /*
+        Según cómo tengas armado Axios, puede venir:
+        res.data
+        o directamente res
+      */
+      setVentas(res.data || res || []);
+    } catch (error) {
+      console.error("Error al traer ventas:", error);
+      alert("No se pudieron cargar las ventas");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
+  useEffect(() => {
+    traerVentas();
+  }, []);
+
+  const ventasFiltradas = useMemo(() => {
+    const texto = busqueda.toLowerCase().trim();
+
+    if (!texto) return ventas;
+
+    return ventas.filter((venta) => {
+      return [
+        venta.manzana,
+        venta.lote,
+        venta.tipo,
+        venta.comprador,
+        venta.estado,
+        venta.uso_de_suelo,
+        venta.plan,
+      ]
+        .join(" ")
+        .toLowerCase()
+        .includes(texto);
+    });
+  }, [ventas, busqueda]);
+
   return (
-    <>
-     {/* HEADER PREMIUM */}
-<Box
-  sx={{
-    borderRadius: "22px",
-    overflow: "hidden",
-    mb: 2,
-    background:
-      "linear-gradient(90deg,#083b5c 0%, #0b5c76 55%, #148a8f 100%)",
-    boxShadow: "0 10px 28px rgba(0,0,0,0.10)",
-  }}
->
-  <Box
-    sx={{
-      px: 2.5,
-      py: 2,
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      gap: 2,
-      flexWrap: "wrap",
-    }}
-  >
-    {/* IZQUIERDA */}
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: 1.8,
-      }}
-    >
-      {/* ICONO */}
+    <Box sx={{ mt: 2 }}>
+      {/* CABECERA DE TABLA */}
       <Box
         sx={{
-          width: 56,
-          height: 56,
-          borderRadius: "18px",
-          background: "rgba(255,255,255,0.12)",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          border: "1px solid rgba(255,255,255,0.15)",
-        }}
-      >
-        <Typography sx={{ fontSize: 26 }}>
-          💳
-        </Typography>
-      </Box>
-
-      {/* TITULOS */}
-      <Box>
-        <Typography
-          sx={{
-            color: "#fff",
-            fontWeight: 800,
-            fontSize: 24,
-            lineHeight: 1,
-          }}
-        >
-          Movimientos
-        </Typography>
-
-        <Typography
-          sx={{
-            color: "rgba(255,255,255,0.82)",
-            fontSize: 13,
-            mt: 0.6,
-          }}
-        >
-          Gestión y control de ingresos y egresos
-        </Typography>
-      </Box>
-    </Box>
-
-    {/* DERECHA */}
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: 1.2,
-        ml: "auto",
-        flexWrap: "wrap",
-      }}
-    >
-      {/* CANTIDAD */}
-    
-
-      {/* BOTON EXCEL */}
-      <Button
-        onClick={() => setOpenExcel(true)}
-        variant="contained"
-        sx={{
-          borderRadius: 2,
-          textTransform: "none",
-          fontWeight: 900,
-          px: 2,
-          height: 42,
-          fontSize: 14,
-
-          backgroundColor: "rgba(255,255,255,0.16)",
-          color: "#fff",
-
-          border: "1px solid rgba(255,255,255,0.25)",
-
-          boxShadow: "0 8px 20px rgba(0,0,0,0.12)",
-
-          "&:hover": {
-            backgroundColor: "rgba(255,255,255,0.24)",
-          },
-        }}
-      >
-        📊 Cargar Excel
-      </Button>
-
-      {/* BOTON MOVIMIENTO */}
-     <Button
-  onClick={() => setMostrarForm(true)}
-        variant="contained"
-        sx={{
-          borderRadius: 2,
-          textTransform: "none",
-          fontWeight: 900,
-          px: 2,
-          height: 42,
-          fontSize: 14,
-
-          backgroundColor: "rgba(255,255,255,0.16)",
-          color: "#fff",
-
-          border: "1px solid rgba(255,255,255,0.25)",
-
-          boxShadow: "0 8px 20px rgba(0,0,0,0.12)",
-
-          "&:hover": {
-            backgroundColor: "rgba(255,255,255,0.24)",
-          },
-        }}
-      >
-        ➕ Registrar movimiento
-      </Button>
-    </Box>
-  </Box>
-</Box>
-
-      {/* MODAL EXCEL */}
-{/* MODAL EXCEL */}
-<Modal
-  open={openExcel}
-  onClose={() => setOpenExcel(false)}
->
-  <Box
-    sx={{
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      width: "100%",
-      maxWidth: 700,
-      px: 2,
-    }}
-  >
-    <Card
-      sx={{
-        borderRadius: "22px",
-        overflow: "hidden",
-        boxShadow: "0 25px 60px rgba(0,0,0,0.25)",
-      }}
-    >
-      {/* HEADER */}
-      <Box
-        sx={{
-          background:
-            "linear-gradient(90deg,#083b5c 0%, #0b5c76 55%, #148a8f 100%)",
-          px: 3,
-          py: 2,
-          display: "flex",
-          alignItems: "center",
           justifyContent: "space-between",
-        }}
-      >
-        <Typography
-          sx={{
-            color: "#fff",
-            fontWeight: 800,
-            fontSize: 20,
-          }}
-        >
-          Cargar Excel
-        </Typography>
-
-        <Button
-          onClick={() => setOpenExcel(false)}
-          sx={{
-            minWidth: "auto",
-            color: "#fff",
-            fontSize: 18,
-          }}
-        >
-          ✕
-        </Button>
-      </Box>
-
-      {/* BODY */}
-      <Box
-        sx={{
-          p: 3,
-          background: "#fff",
-        }}
-      >
-        <SubirExcelMovimientos />
-      </Box>
-    </Card>
-  </Box>
-</Modal>
-
-      {/* FORMULARIO */}
-      {/* MODAL REGISTRAR MOVIMIENTO */}
-<Modal
-  open={mostrarForm}
-  onClose={() => setMostrarForm(false)}
->
-  <Box
-    sx={{
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      width: "100%",
-      maxWidth: 520,
-      px: 2,
-    }}
-  >
-    <Card
-      sx={{
-        borderRadius: "22px",
-        overflow: "hidden",
-        boxShadow: "0 25px 60px rgba(0,0,0,0.25)",
-      
-      }}
-    >
-      {/* HEADER */}
-      <Box
-        sx={{
-          background:
-            "linear-gradient(90deg,#083b5c 0%, #0b5c76 55%, #148a8f 100%)",
-          px: 3,
-          py: 2,
-          display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          gap: 2,
+          mb: 2,
+          flexWrap: "wrap",
         }}
       >
-        <Typography
-          sx={{
-            color: "#fff",
-            fontWeight: 800,
-            fontSize: 20,
-          }}
-        >
-          Registrar Movimiento
-        </Typography>
+        <Box>
+          <Typography fontWeight={800} fontSize={20} color="#083b5c">
+            Ventas de lotes
+          </Typography>
 
-        <Button
-          onClick={() => setMostrarForm(false)}
-          sx={{
-            minWidth: "auto",
-            color: "#fff",
-            fontSize: 18,
-          }}
-        >
-          ✕
-        </Button>
-      </Box>
-
-      <CardContent sx={{ p: 3 }}>
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-          }}
-        >
-          <TextField
-            select
-            label="Tipo"
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-            size="small"
-          >
-            <MenuItem value="EGRESO">Egreso</MenuItem>
-            <MenuItem value="INGRESO">Ingreso</MenuItem>
-          </TextField>
-
-          <TextField
-            label="Concepto"
-            value={concepto}
-            onChange={(e) => setConcepto(e.target.value)}
-            size="small"
-          />
-
-          <TextField
-            label="Monto"
-            type="number"
-            value={monto}
-            onChange={(e) => setMonto(e.target.value)}
-            size="small"
-          />
-
-          <TextField
-            select
-            label="Medio de pago"
-            value={medio}
-            onChange={(e) => setMedio(e.target.value)}
-            size="small"
-          >
-            <MenuItem value="">Seleccionar</MenuItem>
-
-            {mediosPago.map((m, i) => (
-              <MenuItem key={i} value={m}>
-                {m}
-              </MenuItem>
-            ))}
-          </TextField>
-
-          <TextField
-            label="Detalle"
-            value={detalle}
-            onChange={(e) => setDetalle(e.target.value)}
-            size="small"
-          />
-
-       <Button
-  type="submit"
-  disabled={loading}
-  variant="contained"
-  sx={{
-     mt: 1,
-  background: "#14919B",
-  color: "#fff",
-  borderRadius: "10px",
-  textTransform: "none",
-  fontWeight: 700,
-  fontSize: "13px",
-
-  minWidth: 140,
-  width: "fit-content",
-  height: 34,
-
-  px: 2,
-
-  alignSelf: "center",
-
-  boxShadow: "none",
-
-  "&:hover": {
-    background: "#117C85",
-    boxShadow: "none",
-    },
-  }}
->
-  {loading ? "Guardando..." : "Guardar movimiento"}
-</Button>
+          <Typography color="text.secondary" fontSize={13}>
+            Total de registros: {ventasFiltradas.length}
+          </Typography>
         </Box>
-      </CardContent>
-    </Card>
-  </Box>
-</Modal>
 
-      {/* TABLA */}
-      
-    </>
+        <TextField
+          size="small"
+          placeholder="Buscar por manzana, lote, comprador..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          sx={{
+            width: { xs: "100%", sm: 350 },
+            background: "#fff",
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">🔎</InputAdornment>
+            ),
+          }}
+        />
+      </Box>
+
+      <TableContainer
+        component={Paper}
+        sx={{
+          borderRadius: 3,
+          boxShadow: "0 8px 25px rgba(0,0,0,0.08)",
+          maxHeight: "70vh",
+        }}
+      >
+        <Table stickyHeader size="small">
+          <TableHead>
+            <TableRow>
+              {[
+                "Manzana",
+                "Lote",
+                "Tipo",
+                "Fecha",
+                "Comprador",
+                "Valor",
+                "Anticipo",
+                "M²",
+                "Valor M²",
+                "Uso de suelo",
+                "Plan",
+                "Valor cuota",
+                "Cuotas pagadas",
+                "Cuotas pendientes",
+                "Monto cobrado",
+                "Saldo",
+                "Estado",
+              ].map((titulo) => (
+                <TableCell
+                  key={titulo}
+                  sx={{
+                    fontWeight: 800,
+                    whiteSpace: "nowrap",
+                    background: "#083b5c",
+                    color: "#fff",
+                    borderBottom: "none",
+                  }}
+                >
+                  {titulo}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+
+          <TableBody>
+            {loading ? (
+              <TableRow>
+                <TableCell colSpan={17} align="center" sx={{ py: 5 }}>
+                  <CircularProgress size={28} />
+                  <Typography sx={{ mt: 1 }}>
+                    Cargando ventas...
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            ) : ventasFiltradas.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={17} align="center" sx={{ py: 5 }}>
+                  No se encontraron ventas.
+                </TableCell>
+              </TableRow>
+            ) : (
+              ventasFiltradas.map((venta, index) => {
+                const cancelado =
+                  venta.estado?.toLowerCase() === "cancelado";
+
+                return (
+                  <TableRow
+                    key={venta.id || index}
+                    hover
+                    sx={{
+                      "&:nth-of-type(even)": {
+                        backgroundColor: "#f7fafc",
+                      },
+                    }}
+                  >
+                    <TableCell sx={{ whiteSpace: "nowrap", fontWeight: 700 }}>
+                      {venta.manzana}
+                    </TableCell>
+
+                    <TableCell sx={{ whiteSpace: "nowrap" }}>
+                      {venta.lote}
+                    </TableCell>
+
+                    <TableCell>{venta.tipo}</TableCell>
+
+                    <TableCell sx={{ whiteSpace: "nowrap" }}>
+                      {formatoFecha(venta.fecha)}
+                    </TableCell>
+
+                    <TableCell sx={{ minWidth: 230 }}>
+                      {venta.comprador || "-"}
+                    </TableCell>
+
+                    <TableCell sx={{ whiteSpace: "nowrap", fontWeight: 700 }}>
+                      {formatoNumero(venta.valor)}
+                    </TableCell>
+
+                    <TableCell sx={{ whiteSpace: "nowrap" }}>
+                      {formatoNumero(venta.anticipo)}
+                    </TableCell>
+
+                    <TableCell>{venta.m2}</TableCell>
+
+                    <TableCell sx={{ whiteSpace: "nowrap" }}>
+                      {formatoNumero(venta.valor_pagado_m2)}
+                    </TableCell>
+
+                    <TableCell>{venta.uso_de_suelo}</TableCell>
+
+                    <TableCell sx={{ whiteSpace: "nowrap" }}>
+                      {venta.plan || "-"}
+                    </TableCell>
+
+                    <TableCell sx={{ whiteSpace: "nowrap" }}>
+                      {venta.valor_cuota
+                        ? formatoNumero(venta.valor_cuota)
+                        : "-"}
+                    </TableCell>
+
+                    <TableCell align="center">
+                      {venta.cuotas_pagadas || 0}
+                    </TableCell>
+
+                    <TableCell align="center">
+                      {venta.cuotas_pendientes || 0}
+                    </TableCell>
+
+                    <TableCell sx={{ whiteSpace: "nowrap", fontWeight: 700 }}>
+                      {formatoNumero(venta.monto_cobrado)}
+                    </TableCell>
+
+                    <TableCell
+                      sx={{
+                        whiteSpace: "nowrap",
+                        fontWeight: 800,
+                        color: Number(venta.saldo) > 0 ? "#d97706" : "#15803d",
+                      }}
+                    >
+                      {formatoNumero(venta.saldo)}
+                    </TableCell>
+
+                    <TableCell>
+                      <Chip
+                        label={venta.estado || "-"}
+                        size="small"
+                        sx={{
+                          fontWeight: 800,
+                          color: cancelado ? "#166534" : "#9a3412",
+                          backgroundColor: cancelado ? "#dcfce7" : "#ffedd5",
+                        }}
+                      />
+                    </TableCell>
+                  </TableRow>
+                );
+              })
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 }
