@@ -368,7 +368,7 @@ const toggleTodasLasZonas = () => {
                 })
                 .catch((error) => console.error(`Error cargando ${plan}:`, error));
         });
-
+     
         // Barrios / Calles
         fetch("/calles.geojson")
             .then((r) => r.json())
