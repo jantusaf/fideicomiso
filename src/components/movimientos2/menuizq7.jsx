@@ -94,7 +94,7 @@ useEffect(() => {
   }
   const menuItems = [
 /*     {
-      text: 'Carga de Movimientos',
+      text: 'Carga de Movimientos', 
       icon: <GroupIcon style={{ color: "#1a303e" }} />,
       path: '/mov2/carga'
     }, */
