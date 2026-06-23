@@ -30,6 +30,14 @@ const enviarmovimiento= async  (datos) => {
     alert(data)
    
 } 
+const enviarmovimiento2= async  (datos) => {
+   ///activo
+   console.log(datos)
+    const {data } = await axios.post(baseUrl+'enviarmovimiento2',datos,config)
+    alert(data)
+   
+}
+
 
 const agregariccgral= async  (datos) => {
    ///activo
@@ -151,6 +159,23 @@ const borrarhistorial= async  () => {
 }
 
 
+ const subirexceldemovimientos2 = async (archivo) => {
+
+  const { data } = await axios.post(
+    baseUrl + 'subirexceldemovimientos2',
+    archivo,
+    {
+      ...config,
+      headers: {
+        ...config.headers,
+        "Content-Type": "multipart/form-data"
+      }
+    }
+  );
+
+  return data;
+
+}
 
  const mofificarmconcepto = async (datos) => {
     
@@ -181,4 +206,4 @@ const borrarhistorial= async  () => {
      return data 
  }  
 
-export default {traerventas2, traeringresos, mofificarmconcepto, traermovimientos, subirexceldemovimientos, enviarmovimiento,enviardatosnuevosalario,traerdatosdetarjetas,traerhistorialvalor,agregariccgral2,agregariccgral,traerUsuarios,asignarclave,traerhistorial,borrarhistorial,nuevoicc,valormetrocuadrado,registronivel3};
+export default {subirexceldemovimientos2, enviarmovimiento2, traerventas2, traeringresos, mofificarmconcepto, traermovimientos, subirexceldemovimientos, enviarmovimiento,enviardatosnuevosalario,traerdatosdetarjetas,traerhistorialvalor,agregariccgral2,agregariccgral,traerUsuarios,asignarclave,traerhistorial,borrarhistorial,nuevoicc,valormetrocuadrado,registronivel3};

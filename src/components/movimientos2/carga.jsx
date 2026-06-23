@@ -53,7 +53,7 @@ export default function FormMovimiento() {
     };
 
     try {
-      await servicionivel3.enviarmovimiento(data);
+      await servicionivel3.enviarmovimiento2(data);
 
       alert("Movimiento registrado");
 
@@ -442,7 +442,7 @@ export default function FormMovimiento() {
 </Modal>
 
       {/* TABLA */}
-      {/* <Tabla /> */}
+  
     </>
   );
 }

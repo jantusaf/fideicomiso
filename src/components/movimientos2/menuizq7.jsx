@@ -93,11 +93,11 @@ useEffect(() => {
     window.location.reload(true);
   }
   const menuItems = [
-    {
+/*     {
       text: 'Carga de Movimientos',
       icon: <GroupIcon style={{ color: "#1a303e" }} />,
       path: '/mov2/carga'
-    },
+    }, */
     {
       text: 'Resumen1',
       icon: <GroupIcon style={{ color: "#1a303e" }} />,
