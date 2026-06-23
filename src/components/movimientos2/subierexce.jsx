@@ -103,7 +103,7 @@ export default function SubirExcelMovimientos() {
       const interval = setInterval(() => {
         setProgreso((p) => (p < 90 ? p + 10 : p));
       }, 200);
-
+console.log("Subiendo archivo:", archivo.name);
       const resp = await servicionivel3.subirexceldemovimientos2(formData);
 
       clearInterval(interval);
@@ -112,6 +112,7 @@ export default function SubirExcelMovimientos() {
       setResultado(resp);
       setArchivo(null);
     } catch (e) {
+      console.error(e);
       alert("Error");
     }
 
