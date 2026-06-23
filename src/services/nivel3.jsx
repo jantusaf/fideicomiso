@@ -199,11 +199,14 @@ const borrarhistorial= async  () => {
  }  
 
 
-    const traerventas2= async  () => {
-  
-     const {data } =await axios.get(baseUrl+'traerventas2',config)
  
-     return data 
- }  
+
+
+const traerventas2 = (filtros = {}) => {
+  return axios.get(baseUrl+"traerventas2", {
+    params: filtros,
+  });
+};
+
 
 export default {subirexceldemovimientos2, enviarmovimiento2, traerventas2, traeringresos, mofificarmconcepto, traermovimientos, subirexceldemovimientos, enviarmovimiento,enviardatosnuevosalario,traerdatosdetarjetas,traerhistorialvalor,agregariccgral2,agregariccgral,traerUsuarios,asignarclave,traerhistorial,borrarhistorial,nuevoicc,valormetrocuadrado,registronivel3};
