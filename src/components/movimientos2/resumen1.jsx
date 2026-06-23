@@ -15,6 +15,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  MenuItem,
 } from "@mui/material";
 
 const formatoNumero = (valor, moneda = "USD") => {
@@ -43,30 +44,57 @@ export default function TablaVentas() {
   const [ventas, setVentas] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [loading, setLoading] = useState(true);
+const [manzana, setManzana] = useState("");
+const [lote, setLote] = useState("");
+const [mes, setMes] = useState("");
 
-  const traerVentas = async () => {
-    try {
-      setLoading(true);
+const manzanasDisponibles = useMemo(() => {
+  return [...new Set(
+    ventas
+      .map((venta) => venta.manzana)
+      .filter(Boolean)
+  )].sort((a, b) =>
+    String(a).localeCompare(String(b), "es", { numeric: true })
+  );
+}, [ventas]);
 
-      const res = await servicionivel3.traerventas2();
+const lotesDisponibles = useMemo(() => {
+  return [...new Set(
+    ventas
+      .filter((venta) => !manzana || venta.manzana === manzana)
+      .map((venta) => venta.lote)
+      .filter(Boolean)
+  )].sort((a, b) =>
+    String(a).localeCompare(String(b), "es", { numeric: true })
+  );
+}, [ventas, manzana]);
+const traerVentas = async () => {
+  try {
+    setLoading(true);
 
-      /*
-        Según cómo tengas armado Axios, puede venir:
-        res.data
-        o directamente res
-      */
-      setVentas(res.data || res || []);
-    } catch (error) {
-      console.error("Error al traer ventas:", error);
-      alert("No se pudieron cargar las ventas");
-    } finally {
-      setLoading(false);
-    }
-  };
+    const res = await servicionivel3.traerventas2({
+      manzana,
+      lote,
+      mes,
+      busqueda,
+    });
 
-  useEffect(() => {
+    setVentas(res.data || res || []);
+  } catch (error) {
+    console.error("Error al traer ventas:", error);
+    alert("No se pudieron cargar las ventas");
+  } finally {
+    setLoading(false);
+  }
+};
+
+useEffect(() => {
+  const tiempoEspera = setTimeout(() => {
     traerVentas();
-  }, []);
+  }, 400);
+
+  return () => clearTimeout(tiempoEspera);
+}, [manzana, lote, mes, busqueda]);
 
   const ventasFiltradas = useMemo(() => {
     const texto = busqueda.toLowerCase().trim();
@@ -128,7 +156,77 @@ export default function TablaVentas() {
           }}
         />
       </Box>
+<Box
+  sx={{
+    display: "flex",
+    gap: 1.5,
+    flexWrap: "wrap",
+    width: { xs: "100%", md: "auto" },
+  }}
+>
+<TextField
+  select
+  size="small"
+  label="Manzana"
+  value={manzana}
+  onChange={(e) => {
+    setManzana(e.target.value);
+    setLote("");
+  }}
+  sx={{ width: { xs: "100%", sm: 180 } }}
+>
+  <MenuItem value="">Todas las manzanas</MenuItem>
 
+  {manzanasDisponibles.map((opcion) => (
+    <MenuItem key={opcion} value={opcion}>
+      {opcion}
+    </MenuItem>
+  ))}
+</TextField>
+
+<TextField
+  select
+  size="small"
+  label="Lote"
+  value={lote}
+  onChange={(e) => setLote(e.target.value)}
+  disabled={!manzana}
+  sx={{ width: { xs: "100%", sm: 160 } }}
+>
+  <MenuItem value="">
+    {manzana ? "Todos los lotes" : "Elegí una manzana"}
+  </MenuItem>
+
+  {lotesDisponibles.map((opcion) => (
+    <MenuItem key={opcion} value={opcion}>
+      {opcion}
+    </MenuItem>
+  ))}
+</TextField>
+
+  <TextField
+    size="small"
+    label="Mes de venta"
+    type="month"
+    value={mes}
+    onChange={(e) => setMes(e.target.value)}
+    InputLabelProps={{ shrink: true }}
+    sx={{ width: { xs: "100%", sm: 180 } }}
+  />
+
+  <TextField
+    size="small"
+    placeholder="Buscar comprador, estado..."
+    value={busqueda}
+    onChange={(e) => setBusqueda(e.target.value)}
+    sx={{ width: { xs: "100%", sm: 280 } }}
+    InputProps={{
+      startAdornment: (
+        <InputAdornment position="start">🔎</InputAdornment>
+      ),
+    }}
+  />
+</Box>
       <TableContainer
         component={Paper}
         sx={{
