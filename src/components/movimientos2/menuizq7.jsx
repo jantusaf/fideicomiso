@@ -99,9 +99,14 @@ useEffect(() => {
       path: '/mov2/carga'
     }, */
     {
-      text: 'Resumen1',
+      text: 'Remax',
       icon: <GroupIcon style={{ color: "#1a303e" }} />,
-      path: '/mov2/resumen1'
+      path: '/mov2/remax'
+    },
+    {
+      text: 'Fideicomiso',
+      icon: <GroupIcon style={{ color: "#1a303e" }} />,
+      path: '/mov2/fideicomiso'
     },
   
    /*  {

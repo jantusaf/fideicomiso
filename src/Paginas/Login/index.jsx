@@ -89,7 +89,7 @@ const Login = () => {
   const redirigir = (nivel) => {
     const rutas = {
       1: '/usuario/menu', 2: '/usuario2/clientes', 3: '/nivel3',
-      4: '/legales/clientes', 5: '/usuariomapas/inicio', 6: '/nivel6/carga',7:'/mov2/resumen1',
+      4: '/legales/clientes', 5: '/usuariomapas/inicio', 6: '/nivel6/carga', 7: '/mov2/remax',
       10: '/admin/usuarios',
     };
     if (rutas[nivel]) { navigate(rutas[nivel]); window.location.reload(); }
