@@ -53,6 +53,7 @@ export default function FormMovimiento() {
     };
 
     try {
+      console.log(data);
       await servicionivel3.enviarmovimiento2(data);
 
       alert("Movimiento registrado");
