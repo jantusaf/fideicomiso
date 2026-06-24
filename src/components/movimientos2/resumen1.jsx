@@ -307,7 +307,7 @@ useEffect(() => {
                   >
                     <TableCell sx={{ whiteSpace: "nowrap", fontWeight: 700 }}>
                       {venta.manzana}
-                    </TableCell>
+                    </TableCell>  
 
                     <TableCell sx={{ whiteSpace: "nowrap" }}>
                       {venta.lote}
