@@ -60,7 +60,7 @@ import Navbar from "../components/Navbar";
 
 import Mapassegundaparte from '../Paginas/mapas'
 
-
+import Mapasusuario from '../Paginas/usuariomapas/inicio'
 
 import NOtFound from '../Paginas/not found'
 
@@ -245,6 +245,7 @@ const Rutas = [
 { path: '/mov2/carga', element: <Cargamov2 /> },
 { path: '/mov2/fideicomiso', element: <Fideicomisomov2 /> },
 
+	{ path: '/usuariomapas/inicio', element: <Mapasusuario /> },
 	{ path: '*', element: <NOtFound /> },
 
 ];
