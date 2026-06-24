@@ -77,6 +77,7 @@ const traerVentas = async () => {
       lote,
       mes,
       busqueda,
+      vendedor:"Remax"
     });
 
     setVentas(res.data || res || []);
