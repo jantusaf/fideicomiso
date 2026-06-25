@@ -22,12 +22,12 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import servicioLegajo from "../../../services/legajos";
 
 export default function FormDialog(props) {
-  let params = useParams();
-  let cuil_cuit = params.cuil_cuit;
+  const params = useParams();
+  const cuil_cuit = params.cuil_cuit;
 
   const [open, setOpen] = useState(false);
   const [fileUpload, setFileUpload] = useState(null);
-  const [enviarr, setEnviarr] = useState();
+  const [enviarr, setEnviarr] = useState(null);
   const [cargando, setCargando] = useState(false);
   const [loadingPdf, setLoadingPdf] = useState(false);
 
@@ -37,11 +37,84 @@ export default function FormDialog(props) {
     descripcion: ""
   });
 
+  /*
+    IMPORTANTE:
+    Cada objeto tiene:
+    - value: valor que se guarda en la base de datos.
+    - label: texto que ve el usuario.
+  */
+  const documentosPersona = [
+    { value: "Dni", label: "1.a - DNI Frente" },
+    { value: "Dni dorso", label: "1.b - DNI Dorso" },
+    { value: "Constancia CUIL/CUIT", label: "2 - Constancia CUIL/CUIT" },
+    { value: "Acreditacion Domicilio", label: "3 - Acreditación de domicilio" },
+    { value: "Acreditacion de ingresos", label: "4.1 - Certificación de ingresos" },
+    { value: "Recibo de sueldo", label: "4.a - Recibo de sueldo" },
+    { value: "Pago Monotributo", label: "4.b - Pago de Monotributo" },
+    { value: "Constancia de Afip", label: "4.c - Constancia de AFIP" },
+    { value: "Pago autonomo", label: "4.c - Pago de autónomo" },
+    { value: "DDJJ IIBB", label: "4.d - DDJJ IIBB" },
+    { value: "Dj CalidadPerso", label: "DJ Calidad de Persona" },
+    { value: "Dj Datospers", label: "5 - DJ Datos personales" },
+    { value: "Dj OrigenFondos", label: "7 - DJ Origen de fondos" },
+    { value: "Cbu personal", label: "8 - CBU personal" },
+    { value: "Cbu familiar", label: "8 - CBU familiar" },
+    { value: "Constancia RePET", label: "9.1 - Constancia RePET" },
+    { value: "Anticipo", label: "Anticipo" },
+    { value: "Boleto comparaventa", label: "Boleto compraventa" }
+  ];
+
+  const documentosEmpresa = [
+    { value: "Dni", label: "1.a - DNI Frente" },
+    { value: "Dni dorso", label: "1.b - DNI Dorso" },
+    { value: "Constancia de Afip", label: "2 - Constancia de AFIP" },
+    { value: "Acreditacion Domicilio", label: "3 - Acreditación de domicilio" },
+    {
+      value: "Ultimos balances CPCE",
+      label: "4.1 - Últimos balances certificados en CPCE"
+    },
+    { value: "DjIva", label: "4.2 - DJ IVA" },
+    { value: "Pagos Previsionales", label: "4.3 - Pagos previsionales" },
+    {
+      value: "Referencias comerciales",
+      label: "4.4 - Referencias comerciales"
+    },
+    { value: "DDJJ IIBB", label: "4.5 - DDJJ IIBB" },
+    { value: "Dj Datospers", label: "5 - DJ Datos personales" },
+    { value: "Dj OrigenFondos", label: "7 - DJ Origen de fondos" },
+    { value: "Cbu personal", label: "8 - CBU personal" },
+    { value: "Cbu familiar", label: "8 - CBU familiar" },
+    { value: "Estatuto Social", label: "9 - Estatuto social" },
+    {
+      value: "Acta del organo decisorio",
+      label: "10 - Acta de órgano decisorio asignado"
+    },
+    { value: "Constancia RePET", label: "11 - Constancia RePET" },
+    { value: "Poder General", label: "Poder general" },
+    { value: "Acta de Entrega", label: "Acta de entrega" },
+    { value: "Anticipo", label: "Anticipo" },
+    { value: "Boleto comparaventa", label: "Boleto compraventa" }
+  ];
+
+  // Si razon es "Persona", muestra categorías de persona física.
+  // Cualquier otro valor muestra categorías de empresa.
+  const documentosAMostrar =
+    props.razon === "Persona" ? documentosPersona : documentosEmpresa;
+
+  const tiposExistentes = props.tiposExistentes || [];
+
+  const esTipoExistente = (tipo) => {
+    return tiposExistentes.includes(tipo);
+  };
+
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles.length > 0) {
+      const archivo = acceptedFiles[0];
       const formData = new FormData();
-      setFileUpload(acceptedFiles[0]);
-      formData.append("file", acceptedFiles[0]);
+
+      formData.append("file", archivo);
+
+      setFileUpload(archivo);
       setEnviarr(formData);
     }
   }, []);
@@ -51,42 +124,73 @@ export default function FormDialog(props) {
     multiple: false
   });
 
+  const handleChange = (e) => {
+    setLegform({
+      ...legform,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const cerrarModal = () => {
+    setOpen(false);
+    setFileUpload(null);
+    setEnviarr(null);
+
+    setLegform({
+      cuil_cuit: cuil_cuit,
+      tipo: "",
+      descripcion: ""
+    });
+  };
+
+  const abrirModal = () => {
+    setOpen(true);
+  };
+
   const enviar = async () => {
+    if (!legform.tipo) {
+      alert("Seleccioná un tipo de documento");
+      return;
+    }
+
+    if (!enviarr) {
+      alert("Subí un archivo primero");
+      return;
+    }
+
     setLoadingPdf(true);
     setCargando(true);
 
-    if (enviarr) {
+    try {
+      // append se hace sólo una vez, justo antes de enviar.
       enviarr.append("cuil_cuit", legform.cuil_cuit);
       enviarr.append("tipo", legform.tipo);
       enviarr.append("descripcion", legform.descripcion);
 
-      try {
-        const data = await servicioLegajo.subirlegajode(enviarr);
-        alert(data);
+      const data = await servicioLegajo.subirlegajode(enviarr);
+
+      alert(data);
+
+      if (props.getData) {
         props.getData();
-        props.getData2();
-      } catch (error) {
-        console.error(error);
       }
-    } else {
-      alert("Subí un archivo primero");
+
+      if (props.getData2) {
+        props.getData2();
+      }
+
+      cerrarModal();
+    } catch (error) {
+      console.error("Error al subir legajo:", error);
+      alert("Ocurrió un error al subir el archivo");
+    } finally {
+      setCargando(false);
+      setLoadingPdf(false);
     }
-
-    setCargando(false);
-    setLoadingPdf(false);
-    setOpen(false);
   };
-
-  const handleChange = (e) => {
-    setLegform({ ...legform, [e.target.name]: e.target.value });
-  };
-
-  const tiposExistentes = props.tiposExistentes || [];
-  const esTipoExistente = (tipo) => tiposExistentes.includes(tipo);
 
   return (
     <>
-      {/* LOADER */}
       <Backdrop open={loadingPdf} sx={{ color: "#fff", zIndex: 1301 }}>
         <Box textAlign="center">
           <CircularProgress color="inherit" />
@@ -94,10 +198,9 @@ export default function FormDialog(props) {
         </Box>
       </Backdrop>
 
-      {/* BOTON */}
       <Button
         variant="contained"
-        onClick={() => setOpen(true)}
+        onClick={abrirModal}
         sx={{
           borderRadius: "20px",
           background: "#1f7a8c",
@@ -108,376 +211,38 @@ export default function FormDialog(props) {
         + Agregar Legajo
       </Button>
 
-      {/* MODAL */}
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm" fullWidth>
+      <Dialog open={open} onClose={cerrarModal} maxWidth="sm" fullWidth>
         <DialogTitle sx={{ fontWeight: "bold" }}>
           📄 Nuevo Legajo
         </DialogTitle>
 
         <DialogContent>
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <InputLabel>Tipo de documento</InputLabel>
 
-          {/* SELECT */}
-     <FormControl fullWidth sx={{ mt: 2 }}>
-  <InputLabel>Tipo de documento</InputLabel>
+            <Select
+              name="tipo"
+              value={legform.tipo}
+              onChange={handleChange}
+              label="Tipo de documento"
+              sx={{ borderRadius: "12px" }}
+            >
+              <MenuItem value="">Elegir</MenuItem>
 
-  <Select
-    name="tipo"
-    value={legform.tipo}
-    onChange={handleChange}
-    label="Tipo de documento"
-    sx={{ borderRadius: "12px" }}
-  >
-    <MenuItem value="">Elegir</MenuItem>
+              {documentosAMostrar.map((documento) => (
+                <MenuItem
+                  key={documento.value}
+                  value={documento.value}
+                  sx={{
+                    color: esTipoExistente(documento.value) ? "blue" : "red"
+                  }}
+                >
+                  {documento.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
-    {/* 
-      Tipos que ya existen en la base.
-      Sirve para no perder documentos viejos o tipos agregados manualmente.
-    */}
-
-    {/* ================= PERSONA FÍSICA ================= */}
-    {props.razon === "Persona" ? (
-      <>
-        <MenuItem
-          value="Dni"
-          sx={{ color: esTipoExistente("Dni") ? "blue" : "red" }}
-        >
-          1.a - DNI Frente
-        </MenuItem>
-
-        <MenuItem
-          value="Dni dorso"
-          sx={{ color: esTipoExistente("Dni dorso") ? "blue" : "red" }}
-        >
-          1.b - DNI Dorso
-        </MenuItem>
-
-        <MenuItem
-          value="Constancia CUIL/CUIT"
-          sx={{
-            color: esTipoExistente("Constancia CUIL/CUIT")
-              ? "blue"
-              : "red"
-          }}
-        >
-          2 - Constancia CUIL/CUIT
-        </MenuItem>
-
-        <MenuItem
-          value="Acreditacion Domicilio"
-          sx={{
-            color: esTipoExistente("Acreditacion Domicilio")
-              ? "blue"
-              : "red"
-          }}
-        >
-          3 - Acreditación de domicilio
-        </MenuItem>
-
-        <MenuItem
-          value="Acreditacion de ingresos"
-          sx={{
-            color: esTipoExistente("Acreditacion de ingresos")
-              ? "blue"
-              : "red"
-          }}
-        >
-          4.1 - Certificación de ingresos
-        </MenuItem>
-
-        <MenuItem
-          value="Recibo de sueldo"
-          sx={{
-            color: esTipoExistente("Recibo de sueldo") ? "blue" : "red"
-          }}
-        >
-          4.a - Recibo de sueldo
-        </MenuItem>
-
-        <MenuItem
-          value="Pago Monotributo"
-          sx={{
-            color: esTipoExistente("Pago Monotributo") ? "blue" : "red"
-          }}
-        >
-          4.b - Pago de Monotributo
-        </MenuItem>
-
-        <MenuItem
-          value="Constancia de Afip"
-          sx={{
-            color: esTipoExistente("Constancia de Afip") ? "blue" : "red"
-          }}
-        >
-          4.c - Constancia de AFIP
-        </MenuItem>
-
-        <MenuItem
-          value="Pago autonomo"
-          sx={{
-            color: esTipoExistente("Pago autonomo") ? "blue" : "red"
-          }}
-        >
-          4.c - Pago de autónomo
-        </MenuItem>
-
-        <MenuItem
-          value="DDJJ IIBB"
-          sx={{ color: esTipoExistente("DDJJ IIBB") ? "blue" : "red" }}
-        >
-          4.d - DDJJ IIBB
-        </MenuItem>
-
-        <MenuItem
-          value="Dj CalidadPerso"
-          sx={{
-            color: esTipoExistente("Dj CalidadPerso") ? "blue" : "red"
-          }}
-        >
-          DJ Calidad de Persona
-        </MenuItem>
-
-        <MenuItem
-          value="Dj Datospers"
-          sx={{ color: esTipoExistente("Dj Datospers") ? "blue" : "red" }}
-        >
-          5 - DJ Datos personales
-        </MenuItem>
-
-        <MenuItem
-          value="Dj OrigenFondos"
-          sx={{
-            color: esTipoExistente("Dj OrigenFondos") ? "blue" : "red"
-          }}
-        >
-          7 - DJ Origen de fondos
-        </MenuItem>
-
-        <MenuItem
-          value="Cbu personal"
-          sx={{
-            color: esTipoExistente("Cbu personal") ? "blue" : "red"
-          }}
-        >
-          8 - CBU personal
-        </MenuItem>
-
-        <MenuItem
-          value="Cbu familiar"
-          sx={{
-            color: esTipoExistente("Cbu familiar") ? "blue" : "red"
-          }}
-        >
-          8 - CBU familiar
-        </MenuItem>
-
-        <MenuItem
-          value="Constancia RePET"
-          sx={{
-            color: esTipoExistente("Constancia RePET") ? "blue" : "red"
-          }}
-        >
-          9.1 - Constancia RePET
-        </MenuItem>
-
-        <MenuItem
-          value="Anticipo"
-          sx={{ color: esTipoExistente("Anticipo") ? "blue" : "red" }}
-        >
-          Anticipo
-        </MenuItem>
-
-        <MenuItem
-          value="Boleto comparaventa"
-          sx={{
-            color: esTipoExistente("Boleto comparaventa") ? "blue" : "red"
-          }}
-        >
-          Boleto compraventa
-        </MenuItem>
-      </>
-    ) : (
-      <>
-        {/* ================= EMPRESA / PERSONA JURÍDICA ================= */}
-
-        <MenuItem
-          value="Dni"
-          sx={{ color: esTipoExistente("Dni") ? "blue" : "red" }}
-        >
-          1.a - DNI Frente
-        </MenuItem>
-
-        <MenuItem
-          value="Dni dorso"
-          sx={{ color: esTipoExistente("Dni dorso") ? "blue" : "red" }}
-        >
-          1.b - DNI Dorso
-        </MenuItem>
-
-        <MenuItem
-          value="Constancia de Afip"
-          sx={{
-            color: esTipoExistente("Constancia de Afip") ? "blue" : "red"
-          }}
-        >
-          2 - Constancia de AFIP
-        </MenuItem>
-
-        <MenuItem
-          value="Acreditacion Domicilio"
-          sx={{
-            color: esTipoExistente("Acreditacion Domicilio")
-              ? "blue"
-              : "red"
-          }}
-        >
-          3 - Acreditación de domicilio
-        </MenuItem>
-
-        <MenuItem
-          value="Ultimos balances CPCE"
-          sx={{
-            color: esTipoExistente("Ultimos balances CPCE") ? "blue" : "red"
-          }}
-        >
-          4.1 - Últimos balances certificados en CPCE
-        </MenuItem>
-
-        <MenuItem
-          value="DjIva"
-          sx={{ color: esTipoExistente("DjIva") ? "blue" : "red" }}
-        >
-          4.2 - DJ IVA
-        </MenuItem>
-
-        <MenuItem
-          value="Pagos Previsionales"
-          sx={{
-            color: esTipoExistente("Pagos Previsionales") ? "blue" : "red"
-          }}
-        >
-          4.3 - Pagos previsionales
-        </MenuItem>
-
-        <MenuItem
-          value="Referencias comerciales"
-          sx={{
-            color: esTipoExistente("Referencias comerciales")
-              ? "blue"
-              : "red"
-          }}
-        >
-          4.4 - Referencias comerciales
-        </MenuItem>
-
-        <MenuItem
-          value="DDJJ IIBB"
-          sx={{ color: esTipoExistente("DDJJ IIBB") ? "blue" : "red" }}
-        >
-          4.5 - DDJJ IIBB
-        </MenuItem>
-
-        <MenuItem
-          value="Dj Datospers"
-          sx={{ color: esTipoExistente("Dj Datospers") ? "blue" : "red" }}
-        >
-          5 - DJ Datos personales
-        </MenuItem>
-
-        <MenuItem
-          value="Dj OrigenFondos"
-          sx={{
-            color: esTipoExistente("Dj OrigenFondos") ? "blue" : "red"
-          }}
-        >
-          7 - DJ Origen de fondos
-        </MenuItem>
-
-        <MenuItem
-          value="Cbu personal"
-          sx={{
-            color: esTipoExistente("Cbu personal") ? "blue" : "red"
-          }}
-        >
-          8 - CBU personal
-        </MenuItem>
-
-        <MenuItem
-          value="Cbu familiar"
-          sx={{
-            color: esTipoExistente("Cbu familiar") ? "blue" : "red"
-          }}
-        >
-          8 - CBU familiar
-        </MenuItem>
-
-        <MenuItem
-          value="Estatuto Social"
-          sx={{
-            color: esTipoExistente("Estatuto Social") ? "blue" : "red"
-          }}
-        >
-          9 - Estatuto social
-        </MenuItem>
-
-        <MenuItem
-          value="Acta del organo decisorio"
-          sx={{
-            color: esTipoExistente("Acta del organo decisorio")
-              ? "blue"
-              : "red"
-          }}
-        >
-          10 - Acta de órgano decisorio asignado
-        </MenuItem>
-
-        <MenuItem
-          value="Constancia RePET"
-          sx={{
-            color: esTipoExistente("Constancia RePET") ? "blue" : "red"
-          }}
-        >
-          11 - Constancia RePET
-        </MenuItem>
-
-        <MenuItem
-          value="Poder General"
-          sx={{
-            color: esTipoExistente("Poder General") ? "blue" : "red"
-          }}
-        >
-          Poder general
-        </MenuItem>
-
-        <MenuItem
-          value="Acta de Entrega"
-          sx={{
-            color: esTipoExistente("Acta de Entrega") ? "blue" : "red"
-          }}
-        >
-          Acta de entrega
-        </MenuItem>
-
-        <MenuItem
-          value="Anticipo"
-          sx={{ color: esTipoExistente("Anticipo") ? "blue" : "red" }}
-        >
-          Anticipo
-        </MenuItem>
-
-        <MenuItem
-          value="Boleto comparaventa"
-          sx={{
-            color: esTipoExistente("Boleto comparaventa") ? "blue" : "red"
-          }}
-        >
-          Boleto compraventa
-        </MenuItem>
-      </>
-    )}
-  </Select>
-</FormControl>
-
-          {/* DROPZONE */}
           {legform.tipo && (
             <Paper
               {...getRootProps()}
@@ -507,18 +272,18 @@ export default function FormDialog(props) {
 
               {fileUpload && (
                 <p style={{ color: "green", fontWeight: "bold" }}>
-                  {fileUpload.name}
+                  Archivo seleccionado: {fileUpload.name}
                 </p>
               )}
             </Paper>
           )}
 
-          {/* DESCRIPCION */}
           {fileUpload && (
             <TextField
               margin="dense"
               label="Descripción"
               name="descripcion"
+              value={legform.descripcion}
               onChange={handleChange}
               fullWidth
               sx={{ mt: 3 }}
@@ -526,9 +291,8 @@ export default function FormDialog(props) {
           )}
         </DialogContent>
 
-        {/* ACCIONES */}
         <DialogActions sx={{ p: 2 }}>
-          <Button onClick={() => setOpen(false)}>
+          <Button onClick={cerrarModal} disabled={cargando}>
             Cancelar
           </Button>
 
