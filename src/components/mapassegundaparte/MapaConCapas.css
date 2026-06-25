@@ -479,13 +479,19 @@ input[type="checkbox"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transform: translate(-50%, -50%); /* ✅ centra exacto en el punto */
-  border-radius: 20px;
-  font-weight: 800;
-  white-space: nowrap;
- 
+  text-align: center;
+  transform: translate(-50%, -50%);
+  border-radius: 6px;
+  font-weight: 700;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  max-width: 90px;
+  line-height: 1.2;
   color: #111;
-  pointer-events: none; /* ✅ no molesta el click del polígono */
+  pointer-events: none;
+  background: transparent;
+  box-shadow: none;
 }
 
 
@@ -682,6 +688,22 @@ z-index:1000;
 .sc-labelIcon{
 background:transparent;
 border:none;
+}
+
+.sc-tooltipHover {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #111;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  pointer-events: none;
+  white-space: normal;
+  word-break: keep-all;
+  max-width: 140px;
+  text-align: center;
 }
 
 
