@@ -133,7 +133,7 @@ const clavesZonas = [
   "invicoresidencial", "invico2", "zona_municipal", "area1", "area2", "area3", "area4",
   "mensura31548Unuevo", "Mensura30922U", "zonapirayui",
 ];
-const todasLasZonasActivas = clavesZonas.every((key) => !!capasActivas[key]);
+const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras"].every((key) => !!capasActivas[key]);
 const zonasActivasCount = clavesZonas.filter((k) => !!capasActivas[k]).length;
 const planEspecialCount = Object.values(subCapasActivas).filter(Boolean).length;
 const otrosCount = ["Barrios", "Manzanas", "Zonificación Sta Catalina", "ZRU Predios La Caja", "Planificación Sección Sur", "rutas1"].filter((k) => !!capasActivas[k]).length;
@@ -297,9 +297,12 @@ const toggleTodasLasZonas = () => {
     const [mapa, setMapa] = useState(null);
     const [subclasificacion, setSubclasificacion] = useState("");
     const [descripcion, setDescripcion] = useState("");
-    const [verReferencias, setVerReferencias] = useState(true);
+    const [verReferencias, setVerReferencias] = useState(false);
     const [verReferenciasTabla, setVerReferenciasTabla] = useState(false);
-    const [verReferenciasTabla2, setVerReferenciasTabla2] = useState(true);
+    const [verReferenciasTabla2, setVerReferenciasTabla2] = useState(false);
+    const [mostrarEtiquetas, setMostrarEtiquetas] = useState(false);
+    const mostrarEtiquetasRef = React.useRef(false);
+    useEffect(() => { mostrarEtiquetasRef.current = mostrarEtiquetas; }, [mostrarEtiquetas]);
     const [datosZonaSeleccionada, setDatosZonaSeleccionada] = useState(null);
     const [judicializado, setJudicializado] = useState("");
     const [adrema, setAdrema] = useState("");
@@ -657,6 +660,7 @@ const toggleTodasLasZonas = () => {
         layer.on({ click: handleFeatureClick });
         if (nombreCapa === "Barrios" || nombreCapa === "rutas1") return;
         layer.bindTooltip(() => {
+            if (mostrarEtiquetasRef.current) return "";
             const id =
                 feature?.properties?.id ??
                 feature?.properties?.ID ??
@@ -666,7 +670,7 @@ const toggleTodasLasZonas = () => {
             if (id == null) return "";
             const poligono = buscarPoligonoDB(poligonosRef.current, id, nombreCapa);
             return poligono?.dato1 || "";
-        }, { permanent: false, direction: "top", className: "sc-labelBubble", sticky: true });
+        }, { permanent: false, direction: "top", className: "sc-tooltipHover", sticky: true });
     };
     const MapResizer = () => {
         const map = useMap();
@@ -696,14 +700,14 @@ const toggleTodasLasZonas = () => {
         setCapasActivas((prev) => {
             const updates = { ...prev, [nombre]: nuevoEstado };
 
-            if (nombre === "fraccionIC" && nuevoEstado) {
-                updates.ic3 = true;
-                updates.ic4 = true;
-                updates.ic42 = true;
-                updates["unidad-ejecutora1"] = true;
-                updates["unidad-ejecutora2"] = true;
-                updates["unidad-ejecutora3"] = true;
-                updates["unidad-ejecutora2y3"] = true;
+            if (nombre === "fraccionIC") {
+                updates.ic3 = nuevoEstado;
+                updates.ic4 = nuevoEstado;
+                updates.ic42 = nuevoEstado;
+                updates["unidad-ejecutora1"] = nuevoEstado;
+                updates["unidad-ejecutora2"] = nuevoEstado;
+                updates["unidad-ejecutora3"] = nuevoEstado;
+                updates["unidad-ejecutora2y3"] = nuevoEstado;
             }
             if (nombre === "ic4") {
                 updates.ic42 = nuevoEstado;
@@ -722,23 +726,23 @@ const toggleTodasLasZonas = () => {
                 const ue3 = nombre === "unidad-ejecutora3" ? nuevoEstado : !!prev["unidad-ejecutora3"];
                 updates["unidad-ejecutora2y3"] = ue2 && ue3;
             }
-            if (nombre === "IB" && nuevoEstado) {
-                updates.ib2 = true;
-                updates.ib3 = true;
-                updates.area5 = true;
-                updates.ib5 = true;
-                updates.area6 = true;
+            if (nombre === "IB") {
+                updates.ib2 = nuevoEstado;
+                updates.ib3 = nuevoEstado;
+                updates.area5 = nuevoEstado;
+                updates.ib5 = nuevoEstado;
+                updates.area6 = nuevoEstado;
             }
-            if (nombre === "otras" && nuevoEstado) {
-                updates.invicoresidencial = true;
-                updates.zona_municipal = true;
-                updates.area1 = true;
-                updates.area2 = true;
-                updates.area3 = true;
-                updates.area4 = true;
-                updates.mensura31548Unuevo = true;
-                updates.Mensura30922U = true;
-                updates.zonapirayui = true;
+            if (nombre === "otras") {
+                updates.invicoresidencial = nuevoEstado;
+                updates.zona_municipal = nuevoEstado;
+                updates.area1 = nuevoEstado;
+                updates.area2 = nuevoEstado;
+                updates.area3 = nuevoEstado;
+                updates.area4 = nuevoEstado;
+                updates.mensura31548Unuevo = nuevoEstado;
+                updates.Mensura30922U = nuevoEstado;
+                updates.zonapirayui = nuevoEstado;
             }
 
             return updates;
@@ -797,10 +801,10 @@ const toggleTodasLasZonas = () => {
         if (!mostrarEtiquetas) return null;
         const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
-        const fontSize = clamp(10 + (zoomActual - 16) * 2.2, 10, 20);
-        const paddingY = clamp(6 + (zoomActual - 16) * 1.2, 6, 14);
-        const paddingX = clamp(6 + (zoomActual - 16) * 0.8, 6, 16);
-        const minWidth = clamp(18 + (zoomActual - 16) * 6, 18, 60);
+        const fontSize = clamp(7 + (zoomActual - 16) * 1.5, 7, 14);
+        const paddingY = clamp(2 + (zoomActual - 16) * 0.8, 2, 8);
+        const paddingX = clamp(3 + (zoomActual - 16) * 0.6, 3, 10);
+        const maxWidth = clamp(60 + (zoomActual - 16) * 15, 60, 120);
 
         return (
             <>
@@ -837,7 +841,7 @@ const toggleTodasLasZonas = () => {
     <div class="sc-labelBubble" style="
       font-size:${fontSize}px;
       padding:${paddingY}px ${paddingX}px;
-      min-width:${minWidth}px;
+      max-width:${maxWidth}px;
     ">
       ${poligonoDB.dato1}
     </div>
@@ -882,11 +886,12 @@ const toggleTodasLasZonas = () => {
         fillColor = coloresPorSubclasificacion[sub] || "gray";
         fillOpacity = 0.8;
 
+        const isGray = fillColor === "gray";
         return {
             fillColor,
-            weight: 1,
-            opacity: 0.5,
-            color: "black",
+            weight: isGray ? 0 : 1,
+            opacity: isGray ? 0 : 0.5,
+            color: isGray ? "transparent" : "black",
             fillOpacity,
         };
     };
@@ -903,9 +908,9 @@ const toggleTodasLasZonas = () => {
             return {
                 fillColor: "grey",
                 fillOpacity: 0.15,
-                color: "black",
-                weight: pesoBorde,
-                opacity: 1,
+                color: "transparent",
+                weight: 0,
+                opacity: 0,
             };
         }
 
@@ -929,9 +934,9 @@ const toggleTodasLasZonas = () => {
         return {
             fillColor: "grey",
             fillOpacity: 0.15,
-            color: "black",
-            weight: pesoBorde,
-            opacity: 1,
+            color: "transparent",
+            weight: 0,
+            opacity: 0,
         };
     };
 useEffect(() => {
@@ -996,6 +1001,16 @@ useEffect(() => {
                                 }}
                             />
                             <strong>Ver tabla de referencias</strong>
+                        </label>
+                    </div>
+                    <div className="capa-item">
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={mostrarEtiquetas}
+                                onChange={() => setMostrarEtiquetas(p => !p)}
+                            />
+                            <strong>Mostrar leyenda</strong>
                         </label>
                     </div>
 
@@ -1464,12 +1479,13 @@ useEffect(() => {
                                             };
                                         }
 
+                                        const isGray = color === "gray";
                                         return {
                                             fillColor: color,
                                             fillOpacity: 0.65,
-                                            color: "black",
-                                            weight: 1,
-                                            opacity: 0.5,
+                                            color: isGray ? "transparent" : "black",
+                                            weight: isGray ? 0 : 1,
+                                            opacity: isGray ? 0 : 0.5,
                                         };
                                     }}
                                     onEachFeature={crearOnEachFeature(nombre)}
@@ -1507,8 +1523,6 @@ useEffect(() => {
 
                                 let fillColor = "gray";
                                 let fillOpacity = 0.8;
-                                let borderColor = "black";
-                                let borderOpacity = 1;
 
                                 if (poligono) {
                                     const sub = poligono.subclasificacion;
@@ -1516,11 +1530,12 @@ useEffect(() => {
                                     fillOpacity = 0.95;
                                 }
 
+                                const isGray = fillColor === "gray";
                                 return {
                                     fillColor,
-                                    color: borderColor,
-                                    weight: 1,
-                                    opacity: borderOpacity,
+                                    color: isGray ? "transparent" : "black",
+                                    weight: isGray ? 0 : 1,
+                                    opacity: isGray ? 0 : 1,
                                     fillOpacity,
                                 };
                             }}
@@ -1596,11 +1611,12 @@ useEffect(() => {
                                             fillOpacity = 0.8;
                                         }
 
+                                        const isGray2 = fillColor === "gray";
                                         return {
                                             fillColor,
-                                            weight: 1,
-                                            opacity: 0.5,
-                                            color: "black",
+                                            weight: isGray2 ? 0 : 1,
+                                            opacity: isGray2 ? 0 : 0.5,
+                                            color: isGray2 ? "transparent" : "black",
                                             fillOpacity,
                                         };
                                     }}
@@ -1788,6 +1804,17 @@ useEffect(() => {
             }}
         />
 )}
+                {zoomActual >= 16 && (
+                    <EtiquetasPoligonos
+                        geojsonData={geojsonData}
+                        poligonosGuardados={poligonosGuardados}
+                        capasActivas={capasActivas}
+                        subCapasActivas={subCapasActivas}
+                        subCapasSur={subCapasSur}
+                        mostrarEtiquetas={mostrarEtiquetas}
+                        zoomActual={zoomActual}
+                    />
+                )}
                 </MapContainer>
             </div>
 
