@@ -77,6 +77,7 @@ const traerVentas = async () => {
       lote,
       mes,
       busqueda,
+      vendedor:"Remax"
     });
 
     setVentas(res.data || res || []);
@@ -306,7 +307,7 @@ useEffect(() => {
                   >
                     <TableCell sx={{ whiteSpace: "nowrap", fontWeight: 700 }}>
                       {venta.manzana}
-                    </TableCell>
+                    </TableCell>  
 
                     <TableCell sx={{ whiteSpace: "nowrap" }}>
                       {venta.lote}
