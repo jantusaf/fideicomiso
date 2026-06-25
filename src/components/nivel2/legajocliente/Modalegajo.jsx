@@ -117,30 +117,365 @@ export default function FormDialog(props) {
         <DialogContent>
 
           {/* SELECT */}
-          <FormControl fullWidth sx={{ mt: 2 }}>
-            <InputLabel>Tipo de documento</InputLabel>
-            <Select
-              name="tipo"
-              value={legform.tipo}
-              onChange={handleChange}
-              label="Tipo de documento"
-              sx={{ borderRadius: "12px" }}
-            >
-              <MenuItem value="">Elegir</MenuItem>
+     <FormControl fullWidth sx={{ mt: 2 }}>
+  <InputLabel>Tipo de documento</InputLabel>
 
-              {props.tiposExistentes?.map((t, i) => (
-                <MenuItem key={i} value={t} sx={{ color: "#1976d2" }}>
-                  {t}
-                </MenuItem>
-              ))}
+  <Select
+    name="tipo"
+    value={legform.tipo}
+    onChange={handleChange}
+    label="Tipo de documento"
+    sx={{ borderRadius: "12px" }}
+  >
+    <MenuItem value="">Elegir</MenuItem>
 
-              {/* nuevos tipos */}
-              <MenuItem value="Dni" sx={{ color: esTipoExistente("Dni") ? "blue" : "red" }}>DNI</MenuItem>
-              <MenuItem value="Dni dorso" sx={{ color: esTipoExistente("Dni dorso") ? "blue" : "red" }}>DNI Dorso</MenuItem>
-              <MenuItem value="Constancia de Afip">Constancia AFIP</MenuItem>
+    {/* 
+      Tipos que ya existen en la base.
+      Sirve para no perder documentos viejos o tipos agregados manualmente.
+    */}
 
-            </Select>
-          </FormControl>
+    {/* ================= PERSONA FÍSICA ================= */}
+    {props.razon === "Persona" ? (
+      <>
+        <MenuItem
+          value="Dni"
+          sx={{ color: esTipoExistente("Dni") ? "blue" : "red" }}
+        >
+          1.a - DNI Frente
+        </MenuItem>
+
+        <MenuItem
+          value="Dni dorso"
+          sx={{ color: esTipoExistente("Dni dorso") ? "blue" : "red" }}
+        >
+          1.b - DNI Dorso
+        </MenuItem>
+
+        <MenuItem
+          value="Constancia CUIL/CUIT"
+          sx={{
+            color: esTipoExistente("Constancia CUIL/CUIT")
+              ? "blue"
+              : "red"
+          }}
+        >
+          2 - Constancia CUIL/CUIT
+        </MenuItem>
+
+        <MenuItem
+          value="Acreditacion Domicilio"
+          sx={{
+            color: esTipoExistente("Acreditacion Domicilio")
+              ? "blue"
+              : "red"
+          }}
+        >
+          3 - Acreditación de domicilio
+        </MenuItem>
+
+        <MenuItem
+          value="Acreditacion de ingresos"
+          sx={{
+            color: esTipoExistente("Acreditacion de ingresos")
+              ? "blue"
+              : "red"
+          }}
+        >
+          4.1 - Certificación de ingresos
+        </MenuItem>
+
+        <MenuItem
+          value="Recibo de sueldo"
+          sx={{
+            color: esTipoExistente("Recibo de sueldo") ? "blue" : "red"
+          }}
+        >
+          4.a - Recibo de sueldo
+        </MenuItem>
+
+        <MenuItem
+          value="Pago Monotributo"
+          sx={{
+            color: esTipoExistente("Pago Monotributo") ? "blue" : "red"
+          }}
+        >
+          4.b - Pago de Monotributo
+        </MenuItem>
+
+        <MenuItem
+          value="Constancia de Afip"
+          sx={{
+            color: esTipoExistente("Constancia de Afip") ? "blue" : "red"
+          }}
+        >
+          4.c - Constancia de AFIP
+        </MenuItem>
+
+        <MenuItem
+          value="Pago autonomo"
+          sx={{
+            color: esTipoExistente("Pago autonomo") ? "blue" : "red"
+          }}
+        >
+          4.c - Pago de autónomo
+        </MenuItem>
+
+        <MenuItem
+          value="DDJJ IIBB"
+          sx={{ color: esTipoExistente("DDJJ IIBB") ? "blue" : "red" }}
+        >
+          4.d - DDJJ IIBB
+        </MenuItem>
+
+        <MenuItem
+          value="Dj CalidadPerso"
+          sx={{
+            color: esTipoExistente("Dj CalidadPerso") ? "blue" : "red"
+          }}
+        >
+          DJ Calidad de Persona
+        </MenuItem>
+
+        <MenuItem
+          value="Dj Datospers"
+          sx={{ color: esTipoExistente("Dj Datospers") ? "blue" : "red" }}
+        >
+          5 - DJ Datos personales
+        </MenuItem>
+
+        <MenuItem
+          value="Dj OrigenFondos"
+          sx={{
+            color: esTipoExistente("Dj OrigenFondos") ? "blue" : "red"
+          }}
+        >
+          7 - DJ Origen de fondos
+        </MenuItem>
+
+        <MenuItem
+          value="Cbu personal"
+          sx={{
+            color: esTipoExistente("Cbu personal") ? "blue" : "red"
+          }}
+        >
+          8 - CBU personal
+        </MenuItem>
+
+        <MenuItem
+          value="Cbu familiar"
+          sx={{
+            color: esTipoExistente("Cbu familiar") ? "blue" : "red"
+          }}
+        >
+          8 - CBU familiar
+        </MenuItem>
+
+        <MenuItem
+          value="Constancia RePET"
+          sx={{
+            color: esTipoExistente("Constancia RePET") ? "blue" : "red"
+          }}
+        >
+          9.1 - Constancia RePET
+        </MenuItem>
+
+        <MenuItem
+          value="Anticipo"
+          sx={{ color: esTipoExistente("Anticipo") ? "blue" : "red" }}
+        >
+          Anticipo
+        </MenuItem>
+
+        <MenuItem
+          value="Boleto comparaventa"
+          sx={{
+            color: esTipoExistente("Boleto comparaventa") ? "blue" : "red"
+          }}
+        >
+          Boleto compraventa
+        </MenuItem>
+      </>
+    ) : (
+      <>
+        {/* ================= EMPRESA / PERSONA JURÍDICA ================= */}
+
+        <MenuItem
+          value="Dni"
+          sx={{ color: esTipoExistente("Dni") ? "blue" : "red" }}
+        >
+          1.a - DNI Frente
+        </MenuItem>
+
+        <MenuItem
+          value="Dni dorso"
+          sx={{ color: esTipoExistente("Dni dorso") ? "blue" : "red" }}
+        >
+          1.b - DNI Dorso
+        </MenuItem>
+
+        <MenuItem
+          value="Constancia de Afip"
+          sx={{
+            color: esTipoExistente("Constancia de Afip") ? "blue" : "red"
+          }}
+        >
+          2 - Constancia de AFIP
+        </MenuItem>
+
+        <MenuItem
+          value="Acreditacion Domicilio"
+          sx={{
+            color: esTipoExistente("Acreditacion Domicilio")
+              ? "blue"
+              : "red"
+          }}
+        >
+          3 - Acreditación de domicilio
+        </MenuItem>
+
+        <MenuItem
+          value="Ultimos balances CPCE"
+          sx={{
+            color: esTipoExistente("Ultimos balances CPCE") ? "blue" : "red"
+          }}
+        >
+          4.1 - Últimos balances certificados en CPCE
+        </MenuItem>
+
+        <MenuItem
+          value="DjIva"
+          sx={{ color: esTipoExistente("DjIva") ? "blue" : "red" }}
+        >
+          4.2 - DJ IVA
+        </MenuItem>
+
+        <MenuItem
+          value="Pagos Previsionales"
+          sx={{
+            color: esTipoExistente("Pagos Previsionales") ? "blue" : "red"
+          }}
+        >
+          4.3 - Pagos previsionales
+        </MenuItem>
+
+        <MenuItem
+          value="Referencias comerciales"
+          sx={{
+            color: esTipoExistente("Referencias comerciales")
+              ? "blue"
+              : "red"
+          }}
+        >
+          4.4 - Referencias comerciales
+        </MenuItem>
+
+        <MenuItem
+          value="DDJJ IIBB"
+          sx={{ color: esTipoExistente("DDJJ IIBB") ? "blue" : "red" }}
+        >
+          4.5 - DDJJ IIBB
+        </MenuItem>
+
+        <MenuItem
+          value="Dj Datospers"
+          sx={{ color: esTipoExistente("Dj Datospers") ? "blue" : "red" }}
+        >
+          5 - DJ Datos personales
+        </MenuItem>
+
+        <MenuItem
+          value="Dj OrigenFondos"
+          sx={{
+            color: esTipoExistente("Dj OrigenFondos") ? "blue" : "red"
+          }}
+        >
+          7 - DJ Origen de fondos
+        </MenuItem>
+
+        <MenuItem
+          value="Cbu personal"
+          sx={{
+            color: esTipoExistente("Cbu personal") ? "blue" : "red"
+          }}
+        >
+          8 - CBU personal
+        </MenuItem>
+
+        <MenuItem
+          value="Cbu familiar"
+          sx={{
+            color: esTipoExistente("Cbu familiar") ? "blue" : "red"
+          }}
+        >
+          8 - CBU familiar
+        </MenuItem>
+
+        <MenuItem
+          value="Estatuto Social"
+          sx={{
+            color: esTipoExistente("Estatuto Social") ? "blue" : "red"
+          }}
+        >
+          9 - Estatuto social
+        </MenuItem>
+
+        <MenuItem
+          value="Acta del organo decisorio"
+          sx={{
+            color: esTipoExistente("Acta del organo decisorio")
+              ? "blue"
+              : "red"
+          }}
+        >
+          10 - Acta de órgano decisorio asignado
+        </MenuItem>
+
+        <MenuItem
+          value="Constancia RePET"
+          sx={{
+            color: esTipoExistente("Constancia RePET") ? "blue" : "red"
+          }}
+        >
+          11 - Constancia RePET
+        </MenuItem>
+
+        <MenuItem
+          value="Poder General"
+          sx={{
+            color: esTipoExistente("Poder General") ? "blue" : "red"
+          }}
+        >
+          Poder general
+        </MenuItem>
+
+        <MenuItem
+          value="Acta de Entrega"
+          sx={{
+            color: esTipoExistente("Acta de Entrega") ? "blue" : "red"
+          }}
+        >
+          Acta de entrega
+        </MenuItem>
+
+        <MenuItem
+          value="Anticipo"
+          sx={{ color: esTipoExistente("Anticipo") ? "blue" : "red" }}
+        >
+          Anticipo
+        </MenuItem>
+
+        <MenuItem
+          value="Boleto comparaventa"
+          sx={{
+            color: esTipoExistente("Boleto comparaventa") ? "blue" : "red"
+          }}
+        >
+          Boleto compraventa
+        </MenuItem>
+      </>
+    )}
+  </Select>
+</FormControl>
 
           {/* DROPZONE */}
           {legform.tipo && (
