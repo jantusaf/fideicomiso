@@ -44,8 +44,9 @@ useEffect(() => {
 
    return (
   logueado && (
-    <>
+    <><Navbar/>
   <br/>
+  
       <DetallesPagos />
     </>
   )
