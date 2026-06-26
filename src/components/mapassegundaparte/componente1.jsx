@@ -66,12 +66,15 @@ const MapaConCapas = () => {
 
         area1: false,
         area2: false,
-        area3: false,
+        zonaesperanza: false,
         area4: false,
         area5: false,
         area6: false,
         invicoresidencial: false,
         invico2: false,
+        parc1: false,
+        parc2: false,
+        parc3: false,
         ic3: false,
         ic4: false,
         ic42: false,
@@ -88,9 +91,12 @@ const MapaConCapas = () => {
         "unidad-ejecutora2y3": false,
         zona_municipal: false,
         rutas1: false,
+        calleYRutas: false,
         IB: false,
         otras: false,
         fraccionIC: false,
+        fraccionIG: false,
+        invicomontana: false,
     });
 
     const [subCapasActivas, setSubCapasActivas] = useState({
@@ -115,28 +121,31 @@ const zonasConfig = [
     { key: "unidad-ejecutora2y3", label: "Unidad Ejecutora 2 y 3" },
 
   { key: "area6", label: "IB6" },
-    { key: "zona_municipal", label: "Zona Municipal" },
   { key: "invicoresidencial", label: "Invico - Residencial" },
     { key: "invico2", label: "Invico - Otros" },
+    { key: "invicomontana", label: "INVICO - Barrio Dr Montaña" },
+    { key: "parc1", label: "Parcela 1" },
+    { key: "parc2", label: "Parcela 2" },
+    { key: "parc3", label: "Parcela 3" },
   { key: "area1", label: "Zona Hípico" },
   { key: "area2", label: "Zona Clubes/Gremio B/Traza" },
   { key: "area4", label: "Zona Clubes/Gremio S/Traza" },
   { key: "mensura31548Unuevo", label: "Mensura 31548-U" },
   { key: "Mensura30922U", label: "Mensura 30922-U" },
   { key: "zonapirayui", label: "Zona Pirayui" },
-  { key: "area3", label: "Sin definir" },
+  { key: "zonaesperanza", label: "Zona Esperanza" },
 ];
 const clavesZonas = [
   "ic3", "ic4", "ic42",
   "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3", "unidad-ejecutora2y3",
   "ib2", "ib3", "area5", "ib5", "area6",
-  "invicoresidencial", "invico2", "zona_municipal", "area1", "area2", "area3", "area4",
+  "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "area1", "area2", "zonaesperanza", "area4",
   "mensura31548Unuevo", "Mensura30922U", "zonapirayui",
 ];
-const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras"].every((key) => !!capasActivas[key]);
+const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras", "fraccionIG", "ZRU Predios La Caja", "Planificación Sección Sur"].every((key) => !!capasActivas[key]);
 const zonasActivasCount = clavesZonas.filter((k) => !!capasActivas[k]).length;
 const planEspecialCount = Object.values(subCapasActivas).filter(Boolean).length;
-const otrosCount = ["Barrios", "Manzanas", "Zonificación Sta Catalina", "ZRU Predios La Caja", "Planificación Sección Sur", "rutas1"].filter((k) => !!capasActivas[k]).length;
+const otrosCount = ["calleYRutas", "zona_municipal", "Manzanas", "Zonificación Sta Catalina"].filter((k) => !!capasActivas[k]).length;
 
 const toggleTodasLasZonas = () => {
   const nuevoEstado = !todasLasZonasActivas;
@@ -145,11 +154,15 @@ const toggleTodasLasZonas = () => {
     fraccionIC: nuevoEstado,
     IB: nuevoEstado,
     otras: nuevoEstado,
+    fraccionIG: nuevoEstado,
+    "ZRU Predios La Caja": nuevoEstado,
+    "Planificación Sección Sur": nuevoEstado,
     ...clavesZonas.reduce((acc, key) => {
       acc[key] = nuevoEstado;
       return acc;
     }, {}),
   }));
+  setSubCapasSur((prev) => Object.fromEntries(Object.keys(prev).map((k) => [k, nuevoEstado])));
 };
 
     const opcionesSubclasificacion = [
@@ -265,12 +278,12 @@ const toggleTodasLasZonas = () => {
         "UG1-Reordenamiento Urbano y lotes con servicios en zona de interes social; y Parque Lineal Ex Via FF.CC Urquiza": "#8a8a8a",
         "UG2-Areas Residenciales y Mixtas, Equipamientos Generales y Parque Lineal Ex Via FF.CC Urquiza": "#c2c1c1",
         // PLANIFICACION SECCION SUR
-        "PIT-Parque Industrial Tecnologico - FASE 1": "#2c73e6ff",
-        "PIT-Parque Industrial Tecnologico - FASE 2": "#2c73e6ff",
-        "PIT-Parque Industrial Tecnologico - FASE 3": "#2c73e6ff",
+        "PIT-Parque Industrial Tecnologico - FASE 1": "#d0d0d0",
+        "PIT-Parque Industrial Tecnologico - FASE 2": "#d0d0d0",
+        "PIT-Parque Industrial Tecnologico - FASE 3": "#d0d0d0",
         "PLC-Planta de Liquidos Cloacales": "#c85b01",
         "PLC-Zona Fuelle": "#f1a465",
-        "ZPA-Zona de Proteccion Ambiental-Reserva Natural Santa Catalina": "#034F04",
+        "ZPA-Zona de Proteccion Ambiental-Reserva Natural Santa Catalina": "#7a9e6e",
         "Reserva Municipal": "#e08c3a",
         "Reserva Municipal I": "#e08c3a",
         "Reserva Municipal II": "#e08c3a",
@@ -320,7 +333,7 @@ const toggleTodasLasZonas = () => {
         "PLC-F": false,
         ZPA: false
     });
-    const esAreaEspecial = ["area1", "area2", "area3", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "zonapirayui", "Mensura30922U"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "zonapirayui", "Mensura30922U"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
 
@@ -398,11 +411,11 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/area3.geojson")
+        fetch("/zonaesperanza.geojson")
             .then((r) => r.json())
             .then((data) => {
-                const normalizado = normalizarGeojsonConIds(data, "area3");
-                setGeojsonData((prev) => ({ ...prev, area3: normalizado }));
+                const normalizado = normalizarGeojsonConIds(data, "zonaesperanza");
+                setGeojsonData((prev) => ({ ...prev, zonaesperanza: normalizado }));
             })
             .catch(console.error);
 
@@ -515,6 +528,38 @@ const toggleTodasLasZonas = () => {
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "invico2");
                 setGeojsonData((prev) => ({ ...prev, invico2: normalizado }));
+            })
+            .catch(console.error);
+
+        fetch("/invicomontaña.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "invicomontana");
+                setGeojsonData((prev) => ({ ...prev, invicomontana: normalizado }));
+            })
+            .catch(console.error);
+
+        fetch("/parc1.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "parc1");
+                setGeojsonData((prev) => ({ ...prev, parc1: normalizado }));
+            })
+            .catch(console.error);
+
+        fetch("/parc2.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "parc2");
+                setGeojsonData((prev) => ({ ...prev, parc2: normalizado }));
+            })
+            .catch(console.error);
+
+        fetch("/parc3.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "parc3");
+                setGeojsonData((prev) => ({ ...prev, parc3: normalizado }));
             })
             .catch(console.error);
 
@@ -733,16 +778,27 @@ const toggleTodasLasZonas = () => {
                 updates.ib5 = nuevoEstado;
                 updates.area6 = nuevoEstado;
             }
+            if (nombre === "fraccionIG") {
+                updates.invicomontana = nuevoEstado;
+                updates.parc1 = nuevoEstado;
+                updates.parc2 = nuevoEstado;
+                updates.parc3 = nuevoEstado;
+            }
             if (nombre === "otras") {
                 updates.invicoresidencial = nuevoEstado;
-                updates.zona_municipal = nuevoEstado;
                 updates.area1 = nuevoEstado;
                 updates.area2 = nuevoEstado;
-                updates.area3 = nuevoEstado;
+                updates.zonaesperanza = nuevoEstado;
                 updates.area4 = nuevoEstado;
                 updates.mensura31548Unuevo = nuevoEstado;
                 updates.Mensura30922U = nuevoEstado;
                 updates.zonapirayui = nuevoEstado;
+                updates["ZRU Predios La Caja"] = nuevoEstado;
+                updates["Planificación Sección Sur"] = nuevoEstado;
+            }
+            if (nombre === "calleYRutas") {
+                updates.Barrios = nuevoEstado;
+                updates.rutas1 = nuevoEstado;
             }
 
             return updates;
@@ -919,7 +975,7 @@ const toggleTodasLasZonas = () => {
             let colorBase = "#9e9e9e";
 
             if (poligono.privado === "privado") colorBase = "#d32f2f";
-            if (poligono.privado === "publico") colorBase = "#2e7d32";
+            if (poligono.privado === "publico") colorBase = "#00e000";
 
             return {
                 fillColor: colorBase,
@@ -1120,27 +1176,22 @@ useEffect(() => {
     </div>
   </div>
 
-  {/* Otras con subcapas */}
+  {/* Fracción IG */}
   <div className="capa-item">
     <label>
       <input
         type="checkbox"
-        checked={!!capasActivas.otras}
-        onChange={() => toggleCapaPrincipal("otras")}
+        checked={!!capasActivas.fraccionIG}
+        onChange={() => toggleCapaPrincipal("fraccionIG")}
       />
-      <strong>Otras</strong>
+      <strong>Fracción IG</strong>
     </label>
     <div className="subcapas">
       {[
-        { key: "zona_municipal", label: "Zona Municipal" },
-        { key: "invicoresidencial", label: "Invico - Residencial" },
-        { key: "area1", label: "Zona Hípico" },
-        { key: "area2", label: "Zona Clubes/Gremio B/Traza" },
-        { key: "area4", label: "Zona Clubes/Gremio S/Traza" },
-        { key: "mensura31548Unuevo", label: "Mensura 31548-U" },
-        { key: "Mensura30922U", label: "Mensura 30922-U" },
-        { key: "zonapirayui", label: "Zona Pirayui" },
-        { key: "area3", label: "Sin definir" },
+        { key: "invicomontana", label: "INVICO - B° Dr Montaña" },
+        { key: "parc1", label: "Parcela 1" },
+        { key: "parc2", label: "Parcela 2" },
+        { key: "parc3", label: "Parcela 3" },
       ].map(({ key, label }) => (
         <div key={key}>
           <label>
@@ -1153,6 +1204,78 @@ useEffect(() => {
           </label>
         </div>
       ))}
+    </div>
+  </div>
+
+  {/* Otras con subcapas */}
+  <div className="capa-item">
+    <label>
+      <input
+        type="checkbox"
+        checked={!!capasActivas.otras}
+        onChange={() => toggleCapaPrincipal("otras")}
+      />
+      <strong>Otras</strong>
+    </label>
+    <div className="subcapas">
+      {[
+        { key: "invicoresidencial", label: "Invico - Residencial" },
+        { key: "invico2", label: "Invico 2" },
+        { key: "area1", label: "Zona Hípico" },
+        { key: "area2", label: "Zona Clubes/Gremio B/Traza" },
+        { key: "area4", label: "Zona Clubes/Gremio S/Traza" },
+        { key: "mensura31548Unuevo", label: "Mensura 31548-U" },
+        { key: "Mensura30922U", label: "Mensura 30922-U" },
+        { key: "zonapirayui", label: "Zona Pirayui" },
+        { key: "zonaesperanza", label: "Zona Esperanza" },
+      ].map(({ key, label }) => (
+        <div key={key}>
+          <label>
+            <input
+              type="checkbox"
+              checked={!!capasActivas[key]}
+              onChange={() => toggleCapaPrincipal(key)}
+            />
+            {label}
+          </label>
+        </div>
+      ))}
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["ZRU Predios La Caja"]}
+            onChange={() => toggleCapaPrincipal("ZRU Predios La Caja")}
+          />
+          ZRU
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["Planificación Sección Sur"]}
+            onChange={() => toggleCapaPrincipal("Planificación Sección Sur")}
+          />
+          Planificación Sección Sur
+        </label>
+        {capasActivas["Planificación Sección Sur"] && (
+          <div className="subcapas">
+            {Object.keys(subCapasSur).map(nombre => (
+              <div key={nombre}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={!!subCapasSur[nombre]}
+                    onChange={() => setSubCapasSur(prev => ({ ...prev, [nombre]: !prev[nombre] }))}
+                  />
+                  {nombre}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   </div>
 </div>
@@ -1219,135 +1342,69 @@ useEffect(() => {
 
 
                     <div className="capa-item">
-
                         <label>
-
                             <input
                                 type="checkbox"
-                                checked={!!capasActivas.Barrios}
-                                onChange={() => toggleCapaPrincipal("Barrios")}
+                                checked={!!capasActivas.calleYRutas}
+                                onChange={() => toggleCapaPrincipal("calleYRutas")}
                             />
-
-                            Calles
-
+                            <strong>Calle y Rutas</strong>
                         </label>
-
+                        <div className="subcapas">
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={!!capasActivas.Barrios}
+                                        onChange={() => toggleCapaPrincipal("Barrios")}
+                                    />
+                                    Calles
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        checked={!!capasActivas.rutas1}
+                                        onChange={() => toggleCapaPrincipal("rutas1")}
+                                    />
+                                    Rutas + Traza Segundo Puente Chaco-Ctes
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
+                    <div className="capa-item">
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={!!capasActivas.zona_municipal}
+                                onChange={() => toggleCapaPrincipal("zona_municipal")}
+                            />
+                            Zona Municipal
+                        </label>
+                    </div>
 
                     <div className="capa-item">
-
                         <label>
-
                             <input
                                 type="checkbox"
                                 checked={!!capasActivas.Manzanas}
                                 onChange={() => toggleCapaPrincipal("Manzanas")}
                             />
-
                             Manzanas
-
                         </label>
-
                     </div>
 
-
                     <div className="capa-item">
-
                         <label>
-
                             <input
                                 type="checkbox"
                                 checked={!!capasActivas["Zonificación Sta Catalina"]}
                                 onChange={() => toggleCapaPrincipal("Zonificación Sta Catalina")}
                             />
-
                             Zonificación
-
                         </label>
-
-                    </div>
-
-
-                    <div className="capa-item">
-
-                        <label>
-
-                            <input
-                                type="checkbox"
-                                checked={!!capasActivas["ZRU Predios La Caja"]}
-                                onChange={() => toggleCapaPrincipal("ZRU Predios La Caja")}
-                            />
-
-                            ZRU
-
-                        </label>
-
-                    </div>
-
-
-                    {/* PLANIFICACION SECCION SUR */}
-
-                    <div className="capa-item">
-
-                        <label>
-
-                            <input
-                                type="checkbox"
-                                checked={!!capasActivas["Planificación Sección Sur"]}
-                                onChange={() => toggleCapaPrincipal("Planificación Sección Sur")}
-                            />
-
-                            Planificación Sección Sur
-
-                        </label>
-
-
-                        {capasActivas["Planificación Sección Sur"] && (
-
-                            <div className="subcapas">
-
-                                {Object.keys(subCapasSur).map(nombre => (
-
-                                    <div key={nombre}>
-
-                                        <label>
-
-                                            <input
-                                                type="checkbox"
-                                                checked={!!subCapasSur[nombre]}
-                                                onChange={() => setSubCapasSur(prev => ({ ...prev, [nombre]: !prev[nombre] }))}
-                                            />
-
-                                            {nombre}
-
-                                        </label>
-
-                                    </div>
-
-                                ))}
-
-                            </div>
-
-                        )}
-
-                    </div>
-
-
-                    <div className="capa-item">
-
-                        <label>
-
-                            <input
-                                type="checkbox"
-                                checked={!!capasActivas.rutas1}
-                                onChange={() => toggleCapaPrincipal("rutas1")}
-                            />
-
-                            Rutas + Traza Segundo Puente Chaco-Ctes
-
-                        </label>
-
                     </div>
 
 
@@ -1571,17 +1628,12 @@ useEffect(() => {
                         <GeoJSON
                             key={`ZRU Predios La Caja-${geoJsonKey}`}
                             data={geojsonData["ZRU Predios La Caja"]}
-                            style={(feature) => {
-                                const id = feature.properties?.id;
-                                const existeEnBase = idsDesdeBase.includes(id);
-
-                                return {
-                                    fillColor: existeEnBase ? "red" : "blue",
-                                    weight: 1,
-                                    opacity: 1,
-                                    color: "black",
-                                    fillOpacity: 0.5,
-                                };
+                            style={{
+                                fillColor: "#e05c5c",
+                                fillOpacity: 0.72,
+                                color: "red",
+                                weight: 0.4,
+                                opacity: 0.35,
                             }}
                             onEachFeature={crearOnEachFeature("ZRU Predios La Caja")}
                         />
@@ -1625,7 +1677,7 @@ useEffect(() => {
                             )
                     )}
 
-                    {["area1", "area2", "area3", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "invico2", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "zonapirayui"].map(
+                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "zonapirayui"].map(
                         (nombre) => {
                             if (!capasActivas[nombre] || !geojsonData[nombre]) return null;
 
@@ -1639,15 +1691,33 @@ useEffect(() => {
                                         key={`${nombre}-${geoJsonKey}`}
                                         data={geojsonData[nombre]}
                                         style={{
-                                            fillColor: "transparent",
-                                            fillOpacity: 0,
+                                            fillColor: "red",
+                                            fillOpacity: 0.25,
                                             color: "red",
-                                            weight: 2,
-                                            opacity: 1,
+                                            weight: 1.5,
+                                            opacity: 0.8,
                                         }}
                                         onEachFeature={(feature, layer) => {
                                             layer.options.interactive = false;
                                         }}
+                                    />
+                                );
+                            }
+
+                            // IC3 e INVICO RESIDENCIAL: fondo rojo + líneas rojas finas
+                            if (nombre === "ic3" || nombre === "invicoresidencial") {
+                                return (
+                                    <GeoJSON
+                                        key={`${nombre}-${geoJsonKey}`}
+                                        data={geojsonData[nombre]}
+                                        style={{
+                                            fillColor: "#e05c5c",
+                                            fillOpacity: 0.72,
+                                            color: "red",
+                                            weight: 0.4,
+                                            opacity: 0.35,
+                                        }}
+                                        onEachFeature={crearOnEachFeature(nombre)}
                                     />
                                 );
                             }
@@ -1689,7 +1759,7 @@ useEffect(() => {
                                         if (["unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3"].includes(nombre)) {
                                             const id = feature?.properties?.id;
                                             const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
-                                            const bordeUE = { color: "rgba(0,0,0,0.55)", weight: 1.5, opacity: 1 };
+                                            const bordeUE = { color: "rgba(0,0,0,0.55)", weight: 0.5, opacity: zoomActual >= 15 ? 0.6 : 0 };
 
                                             // UE1: colores por subclasificación de zonificación
                                             if (nombre === "unidad-ejecutora1") {
@@ -1700,23 +1770,23 @@ useEffect(() => {
 
                                             // UE2/3: colores por disponibilidad (privado)
                                             if (poligono?.privado === "reserva municipal")
-                                                return { fillColor: "#e08c3a", fillOpacity: 0.72, ...bordeUE };
+                                                return { fillColor: "#e08c3a", fillOpacity: 0.72, color: "#e08c3a", weight: 0.4, opacity: 0.35 };
                                             if (poligono?.privado === "equipamiento publico")
-                                                return { fillColor: "#d4c83a", fillOpacity: 0.72, ...bordeUE };
+                                                return { fillColor: "#d4c83a", fillOpacity: 0.72, color: "#d4c83a", weight: 0.4, opacity: 0.35 };
                                             if (poligono?.privado === "privado")
-                                                return { fillColor: "#e05c5c", fillOpacity: 0.72, ...bordeUE };
+                                                return { fillColor: "#e05c5c", fillOpacity: 0.72, color: "red", weight: 0.4, opacity: 0.35 };
                                             if (poligono?.privado === "publico")
-                                                return { fillColor: "#5db862", fillOpacity: 0.72, ...bordeUE };
-                                            return { fillColor: "#5db862", fillOpacity: 0.72, color: "rgba(0,0,0,0.3)", weight: 1, opacity: 1 };
+                                                return { fillColor: "#5db862", fillOpacity: 0.72, color: "green", weight: 0.4, opacity: 0.35 };
+                                            return { fillColor: "#5db862", fillOpacity: 0.72, color: "green", weight: 0.4, opacity: 0.35 };
                                         }
 
                                         if (nombre === "unidad-ejecutora2y3" || nombre === "invico2") {
                                             return {
-                                                fillColor: "transparent",
-                                                fillOpacity: 0,
-                                                color: "red",
-                                                weight: 2,
-                                                opacity: 1,
+                                                fillColor: "white",
+                                                fillOpacity: 0.18,
+                                                color: "transparent",
+                                                weight: 0,
+                                                opacity: 0,
                                                 interactive: false,
                                             };
                                         }
@@ -1726,30 +1796,31 @@ useEffect(() => {
                                         const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
 
                                         const borde = { color: "rgba(0,0,0,0.55)", weight: 1.5, opacity: 1 };
+                                        const bordeRojo = { color: "red", weight: 0.4, opacity: 0.35 };
 
                                         // 🔴 no existe
                                         if (!poligono) {
-                                            return { fillColor: "#e05c5c", fillOpacity: 0.72, ...borde };
+                                            return { fillColor: "#e05c5c", fillOpacity: 0.72, ...bordeRojo };
                                         }
 
-                                        // 🔵 reserva municipal
+                                        // 🟠 reserva municipal
                                         if (poligono.privado === "reserva municipal") {
-                                            return { fillColor: "#e08c3a", fillOpacity: 0.72, ...borde };
+                                            return { fillColor: "#e08c3a", fillOpacity: 0.72, color: "#e08c3a", weight: 0.4, opacity: 0.35 };
                                         }
 
-                                        // ⚫ equipamiento publico
+                                        // 🟡 equipamiento publico
                                         if (poligono.privado === "equipamiento publico") {
-                                            return { fillColor: "#d4c83a", fillOpacity: 0.72, ...borde };
+                                            return { fillColor: "#d4c83a", fillOpacity: 0.72, color: "#d4c83a", weight: 0.4, opacity: 0.35 };
                                         }
 
                                         // 🔴 privado
                                         if (poligono.privado === "privado") {
-                                            return { fillColor: "#e05c5c", fillOpacity: 0.72, ...borde };
+                                            return { fillColor: "#e05c5c", fillOpacity: 0.72, ...bordeRojo };
                                         }
 
                                         // 🟢 publico
                                         if (poligono.privado === "publico") {
-                                            return { fillColor: "#5db862", fillOpacity: 0.72, ...borde };
+                                            return { fillColor: "#5db862", fillOpacity: 0.72, color: "green", weight: 0.4, opacity: 0.35 };
                                         }
 
                                         return {
@@ -1766,7 +1837,7 @@ useEffect(() => {
                         }
                     )}
                     {/* Pines de "vendido" sobre UE1 */}
-                    {capasActivas["unidad-ejecutora1"] && geojsonData["unidad-ejecutora1"] &&
+                    {capasActivas["unidad-ejecutora1"] && geojsonData["unidad-ejecutora1"] && zoomActual >= 17 &&
                         geojsonData["unidad-ejecutora1"].features.map((feature) => {
                             const id = feature?.properties?.id;
                             const poligono = buscarPoligonoDB(poligonosGuardados, id, "unidad-ejecutora1");
@@ -1804,7 +1875,7 @@ useEffect(() => {
             }}
         />
 )}
-                {zoomActual >= 16 && (
+                {zoomActual >= 15 && (
                     <EtiquetasPoligonos
                         geojsonData={geojsonData}
                         poligonosGuardados={poligonosGuardados}

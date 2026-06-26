@@ -58,6 +58,9 @@ const referencias = [
   { tipo: "titulo", texto: "ZONA DE PROTECCIÓN AMBIENTAL - Santa Catalina" },
   { color: "#034F04", texto: "ZPA" },
 
+  { tipo: "titulo", texto: "INVICO" },
+  { tipo: "overlay", texto: "Invico - Otros" },
+
   { tipo: "titulo", texto: "RESERVA" },
   { color: "#e08c3a", texto: "Reserva Municipal" },
 ];
@@ -96,6 +99,18 @@ const TablaReferencias = () => {
             return (
               <div key={`t-${index}`} className="refSectionTitle">
                 {ref.texto}
+              </div>
+            );
+          }
+
+          if (ref.tipo === "overlay") {
+            return (
+              <div className="refRow" key={`r-${index}`}>
+                <div className="refSwatch" style={{
+                  background: "rgba(255,0,0,0.25)",
+                  border: "1.5px solid red",
+                }} />
+                <div className="refText">{ref.texto}</div>
               </div>
             );
           }
