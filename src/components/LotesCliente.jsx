@@ -169,7 +169,19 @@ const vercuotas = async (index) => {
     const rta = await servicioCuotas.borrarcuota(id);
     alert(rta);
   };
+const obtenerCuotaQueCancelo = (idCuotaCancelada) => {
+  if (
+    !idCuotaCancelada ||
+    idCuotaCancelada === "No" ||
+    idCuotaCancelada === "0"
+  ) {
+    return null;
+  }
 
+  return cuotas.find(
+    (cuota) => String(cuota.id) === String(idCuotaCancelada)
+  );
+};
   const traerlink = async (index) => {
     const dde = await servicioAdmin.traerlinkcuota(index);
     window.open(dde);
@@ -860,13 +872,35 @@ const exportarExcel = () => {
           </StyledTableCell>
 
           {/* SALDO REAL */}
-          <StyledTableCell>
-            $
-            {new Intl.NumberFormat("de-DE").format(
-              row.Saldo_real || 0
-            )}
-          </StyledTableCell>
+<StyledTableCell>
+  {row.cuota_cancelada && row.cuota_cancelada !== "No" ? (
+    (() => {
+      const cuotaQueCancelo = obtenerCuotaQueCancelo(row.cuota_cancelada);
 
+      return cuotaQueCancelo ? (
+        <>
+          Cuota cancelada por la cuota de{" "}
+          <strong>
+            {cuotaQueCancelo.mes}/{cuotaQueCancelo.anio}
+          </strong>
+          <br />
+          <small>ID cuota: {cuotaQueCancelo.id}</small>
+        </>
+      ) : (
+        <>
+          Cuota cancelada
+          <br />
+          <small>ID: {row.cuota_cancelada}</small>
+        </>
+      );
+    })()
+  ) : (
+    <>
+      $
+      {new Intl.NumberFormat("de-DE").format(row.Saldo_real || 0)}
+    </>
+  )}
+</StyledTableCell>
           {/* ACCIONES */}
           <StyledTableCell>
             <Box
