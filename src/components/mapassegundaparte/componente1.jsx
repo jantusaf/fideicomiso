@@ -97,6 +97,8 @@ const MapaConCapas = () => {
         fraccionIG: false,
         invicomontana: false,
         nuevazona: false,
+        fraccionIE: false,
+        ejercitoarg: false,
     });
 
     const [subCapasActivas, setSubCapasActivas] = useState({
@@ -133,14 +135,14 @@ const zonasConfig = [
   { key: "mensura31548Unuevo", label: "Mensura 31548-U" },
   { key: "Mensura30922U", label: "Mensura 30922-U" },
   { key: "zonaesperanza", label: "Zona Esperanza" },
-  { key: "nuevazona", label: "Nueva Zona" },
+  { key: "fraccionIE", label: "Fracción IE" },
 ];
 const clavesZonas = [
   "ic3", "ic4", "ic42",
   "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3", "unidad-ejecutora2y3",
   "ib2", "ib3", "area5", "ib5", "area6",
   "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "area1", "area2", "zonaesperanza", "area4",
-  "mensura31548Unuevo", "Mensura30922U", "nuevazona",
+  "mensura31548Unuevo", "Mensura30922U", "fraccionIE",
 ];
 const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras", "fraccionIG", "ZRU Predios La Caja", "Planificación Sección Sur"].every((key) => !!capasActivas[key]);
 const zonasActivasCount = clavesZonas.filter((k) => !!capasActivas[k]).length;
@@ -157,6 +159,8 @@ const toggleTodasLasZonas = () => {
     fraccionIG: nuevoEstado,
     "ZRU Predios La Caja": nuevoEstado,
     "Planificación Sección Sur": nuevoEstado,
+    nuevazona: nuevoEstado,
+    ejercitoarg: nuevoEstado,
     ...clavesZonas.reduce((acc, key) => {
       acc[key] = nuevoEstado;
       return acc;
@@ -333,7 +337,7 @@ const toggleTodasLasZonas = () => {
         "PLC-F": false,
         ZPA: false
     });
-    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
 
@@ -424,6 +428,13 @@ const toggleTodasLasZonas = () => {
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "nuevazona");
                 setGeojsonData((prev) => ({ ...prev, nuevazona: normalizado }));
+            })
+            .catch(console.error);
+        fetch("/ejercitoarg.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "ejercitoarg");
+                setGeojsonData((prev) => ({ ...prev, ejercitoarg: normalizado }));
             })
             .catch(console.error);
 
@@ -799,6 +810,10 @@ const toggleTodasLasZonas = () => {
             if (nombre === "calleYRutas") {
                 updates.Barrios = nuevoEstado;
                 updates.rutas1 = nuevoEstado;
+            }
+            if (nombre === "fraccionIE") {
+                updates.nuevazona = nuevoEstado;
+                updates.ejercitoarg = nuevoEstado;
             }
 
             return updates;
@@ -1278,15 +1293,15 @@ useEffect(() => {
     </div>
   </div>
 
-  {/* Nueva Zona */}
+  {/* Fracción IE */}
   <div className="capa-item">
     <label>
       <input
         type="checkbox"
-        checked={!!capasActivas.nuevazona}
-        onChange={() => toggleCapaPrincipal("nuevazona")}
+        checked={!!capasActivas.fraccionIE}
+        onChange={() => toggleCapaPrincipal("fraccionIE")}
       />
-      <strong>Nueva Zona</strong>
+      <strong>Fracción IE</strong>
     </label>
   </div>
 
@@ -1689,7 +1704,7 @@ useEffect(() => {
                             )
                     )}
 
-                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U"].map(
+                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U"].map(
                         (nombre) => {
                             if (!capasActivas[nombre] || !geojsonData[nombre]) return null;
 
