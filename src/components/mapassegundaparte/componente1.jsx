@@ -79,7 +79,6 @@ const MapaConCapas = () => {
         ic4: false,
         ic42: false,
         restante: false,
-        zonapirayui: false,
         Mensura30922U: false,
         mensura31548Unuevo: false,
         ib5: false,
@@ -133,7 +132,6 @@ const zonasConfig = [
   { key: "area4", label: "Zona Clubes/Gremio S/Traza" },
   { key: "mensura31548Unuevo", label: "Mensura 31548-U" },
   { key: "Mensura30922U", label: "Mensura 30922-U" },
-  { key: "zonapirayui", label: "Zona Pirayui" },
   { key: "zonaesperanza", label: "Zona Esperanza" },
   { key: "nuevazona", label: "Nueva Zona" },
 ];
@@ -142,7 +140,7 @@ const clavesZonas = [
   "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3", "unidad-ejecutora2y3",
   "ib2", "ib3", "area5", "ib5", "area6",
   "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "area1", "area2", "zonaesperanza", "area4",
-  "mensura31548Unuevo", "Mensura30922U", "zonapirayui", "nuevazona",
+  "mensura31548Unuevo", "Mensura30922U", "nuevazona",
 ];
 const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras", "fraccionIG", "ZRU Predios La Caja", "Planificación Sección Sur"].every((key) => !!capasActivas[key]);
 const zonasActivasCount = clavesZonas.filter((k) => !!capasActivas[k]).length;
@@ -335,7 +333,7 @@ const toggleTodasLasZonas = () => {
         "PLC-F": false,
         ZPA: false
     });
-    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "zonapirayui", "Mensura30922U", "nuevazona"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
 
@@ -589,13 +587,6 @@ const toggleTodasLasZonas = () => {
                 setGeojsonData((prev) => ({ ...prev, "Mensura30922U": normalizado }));
             })
             .catch(console.error);
-        fetch("/zonapirayui.geojson")
-            .then((r) => r.json())
-            .then((data) => {
-                const normalizado = normalizarGeojsonConIds(data, "zonapirayui");
-                setGeojsonData((prev) => ({ ...prev, "zonapirayui": normalizado }));
-            })
-            .catch(console.error);
         fetch("/rutas1.geojson")
 
             .then((r) => r.json())
@@ -802,7 +793,6 @@ const toggleTodasLasZonas = () => {
                 updates.area4 = nuevoEstado;
                 updates.mensura31548Unuevo = nuevoEstado;
                 updates.Mensura30922U = nuevoEstado;
-                updates.zonapirayui = nuevoEstado;
                 updates["ZRU Predios La Caja"] = nuevoEstado;
                 updates["Planificación Sección Sur"] = nuevoEstado;
             }
@@ -1236,7 +1226,6 @@ useEffect(() => {
         { key: "area4", label: "Zona Clubes/Gremio S/Traza" },
         { key: "mensura31548Unuevo", label: "Mensura 31548-U" },
         { key: "Mensura30922U", label: "Mensura 30922-U" },
-        { key: "zonapirayui", label: "Zona Pirayui" },
         { key: "zonaesperanza", label: "Zona Esperanza" },
       ].map(({ key, label }) => (
         <div key={key}>
@@ -1700,7 +1689,7 @@ useEffect(() => {
                             )
                     )}
 
-                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "zonapirayui"].map(
+                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U"].map(
                         (nombre) => {
                             if (!capasActivas[nombre] || !geojsonData[nombre]) return null;
 
@@ -2228,14 +2217,32 @@ useEffect(() => {
                                             vendido,
                                         });
 
-
-
-                                        const nuevos = await serviciolotes.poligonosguardados();
-                                        setPoligonosGuardados(nuevos);
+                                        const poligonoActualizado = {
+                                            id_mapa: String(idSeleccionado),
+                                            dato1: texto,
+                                            descripcion,
+                                            subclasificacion,
+                                            capa: nombreCapaSeleccionada,
+                                            privado,
+                                            adrema,
+                                            superficie,
+                                            judicializado,
+                                            mensura,
+                                            vendido,
+                                        };
+                                        setPoligonosGuardados((prev) => {
+                                            const idx = prev.findIndex(
+                                                (p) => String(p.id_mapa) === String(idSeleccionado) && p.capa === nombreCapaSeleccionada
+                                            );
+                                            if (idx >= 0) {
+                                                const copia = [...prev];
+                                                copia[idx] = poligonoActualizado;
+                                                return copia;
+                                            }
+                                            return [...prev, poligonoActualizado];
+                                        });
                                         setGeoJsonKey((k) => k + 1);
-
-                                        const actualizado = buscarPoligonoDB(nuevos, idSeleccionado, nombreCapaSeleccionada);
-                                        setDatosZonaSeleccionada(actualizado);
+                                        setDatosZonaSeleccionada(poligonoActualizado);
 
                                         setModalAbierto(false);
                                         setModalDetalleAbierto(true);
