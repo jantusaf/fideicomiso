@@ -1690,11 +1690,12 @@ useEffect(() => {
                             key={`ZRU Predios La Caja-${geoJsonKey}`}
                             data={geojsonData["ZRU Predios La Caja"]}
                             style={{
-                                fillColor: "#c0392b",
-                                fillOpacity: 0.65,
-                                color: "#922b21",
-                                weight: 0.6,
-                                opacity: 0.6,
+                                fillColor: "transparent",
+                                fillOpacity: 0,
+                                color: "#ff0000",
+                                weight: 3.5,
+                                opacity: 1,
+                                dashArray: "6 5",
                             }}
                             onEachFeature={crearOnEachFeature("ZRU Predios La Caja")}
                         />
@@ -1712,7 +1713,7 @@ useEffect(() => {
                                     const poligono = buscarPoligonoDB(poligonosGuardados, id, capa);
                                     let color = "#ff1a1a";
                                     if (poligono?.privado === "publico") color = "#00ff66";
-                                    else if (poligono?.privado === "reserva municipal") color = "#ff8800";
+                                    else if (poligono?.privado === "reserva municipal") color = "#F227F5";
                                     else if (poligono?.privado === "equipamiento publico") color = "#00aaff";
                                     return { fillColor: "transparent", fillOpacity: 0, color, weight: 3, opacity: 1 };
                                 }}
@@ -1731,10 +1732,11 @@ useEffect(() => {
                                     data={geojsonData[nombre]}
                                     style={() => ({
                                         fillColor: "#b0b0b0",
-                                        fillOpacity: 0.8,
-                                        color: "#4a4a4a",
-                                        weight: 2,
+                                        fillOpacity: 0.25,
+                                        color: "#2E27F5",
+                                        weight: 3.5,
                                         opacity: 1,
+                                        dashArray: "6 5",
                                     })}
                                     onEachFeature={crearOnEachFeature(nombre)}
                                 />
@@ -1748,7 +1750,6 @@ useEffect(() => {
                             // ic4 no se pinta como capa propia; ic42 y las UE cubren sus sub-áreas
                             if (nombre === "ic4") return null;
 
-                            // Capas de borde/outline: no deben capturar clicks para no interferir con la capa de abajo
                             if (nombre === "unidad-ejecutora2y3" || nombre === "invico2") {
                                 return (
                                     <GeoJSON
@@ -1779,7 +1780,7 @@ useEffect(() => {
                                             const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
                                             let color = "#ff0000";
                                             if (poligono?.privado === "publico") color = "#00ff00";
-                                            else if (poligono?.privado === "reserva municipal") color = "#ff6600";
+                                            else if (poligono?.privado === "reserva municipal") color = "#F227F5";
                                             else if (poligono?.privado === "equipamiento publico") color = "#00eeff";
                                             return {
                                                 fillColor: "transparent",
@@ -1795,19 +1796,13 @@ useEffect(() => {
                                 );
                             }
 
-                            // IC3 e INVICO RESIDENCIAL: fondo rojo + líneas rojas finas
+                            // IC3 e INVICO RESIDENCIAL
                             if (nombre === "ic3" || nombre === "invicoresidencial") {
                                 return (
                                     <GeoJSON
                                         key={`${nombre}-${geoJsonKey}`}
                                         data={geojsonData[nombre]}
-                                        style={{
-                                            fillColor: "#c0392b",
-                                            fillOpacity: 0.65,
-                                            color: "#922b21",
-                                            weight: 0.6,
-                                            opacity: 0.6,
-                                        }}
+                                        style={{ fillColor: "transparent", fillOpacity: 0, color: "#ff0000", weight: 3.5, opacity: 1, dashArray: "6 5" }}
                                         onEachFeature={crearOnEachFeature(nombre)}
                                     />
                                 );
@@ -1819,13 +1814,7 @@ useEffect(() => {
                                     <GeoJSON
                                         key={`${nombre}-${geoJsonKey}`}
                                         data={geojsonData[nombre]}
-                                        style={{
-                                            fillColor: "red",
-                                            fillOpacity: 0.15,
-                                            color: "red",
-                                            weight: 2,
-                                            opacity: 1,
-                                        }}
+                                        style={{ fillColor: "transparent", fillOpacity: 0, color: "#ff0000", weight: 3.5, opacity: 1, dashArray: "6 5" }}
                                         onEachFeature={crearOnEachFeature(nombre)}
                                     />
                                 );
@@ -1836,96 +1825,37 @@ useEffect(() => {
                                     key={`${nombre}-${geoJsonKey}`}
                                     data={geojsonData[nombre]}
                                     style={(feature) => {
+                                        const DASH = { fillColor: "transparent", fillOpacity: 0, dashArray: "6 5", weight: 3.5, opacity: 1 };
 
                                         if (nombre === "zona_municipal") {
-                                            return {
-                                                fillColor: "#4a7c4e",
-                                                fillOpacity: 0.72,
-                                                color: "#2a4a2e",
-                                                weight: 3,
-                                                opacity: 1,
-                                            };
+                                            return { ...DASH, color: "#00ff00" };
                                         }
 
-                                        if (["unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3"].includes(nombre)) {
-                                            const id = feature?.properties?.id;
-                                            const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
-                                            const bordeUE = { color: "rgba(0,0,0,0.55)", weight: 0.5, opacity: zoomActual >= 15 ? 0.6 : 0 };
-
-                                            // UE1: colores por subclasificación de zonificación
-                                            if (nombre === "unidad-ejecutora1") {
-                                                if (!poligono) return { fillColor: "#cccccc", fillOpacity: 0.35, ...bordeUE };
-                                                const fillColor = coloresPorSubclasificacion[poligono.subclasificacion] || "#cccccc";
-                                                return { fillColor, fillOpacity: 0.72, ...bordeUE };
-                                            }
-
-                                            // UE2/3: colores por disponibilidad (privado)
-                                            if (poligono?.privado === "reserva municipal")
-                                                return { fillColor: "#e67e22", fillOpacity: 0.72, color: "#ca6f1e", weight: 0.6, opacity: 0.6 };
-                                            if (poligono?.privado === "equipamiento publico")
-                                                return { fillColor: "#3498db", fillOpacity: 0.72, color: "#2980b9", weight: 0.6, opacity: 0.6 };
-                                            if (poligono?.privado === "privado")
-                                                return { fillColor: "#c0392b", fillOpacity: 0.65, color: "#922b21", weight: 0.6, opacity: 0.6 };
-                                            if (poligono?.privado === "publico")
-                                                return { fillColor: "#27ae60", fillOpacity: 0.72, color: "#1e8449", weight: 0.6, opacity: 0.6 };
-                                            return { fillColor: "#27ae60", fillOpacity: 0.72, color: "#1e8449", weight: 0.6, opacity: 0.6 };
-                                        }
-
-                                        if (nombre === "unidad-ejecutora2y3" || nombre === "invico2") {
-                                            return {
-                                                fillColor: "white",
-                                                fillOpacity: 0.18,
-                                                color: "transparent",
-                                                weight: 0,
-                                                opacity: 0,
-                                                interactive: false,
-                                            };
+                                        if (nombre === "invico2" || nombre === "unidad-ejecutora2y3") {
+                                            return { fillColor: "transparent", fillOpacity: 0, color: "transparent", weight: 0, opacity: 0, interactive: false };
                                         }
 
                                         const id = feature?.properties?.id;
-
                                         const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
 
-                                        const contornoActivo = capasActivas[`${nombre}contorno`];
-                                        const borde = contornoActivo
-                                            ? { color: "transparent", weight: 0, opacity: 0 }
-                                            : { color: "rgba(0,0,0,0.55)", weight: 1.5, opacity: 1 };
-                                        const bordeRojo = contornoActivo
-                                            ? { color: "transparent", weight: 0, opacity: 0 }
-                                            : { color: "#922b21", weight: 0.6, opacity: 0.6 };
-
-                                        // 🔴 no existe
-                                        if (!poligono) {
-                                            return { fillColor: "#c0392b", fillOpacity: 0.65, ...bordeRojo };
+                                        if (["unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3"].includes(nombre)) {
+                                            if (nombre === "unidad-ejecutora1") {
+                                                const fillColor = poligono ? (coloresPorSubclasificacion[poligono.subclasificacion] || "#cccccc") : "#cccccc";
+                                                return { ...DASH, color: fillColor };
+                                            }
+                                            if (poligono?.privado === "reserva municipal") return { ...DASH, color: "#F227F5" };
+                                            if (poligono?.privado === "equipamiento publico") return { ...DASH, color: "#00eeff" };
+                                            if (poligono?.privado === "privado") return { ...DASH, color: "#ff0000" };
+                                            return { ...DASH, color: "#00ff00" };
                                         }
 
-                                        // 🟠 reserva municipal
-                                        if (poligono.privado === "reserva municipal") {
-                                            return { fillColor: "#e67e22", fillOpacity: 0.72, color: contornoActivo ? "transparent" : "#ca6f1e", weight: contornoActivo ? 0 : 0.6, opacity: contornoActivo ? 0 : 0.6 };
-                                        }
+                                        if (!poligono) return { ...DASH, color: "#ff0000" };
+                                        if (poligono.privado === "reserva municipal") return { ...DASH, color: "#F227F5" };
+                                        if (poligono.privado === "equipamiento publico") return { ...DASH, color: "#00eeff" };
+                                        if (poligono.privado === "privado") return { ...DASH, color: "#ff0000" };
+                                        if (poligono.privado === "publico") return { ...DASH, color: "#00ff00" };
 
-                                        // 🔵 equipamiento publico
-                                        if (poligono.privado === "equipamiento publico") {
-                                            return { fillColor: "#3498db", fillOpacity: 0.72, color: contornoActivo ? "transparent" : "#2980b9", weight: contornoActivo ? 0 : 0.6, opacity: contornoActivo ? 0 : 0.6 };
-                                        }
-
-                                        // 🔴 privado
-                                        if (poligono.privado === "privado") {
-                                            return { fillColor: "#c0392b", fillOpacity: 0.65, ...bordeRojo };
-                                        }
-
-                                        // 🟢 publico
-                                        if (poligono.privado === "publico") {
-                                            return { fillColor: "#27ae60", fillOpacity: 0.72, color: contornoActivo ? "transparent" : "#1e8449", weight: contornoActivo ? 0 : 0.6, opacity: contornoActivo ? 0 : 0.6 };
-                                        }
-
-                                        return {
-                                            fillColor: "#9e9e9e",
-                                            fillOpacity: 0.9,
-                                            color: "black",
-                                            weight: 3,
-                                            opacity: 1,
-                                        };
+                                        return { ...DASH, color: "#aaaaaa" };
                                     }}
                                     onEachFeature={crearOnEachFeature(nombre)}
                                 />

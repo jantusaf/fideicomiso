@@ -690,6 +690,11 @@ background:transparent;
 border:none;
 }
 
+.sc-tooltipHover:empty,
+.leaflet-tooltip.sc-tooltipHover:empty {
+  display: none !important;
+}
+
 .sc-tooltipHover {
   background: rgba(255,255,255,0.92);
   border: 1px solid rgba(0,0,0,0.12);
