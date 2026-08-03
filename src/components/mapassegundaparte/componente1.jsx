@@ -7,7 +7,7 @@ import "./MapaConCapas.css";
 import parcasLogo from "../../Assets/marcas.png";
 import L from "leaflet";
 import serviciolotes from "../../services/lotes";
-import { centerOfMass, pointOnFeature, booleanPointInPolygon } from "@turf/turf";
+import { centerOfMass, pointOnFeature, booleanPointInPolygon, union, featureCollection } from "@turf/turf";
 import TablaReferencias from "./tablaReferencias";
 import TablaReferencias2 from "./TablaReferencias2";
 
@@ -99,6 +99,13 @@ const MapaConCapas = () => {
         nuevazona: false,
         fraccionIE: false,
         ejercitoarg: false,
+        area2contorno: false,
+        area4contorno: false,
+        clubesHipico: false,
+        hipico1: false,
+        hipico2: false,
+        hipico3: false,
+        hipico4: false,
     });
 
     const [subCapasActivas, setSubCapasActivas] = useState({
@@ -142,7 +149,7 @@ const clavesZonas = [
   "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3", "unidad-ejecutora2y3",
   "ib2", "ib3", "area5", "ib5", "area6",
   "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "area1", "area2", "zonaesperanza", "area4",
-  "mensura31548Unuevo", "Mensura30922U", "fraccionIE",
+  "mensura31548Unuevo", "Mensura30922U", "fraccionIE", "clubesHipico",
 ];
 const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras", "fraccionIG", "ZRU Predios La Caja", "Planificación Sección Sur"].every((key) => !!capasActivas[key]);
 const zonasActivasCount = clavesZonas.filter((k) => !!capasActivas[k]).length;
@@ -161,6 +168,10 @@ const toggleTodasLasZonas = () => {
     "Planificación Sección Sur": nuevoEstado,
     nuevazona: nuevoEstado,
     ejercitoarg: nuevoEstado,
+    hipico1: nuevoEstado,
+    hipico2: nuevoEstado,
+    hipico3: nuevoEstado,
+    hipico4: nuevoEstado,
     ...clavesZonas.reduce((acc, key) => {
       acc[key] = nuevoEstado;
       return acc;
@@ -337,7 +348,7 @@ const toggleTodasLasZonas = () => {
         "PLC-F": false,
         ZPA: false
     });
-    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg", "hipico1", "hipico2", "hipico3", "hipico4"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
 
@@ -437,6 +448,15 @@ const toggleTodasLasZonas = () => {
                 setGeojsonData((prev) => ({ ...prev, ejercitoarg: normalizado }));
             })
             .catch(console.error);
+        ["hipico1", "hipico2", "hipico3", "hipico4"].forEach((nombre) => {
+            fetch(`/${nombre}.geojson`)
+                .then((r) => r.json())
+                .then((data) => {
+                    const normalizado = normalizarGeojsonConIds(data, nombre);
+                    setGeojsonData((prev) => ({ ...prev, [nombre]: normalizado }));
+                })
+                .catch(console.error);
+        });
 
         fetch("/area4.geojson")
             .then((r) => r.json())
@@ -814,6 +834,13 @@ const toggleTodasLasZonas = () => {
             if (nombre === "fraccionIE") {
                 updates.nuevazona = nuevoEstado;
                 updates.ejercitoarg = nuevoEstado;
+            }
+            if (nombre === "clubesHipico") {
+                updates.hipico1 = nuevoEstado;
+                updates.hipico2 = nuevoEstado;
+                updates.hipico3 = nuevoEstado;
+                updates.hipico4 = nuevoEstado;
+                updates.area1 = nuevoEstado;
             }
 
             return updates;
@@ -1236,9 +1263,8 @@ useEffect(() => {
       {[
         { key: "invicoresidencial", label: "Invico - Residencial" },
         { key: "invico2", label: "Invico 2" },
-        { key: "area1", label: "Zona Hípico" },
-        { key: "area2", label: "Zona Clubes/Gremio B/Traza" },
-        { key: "area4", label: "Zona Clubes/Gremio S/Traza" },
+        { key: "area2contorno", label: "Zona Clubes/Gremio B/Traza (contorno)" },
+        { key: "area4contorno", label: "Zona Clubes/Gremio S/Traza (contorno)" },
         { key: "mensura31548Unuevo", label: "Mensura 31548-U" },
         { key: "Mensura30922U", label: "Mensura 30922-U" },
         { key: "zonaesperanza", label: "Zona Esperanza" },
@@ -1302,6 +1328,18 @@ useEffect(() => {
         onChange={() => toggleCapaPrincipal("fraccionIE")}
       />
       <strong>Fracción IE</strong>
+    </label>
+  </div>
+
+  {/* Clubes Hípico */}
+  <div className="capa-item">
+    <label>
+      <input
+        type="checkbox"
+        checked={!!capasActivas.clubesHipico}
+        onChange={() => toggleCapaPrincipal("clubesHipico")}
+      />
+      <strong>CLUBES (HÍPICO)</strong>
     </label>
   </div>
 
@@ -1666,6 +1704,27 @@ useEffect(() => {
                         />
                     )}
 
+                    {/* Contornos por capa */}
+                    {["area2", "area4"].map((capa) => {
+                        if (!capasActivas[`${capa}contorno`] || !geojsonData[capa]) return null;
+                        return (
+                            <GeoJSON
+                                key={`${capa}contorno-${geoJsonKey}`}
+                                data={geojsonData[capa]}
+                                style={(feature) => {
+                                    const id = feature?.properties?.id;
+                                    const poligono = buscarPoligonoDB(poligonosGuardados, id, capa);
+                                    let color = "#ff1a1a";
+                                    if (poligono?.privado === "publico") color = "#00ff66";
+                                    else if (poligono?.privado === "reserva municipal") color = "#ff8800";
+                                    else if (poligono?.privado === "equipamiento publico") color = "#00aaff";
+                                    return { fillColor: "transparent", fillOpacity: 0, color, weight: 3, opacity: 1 };
+                                }}
+                                onEachFeature={crearOnEachFeature(capa)}
+                            />
+                        );
+                    })}
+
                     {/* Sección Sur (subcapas) */}
                     {Object.entries(subCapasSur).map(
                         ([nombre, activa]) =>
@@ -1686,7 +1745,7 @@ useEffect(() => {
                             )
                     )}
 
-                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U"].map(
+                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "hipico1", "hipico2", "hipico3", "hipico4"].map(
                         (nombre) => {
                             if (!capasActivas[nombre] || !geojsonData[nombre]) return null;
 
@@ -1709,6 +1768,33 @@ useEffect(() => {
                                         onEachFeature={(feature, layer) => {
                                             layer.options.interactive = false;
                                         }}
+                                    />
+                                );
+                            }
+
+                            // Hípico: sin relleno, líneas punteadas vibrantes
+                            if (["area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4"].includes(nombre)) {
+                                return (
+                                    <GeoJSON
+                                        key={`${nombre}-${geoJsonKey}`}
+                                        data={geojsonData[nombre]}
+                                        style={(feature) => {
+                                            const id = feature?.properties?.id;
+                                            const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
+                                            let color = "#ff2020";
+                                            if (poligono?.privado === "publico") color = "#00ff55";
+                                            else if (poligono?.privado === "reserva municipal") color = "#ff8800";
+                                            else if (poligono?.privado === "equipamiento publico") color = "#00ccff";
+                                            return {
+                                                fillColor: "transparent",
+                                                fillOpacity: 0,
+                                                color,
+                                                weight: 2.5,
+                                                opacity: 1,
+                                                dashArray: "6 5",
+                                            };
+                                        }}
+                                        onEachFeature={crearOnEachFeature(nombre)}
                                     />
                                 );
                             }
@@ -1804,8 +1890,13 @@ useEffect(() => {
 
                                         const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
 
-                                        const borde = { color: "rgba(0,0,0,0.55)", weight: 1.5, opacity: 1 };
-                                        const bordeRojo = { color: "#922b21", weight: 0.6, opacity: 0.6 };
+                                        const contornoActivo = capasActivas[`${nombre}contorno`];
+                                        const borde = contornoActivo
+                                            ? { color: "transparent", weight: 0, opacity: 0 }
+                                            : { color: "rgba(0,0,0,0.55)", weight: 1.5, opacity: 1 };
+                                        const bordeRojo = contornoActivo
+                                            ? { color: "transparent", weight: 0, opacity: 0 }
+                                            : { color: "#922b21", weight: 0.6, opacity: 0.6 };
 
                                         // 🔴 no existe
                                         if (!poligono) {
@@ -1814,12 +1905,12 @@ useEffect(() => {
 
                                         // 🟠 reserva municipal
                                         if (poligono.privado === "reserva municipal") {
-                                            return { fillColor: "#e67e22", fillOpacity: 0.72, color: "#ca6f1e", weight: 0.6, opacity: 0.6 };
+                                            return { fillColor: "#e67e22", fillOpacity: 0.72, color: contornoActivo ? "transparent" : "#ca6f1e", weight: contornoActivo ? 0 : 0.6, opacity: contornoActivo ? 0 : 0.6 };
                                         }
 
                                         // 🔵 equipamiento publico
                                         if (poligono.privado === "equipamiento publico") {
-                                            return { fillColor: "#3498db", fillOpacity: 0.72, color: "#2980b9", weight: 0.6, opacity: 0.6 };
+                                            return { fillColor: "#3498db", fillOpacity: 0.72, color: contornoActivo ? "transparent" : "#2980b9", weight: contornoActivo ? 0 : 0.6, opacity: contornoActivo ? 0 : 0.6 };
                                         }
 
                                         // 🔴 privado
@@ -1829,7 +1920,7 @@ useEffect(() => {
 
                                         // 🟢 publico
                                         if (poligono.privado === "publico") {
-                                            return { fillColor: "#27ae60", fillOpacity: 0.72, color: "#1e8449", weight: 0.6, opacity: 0.6 };
+                                            return { fillColor: "#27ae60", fillOpacity: 0.72, color: contornoActivo ? "transparent" : "#1e8449", weight: contornoActivo ? 0 : 0.6, opacity: contornoActivo ? 0 : 0.6 };
                                         }
 
                                         return {
