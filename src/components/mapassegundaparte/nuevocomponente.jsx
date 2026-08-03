@@ -418,6 +418,17 @@ if (layer.getBounds) {
 
         const poligono = buscarPoligonoDB(poligonosGuardados, id, nombreCapa);
 
+        // Planificación Sección Sur: siempre gris inhabilitado
+        if (["PIT", "PLC-C", "PLC-F", "ZPA"].includes(nombreCapa)) {
+            return {
+                fillColor: "#b0b0b0",
+                fillOpacity: 0.55,
+                color: "#787878",
+                weight: 0.8,
+                opacity: 0.7,
+            };
+        }
+
         let fillColor = "white";
         let fillOpacity = 0.2;
 

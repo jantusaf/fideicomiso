@@ -989,8 +989,8 @@ const toggleTodasLasZonas = () => {
         if (verPublicoPrivado) {
             let colorBase = "#9e9e9e";
 
-            if (poligono.privado === "privado") colorBase = "#d32f2f";
-            if (poligono.privado === "publico") colorBase = "#00e000";
+            if (poligono.privado === "privado") colorBase = "#c0392b";
+            if (poligono.privado === "publico") colorBase = "#27ae60";
 
             return {
                 fillColor: colorBase,
@@ -1656,11 +1656,11 @@ useEffect(() => {
                             key={`ZRU Predios La Caja-${geoJsonKey}`}
                             data={geojsonData["ZRU Predios La Caja"]}
                             style={{
-                                fillColor: "#e05c5c",
-                                fillOpacity: 0.72,
-                                color: "red",
-                                weight: 0.4,
-                                opacity: 0.35,
+                                fillColor: "#c0392b",
+                                fillOpacity: 0.65,
+                                color: "#922b21",
+                                weight: 0.6,
+                                opacity: 0.6,
                             }}
                             onEachFeature={crearOnEachFeature("ZRU Predios La Caja")}
                         />
@@ -1674,31 +1674,13 @@ useEffect(() => {
                                 <GeoJSON
                                     key={`${nombre}-${geoJsonKey}`}
                                     data={geojsonData[nombre]}
-                                    style={(feature) => {
-                                        const id = feature.properties?.id;
-
-                                        const poligono = poligonosGuardados.find(
-                                            (p) => String(p.id_mapa) === String(id)
-                                        );
-
-                                        let fillColor = "white";
-                                        let fillOpacity = 0.2;
-
-                                        if (poligono) {
-                                            const sub = poligono.subclasificacion;
-                                            fillColor = coloresPorSubclasificacion[sub] || "gray";
-                                            fillOpacity = 0.8;
-                                        }
-
-                                        const isGray2 = fillColor === "gray";
-                                        return {
-                                            fillColor,
-                                            weight: isGray2 ? 0 : 1,
-                                            opacity: isGray2 ? 0 : 0.5,
-                                            color: isGray2 ? "transparent" : "black",
-                                            fillOpacity,
-                                        };
-                                    }}
+                                    style={() => ({
+                                        fillColor: "#b0b0b0",
+                                        fillOpacity: 0.8,
+                                        color: "#4a4a4a",
+                                        weight: 2,
+                                        opacity: 1,
+                                    })}
                                     onEachFeature={crearOnEachFeature(nombre)}
                                 />
                             )
@@ -1738,11 +1720,11 @@ useEffect(() => {
                                         key={`${nombre}-${geoJsonKey}`}
                                         data={geojsonData[nombre]}
                                         style={{
-                                            fillColor: "#e05c5c",
-                                            fillOpacity: 0.72,
-                                            color: "red",
-                                            weight: 0.4,
-                                            opacity: 0.35,
+                                            fillColor: "#c0392b",
+                                            fillOpacity: 0.65,
+                                            color: "#922b21",
+                                            weight: 0.6,
+                                            opacity: 0.6,
                                         }}
                                         onEachFeature={crearOnEachFeature(nombre)}
                                     />
@@ -1797,14 +1779,14 @@ useEffect(() => {
 
                                             // UE2/3: colores por disponibilidad (privado)
                                             if (poligono?.privado === "reserva municipal")
-                                                return { fillColor: "#e08c3a", fillOpacity: 0.72, color: "#e08c3a", weight: 0.4, opacity: 0.35 };
+                                                return { fillColor: "#e67e22", fillOpacity: 0.72, color: "#ca6f1e", weight: 0.6, opacity: 0.6 };
                                             if (poligono?.privado === "equipamiento publico")
-                                                return { fillColor: "#d4c83a", fillOpacity: 0.72, color: "#d4c83a", weight: 0.4, opacity: 0.35 };
+                                                return { fillColor: "#3498db", fillOpacity: 0.72, color: "#2980b9", weight: 0.6, opacity: 0.6 };
                                             if (poligono?.privado === "privado")
-                                                return { fillColor: "#e05c5c", fillOpacity: 0.72, color: "red", weight: 0.4, opacity: 0.35 };
+                                                return { fillColor: "#c0392b", fillOpacity: 0.65, color: "#922b21", weight: 0.6, opacity: 0.6 };
                                             if (poligono?.privado === "publico")
-                                                return { fillColor: "#5db862", fillOpacity: 0.72, color: "green", weight: 0.4, opacity: 0.35 };
-                                            return { fillColor: "#5db862", fillOpacity: 0.72, color: "green", weight: 0.4, opacity: 0.35 };
+                                                return { fillColor: "#27ae60", fillOpacity: 0.72, color: "#1e8449", weight: 0.6, opacity: 0.6 };
+                                            return { fillColor: "#27ae60", fillOpacity: 0.72, color: "#1e8449", weight: 0.6, opacity: 0.6 };
                                         }
 
                                         if (nombre === "unidad-ejecutora2y3" || nombre === "invico2") {
@@ -1823,31 +1805,31 @@ useEffect(() => {
                                         const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
 
                                         const borde = { color: "rgba(0,0,0,0.55)", weight: 1.5, opacity: 1 };
-                                        const bordeRojo = { color: "red", weight: 0.4, opacity: 0.35 };
+                                        const bordeRojo = { color: "#922b21", weight: 0.6, opacity: 0.6 };
 
                                         // 🔴 no existe
                                         if (!poligono) {
-                                            return { fillColor: "#e05c5c", fillOpacity: 0.72, ...bordeRojo };
+                                            return { fillColor: "#c0392b", fillOpacity: 0.65, ...bordeRojo };
                                         }
 
                                         // 🟠 reserva municipal
                                         if (poligono.privado === "reserva municipal") {
-                                            return { fillColor: "#e08c3a", fillOpacity: 0.72, color: "#e08c3a", weight: 0.4, opacity: 0.35 };
+                                            return { fillColor: "#e67e22", fillOpacity: 0.72, color: "#ca6f1e", weight: 0.6, opacity: 0.6 };
                                         }
 
-                                        // 🟡 equipamiento publico
+                                        // 🔵 equipamiento publico
                                         if (poligono.privado === "equipamiento publico") {
-                                            return { fillColor: "#d4c83a", fillOpacity: 0.72, color: "#d4c83a", weight: 0.4, opacity: 0.35 };
+                                            return { fillColor: "#3498db", fillOpacity: 0.72, color: "#2980b9", weight: 0.6, opacity: 0.6 };
                                         }
 
                                         // 🔴 privado
                                         if (poligono.privado === "privado") {
-                                            return { fillColor: "#e05c5c", fillOpacity: 0.72, ...bordeRojo };
+                                            return { fillColor: "#c0392b", fillOpacity: 0.65, ...bordeRojo };
                                         }
 
                                         // 🟢 publico
                                         if (poligono.privado === "publico") {
-                                            return { fillColor: "#5db862", fillOpacity: 0.72, color: "green", weight: 0.4, opacity: 0.35 };
+                                            return { fillColor: "#27ae60", fillOpacity: 0.72, color: "#1e8449", weight: 0.6, opacity: 0.6 };
                                         }
 
                                         return {
