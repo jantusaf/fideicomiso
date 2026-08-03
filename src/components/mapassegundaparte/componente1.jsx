@@ -735,7 +735,7 @@ const toggleTodasLasZonas = () => {
 
     const crearOnEachFeature = (nombreCapa) => (feature, layer) => {
         layer.on({ click: handleFeatureClick });
-        if (nombreCapa === "Barrios" || nombreCapa === "rutas1") return;
+        if (["Barrios", "rutas1", "area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4"].includes(nombreCapa)) return;
         layer.bindTooltip(() => {
             if (mostrarEtiquetasRef.current) return "";
             const id =
@@ -1781,15 +1781,15 @@ useEffect(() => {
                                         style={(feature) => {
                                             const id = feature?.properties?.id;
                                             const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
-                                            let color = "#ff2020";
-                                            if (poligono?.privado === "publico") color = "#00ff55";
-                                            else if (poligono?.privado === "reserva municipal") color = "#ff8800";
-                                            else if (poligono?.privado === "equipamiento publico") color = "#00ccff";
+                                            let color = "#ff0000";
+                                            if (poligono?.privado === "publico") color = "#00ff00";
+                                            else if (poligono?.privado === "reserva municipal") color = "#ff6600";
+                                            else if (poligono?.privado === "equipamiento publico") color = "#00eeff";
                                             return {
                                                 fillColor: "transparent",
                                                 fillOpacity: 0,
                                                 color,
-                                                weight: 2.5,
+                                                weight: 3.5,
                                                 opacity: 1,
                                                 dashArray: "6 5",
                                             };
@@ -1959,6 +1959,44 @@ useEffect(() => {
                             );
                         })
                     }
+
+                    {/* Labels de dato1 para capas hípico/clubes al hacer zoom */}
+                    {zoomActual >= 16 && ["area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4"].map((capa) => {
+                        if (!capasActivas[capa] && !capasActivas.clubesHipico && !capasActivas[`${capa}contorno`]) return null;
+                        if (!geojsonData[capa]) return null;
+                        return geojsonData[capa].features.map((feature) => {
+                            const id = feature?.properties?.id;
+                            const poligono = buscarPoligonoDB(poligonosGuardados, id, capa);
+                            const dato = poligono?.dato1;
+                            if (!dato) return null;
+                            let center;
+                            try { center = getCentroideAproximado(feature.geometry); } catch { return null; }
+                            if (!center) return null;
+                            return (
+                                <Marker
+                                    key={`label-${capa}-${id}-${geoJsonKey}`}
+                                    position={center}
+                                    interactive={false}
+                                    icon={L.divIcon({
+                                        className: "",
+                                        html: `<div style="
+                                            background: rgba(0,0,0,0.72);
+                                            color: #fff;
+                                            font-size: 11px;
+                                            font-weight: 600;
+                                            padding: 3px 7px;
+                                            border-radius: 4px;
+                                            white-space: nowrap;
+                                            pointer-events: none;
+                                            box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+                                        ">${dato}</div>`,
+                                        iconSize: null,
+                                        iconAnchor: [0, 0],
+                                    })}
+                                />
+                            );
+                        });
+                    })}
 
                    {capasActivas.judicializados &&
     geojsonData.judicializados && (
