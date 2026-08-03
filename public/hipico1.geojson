@@ -1,27 +1,500 @@
 {
-"type": "FeatureCollection",
-"name": "hipico1",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-1" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-2" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-3" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-4" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-5" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-6" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-7" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-8" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-9" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-10" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-11" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-12" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-13" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-14" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-15" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -58.765468230400003, -27.537787270500001, 0.0 ], [ -58.7683768176, -27.535251157499999, 0.0 ], [ -58.770517673299999, -27.535472113800001, 0.0 ], [ -58.770290303499998, -27.537597862599998, 0.0 ], [ -58.769659763600011, -27.542811344, 0.0 ], [ -58.769693061499993, -27.5432444934, 0.0 ], [ -58.76514751, -27.543802557799999, 0.0 ], [ -58.764914736199998, -27.543143648, 0.0 ], [ -58.765610607299998, -27.5422991499, 0.0 ], [ -58.765652912299998, -27.54179391, 0.0 ], [ -58.765158856200003, -27.540074928300001, 0.0 ], [ -58.7650782682, -27.5383980111, 0.0 ], [ -58.765468230400003, -27.537787270500001, 0.0 ] ] ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-16" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-17" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-18" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-19" }, "geometry": { "type": "Polygon", "coordinates": [ ] } },
-{ "type": "Feature", "properties": { "Name": null, "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0", "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 1, "visibility": -1, "drawOrder": null, "icon": null, "id": "areasnuevas-20" }, "geometry": { "type": "Polygon", "coordinates": [ ] } }
-]
+  "type": "FeatureCollection",
+  "name": "hipico1",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-1"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-2"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-3"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-4"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-5"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-6"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-7"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-8"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-9"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-10"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-11"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-12"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-13"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-14"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-15"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -58.7654682304,
+              -27.5377872705,
+              0
+            ],
+            [
+              -58.7683768176,
+              -27.5352511575,
+              0
+            ],
+            [
+              -58.7705176733,
+              -27.5354721138,
+              0
+            ],
+            [
+              -58.7702903035,
+              -27.5375978626,
+              0
+            ],
+            [
+              -58.76965976360001,
+              -27.542811344,
+              0
+            ],
+            [
+              -58.76969306149999,
+              -27.5432444934,
+              0
+            ],
+            [
+              -58.76514751,
+              -27.5438025578,
+              0
+            ],
+            [
+              -58.7649147362,
+              -27.543143648,
+              0
+            ],
+            [
+              -58.7656106073,
+              -27.5422991499,
+              0
+            ],
+            [
+              -58.7656529123,
+              -27.54179391,
+              0
+            ],
+            [
+              -58.7651588562,
+              -27.5400749283,
+              0
+            ],
+            [
+              -58.7650782682,
+              -27.5383980111,
+              0
+            ],
+            [
+              -58.7654682304,
+              -27.5377872705,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-16"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-17"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-18"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-19"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": null,
+        "description": "DIVISION<BR><BR><B>ELEVATION</B> = 0",
+        "timestamp": null,
+        "begin": null,
+        "end": null,
+        "altitudeMode": "relativeToGround",
+        "tessellate": -1,
+        "extrude": 1,
+        "visibility": -1,
+        "drawOrder": null,
+        "icon": null,
+        "id": "hipico1-20"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": []
+      }
+    }
+  ]
 }

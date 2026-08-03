@@ -665,13 +665,9 @@ const toggleTodasLasZonas = () => {
 
     // match recomendado: id_mapa + capa
     const buscarPoligonoDB = (arr, id, capa) => {
-        const matchExacto = (arr || []).find(
+        return (arr || []).find(
             (p) => String(p.id_mapa) === String(id) && String(p.capa || "") === String(capa || "")
-        );
-        if (matchExacto) return matchExacto;
-
-        const fallback = (arr || []).find((p) => String(p.id_mapa) === String(id));
-        return fallback || null;
+        ) || null;
     };
 
 
