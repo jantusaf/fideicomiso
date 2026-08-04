@@ -118,11 +118,11 @@ export default function MenuIzq2({ children }) {
       icon: <GroupIcon style={{ color: "#1a303e" }} />,
       path: '/usuario2/clientesic3'
     },
-    {
-      text: 'Lotes',
-      icon: <NfcIcon style={{ color: "#1a303e" }} />,
-      path: '/usuario2/lotes',
-    },
+    // {
+    //   text: 'Lotes',
+    //   icon: <NfcIcon style={{ color: "#1a303e" }} />,
+    //   path: '/usuario2/lotes',
+    // },
 
     {
       text: 'Extracto',
@@ -159,14 +159,14 @@ export default function MenuIzq2({ children }) {
       path: '/usuario2/aprobacionesdepagos'
     },*/
     {
-      text: 'Mapas',
+      text: 'Mapas IC3 - PIT',
       icon: <div><Badge color="error">
         <TravelExploreIcon style={{ color: "#1a303e" }} />
       </Badge></div>,
       path: '/usuario2/mapas'
     },
     {
-      text: 'Mapas 2',
+      text: 'Mapa SC',
       icon: <div><Badge color="error">
         <TravelExploreIcon style={{ color: "#1a303e" }} />
       </Badge></div>,
