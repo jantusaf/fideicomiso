@@ -1200,34 +1200,67 @@ color:#777;
    TOGGLE MAPA / SATELITE
 ========================= */
 
+.tipo-mapa-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+  margin-bottom: 6px;
+}
+
 .tipo-mapa-toggle {
   display: flex;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid #d1d5db;
+  gap: 8px;
   width: 100%;
   margin-top: 2px;
 }
 
 .tipo-mapa-btn {
   flex: 1;
-  padding: 9px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 6px 8px;
   font-size: 13px;
-  font-weight: 600;
-  border: none;
-  background: #f3f4f6;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
   color: #6b7280;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: border-color 0.15s, background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.tipo-mapa-btn:hover {
+  border-color: #0097a7;
+  background: #f0fdfe;
+  color: #0097a7;
 }
 
 .tipo-mapa-btn.activo {
+  border-color: #0097a7;
   background: linear-gradient(135deg, #0a3b4f, #148d8d);
   color: white;
+  box-shadow: 0 2px 8px rgba(0,151,167,0.25);
 }
 
-.tipo-mapa-btn:first-child {
-  border-right: 1px solid #d1d5db;
+.tipo-mapa-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.tipo-mapa-nombre {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.tipo-mapa-desc {
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.75;
+  line-height: 1;
 }
 
 /* =========================

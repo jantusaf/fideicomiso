@@ -1058,18 +1058,23 @@ useEffect(() => {
 
                     <div className="grupo-titulo">VISUALIZACIÓN</div>
                     <div className="capa-item">
+                        <div className="tipo-mapa-label">Tipo de vista</div>
                         <div className="tipo-mapa-toggle">
                             <button
                                 className={`tipo-mapa-btn${tipoMapa === "normal" ? " activo" : ""}`}
                                 onClick={() => setTipoMapa("normal")}
                             >
-                                Mapa
+                                <span className="tipo-mapa-icon">🗺️</span>
+                                <span className="tipo-mapa-nombre">Mapa</span>
+                                <span className="tipo-mapa-desc">Calles y rutas</span>
                             </button>
                             <button
                                 className={`tipo-mapa-btn${tipoMapa === "satelite" ? " activo" : ""}`}
                                 onClick={() => setTipoMapa("satelite")}
                             >
-                                Satélite
+                                <span className="tipo-mapa-icon">🛰️</span>
+                                <span className="tipo-mapa-nombre">Satélite</span>
+                                <span className="tipo-mapa-desc">Vista aérea</span>
                             </button>
                         </div>
                     </div>
@@ -1837,13 +1842,15 @@ useEffect(() => {
                                         const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
 
                                         if (["unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3"].includes(nombre)) {
+                                            // privado tiene prioridad sobre subclasificacion
+                                            if (poligono?.privado === "reserva municipal") return { ...DASH, color: "#F227F5" };
+                                            if (poligono?.privado === "equipamiento publico") return { ...DASH, color: "#00eeff" };
+                                            if (poligono?.privado === "privado") return { ...DASH, color: "#ff0000" };
+                                            if (poligono?.privado === "publico") return { ...DASH, color: "#00ff00" };
                                             if (nombre === "unidad-ejecutora1") {
                                                 const fillColor = poligono ? (coloresPorSubclasificacion[poligono.subclasificacion] || "#cccccc") : "#cccccc";
                                                 return { ...DASH, color: fillColor };
                                             }
-                                            if (poligono?.privado === "reserva municipal") return { ...DASH, color: "#F227F5" };
-                                            if (poligono?.privado === "equipamiento publico") return { ...DASH, color: "#00eeff" };
-                                            if (poligono?.privado === "privado") return { ...DASH, color: "#ff0000" };
                                             return { ...DASH, color: "#00ff00" };
                                         }
 
