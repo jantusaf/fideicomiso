@@ -1259,8 +1259,6 @@ useEffect(() => {
       {[
         { key: "invicoresidencial", label: "Invico - Residencial" },
         { key: "invico2", label: "Invico 2" },
-        { key: "area2contorno", label: "Zona Clubes/Gremio B/Traza (contorno)" },
-        { key: "area4contorno", label: "Zona Clubes/Gremio S/Traza (contorno)" },
         { key: "mensura31548Unuevo", label: "Mensura 31548-U" },
         { key: "Mensura30922U", label: "Mensura 30922-U" },
         { key: "zonaesperanza", label: "Zona Esperanza" },
@@ -1886,9 +1884,17 @@ useEffect(() => {
                         })
                     }
 
-                    {/* Labels de dato1 para capas hípico/clubes al hacer zoom */}
-                    {zoomActual >= 16 && ["area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4"].map((capa) => {
-                        if (!capasActivas[capa] && !capasActivas.clubesHipico && !capasActivas[`${capa}contorno`]) return null;
+                    {/* Labels de dato1 — solo capas de zonas */}
+                    {zoomActual >= 16 && [
+                        "ic3", "ic42", "ib2", "ib3", "area5", "ib5", "area6",
+                        "invicoresidencial", "invicomontana", "parc1", "parc2", "parc3",
+                        "area1", "area2", "zonaesperanza", "area4",
+                        "mensura31548Unuevo", "Mensura30922U",
+                        "nuevazona", "ejercitoarg",
+                        "hipico1", "hipico2", "hipico3", "hipico4",
+                        "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3",
+                    ].map((capa) => {
+                        if (!capasActivas[capa] && !capasActivas.clubesHipico) return null;
                         if (!geojsonData[capa]) return null;
                         return geojsonData[capa].features.map((feature) => {
                             const id = feature?.properties?.id;

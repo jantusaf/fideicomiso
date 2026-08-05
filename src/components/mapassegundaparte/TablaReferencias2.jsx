@@ -13,22 +13,22 @@ const TablaReferencias2 = () => {
         <div className="refSectionTitle">ESTADOS</div>
 
         <div className="refRow">
-          <div className="refSwatch" style={{ background: "#61e268" }} />
+          <div className="refSwatch" style={{ background: "transparent", border: "2.5px dashed #00ff00" }} />
           <div className="refText">Disponible</div>
         </div>
 
         <div className="refRow">
-          <div className="refSwatch" style={{ background: "#f04e4e" }} />
+          <div className="refSwatch" style={{ background: "transparent", border: "2.5px dashed #ff0000" }} />
           <div className="refText">No disponible</div>
         </div>
 
         <div className="refRow">
-          <div className="refSwatch" style={{ background: "#f38c26" }} />
+          <div className="refSwatch" style={{ background: "transparent", border: "2.5px dashed #F227F5" }} />
           <div className="refText">Reserva municipal</div>
         </div>
 
         <div className="refRow">
-          <div className="refSwatch" style={{ background: "#faf63b" }} />
+          <div className="refSwatch" style={{ background: "transparent", border: "2.5px dashed #00eeff" }} />
           <div className="refText">Equipamiento público</div>
         </div>
       </div>

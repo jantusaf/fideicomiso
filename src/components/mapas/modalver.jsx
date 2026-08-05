@@ -1,85 +1,87 @@
-// DialogComponent.js
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import Formulario from './formulariolotes'
-import Componentever from './componenteinfo'
-
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Formulario from './formulariolotes';
+import Componentever from './componenteinfo';
 
 const DialogComponent = forwardRef((props, ref) => {
   const [open, setOpen] = useState(false);
   const [nivel, setNivel] = useState(false);
 
-
   const getClients = async () => {
-
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setNivel(user.nivel)
-
-
+      const user = JSON.parse(loggedUserJSON);
+      setNivel(user.nivel);
     }
-  }
+  };
 
-
-
-  // Función para abrir el diálogo
   const openDialog = () => {
     setOpen(true);
-    getClients()
+    getClients();
   };
 
-  // Función para cerrar el diálogo
-  const closeDialog = () => {
-    setOpen(false);
-  };
+  const closeDialog = () => setOpen(false);
 
-  // Permite al componente padre llamar a openDialog desde el ref
-  useImperativeHandle(ref, () => ({
-    openDialog,
-    closeDialog, // También puedes exponer la función closeDialog si es necesario
-  }), []); // Asegura que esto se ejecute solo una vez
+  useImperativeHandle(ref, () => ({ openDialog, closeDialog }), []);
 
   return (
-    <Dialog open={open} onClose={closeDialog} maxWidth={"110%"}>
+    <Dialog
+      open={open}
+      onClose={closeDialog}
+      maxWidth="sm"
+      fullWidth
+      PaperProps={{
+        sx: {
+          borderRadius: 3,
+          boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
+          overflow: 'hidden',
+        }
+      }}
+    >
+      {/* Header */}
+      <div style={{
+        background: 'linear-gradient(135deg, #0097a7 0%, #006064 100%)',
+        padding: '18px 20px 16px 24px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <LocationOnIcon style={{ color: '#fff', fontSize: 22 }} />
+          <span style={{ color: '#fff', fontWeight: 700, fontSize: 17, letterSpacing: 0.3 }}>
+            {nivel == 4 ? 'Agregar detalles' : 'Info del lote'}
+          </span>
+        </div>
+        <IconButton onClick={closeDialog} size="small" sx={{ color: 'rgba(255,255,255,0.8)', '&:hover': { color: '#fff', background: 'rgba(255,255,255,0.15)' } }}>
+          <CloseIcon fontSize="small" />
+        </IconButton>
+      </div>
 
-
-      {nivel ? <>
-        {nivel == 4 ? <>
-          <DialogTitle>"Agregar detalles"</DialogTitle>
-          <DialogContent>
-            <Formulario
-              getClients={props.getClients}
-              info={props.info}
-              mapa={props.mapa}
-              cerrar={() => {
-                setOpen(false);
-              }}
-            />
-          </DialogContent>
-        </> : <>
-          <DialogTitle>{"Info del lote"}</DialogTitle>
-          <DialogContent>
+      <DialogContent sx={{ p: 0 }}>
+        {nivel ? (
+          nivel == 4 ? (
+            <div style={{ padding: '20px 24px' }}>
+              <Formulario
+                getClients={props.getClients}
+                info={props.info}
+                mapa={props.mapa}
+                cerrar={closeDialog}
+              />
+            </div>
+          ) : (
             <Componentever
-            nivel={nivel}
+              nivel={nivel}
               info={props.info}
               mapa={props.mapa}
-              cerrar={() => {
-                setOpen(false);
-              }} />  </DialogContent>
-        </>}
-
-      </> : <></>}
-      {props.children}
-      {props.info}
-
-
-
+              cerrar={closeDialog}
+            />
+          )
+        ) : null}
+      </DialogContent>
     </Dialog>
   );
 });
