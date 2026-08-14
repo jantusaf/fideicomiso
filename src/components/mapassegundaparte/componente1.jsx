@@ -101,6 +101,7 @@ const MapaConCapas = () => {
         ejercitoarg: false,
         area2contorno: false,
         area4contorno: false,
+        usosuelopit: false,
         clubesHipico: false,
         hipico1: false,
         hipico2: false,
@@ -172,6 +173,7 @@ const toggleTodasLasZonas = () => {
     hipico2: nuevoEstado,
     hipico3: nuevoEstado,
     hipico4: nuevoEstado,
+    usosuelopit: nuevoEstado,
     ...clavesZonas.reduce((acc, key) => {
       acc[key] = nuevoEstado;
       return acc;
@@ -223,7 +225,6 @@ const toggleTodasLasZonas = () => {
         "PIT-Parque Industrial Tecnologico - FASE 3",
         "PLC-Planta de Liquidos Cloacales",
         "PLC-Zona Fuelle",
-        "ZPA-Zona de Proteccion Ambiental-Reserva Natural Santa Catalina",
         // NUEVAS REFERENCIAS
         "I",
         "II",
@@ -298,7 +299,6 @@ const toggleTodasLasZonas = () => {
         "PIT-Parque Industrial Tecnologico - FASE 3": "#d0d0d0",
         "PLC-Planta de Liquidos Cloacales": "#c85b01",
         "PLC-Zona Fuelle": "#f1a465",
-        "ZPA-Zona de Proteccion Ambiental-Reserva Natural Santa Catalina": "#7a9e6e",
         "Reserva Municipal": "#e08c3a",
         "Reserva Municipal I": "#e08c3a",
         "Reserva Municipal II": "#e08c3a",
@@ -345,8 +345,7 @@ const toggleTodasLasZonas = () => {
     const [subCapasSur, setSubCapasSur] = useState({
         PIT: false,
         "PLC-C": false,
-        "PLC-F": false,
-        ZPA: false
+        "PLC-F": false
     });
     const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg", "hipico1", "hipico2", "hipico3", "hipico4"].includes(nombreCapaSeleccionada
     );
@@ -446,6 +445,13 @@ const toggleTodasLasZonas = () => {
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "ejercitoarg");
                 setGeojsonData((prev) => ({ ...prev, ejercitoarg: normalizado }));
+            })
+            .catch(console.error);
+        fetch("/usosuelopit.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "usosuelopit");
+                setGeojsonData((prev) => ({ ...prev, usosuelopit: normalizado }));
             })
             .catch(console.error);
         ["hipico1", "hipico2", "hipico3", "hipico4"].forEach((nombre) => {
@@ -632,10 +638,9 @@ const toggleTodasLasZonas = () => {
         ];
 
         const capasSeccionSur = [
-            { nombre: "PIT", archivo: "pitfases.geojson" },
+            { nombre: "PIT", archivo: "pitactualizado.geojson" },
             { nombre: "PLC-C", archivo: "plc-c.geojson" },
             { nombre: "PLC-F", archivo: "plc-f.geojson" },
-            { nombre: "ZPA", archivo: "zpa.geojson" },
         ];
 
         capasSeccionSur.forEach((capa) => {
@@ -731,7 +736,7 @@ const toggleTodasLasZonas = () => {
 
     const crearOnEachFeature = (nombreCapa) => (feature, layer) => {
         layer.on({ click: handleFeatureClick });
-        if (["Barrios", "rutas1", "area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4"].includes(nombreCapa)) return;
+        if (["Barrios", "rutas1", "area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4", "usosuelopit"].includes(nombreCapa)) return;
         layer.bindTooltip(() => {
             if (mostrarEtiquetasRef.current) return "";
             const id =
@@ -904,7 +909,7 @@ const toggleTodasLasZonas = () => {
             <>
                 {Object.entries(geojsonData).map(([nombreCapa, geojson]) => {
                     const esSubcapa = nombreCapa.startsWith("planespecial");
-                    const esSubcapaSur = ["PIT", "PLC-C", "PLC-F", "ZPA"].includes(nombreCapa);
+                    const esSubcapaSur = ["PIT", "PLC-C", "PLC-F"].includes(nombreCapa);
 
                     const estaActiva = esSubcapa
                         ? subCapasActivas[nombreCapa]
@@ -1330,6 +1335,18 @@ useEffect(() => {
     </label>
   </div>
 
+  {/* PIT Fase 1 - Usos de suelo */}
+  <div className="capa-item">
+    <label>
+      <input
+        type="checkbox"
+        checked={!!capasActivas.usosuelopit}
+        onChange={() => toggleCapaPrincipal("usosuelopit")}
+      />
+      <strong>PIT FASE 1 SUELO</strong>
+    </label>
+  </div>
+
   {/* Clubes Hípico */}
   <div className="capa-item">
     <label>
@@ -1744,6 +1761,43 @@ useEffect(() => {
                                     onEachFeature={crearOnEachFeature(nombre)}
                                 />
                             )
+                    )}
+
+                    {/* PIT FASE 1 - Usos de suelo */}
+                    {capasActivas.usosuelopit && geojsonData.usosuelopit && (
+                        <GeoJSON
+                            key={`usosuelopit-${geoJsonKey}`}
+                            data={geojsonData.usosuelopit}
+                            style={(feature) => {
+                                const uso  = (feature?.properties?.uso         || "").toUpperCase();
+                                const desc = (feature?.properties?.description || "").toUpperCase();
+                                const layer = (feature?.properties?.layer      || "").toUpperCase();
+                                const hayLog = uso.includes("LOG") || desc.includes("LOG");
+                                let color;
+                                if (layer.includes("EQUIPAMIENTO")) {
+                                    color = "#aaaaaa";
+                                } else if (uso.includes("INDUSTRIAL")) {
+                                    color = "#8860b8";
+                                } else if (uso.includes("COMERCIAL")) {
+                                    color = "#d4b800";
+                                } else if (hayLog) {
+                                    color = "#4a7bd4";
+                                } else if (uso.includes("TECNOL")) {
+                                    color = "#d4504a";
+                                } else {
+                                    color = "#999999";
+                                }
+                                return {
+                                    fillColor: color,
+                                    fillOpacity: 0.28,
+                                    color: color,
+                                    weight: 3,
+                                    opacity: 1,
+                                    dashArray: "6 5",
+                                };
+                            }}
+                            onEachFeature={crearOnEachFeature("usosuelopit")}
+                        />
                     )}
 
                     {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "hipico1", "hipico2", "hipico3", "hipico4"].map(
