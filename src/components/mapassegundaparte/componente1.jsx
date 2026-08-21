@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { MapContainer, TileLayer, GeoJSON, Marker, useMap } from "react-leaflet";
 import { useMapEvents } from "react-leaflet";
 
@@ -102,6 +102,10 @@ const MapaConCapas = () => {
         area2contorno: false,
         area4contorno: false,
         usosuelopit: false,
+        lotespit: false,
+        pitdisponible: false,
+        pitnodisponible: false,
+        pitreservado: false,
         clubesHipico: false,
         hipico1: false,
         hipico2: false,
@@ -152,7 +156,7 @@ const clavesZonas = [
   "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "area1", "area2", "zonaesperanza", "area4",
   "mensura31548Unuevo", "Mensura30922U", "fraccionIE", "clubesHipico",
 ];
-const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras", "fraccionIG", "ZRU Predios La Caja", "Planificación Sección Sur"].every((key) => !!capasActivas[key]);
+const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras", "fraccionIG", "ZRU Predios La Caja"].every((key) => !!capasActivas[key]);
 const zonasActivasCount = clavesZonas.filter((k) => !!capasActivas[k]).length;
 const planEspecialCount = Object.values(subCapasActivas).filter(Boolean).length;
 const otrosCount = ["calleYRutas", "zona_municipal", "Manzanas", "Zonificación Sta Catalina"].filter((k) => !!capasActivas[k]).length;
@@ -166,20 +170,17 @@ const toggleTodasLasZonas = () => {
     otras: nuevoEstado,
     fraccionIG: nuevoEstado,
     "ZRU Predios La Caja": nuevoEstado,
-    "Planificación Sección Sur": nuevoEstado,
     nuevazona: nuevoEstado,
     ejercitoarg: nuevoEstado,
     hipico1: nuevoEstado,
     hipico2: nuevoEstado,
     hipico3: nuevoEstado,
     hipico4: nuevoEstado,
-    usosuelopit: nuevoEstado,
     ...clavesZonas.reduce((acc, key) => {
       acc[key] = nuevoEstado;
       return acc;
     }, {}),
   }));
-  setSubCapasSur((prev) => Object.fromEntries(Object.keys(prev).map((k) => [k, nuevoEstado])));
 };
 
     const opcionesSubclasificacion = [
@@ -337,6 +338,7 @@ const toggleTodasLasZonas = () => {
     const [privado, setPrivado] = useState("");
     const [superficie, setSuperficie] = useState("");
     const [tipoMapa, setTipoMapa] = useState("satelite");
+    const [modalPIT, setModalPIT] = useState(null); // { mz, lote, sup, medidas, estado, empresa, acceso, servicios, descripcionRaw, color }
     const [panelColapsado, setPanelColapsado] = useState(false);
     const [geoJsonKey, setGeoJsonKey] = useState(0);
     const [mensura, setMensura] = useState("");
@@ -347,7 +349,7 @@ const toggleTodasLasZonas = () => {
         "PLC-C": false,
         "PLC-F": false
     });
-    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg", "hipico1", "hipico2", "hipico3", "hipico4"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg", "hipico1", "hipico2", "hipico3", "hipico4"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
 
@@ -454,6 +456,22 @@ const toggleTodasLasZonas = () => {
                 setGeojsonData((prev) => ({ ...prev, usosuelopit: normalizado }));
             })
             .catch(console.error);
+        fetch("/lotespit.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "lotespit");
+                setGeojsonData((prev) => ({ ...prev, lotespit: normalizado }));
+            })
+            .catch(console.error);
+        ["pitdisponible", "pitnodisponible", "pitreservado"].forEach((nombre) => {
+            fetch(`/${nombre}.geojson`)
+                .then((r) => r.json())
+                .then((data) => {
+                    const normalizado = normalizarGeojsonConIds(data, nombre);
+                    setGeojsonData((prev) => ({ ...prev, [nombre]: normalizado }));
+                })
+                .catch(console.error);
+        });
         ["hipico1", "hipico2", "hipico3", "hipico4"].forEach((nombre) => {
             fetch(`/${nombre}.geojson`)
                 .then((r) => r.json())
@@ -513,6 +531,13 @@ const toggleTodasLasZonas = () => {
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "mensura31548Unuevo");
                 setGeojsonData((prev) => ({ ...prev, mensura31548Unuevo: normalizado }));
+            })
+            .catch(console.error);
+        fetch("/verdumzalazar.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "verdumzalazar");
+                setGeojsonData((prev) => ({ ...prev, verdumzalazar: normalizado }));
             })
             .catch(console.error);
 
@@ -734,9 +759,14 @@ const toggleTodasLasZonas = () => {
         layer.on({ click: handleFeatureClick });
     };
 
+    const sinInteraccion = ["Barrios", "rutas1", "area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4", "usosuelopit", "verdumzalazar", "lotespit"];
     const crearOnEachFeature = (nombreCapa) => (feature, layer) => {
+        if (sinInteraccion.includes(nombreCapa)) {
+            layer.options.interactive = false;
+            return;
+        }
         layer.on({ click: handleFeatureClick });
-        if (["Barrios", "rutas1", "area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4", "usosuelopit"].includes(nombreCapa)) return;
+        if (["Barrios", "rutas1", "area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4", "usosuelopit", "verdumzalazar"].includes(nombreCapa)) return;
         layer.bindTooltip(() => {
             if (mostrarEtiquetasRef.current) return "";
             const id =
@@ -1000,7 +1030,7 @@ const toggleTodasLasZonas = () => {
 
         const poligono = buscarPoligonoDB(poligonosGuardados, id, nombreCapa);
 
-        const pesoBorde = ["ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial","invico2", "restante"].includes(nombreCapa) ? 3 : 2;
+        const pesoBorde = ["ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "invicoresidencial","invico2", "restante"].includes(nombreCapa) ? 3 : 2;
 
         // SIN datos en base
         if (!poligono) {
@@ -1048,6 +1078,75 @@ useEffect(() => {
 }, [mapa]);
     return (
         <div className="mapa-contenedor">
+            {/* Modal info lote PIT */}
+            {modalPIT && (
+                <div onClick={() => setModalPIT(null)} style={{
+                    position:"fixed", inset:0, zIndex:9999,
+                    background:"rgba(0,0,0,0.45)", display:"flex",
+                    alignItems:"center", justifyContent:"center",
+                }}>
+                    <div onClick={e => e.stopPropagation()} style={{
+                        background:"#fff", borderRadius:14, width:360, maxWidth:"92vw",
+                        boxShadow:"0 8px 40px rgba(0,0,0,0.22)", overflow:"hidden",
+                        fontFamily:"inherit",
+                    }}>
+                        {/* Cabecera coloreada */}
+                        <div style={{
+                            background: modalPIT.color, padding:"16px 20px 14px",
+                            display:"flex", alignItems:"center", justifyContent:"space-between",
+                        }}>
+                            <div>
+                                <div style={{color:"#fff", fontWeight:700, fontSize:17, letterSpacing:0.2}}>
+                                    {modalPIT.mz ? `Manzana ${modalPIT.mz}` : "Lote PIT"}
+                                    {modalPIT.lote ? ` · Lote ${modalPIT.lote}` : ""}
+                                </div>
+                                {modalPIT.estado && (
+                                    <div style={{color:"rgba(255,255,255,0.85)", fontSize:12, marginTop:2, fontWeight:500}}>
+                                        {modalPIT.estado}
+                                    </div>
+                                )}
+                            </div>
+                            <button onClick={() => setModalPIT(null)} style={{
+                                background:"rgba(255,255,255,0.25)", border:"none", borderRadius:8,
+                                color:"#fff", fontSize:18, lineHeight:1, width:32, height:32,
+                                cursor:"pointer", fontWeight:700, display:"flex", alignItems:"center", justifyContent:"center",
+                            }}>×</button>
+                        </div>
+                        {/* Cuerpo */}
+                        <div style={{padding:"16px 20px 20px"}}>
+                            {[
+                                { label:"Superficie", value: modalPIT.sup ? `${modalPIT.sup} m²` : null },
+                                { label:"Medidas",    value: modalPIT.medidas },
+                                { label:"Empresa",    value: modalPIT.empresa },
+                            ].filter(r => r.value).map(({ label, value }) => (
+                                <div key={label} style={{
+                                    display:"flex", justifyContent:"space-between",
+                                    padding:"8px 0", borderBottom:"1px solid #f0f0f0",
+                                    fontSize:13,
+                                }}>
+                                    <span style={{color:"#888", fontWeight:600}}>{label}</span>
+                                    <span style={{color:"#222", fontWeight:500, textAlign:"right", maxWidth:"60%"}}>{value}</span>
+                                </div>
+                            ))}
+                            {/* Descripción completa */}
+                            {modalPIT.desc && (
+                                <details style={{marginTop:12}}>
+                                    <summary style={{cursor:"pointer", fontSize:12, color:"#888", fontWeight:600}}>
+                                        Ver ficha completa
+                                    </summary>
+                                    <pre style={{
+                                        marginTop:8, fontSize:11, color:"#555",
+                                        whiteSpace:"pre-wrap", lineHeight:1.6,
+                                        background:"#f8f8f8", borderRadius:6,
+                                        padding:"8px 10px", maxHeight:200, overflowY:"auto",
+                                    }}>{modalPIT.desc}</pre>
+                                </details>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className={`panel-lateral${panelColapsado ? " panel-colapsado" : ""}`}>
 
                 {/* LOGO */}
@@ -1128,6 +1227,112 @@ useEffect(() => {
 
                <div className="grupo-capas">
   <div className="grupo-titulo">ZONAS <span className={`grupo-badge${zonasActivasCount === 0 ? " cero" : ""}`}>{zonasActivasCount}</span></div>
+
+  {/* ── PARQUE INDUSTRIAL TECNOLÓGICO ── */}
+  {(() => {
+    const pitPlanActivo = !!capasActivas["Planificación Sección Sur"];
+    const todoPIT = pitPlanActivo && subCapasSur.PIT && subCapasSur["PLC-C"] && subCapasSur["PLC-F"]
+      && !!capasActivas.pitdisponible && !!capasActivas.pitnodisponible && !!capasActivas.pitreservado
+      && !!capasActivas.usosuelopit && !!capasActivas.lotespit;
+    const toggleTodoPIT = () => {
+      const v = !todoPIT;
+      setCapasActivas(prev => ({ ...prev, "Planificación Sección Sur": v, pitdisponible: v, pitnodisponible: v, pitreservado: v, usosuelopit: v, lotespit: v }));
+      setSubCapasSur(prev => ({ ...prev, PIT: v, "PLC-C": v, "PLC-F": v }));
+    };
+    const togglePlanSur = () => {
+      const v = !(pitPlanActivo && subCapasSur.PIT && subCapasSur["PLC-C"] && subCapasSur["PLC-F"]);
+      setCapasActivas(prev => ({ ...prev, "Planificación Sección Sur": v }));
+      setSubCapasSur(prev => ({ ...prev, PIT: v, "PLC-C": v, "PLC-F": v }));
+    };
+    const toggleLotes = () => {
+      const v = !(capasActivas.pitdisponible && capasActivas.pitnodisponible && capasActivas.pitreservado && capasActivas.lotespit);
+      setCapasActivas(prev => ({ ...prev, pitdisponible: v, pitnodisponible: v, pitreservado: v, lotespit: v }));
+    };
+    const lotesActivos = capasActivas.pitdisponible && capasActivas.pitnodisponible && capasActivas.pitreservado && capasActivas.lotespit;
+    return (
+      <div className="capa-item" style={{borderLeft:"3px solid #1E88E5", paddingLeft:8, marginBottom:6}}>
+        <label>
+          <input type="checkbox" checked={todoPIT} onChange={toggleTodoPIT}/>
+          <strong style={{textTransform:"uppercase", letterSpacing:"0.04em"}}>Parque Industrial Tecnológico</strong>
+        </label>
+        <div className="subcapas">
+          {/* Planificación Sección Sur */}
+          <div>
+            <label>
+              <input type="checkbox"
+                checked={pitPlanActivo && subCapasSur.PIT && subCapasSur["PLC-C"] && subCapasSur["PLC-F"]}
+                onChange={togglePlanSur}/>
+              <strong>Planificación Sección Sur</strong>
+            </label>
+            <div className="subcapas">
+              {[
+                { key: "PIT",   label: "Fases PIT" },
+                { key: "PLC-C", label: "PLC C" },
+                { key: "PLC-F", label: "PLC F" },
+              ].map(({ key, label }) => (
+                <div key={key}>
+                  <label>
+                    <input type="checkbox"
+                      checked={!!subCapasSur[key]}
+                      onChange={() => {
+                        if (!capasActivas["Planificación Sección Sur"])
+                          setCapasActivas(prev => ({ ...prev, "Planificación Sección Sur": true }));
+                        setSubCapasSur(prev => ({ ...prev, [key]: !prev[key] }));
+                      }}/>
+                    {label}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Lotes */}
+          <div>
+            <label>
+              <input type="checkbox" checked={!!lotesActivos} onChange={toggleLotes}/>
+              <strong>Lotes</strong>
+            </label>
+            <div className="subcapas">
+              <div><label>
+                <input type="checkbox" checked={!!capasActivas.lotespit}
+                  onChange={() => toggleCapaPrincipal("lotespit")}/>
+                Trazado lotes
+              </label></div>
+              <div><label>
+                <input type="checkbox" checked={!!capasActivas.pitdisponible}
+                  onChange={() => toggleCapaPrincipal("pitdisponible")}/>
+                <span style={{color:"#16a34a", fontWeight:700}}>● </span>Disponible
+              </label></div>
+              <div><label>
+                <input type="checkbox" checked={!!capasActivas.pitnodisponible}
+                  onChange={() => toggleCapaPrincipal("pitnodisponible")}/>
+                <span style={{color:"#dc2626", fontWeight:700}}>● </span>No disponible
+              </label></div>
+              <div><label>
+                <input type="checkbox" checked={!!capasActivas.pitreservado}
+                  onChange={() => toggleCapaPrincipal("pitreservado")}/>
+                <span style={{color:"#ca8a04", fontWeight:700}}>● </span>Reservado
+              </label></div>
+            </div>
+          </div>
+          {/* Uso de suelo */}
+          <div>
+            <label>
+              <input type="checkbox" checked={!!capasActivas.usosuelopit}
+                onChange={() => toggleCapaPrincipal("usosuelopit")}/>
+              <strong>Uso de Suelo</strong>
+            </label>
+            <div className="subcapas">
+              <div><label>
+                <input type="checkbox" checked={!!capasActivas.usosuelopit}
+                  onChange={() => toggleCapaPrincipal("usosuelopit")}/>
+                Fase 1
+              </label></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  })()}
 
   <div className="capa-item capa-item-todas-zonas">
     <label>
@@ -1294,32 +1499,6 @@ useEffect(() => {
           ZRU
         </label>
       </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={!!capasActivas["Planificación Sección Sur"]}
-            onChange={() => toggleCapaPrincipal("Planificación Sección Sur")}
-          />
-          Planificación Sección Sur
-        </label>
-        {capasActivas["Planificación Sección Sur"] && (
-          <div className="subcapas">
-            {Object.keys(subCapasSur).map(nombre => (
-              <div key={nombre}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={!!subCapasSur[nombre]}
-                    onChange={() => setSubCapasSur(prev => ({ ...prev, [nombre]: !prev[nombre] }))}
-                  />
-                  {nombre}
-                </label>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
     </div>
   </div>
 
@@ -1335,29 +1514,42 @@ useEffect(() => {
     </label>
   </div>
 
-  {/* PIT Fase 1 - Usos de suelo */}
-  <div className="capa-item">
-    <label>
-      <input
-        type="checkbox"
-        checked={!!capasActivas.usosuelopit}
-        onChange={() => toggleCapaPrincipal("usosuelopit")}
-      />
-      <strong>PIT FASE 1 SUELO</strong>
-    </label>
-  </div>
-
-  {/* Clubes Hípico */}
-  <div className="capa-item">
-    <label>
-      <input
-        type="checkbox"
-        checked={!!capasActivas.clubesHipico}
-        onChange={() => toggleCapaPrincipal("clubesHipico")}
-      />
-      <strong>CLUBES (HÍPICO)</strong>
-    </label>
-  </div>
+  {/* ── CLUBES ── */}
+  {(() => {
+    const todosClubes = !!capasActivas.clubesHipico && !!capasActivas.area2 && !!capasActivas.area4;
+    const toggleTodosClubes = () => {
+      const v = !todosClubes;
+      setCapasActivas(prev => ({ ...prev, clubesHipico: v, area2: v, area4: v }));
+      if (v) {
+        setCapasActivas(prev => ({ ...prev, hipico1: true, hipico2: true, hipico3: true, hipico4: true }));
+      }
+    };
+    return (
+      <div className="capa-item" style={{borderLeft:"3px solid #9ca3af", paddingLeft:8, marginTop:4}}>
+        <label>
+          <input type="checkbox" checked={todosClubes} onChange={toggleTodosClubes}/>
+          <strong style={{textTransform:"uppercase", letterSpacing:"0.04em"}}>Clubes</strong>
+        </label>
+        <div className="subcapas">
+          <div><label>
+            <input type="checkbox" checked={!!capasActivas.clubesHipico}
+              onChange={() => toggleCapaPrincipal("clubesHipico")}/>
+            Hípico
+          </label></div>
+          <div><label>
+            <input type="checkbox" checked={!!capasActivas.area2}
+              onChange={() => toggleCapaPrincipal("area2")}/>
+            Zona Clubes B/Traza
+          </label></div>
+          <div><label>
+            <input type="checkbox" checked={!!capasActivas.area4}
+              onChange={() => toggleCapaPrincipal("area4")}/>
+            Zona Clubes S/Traza
+          </label></div>
+        </div>
+      </div>
+    );
+  })()}
 
 </div>
 
@@ -1800,9 +1992,86 @@ useEffect(() => {
                         />
                     )}
 
-                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "hipico1", "hipico2", "hipico3", "hipico4"].map(
+                    {/* Lotes PIT - líneas de división */}
+                    {capasActivas.lotespit && geojsonData.lotespit && (
+                        <GeoJSON
+                            key={`lotespit-${geoJsonKey}`}
+                            data={geojsonData.lotespit}
+                            style={() => ({
+                                color: "#ff6600",
+                                weight: 1.5,
+                                opacity: 0.85,
+                            })}
+                        />
+                    )}
+
+                    {/* PIT Puntos por estado: disponible (verde), no disponible (rojo), reservado (amarillo) */}
+                    {[
+                        { capa: "pitdisponible",    color: "#22c55e", borde: "#15803d" },
+                        { capa: "pitnodisponible",  color: "#ef4444", borde: "#b91c1c" },
+                        { capa: "pitreservado",     color: "#eab308", borde: "#a16207" },
+                    ].map(({ capa, color, borde }) =>
+                        capasActivas[capa] && geojsonData[capa] ? (
+                            <GeoJSON
+                                key={`${capa}-${geoJsonKey}`}
+                                data={geojsonData[capa]}
+                                pointToLayer={(feature, latlng) => {
+                                    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36" width="11" height="16">
+                                        <path d="M12 0C7.16 0 3 4.16 3 9c0 6.75 9 21 9 21s9-14.25 9-21c0-4.84-4.16-9-9-9z" fill="${color}" stroke="${borde}" stroke-width="1.5"/>
+                                        <circle cx="12" cy="9" r="4" fill="white" opacity="0.85"/>
+                                    </svg>`;
+                                    const icon = L.divIcon({
+                                        html: svg,
+                                        className: "",
+                                        iconSize: [11, 16],
+                                        iconAnchor: [5, 16],
+                                        tooltipAnchor: [0, -17],
+                                    });
+                                    return L.marker(latlng, { icon });
+                                }}
+                                onEachFeature={(feature, layer) => {
+                                    const desc = feature.properties.description || "";
+                                    const get = (label) => {
+                                        const m = desc.match(new RegExp(label + "[=:\\t\\s]*([^\\n]+)", "i"));
+                                        return m ? m[1].trim() : null;
+                                    };
+                                    const mz      = get("Mz") || get("Manzana") || get("MZ");
+                                    const lote    = get("Lote");
+                                    const sup     = get("Superficie m2");
+                                    const medidas = get("medidas") || get("MEDIDAS") || get("Medidas");
+                                    const estado  = get("Estado lote");
+                                    const empresa = get("Empresa con Boleto") || get("Empresa con Usufructo") || get("Empresa");
+                                    // Tooltip hover
+                                    const tooltip = [
+                                        mz      ? `<b>Manzana:</b> ${mz}`   : null,
+                                        lote    ? `<b>Lote:</b> ${lote}`     : null,
+                                        sup     ? `<b>Sup.:</b> ${sup} m²`   : null,
+                                        estado  ? `<b>Estado:</b> ${estado}` : null,
+                                        empresa ? `<b>Empresa:</b> ${empresa}`: null,
+                                    ].filter(Boolean).join("<br/>");
+                                    if (tooltip) {
+                                        layer.bindTooltip(tooltip, {
+                                            permanent: false,
+                                            direction: "top",
+                                            className: "sc-tooltipHover",
+                                            sticky: true,
+                                        });
+                                    }
+                                    // Click → modal
+                                    layer.on("click", () => {
+                                        setModalPIT({ mz, lote, sup, medidas, estado, empresa, desc, color });
+                                    });
+                                }}
+                            />
+                        ) : null
+                    )}
+
+                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "hipico1", "hipico2", "hipico3", "hipico4"].map(
                         (nombre) => {
-                            if (!capasActivas[nombre] || !geojsonData[nombre]) return null;
+                            // verdumzalazar se muestra cuando mensura31548Unuevo está activa
+                            if (nombre === "verdumzalazar") {
+                                if (!capasActivas.mensura31548Unuevo || !geojsonData.verdumzalazar) return null;
+                            } else if (!capasActivas[nombre] || !geojsonData[nombre]) return null;
 
                             // ic4 no se pinta como capa propia; ic42 y las UE cubren sus sub-áreas
                             if (nombre === "ic4") return null;
@@ -1950,12 +2219,14 @@ useEffect(() => {
                         "ic3", "ic42", "ib2", "ib3", "area5", "ib5", "area6",
                         "invicoresidencial", "invicomontana", "parc1", "parc2", "parc3",
                         "area1", "area2", "zonaesperanza", "area4",
-                        "mensura31548Unuevo", "Mensura30922U",
+                        "mensura31548Unuevo", "verdumzalazar", "Mensura30922U",
                         "nuevazona", "ejercitoarg",
                         "hipico1", "hipico2", "hipico3", "hipico4",
                         "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3",
                     ].map((capa) => {
-                        if (!capasActivas[capa] && !capasActivas.clubesHipico) return null;
+                        if (capa === "verdumzalazar") {
+                            if (!capasActivas.mensura31548Unuevo) return null;
+                        } else if (!capasActivas[capa] && !capasActivas.clubesHipico) return null;
                         if (!geojsonData[capa]) return null;
                         return geojsonData[capa].features.map((feature) => {
                             const id = feature?.properties?.id;
