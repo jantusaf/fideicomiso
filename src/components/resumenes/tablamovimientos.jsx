@@ -23,6 +23,7 @@ import {
 } from "@mui/material";
 import { Autocomplete } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+import PrintIcon from "@mui/icons-material/Print";
 import { useTemaColores } from "../../context/ModoOscuroContext";
 
 const CONCEPTOS = [];
@@ -133,6 +134,130 @@ const filtered = useMemo(
     }),
   [movimientos, filtros]
 );
+
+const escapeHtml = (valor) =>
+  String(valor ?? "").replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  }[c]));
+
+// Imprime SIEMPRE el listado completo cargado (no el subconjunto filtrado en
+// pantalla), ordenado igual que la tabla, con todas las columnas visibles.
+const imprimirTabla = () => {
+  const filas = [...movimientos].sort((a, b) => {
+    const fechaA = valorFecha(a.fecha);
+    const fechaB = valorFecha(b.fecha);
+    if (fechaA !== fechaB) return fechaB - fechaA;
+    return b.id - a.id;
+  });
+
+  const totalDebito = filas.reduce((acc, m) => acc + (Number(m.debito) || 0), 0);
+  const totalCredito = filas.reduce((acc, m) => acc + (Number(m.credito) || 0), 0);
+
+  const filasHtml = filas
+    .map(
+      (row) => `
+      <tr>
+        <td>${escapeHtml(formatearFecha(row.fecha))}</td>
+        <td>${escapeHtml(row.tipo_operacion)}</td>
+        <td>${escapeHtml(row.descripcion)}</td>
+        <td>${escapeHtml(row.nombre_razon)}</td>
+        <td>${escapeHtml(row.cuil_cuit)}</td>
+        <td class="num debito">${escapeHtml(formatearMoneda(row.debito))}</td>
+        <td class="num credito">${escapeHtml(formatearMoneda(row.credito))}</td>
+        <td>${escapeHtml(row.concepto)}</td>
+        <td>${escapeHtml(row.categoria_general)}</td>
+        <td class="num">${escapeHtml(formatearMoneda(row.saldo))}</td>
+      </tr>`
+    )
+    .join("");
+
+  const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Movimientos - Listado completo</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #0F172A;
+    margin: 24px;
+  }
+  h1 { font-size: 18px; margin: 0 0 2px; color: #083b5c; }
+  .subtitulo { font-size: 11.5px; color: #64748B; margin: 0 0 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 10px; }
+  thead th {
+    background: #083b5c;
+    color: #fff;
+    text-align: left;
+    padding: 6px 6px;
+    font-weight: 700;
+  }
+  tbody td {
+    padding: 4px 6px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #f4f7f9; }
+  td.num { text-align: right; white-space: nowrap; }
+  td.debito { color: #b3564f; }
+  td.credito { color: #15803d; }
+  tfoot td {
+    padding: 8px 6px 0;
+    font-weight: 700;
+    border-top: 2px solid #083b5c;
+  }
+  @page { size: landscape; margin: 12mm; }
+</style>
+</head>
+<body>
+  <h1>Listado completo de movimientos</h1>
+  <p class="subtitulo">
+    Generado el ${new Date().toLocaleString("es-AR")} — ${filas.length} registros cargados
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Tipo</th>
+        <th>Descripción</th>
+        <th>Razón social</th>
+        <th>CUIT/CUIL</th>
+        <th>Débito</th>
+        <th>Crédito</th>
+        <th>Concepto</th>
+        <th>Categoría</th>
+        <th>Saldo</th>
+      </tr>
+    </thead>
+    <tbody>${filasHtml}</tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5">Totales</td>
+        <td class="num debito">${escapeHtml(formatearMoneda(totalDebito))}</td>
+        <td class="num credito">${escapeHtml(formatearMoneda(totalCredito))}</td>
+        <td colspan="3"></td>
+      </tr>
+    </tfoot>
+  </table>
+</body>
+</html>`;
+
+  const ventana = window.open("", "_blank");
+  if (!ventana) return;
+  ventana.document.open();
+  ventana.document.write(html);
+  ventana.document.close();
+  ventana.focus();
+  ventana.onload = () => ventana.print();
+  // Fallback por si onload ya disparó antes de asignarlo
+  setTimeout(() => ventana.print(), 300);
+};
+
 return (
 
 
@@ -155,8 +280,7 @@ return (
     mb: 2,
   }}
 >
-  <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: filtrosActivos ? 1 : 0 }}>
-   
+  <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 1, mb: filtrosActivos ? 1 : 0 }}>
 
     {filtrosActivos && (
       <Button
@@ -174,6 +298,25 @@ return (
         Limpiar filtros
       </Button>
     )}
+
+    <Button
+      size="small"
+      onClick={imprimirTabla}
+      startIcon={<PrintIcon sx={{ fontSize: 15 }} />}
+      sx={{
+        fontSize: 11.5,
+        fontWeight: 700,
+        textTransform: "none",
+        color: "#fff",
+        background: COLOR_TEAL,
+        borderRadius: "8px",
+        px: 1.5,
+        minWidth: "auto",
+        "&:hover": { background: COLOR_TEAL, opacity: 0.9 },
+      }}
+    >
+      Imprimir todo
+    </Button>
   </Box>
 
   <Box

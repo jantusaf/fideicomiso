@@ -6,6 +6,7 @@ import { parseFechaCorta } from "./movimientosUtils";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import ClearIcon from "@mui/icons-material/Clear";
+import PrintIcon from "@mui/icons-material/Print";
 
 import {
   ResponsiveContainer,
@@ -45,6 +46,43 @@ const crearEstilos = (c) => ({
     minHeight: "100vh",
     boxSizing: "border-box",
     background: c.BG_PAGE,
+  },
+
+  pageHeader: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+    flexWrap: "wrap",
+    marginBottom: 18,
+  },
+
+  pageTitle: {
+    margin: 0,
+    fontSize: 19,
+    fontWeight: 800,
+    color: c.TEXT_FUERTE,
+  },
+
+  pageSubtitle: {
+    fontSize: 12.5,
+    color: c.TEXT_MUTED,
+    marginTop: 2,
+  },
+
+  printBtn: {
+    display: "flex",
+    alignItems: "center",
+    gap: 6,
+    border: "none",
+    borderRadius: 10,
+    padding: "9px 16px",
+    fontSize: 13,
+    fontWeight: 700,
+    fontFamily: FONT_FORMAL,
+    color: "#fff",
+    background: c.COLOR_TEAL,
+    cursor: "pointer",
   },
 
   section: {
@@ -202,7 +240,7 @@ const crearEstilos = (c) => ({
   td: {
     padding: "3px 2px",
     textAlign: "right",
-    border: `1px solid ${c.BORDER}`,
+    border: `1px solid ${c.BORDER_INPUT}`,
     color: c.TEXT_FUERTE,
   },
 
@@ -362,6 +400,134 @@ function useDatosTipo(movimientos, campoMonto) {
   };
 }
 
+// Arma el bloque HTML de una tabla concepto x mes para la vista de impresión.
+const construirTablaHtml = (titulo, anio, pivote, colorAccent) => {
+  const filasHtml = pivote.filas
+    .map(
+      (fila) => `
+      <tr>
+        <td class="concepto">${fila.concepto}</td>
+        ${fila.valores.map((v) => `<td class="num">${v > 0 ? formatoEntero(v) : "-"}</td>`).join("")}
+        <td class="num total-fila">${formatoEntero(fila.total)}</td>
+      </tr>`
+    )
+    .join("");
+
+  const totalesHtml = pivote.totalesPorMes
+    .map((v) => `<td class="num">${v > 0 ? formatoEntero(v) : "-"}</td>`)
+    .join("");
+
+  return `
+    <h2 style="color:${colorAccent}">${titulo} por concepto y mes — ${anio}</h2>
+    <table>
+      <thead>
+        <tr>
+          <th class="concepto">Concepto</th>
+          ${MESES_CORTOS.map((m) => `<th>${m}</th>`).join("")}
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>${filasHtml || `<tr><td class="concepto" colspan="14">Sin información cargada para ${anio}</td></tr>`}</tbody>
+      <tfoot>
+        <tr>
+          <td class="concepto">${titulo === "Ingresos" ? "Total Ingresos" : "Total Egresos"}</td>
+          ${totalesHtml}
+          <td class="num" style="color:${colorAccent}">${formatoEntero(pivote.totalGeneral)}</td>
+        </tr>
+      </tfoot>
+    </table>`;
+};
+
+// Arma el bloque HTML del cuadro de una sola fila con el neto Ingresos - Egresos.
+const construirTablaNetoHtml = (datosIngreso, datosEgreso) => {
+  const anioIngreso = datosIngreso.anioPivote;
+  const anioEgreso = datosEgreso.anioPivote;
+  const mismoAnio = anioIngreso === anioEgreso;
+  const { porMes, total } = calcularNetoPorMes(datosIngreso, datosEgreso);
+  const colorTotal = total >= 0 ? "#15803d" : "#b3564f";
+
+  const celdasHtml = porMes
+    .map((v) => `<td class="num" style="color:${v === 0 ? "inherit" : v > 0 ? "#15803d" : "#b3564f"}">${v !== 0 ? formatoEntero(v) : "-"}</td>`)
+    .join("");
+
+  return `
+    <h2>Flujo Neto de Fondos${mismoAnio ? ` — ${anioIngreso}` : ` — Ingresos ${anioIngreso} / Egresos ${anioEgreso}`}</h2>
+    <table>
+      <thead>
+        <tr>
+          <th class="concepto">Concepto</th>
+          ${MESES_CORTOS.map((m) => `<th>${m}</th>`).join("")}
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="concepto total-fila">Flujo Neto</td>
+          ${celdasHtml}
+          <td class="num total-fila" style="color:${colorTotal}">${formatoEntero(total)}</td>
+        </tr>
+      </tbody>
+    </table>`;
+};
+
+// Imprime los dos cuadros (Ingresos y Egresos por concepto y mes) mas el neto,
+// tal como se ven en pantalla, en una vista aparte pensada para papel.
+const imprimirCuadros = (datosIngreso, datosEgreso, colores) => {
+  const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Comparativo de ingresos y egresos</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #0F172A;
+    margin: 24px;
+  }
+  h1 { font-size: 18px; margin: 0 0 2px; color: #083b5c; }
+  .subtitulo { font-size: 11.5px; color: #64748B; margin: 0 0 20px; }
+  h2 { font-size: 13.5px; margin: 26px 0 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 9.5px; margin-bottom: 6px; }
+  thead th {
+    background: #083b5c;
+    color: #fff;
+    text-align: right;
+    padding: 5px 4px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  th.concepto, td.concepto { text-align: left; }
+  tbody td, tfoot td {
+    padding: 4px;
+    border: 1px solid rgba(8,59,92,0.16);
+    text-align: right;
+  }
+  tbody tr:nth-child(even) { background: #f4f7f9; }
+  td.total-fila { font-weight: 700; }
+  tfoot td { font-weight: 700; border-top: 2px solid #083b5c; }
+  @page { size: landscape; margin: 12mm; }
+</style>
+</head>
+<body>
+  <h1>Comparativo de ingresos y egresos</h1>
+  <p class="subtitulo">Generado el ${new Date().toLocaleString("es-AR")}</p>
+  ${construirTablaHtml("Ingresos", datosIngreso.anioPivote, datosIngreso.pivoteConceptoMes, colores.COLOR_GREEN)}
+  ${construirTablaHtml("Egresos", datosEgreso.anioPivote, datosEgreso.pivoteConceptoMes, colores.COLOR_RED)}
+  ${construirTablaNetoHtml(datosIngreso, datosEgreso)}
+</body>
+</html>`;
+
+  const ventana = window.open("", "_blank");
+  if (!ventana) return;
+  ventana.document.open();
+  ventana.document.write(html);
+  ventana.document.close();
+  ventana.focus();
+  ventana.onload = () => ventana.print();
+  setTimeout(() => ventana.print(), 300);
+};
+
 export default function ComparativoIngresosEgresos() {
   const [movimientos, setMovimientos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -394,6 +560,19 @@ export default function ComparativoIngresosEgresos() {
 
   return (
     <div style={styles.page}>
+      <div style={styles.pageHeader}>
+        <div>
+        </div>
+
+        <button
+          style={styles.printBtn}
+          onClick={() => imprimirCuadros(datosIngreso, datosEgreso, colores)}
+          disabled={loading}
+        >
+          <PrintIcon sx={{ fontSize: 17 }} /> Imprimir cuadros
+        </button>
+      </div>
+
       <SeccionTabla
         tipo="INGRESO"
         titulo="Ingresos"
@@ -414,6 +593,8 @@ export default function ComparativoIngresosEgresos() {
         datos={datosEgreso}
       />
 
+      <CuadroNeto datosIngreso={datosIngreso} datosEgreso={datosEgreso} loading={loading} colores={colores} styles={styles} />
+
       <div style={styles.filaGraficos}>
         <CardGraficos
           tipo="INGRESO"
@@ -431,6 +612,68 @@ export default function ComparativoIngresosEgresos() {
           loading={loading}
           datos={datosEgreso}
         />
+      </div>
+    </div>
+  );
+}
+
+// Calcula, mes a mes, Ingresos - Egresos a partir de los mismos totales que ya
+// se muestran en los dos cuadros de arriba (respeta el filtro de año de cada
+// sección tal cual está).
+const calcularNetoPorMes = (datosIngreso, datosEgreso) => {
+  const ingresoPorMes = datosIngreso.pivoteConceptoMes.totalesPorMes;
+  const egresoPorMes = datosEgreso.pivoteConceptoMes.totalesPorMes;
+  const porMes = MESES_CORTOS.map((_, i) => (ingresoPorMes[i] || 0) - (egresoPorMes[i] || 0));
+  const total = datosIngreso.pivoteConceptoMes.totalGeneral - datosEgreso.pivoteConceptoMes.totalGeneral;
+  return { porMes, total };
+};
+
+function CuadroNeto({ datosIngreso, datosEgreso, loading, colores, styles }) {
+  if (loading) return null;
+
+  const anioIngreso = datosIngreso.anioPivote;
+  const anioEgreso = datosEgreso.anioPivote;
+  const mismoAnio = anioIngreso === anioEgreso;
+  const { porMes, total } = calcularNetoPorMes(datosIngreso, datosEgreso);
+  const colorTotal = total >= 0 ? colores.COLOR_GREEN : colores.COLOR_RED;
+
+  return (
+    <div style={styles.section}>
+      <div style={{ ...styles.sectionBody, paddingTop: 20 }}>
+        <div style={styles.chartTitulo}>
+          Flujo Neto de Fondos
+          {mismoAnio ? ` — ${anioIngreso}` : ` — Ingresos ${anioIngreso} / Egresos ${anioEgreso}`}
+        </div>
+
+        <div style={styles.tablaWrap}>
+          <table style={styles.tabla}>
+            <thead>
+              <tr>
+                <th style={{ ...styles.th, ...styles.thConcepto }}>Concepto</th>
+                {MESES_CORTOS.map((mes) => (
+                  <th key={mes} style={styles.th}>{mes}</th>
+                ))}
+                <th style={styles.th}>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ ...styles.td, ...styles.tdConcepto, fontWeight: 700 }}>Flujo Neto</td>
+                {porMes.map((valor, i) => (
+                  <td
+                    key={i}
+                    style={{ ...styles.td, fontWeight: 700, color: valor === 0 ? undefined : valor > 0 ? colores.COLOR_GREEN : colores.COLOR_RED }}
+                  >
+                    {valor !== 0 ? formatoEntero(valor) : <span style={styles.tdVacia}>-</span>}
+                  </td>
+                ))}
+                <td style={{ ...styles.td, fontWeight: 800, color: colorTotal }}>
+                  {formatoEntero(total)}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
