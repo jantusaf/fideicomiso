@@ -272,6 +272,118 @@ const toggleTodasLasZonas = () => {
         "EDR-Equipamiento Deportivo Recreativo": "#bfd1f0",
         "EP-Equipamiento Publico": "#9c9c9c",
         "EVP-Espacio Verde Publico": "#afd9b7",
+    };
+
+    // Parámetros urbanísticos por zona (Ord. 7580/24 y planes de sector)
+    const normativaZonas = {
+        "C1-Corredor de densidad 1": {
+            nombre: "Corredor de Densidad 1",
+            supMinParcela: "450 m²", frenteMin: "15 m",
+            fos: "0.70", fotMax: "6.5",
+            altura: "10 plantas / 31 m (frente ≥12 m) · 8 plantas / 25 m (frente <12 m)",
+            basamento: "3 plantas / 10 m",
+        },
+        "C2-Corredor de densidad 2": {
+            nombre: "Corredor de Densidad 2",
+            supMinParcela: "450 m²", frenteMin: "15 m",
+            fos: "0.70", fotMax: "4",
+            altura: "6 plantas / 19 m",
+            basamento: "3 plantas / 10 m",
+        },
+        "C3-Corredor comercial, logistico y productivo": {
+            nombre: "Corredor Comercial, Logístico y Productivo",
+            supMinParcela: "1.500 m²", frenteMin: "20 m",
+            fos: "0.70", fotMax: "2",
+            altura: "PB + 2 pisos",
+            basamento: "—",
+        },
+        "CC-Corredor Comercial mixto": {
+            nombre: "Corredor Comercial Mixto",
+            supMinParcela: "450 m²", frenteMin: "15 m",
+            fos: "0.70", fotMax: "6",
+            altura: "EM: 6 pl / 19 m · SPL: 8 pl / 24 m · PL: 10 pl / 31 m",
+            basamento: "3 plantas / 10 m",
+        },
+        "AI1-Area inferior - Densidad media baja": {
+            nombre: "Área Interior 1 – Densidad Media Baja",
+            supMinParcela: "300 m²", frenteMin: "12 m",
+            fos: "0.70", fotMax: "2.8",
+            altura: "4 plantas / 13 m",
+            basamento: "—",
+        },
+        "AI2-Area inferior - Densidad baja": {
+            nombre: "Área Interior 2 – Densidad Baja",
+            supMinParcela: "300 m²", frenteMin: "12 m",
+            fos: "0.65", fotMax: "2",
+            altura: "3 plantas / 10 m",
+            basamento: "—",
+        },
+        "AI3-Area inferior de densidad media baja": {
+            nombre: "Área Interior 3 – Densidad Media Baja",
+            supMinParcela: "450 m²", frenteMin: "15 m",
+            fos: "0.60", fotMax: "1.8",
+            altura: "3 plantas / 10 m",
+            basamento: "—",
+        },
+        "AIE-Area inferior Especial - Densidad alta": {
+            nombre: "Área Interior Especial – Densidad Alta",
+            supMinParcela: "1.800 m²", frenteMin: "30 m",
+            fos: "0.60", fotMax: "6",
+            altura: "12 plantas / 37 m",
+            basamento: "3 plantas / 10 m",
+        },
+        "AM1-Area Mixta 1 - Densidad alta": {
+            nombre: "Área Mixta 1 – Densidad Alta",
+            supMinParcela: "600 m²", frenteMin: "20 m",
+            fos: "0.70", fotMax: "6",
+            altura: "mín. 6 pl · máx. 12 plantas / 37 m",
+            basamento: "3 plantas / 10 m",
+        },
+        "AM1-Area Mixta 2 - Densidad alta": {
+            nombre: "Área Mixta 2 – Densidad Alta",
+            supMinParcela: "500 m²", frenteMin: "20 m",
+            fos: "0.70", fotMax: "4",
+            altura: "mín. 3 pl · máx. 10 plantas / 31 m",
+            basamento: "3 plantas / 10 m",
+        },
+        "AR-Area Residencial de baja densidad": {
+            nombre: "Área Residencial de Baja Densidad",
+            supMinParcela: "1.000 m²", frenteMin: "20 m",
+            fos: "0.40", fotMax: "0.8",
+            altura: "PB + 2 pisos (1 vivienda/parcela)",
+            basamento: "—",
+        },
+        "ARP-Area Residencial y agroproductiva complementaria": {
+            nombre: "Área Residencial y Agroproductiva Complementaria",
+            supMinParcela: "2.000 m²", frenteMin: "25 m",
+            fos: "0.40", fotMax: "0.4",
+            altura: "PB + 2 pisos (1 vivienda/parcela)",
+            basamento: "—",
+        },
+        "EDR-Equipamiento Deportivo Recreativo": {
+            nombre: "Equipamiento Deportivo Recreativo",
+            supMinParcela: "5.000 m²", frenteMin: "50 m",
+            fos: "0.35", fotMax: "0.7",
+            altura: "PB + 2 pisos",
+            basamento: "—",
+        },
+        "EP-Equipamiento Publico": {
+            nombre: "Equipamiento Público",
+            supMinParcela: "—", frenteMin: "—",
+            fos: "—", fotMax: "—",
+            altura: "Según plan de sector",
+            basamento: "—",
+        },
+        "EVP-Espacio Verde Publico": {
+            nombre: "Espacio Verde Público",
+            supMinParcela: "—", frenteMin: "—",
+            fos: "—", fotMax: "—",
+            altura: "No aplica",
+            basamento: "—",
+        },
+    };
+
+    const coloresPorSubclasificacionPE = {
         // PLAN ESPECIAL - ETAPA 1
         "UG1-Distrito Administrativo": "#b2a792",
         "UG2-Areas Residenciales y Mixtas/Conjuntos Habitacionales PROCREAR, INVICO y Lotes con Serivicios de oferta municipal":
@@ -311,6 +423,9 @@ const toggleTodasLasZonas = () => {
         null: "red",
         undefined: "red",
     };
+    // Unificar ambos objetos de colores en uno solo
+    Object.assign(coloresPorSubclasificacion, coloresPorSubclasificacionPE);
+
     const [verPublicoPrivado, setVerPublicoPrivado] = useState(false);
     const [geojsonData, setGeojsonData] = useState({});
     const [modalDetalleAbierto, setModalDetalleAbierto] = useState(false);
@@ -416,6 +531,13 @@ const toggleTodasLasZonas = () => {
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "area1");
                 setGeojsonData((prev) => ({ ...prev, area1: normalizado }));
+            })
+            .catch(console.error);
+
+        fetch("/hipico_zonificacion.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                setGeojsonData((prev) => ({ ...prev, hipico_zonificacion: data }));
             })
             .catch(console.error);
 
@@ -1715,9 +1837,9 @@ useEffect(() => {
 
             </div>
 
-            {(verReferenciasTabla || verReferenciasTabla2) && (
+            {(verReferenciasTabla || verReferenciasTabla2 || capasActivas["Zonificación Sta Catalina"]) && (
                 <div className="tabla-referencias-flotante tabla-referencias-doble">
-                    {verReferenciasTabla && <TablaReferencias />}
+                    {(verReferenciasTabla || capasActivas["Zonificación Sta Catalina"]) && <TablaReferencias />}
                     {verReferenciasTabla2 && <TablaReferencias2 />}
                 </div>
             )}
@@ -1869,21 +1991,47 @@ useEffect(() => {
                                     fillOpacity,
                                 };
                             }}
-                            onEachFeature={crearOnEachFeature("Zonificación Sta Catalina")}
+                            onEachFeature={(feature, layer) => {
+                                layer.on({ click: handleFeatureClick });
+                                layer.bindTooltip(() => {
+                                    if (mostrarEtiquetasRef.current) return "";
+                                    const id = feature?.properties?.id ?? null;
+                                    if (id == null) return "";
+                                    const poligono = buscarPoligonoDB(poligonosRef.current, id, "Zonificación Sta Catalina");
+                                    const sub = poligono?.subclasificacion;
+                                    const norma = sub ? normativaZonas[sub] : null;
+                                    const nombre = poligono?.dato1 || "";
+                                    if (!norma && !nombre) return "";
+                                    return `<div style="font-family:inherit;min-width:160px;max-width:220px;">
+                                        ${nombre ? `<div style="font-weight:700;font-size:12px;color:#1e3a5f;margin-bottom:6px;border-bottom:1px solid #dbeafe;padding-bottom:4px;">${nombre}</div>` : ""}
+                                        ${sub ? `<div style="font-size:10px;color:#475569;margin-bottom:6px;font-style:italic;">${sub}</div>` : ""}
+                                        ${norma ? `
+                                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;">
+                                            <div><span style="font-size:9px;color:#94a3b8;display:block;text-transform:uppercase;letter-spacing:.4px">FOT máx.</span><span style="font-size:12px;font-weight:600;color:#1e293b;">${norma.fotMax}</span></div>
+                                            <div><span style="font-size:9px;color:#94a3b8;display:block;text-transform:uppercase;letter-spacing:.4px">FOS máx.</span><span style="font-size:12px;font-weight:600;color:#1e293b;">${norma.fos}</span></div>
+                                            <div><span style="font-size:9px;color:#94a3b8;display:block;text-transform:uppercase;letter-spacing:.4px">Sup. mín.</span><span style="font-size:12px;font-weight:600;color:#1e293b;">${norma.supMinParcela}</span></div>
+                                            <div><span style="font-size:9px;color:#94a3b8;display:block;text-transform:uppercase;letter-spacing:.4px">Altura</span><span style="font-size:12px;font-weight:600;color:#1e293b;">${norma.altura}</span></div>
+                                        </div>` : ""}
+                                    </div>`;
+                                }, { permanent: false, direction: "top", className: "sc-tooltipNorma", sticky: true });
+                            }}
                         />
                     )}
 
-                    {/* Zona Hípico superpuesta en Zonificación */}
-                    {capasActivas["Zonificación Sta Catalina"] && geojsonData.area1 && (
+                    {/* Zona Hípico superpuesta en Zonificación — nuevo geojson combinado */}
+                    {capasActivas["Zonificación Sta Catalina"] && geojsonData.hipico_zonificacion && (
                         <GeoJSON
-                            key={`area1-zonificacion-${geoJsonKey}`}
-                            data={geojsonData.area1}
+                            key={`hipico-zonificacion-${geoJsonKey}`}
+                            data={geojsonData.hipico_zonificacion}
                             style={(feature) => {
                                 const id = feature?.properties?.id;
-                                const poligono = buscarPoligonoDB(poligonosGuardados, id, "area1");
-                                const fillColor = poligono
-                                    ? coloresPorSubclasificacion[poligono.subclasificacion] || "gray"
-                                    : "gray";
+                                // handleFeatureClick detecta nombreCapa como "hipico_zonificacion" (la key en geojsonData)
+                                const poligono = buscarPoligonoDB(poligonosGuardados, id, "hipico_zonificacion");
+                                // Sin subclasificacion: gris claro transparente
+                                if (!poligono || !poligono.subclasificacion) {
+                                    return { fillColor: "#d9d9d9", fillOpacity: 0.35, color: "#aaaaaa", weight: 1, opacity: 0.6 };
+                                }
+                                const fillColor = coloresPorSubclasificacion[poligono.subclasificacion] || "#d9d9d9";
                                 return {
                                     fillColor,
                                     fillOpacity: 0.95,
@@ -1892,7 +2040,28 @@ useEffect(() => {
                                     opacity: 1,
                                 };
                             }}
-                            onEachFeature={crearOnEachFeature("area1")}
+                            onEachFeature={(feature, layer) => {
+                                layer.on({ click: handleFeatureClick });
+                                layer.bindTooltip(() => {
+                                    const id = feature?.properties?.id ?? null;
+                                    const poligono = buscarPoligonoDB(poligonosRef.current, id, "hipico_zonificacion");
+                                    const sub = poligono?.subclasificacion;
+                                    const norma = sub ? normativaZonas[sub] : null;
+                                    const nombre = poligono?.dato1 || sub || "";
+                                    if (!norma && !nombre) return "";
+                                    return `<div style="font-family:inherit;min-width:160px;max-width:220px;">
+                                        ${nombre ? `<div style="font-weight:700;font-size:12px;color:#1e3a5f;margin-bottom:6px;border-bottom:1px solid #dbeafe;padding-bottom:4px;">${nombre}</div>` : ""}
+                                        ${sub ? `<div style="font-size:10px;color:#475569;margin-bottom:6px;font-style:italic;">${sub}</div>` : ""}
+                                        ${norma ? `
+                                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;">
+                                            <div><span style="font-size:9px;color:#94a3b8;display:block;text-transform:uppercase;letter-spacing:.4px">FOT máx.</span><span style="font-size:12px;font-weight:600;color:#1e293b;">${norma.fotMax}</span></div>
+                                            <div><span style="font-size:9px;color:#94a3b8;display:block;text-transform:uppercase;letter-spacing:.4px">FOS máx.</span><span style="font-size:12px;font-weight:600;color:#1e293b;">${norma.fos}</span></div>
+                                            <div><span style="font-size:9px;color:#94a3b8;display:block;text-transform:uppercase;letter-spacing:.4px">Sup. mín.</span><span style="font-size:12px;font-weight:600;color:#1e293b;">${norma.supMinParcela}</span></div>
+                                            <div><span style="font-size:9px;color:#94a3b8;display:block;text-transform:uppercase;letter-spacing:.4px">Altura</span><span style="font-size:12px;font-weight:600;color:#1e293b;">${norma.altura}</span></div>
+                                        </div>` : ""}
+                                    </div>`;
+                                }, { permanent: false, direction: "top", className: "sc-tooltipNorma", sticky: true });
+                            }}
                         />
                     )}
 
@@ -2328,6 +2497,42 @@ useEffect(() => {
                                         <div className="sc-infoLabel">Subclasificación</div>
                                         <div className="sc-infoValue">{datosZonaSeleccionada.subclasificacion || "-"}</div>
                                     </div>
+
+                                    {/* Normativa urbanística — solo para capa Zonificación */}
+                                    {nombreCapaSeleccionada === "Zonificación Sta Catalina" && (() => {
+                                        const sub = datosZonaSeleccionada.subclasificacion;
+                                        const norma = normativaZonas[sub];
+                                        if (!norma) return null;
+                                        return (
+                                            <div className="sc-span2" style={{ width: "100%", marginTop: 8 }}>
+                                                <div style={{
+                                                    background: "#f0f7ff",
+                                                    border: "1px solid #bfdbfe",
+                                                    borderRadius: 10,
+                                                    padding: "10px 14px",
+                                                }}>
+                                                    <div style={{ fontWeight: 700, fontSize: 11, color: "#1e40af", letterSpacing: 0.8, marginBottom: 10, textTransform: "uppercase" }}>
+                                                        📐 Parámetros urbanísticos
+                                                    </div>
+                                                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px 16px" }}>
+                                                        {[
+                                                            { label: "Sup. mín. parcela", value: norma.supMinParcela },
+                                                            { label: "Frente mínimo", value: norma.frenteMin },
+                                                            { label: "FOS máx.", value: norma.fos },
+                                                            { label: "FOT máx.", value: norma.fotMax },
+                                                            { label: "Altura máx.", value: norma.altura },
+                                                            norma.basamento !== "—" && { label: "Basamento", value: norma.basamento },
+                                                        ].filter(Boolean).map(({ label, value }) => (
+                                                            <div key={label}>
+                                                                <div style={{ fontSize: 10, color: "#64748b", fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>{label}</div>
+                                                                <div style={{ fontSize: 13, color: "#1e293b", fontWeight: 500, marginTop: 2 }}>{value}</div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })()}
 
                                     <div className="sc-infoItem sc-span2">
                                         <div className="sc-infoLabel">Descripción</div>
