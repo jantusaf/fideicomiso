@@ -1257,10 +1257,10 @@ color:#777;
 }
 
 .tipo-mapa-btn.activo {
-  border-color: #0097a7;
-  background: linear-gradient(135deg, #0a3b4f, #148d8d);
+  border-color: #6fa8c9;
+  background: linear-gradient(135deg, #3d6d85, #6fa8c9);
   color: white;
-  box-shadow: 0 2px 8px rgba(0,151,167,0.25);
+  box-shadow: 0 2px 8px rgba(111,168,201,0.25);
 }
 
 .tipo-mapa-icon {

@@ -10,8 +10,10 @@ import serviciolotes from "../../services/lotes";
 import { centerOfMass, pointOnFeature, booleanPointInPolygon, union, featureCollection } from "@turf/turf";
 import TablaReferencias from "./tablaReferencias";
 import TablaReferencias2 from "./TablaReferencias2";
+import { useAuth } from "../../auth/AuthContext";
 
 const MapaConCapas = () => {
+    const { logout } = useAuth();
     //  Helper: inyecta properties.id si no existe (para area1..4 y cualquier capa que venga sin id)
     const normalizarGeojsonConIds = (data, nombreCapa) => {
         if (!data?.features) return data;
@@ -1273,7 +1275,33 @@ useEffect(() => {
 
                 {/* LOGO */}
 
-                <div className="logo-container">
+                <div className="logo-container" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+                    <button
+                        onClick={() => logout()}
+                        title="Cerrar sesión"
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 6,
+                            padding: "7px 16px",
+                            borderRadius: 8,
+                            border: "none",
+                            background: "#1E88E5",
+                            color: "#ffffff",
+                            fontWeight: 800,
+                            fontSize: 12,
+                            cursor: "pointer",
+                            whiteSpace: "nowrap",
+                            boxShadow: "0 2px 8px rgba(30,136,229,0.4)",
+                        }}
+                    >
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                            <polyline points="16 17 21 12 16 7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                        Salir
+                    </button>
                     <img src={parcasLogo} alt="Logo PARCAS" className="logo-parcas" />
                 </div>
 
