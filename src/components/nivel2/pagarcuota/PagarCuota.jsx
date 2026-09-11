@@ -3,34 +3,51 @@ import { useCallback, useEffect, useState, Fragment } from "react";
 import servicioPagos from '../../../services/pagos'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import NativeSelect from '@mui/material/NativeSelect';
-import BackupIcon from '@mui/icons-material/Backup';
-import Card from '@mui/material/Card';
-import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Paper from '@mui/material/Paper';
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import { Toolbar } from '@mui/material';
-import { Paper } from '@mui/material';
+import { Stack } from '@mui/material';
+import { Divider } from '@mui/material';
+import { Typography } from '@mui/material';
+import { Alert } from '@mui/material';
+import { Chip } from '@mui/material';
+import { InputAdornment } from '@mui/material';
 import servicioUsuario1 from '../../../services/usuario1'
 import servicioCuotas from '../../../services/cuotas'
 import * as React from 'react';
-import { Dayjs } from 'dayjs';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useDropzone } from 'react-dropzone';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import PaymentsIcon from '@mui/icons-material/Payments';
 
 
-////
-import Select from '@mui/material/Select';
-/////
+const COLOR_TEXT = '#1a303e';
+const COLOR_ACCENT = '#0d3a49';
+
+// Label fijo arriba de cada campo, consistente para todos (evita el
+// desalineado entre campos con label flotante y campos sin él)
+function CampoConLabel({ label, children }) {
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Typography
+        variant="caption"
+        sx={{ display: 'block', mb: 0.5, ml: 0.25, fontWeight: 600, color: 'text.secondary' }}
+      >
+        {label}
+      </Typography>
+      {children}
+    </Box>
+  );
+}
+
 export default function PagarCuota() {
 
   const navigate = useNavigate();
   let params = useParams()
   let id = params.id
- 
+
   const [pago, setPagos] = useState({
 
   })
@@ -41,32 +58,58 @@ export default function PagarCuota() {
   const [enviarr, setEnviarr] = useState();
   const [fileUpload, setFileUpload] = useState(null);
   const [loading, setLoading] = useState(false)
+  const [fileError, setFileError] = useState(null)
 
-  const onDrop = useCallback((files, acceptedFiles) => {
+  const onDrop = useCallback((files, fileRejections) => {
     setLoading(true)
+
+    if (files.length === 0) {
+      setFileError('Archivo no admitido. Solo se aceptan .pdf, .doc, .docx, .jpeg, .jpg y .png')
+      setLoading(false)
+      return
+    }
+
+    setFileError(null)
     const formData = new FormData();
-    setFileUpload(acceptedFiles);
+    setFileUpload(files);
     formData.append('file', files[0]);
     setEnviarr(formData)
     setLoading(false)
 
 
 
-  });
+  }, []);
   const { getRootProps, getInputProps, isDragActive, isDragAccept, acceptedFiles } = useDropzone({
     onDrop,
     multiple: false,
-    accept: 'document/*',
+    accept: {
+      'application/pdf': ['.pdf'],
+      'application/msword': ['.doc'],
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
+      'image/jpeg': ['.jpeg', '.jpg'],
+      'image/png': ['.png'],
+    },
 
   });
 
   const acceptedFileItems = acceptedFiles.map(file => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
+    <Chip
+      key={file.path}
+      size="medium"
+      icon={<InsertDriveFileIcon />}
+      label={`${file.path} · ${(file.size / 1024).toFixed(0)} KB`}
+      color="success"
+      variant="outlined"
+    />
   ));
 
-
+  const dropzoneBorderColor = fileError
+    ? '#d32f2f'
+    : isDragActive
+      ? COLOR_ACCENT
+      : acceptedFiles.length > 0
+        ? '#2e7d32'
+        : '#d5dbe0';
 
 
 
@@ -106,6 +149,11 @@ export default function PagarCuota() {
 
   const enviar = async () => {
 
+    if (!enviarr) {
+      alert('Debe subir un comprobante antes de enviar')
+      return
+    }
+
 setLoading(true)
 await  enviarr.append('datos', [pago.cuil_cuit, pago.id, pago.monto, pago.fecha]);///// aca en forma de array se envian datos del dormulario
 
@@ -114,7 +162,7 @@ await  enviarr.append('datos', [pago.cuil_cuit, pago.id, pago.monto, pago.fecha]
     alert(rta[0])
     navigate('/usuario2/detallecliente/' + rta[1])
 
-   
+
 
 
 
@@ -122,6 +170,11 @@ await  enviarr.append('datos', [pago.cuil_cuit, pago.id, pago.monto, pago.fecha]
   }
 
   const enviar2 = async () => {
+
+    if (!enviarr) {
+      alert('Debe subir un comprobante antes de enviar')
+      return
+    }
 
     setLoading(true)
     enviarr.append('datos', [pago.cuil_cuit, pago.fecha,pago.id, JSON.stringify(pagosVarios)]);///// aca en forma de array se envian datos del dormulario
@@ -150,189 +203,208 @@ await  enviarr.append('datos', [pago.cuil_cuit, pago.id, pago.monto, pago.fecha]
     console.log(pagosVarios)
     setpagosVarios({ ...pagosVarios, [e.target.name]: e.target.value })
   }
+
+  const puedeEnviarUna = eleccion.tipo === '1' && pago.monto > 0 && pago.fecha
+  const puedeEnviarVarias = eleccion.tipo === 'varias' && pago.fecha
+
   return (
 
     <Fragment>
       <Toolbar />
-      <Box sx={{ minWidth: 275 }}>
-        <Card variant="outlined" >
+      <Box sx={{ px: 2, pt: { xs: 2, sm: 3 }, pb: 6 }}>
+        <Paper
+          elevation={0}
+          sx={{
+            maxWidth: 680,
+            mx: 'auto',
+            borderRadius: 2.5,
+            border: '1px solid #e2e6e9',
+            boxShadow: '0 24px 50px rgba(15, 34, 48, 0.18)',
+            overflow: 'hidden',
+          }}
+        >
+          <Box sx={{ height: 4, background: `linear-gradient(90deg, ${COLOR_TEXT}, ${COLOR_ACCENT})` }} />
+          <Box sx={{ p: { xs: 3, sm: 5 } }}>
 
-          <form >
-            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-              Cuantas Cuotas
-            </InputLabel>
-            <NativeSelect
-              sx={{ '& > :not(style)': { m: 1 } }}
-              defaultValue={30}
-              onChange={handleChangee}
-              inputProps={{
-                name: 'tipo',
-                id: 'uncontrolled-native',
-
-              }}
-            >   <option value={'1'}>Una</option>
-              <option value={'varias'}>Varias</option>
-
-            </NativeSelect>
-            <Box sx={{ '& > :not(style)': { m: 1 } }}>
-
-
-              <TextField
-
-                onChange={handleChange}
-                name="fecha"
-                id="date"
-                label="Fecha de pago"
-                type="date"
-                defaultValue="2020-01"
-                sx={{ width: 220 }}
-                InputLabelProps={{
-                  shrink: true,
+            <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 0.5 }}>
+              <Box
+                sx={{
+                  width: 42,
+                  height: 42,
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  bgcolor: 'rgba(13,58,73,0.08)',
+                  flexShrink: 0,
                 }}
-              />
-            </Box>
+              >
+                <PaymentsIcon sx={{ fontSize: 22, color: COLOR_ACCENT }} />
+              </Box>
+              <Typography variant="h5" sx={{ fontWeight: 700, color: COLOR_TEXT }}>
+                Pagar cuota
+              </Typography>
+            </Stack>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+              Completá los datos del pago y adjuntá el comprobante
+            </Typography>
 
+            <form>
+              <Stack spacing={3}>
 
-
-            {eleccion.tipo === '1' ?
-              <>
-
-
-                <TextField
-                  /* style ={{width: '25%'}} */
-                  autoFocus
-                  margin="dense"
-                  id="name"
-                  label="Monto"
-                  name="monto"
-                  onChange={handleChange}
-                  fullWidth
-                  variant="filled"
-                  type={"Number"}
-                />
-
-
-                {pago.monto > 0 && pago.fecha ?
-                  <div>
-                    <Box sx={{
-                      m: 1,
-                      color: 'green',
-                      fontSize: '1rem',
-                    }}
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2.5}>
+                  <CampoConLabel label="Cantidad de cuotas">
+                    <TextField
+                      select
+                      size="medium"
+                      fullWidth
+                      name="tipo"
+                      value={eleccion.tipo}
+                      onChange={handleChangee}
                     >
-                      Archivos Aceptados <BackupIcon fontSize="small" />
-                      <ul>{acceptedFileItems}</ul>
-                      <Button variant='contained' onClick={enviar}>
-                        {loading ? (
-                          <CircularProgress color="inherit" size={25} />
-                        ) : (
-                          "Enviar"
-                        )}
-                      </Button>
-                    </Box>
+                      <MenuItem value="1">Una cuota</MenuItem>
+                      <MenuItem value="varias">Varias cuotas</MenuItem>
+                    </TextField>
+                  </CampoConLabel>
 
-                  </div>
-                  : <div> </div>}
+                  <CampoConLabel label="Fecha de pago">
+                    <TextField
+                      size="medium"
+                      fullWidth
+                      onChange={handleChange}
+                      name="fecha"
+                      id="date"
+                      type="date"
+                    />
+                  </CampoConLabel>
 
-              </> : <></>}
+                  {eleccion.tipo === '1' && (
+                    <CampoConLabel label="Monto">
+                      <TextField
+                        size="medium"
+                        fullWidth
+                        id="name"
+                        name="monto"
+                        onChange={handleChange}
+                        type="number"
+                        slotProps={{
+                          input: {
+                            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                          },
+                        }}
+                        sx={{
+                          '& input[type=number]': { MozAppearance: 'textfield' },
+                          '& input[type=number]::-webkit-outer-spin-button, & input[type=number]::-webkit-inner-spin-button': {
+                            WebkitAppearance: 'none',
+                            margin: 0,
+                          },
+                        }}
+                      />
+                    </CampoConLabel>
+                  )}
+                </Stack>
 
-
-          </form>
-
-        </Card>
-
-      </Box>
-
-
-
-      {eleccion.tipo === 'varias' ? <>
-        {cuotas ?
-          <>
-
-            {cuotas.map((option) => (
-              <>
-                <TextField
-                  /* style ={{width: '25%'}} */
-                  autoFocus
-                  margin="dense"
-                  id="name"
-                  label={"Cuota " + option.nro_cuota}
-                  name={option.id}
-                  onChange={handleChangeVarios}
-                  fullWidth
-                  variant="filled"
-                  type={"Number"}
-                />
-
-
-
-
-
-              </>))}</> : <></>
-
-
-        }
-
-        { pago.fecha ?
-          <div>
-            <Box sx={{
-              m: 1,
-              color: 'green',
-              fontSize: '1rem',
-            }}
-            >
-              Archivos Aceptados <BackupIcon fontSize="small" />
-              <ul>{acceptedFileItems}</ul>
-              <Button variant='contained' onClick={enviar2}>
-                {loading ? (
-                  <CircularProgress color="inherit" size={25} />
-                ) : (
-                  "Enviar varias"
+                {eleccion.tipo === 'varias' && cuotas && cuotas.length > 0 && (
+                  <Stack spacing={1.5}>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 600, color: COLOR_TEXT }}>
+                      Cuotas a pagar
+                    </Typography>
+                    {cuotas.map((option) => (
+                      <CampoConLabel key={option.id} label={"Cuota " + option.nro_cuota}>
+                        <TextField
+                          size="medium"
+                          fullWidth
+                          id="name"
+                          name={option.id}
+                          onChange={handleChangeVarios}
+                          type="number"
+                          sx={{
+                            '& input[type=number]': { MozAppearance: 'textfield' },
+                            '& input[type=number]::-webkit-outer-spin-button, & input[type=number]::-webkit-inner-spin-button': {
+                              WebkitAppearance: 'none',
+                              margin: 0,
+                            },
+                          }}
+                        />
+                      </CampoConLabel>
+                    ))}
+                  </Stack>
                 )}
-              </Button>
-            </Box>
 
+                <Divider sx={{ my: 0.5 }} />
 
+                <Box>
+                  <Typography variant="subtitle2" sx={{ fontWeight: 600, color: COLOR_TEXT, mb: 1 }}>
+                    Comprobante de pago
+                  </Typography>
 
-          </div> : <></>}
+                  <Box
+                    {...getRootProps()}
+                    sx={{
+                      cursor: 'pointer',
+                      textAlign: 'center',
+                      borderRadius: 1.5,
+                      border: '1px dashed',
+                      borderColor: dropzoneBorderColor,
+                      backgroundColor: isDragActive ? 'rgba(13,58,73,0.04)' : '#fafbfc',
+                      py: 4,
+                      px: 2,
+                      transition: 'border-color .15s ease',
+                      '&:hover': { borderColor: COLOR_ACCENT },
+                    }}
+                  >
+                    <input {...getInputProps()} />
+                    <CloudUploadIcon fontSize="small" sx={{ color: '#9aa7b0', mb: 0.5 }} />
+                    <Typography variant="body2" sx={{ color: COLOR_TEXT }}>
+                      {isDragActive
+                        ? 'Soltá aquí el documento'
+                        : 'Arrastrá el comprobante o hacé clic para seleccionarlo'}
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      PDF, DOC, DOCX, JPG o PNG
+                    </Typography>
+                  </Box>
 
-      </> : <></>}
+                  {fileError && (
+                    <Alert severity="error" sx={{ mt: 1.5, borderRadius: 1.5 }}>
+                      {fileError}
+                    </Alert>
+                  )}
 
-      <h2>SUBIR COMPROBANTE </h2>
-      <Paper
-        sx={{
-          cursor: 'pointer',
-          background: '#fafafa',
-          color: '#bdbdbd',
-          border: '1px dashed #ccc',
-          '&:hover': { border: '1px solid #ccc' },
-        }}
-      >
-        <div style={{ padding: '16px' }} {...getRootProps()}>
-          <input {...getInputProps()} />
-          {isDragActive ? (
-            <p style={{ color: 'green' }}>Suelta aqui el documento</p>
-          ) : (
-            <p>Arrastra hasta aqui el archivo </p>
-          )}
-          <em>(Documentos .*pdf, .*doc, *.jpeg, *.png, *.jpg  extenciones aceptadas)</em>
-        </div>
-      </Paper>
+                  {acceptedFiles.length > 0 && (
+                    <Box sx={{ mt: 1.5 }}>
+                      {acceptedFileItems}
+                    </Box>
+                  )}
+                </Box>
 
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end', pt: 1 }}>
+                  <Button
+                    variant="contained"
+                    onClick={puedeEnviarUna ? enviar : enviar2}
+                    disabled={loading || !enviarr || !(puedeEnviarUna || puedeEnviarVarias)}
+                    sx={{
+                      textTransform: 'none',
+                      fontWeight: 600,
+                      borderRadius: 1.5,
+                      px: 3,
+                      backgroundColor: COLOR_TEXT,
+                      boxShadow: 'none',
+                      '&:hover': { backgroundColor: COLOR_ACCENT, boxShadow: 'none' },
+                      '&.Mui-disabled': { backgroundColor: '#e2e6e9', color: '#9aa7b0' },
+                    }}
+                  >
+                    {loading ? <CircularProgress color="inherit" size={20} /> : 'Guardar'}
+                  </Button>
+                </Box>
 
-      {/*  {
-                               lotes.map((item, index) =>
-                                   //   item['']
-                                   <div>
-                                       <MenuItem value={10}>{item['zona']}  </MenuItem>
-                                   </div>
-                               )} */}
+              </Stack>
+            </form>
 
-
-
-
-
-
+          </Box>
+        </Paper>
+      </Box>
     </Fragment>
+
   );
 }

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import loginService from '../../services/login';
 import servicioUsuario from '../../services/usuarios';
+import { useAuth } from '../../auth/AuthContext';
+import { homeDe } from '../../auth/mapaNiveles';
 
 import {
   Button, Box, TextField, Typography,
@@ -57,6 +59,7 @@ const btnSx = {
 /* ══════════════════════════════════════════════ */
 const Login = () => {
   const navigate = useNavigate();
+  const { login, isAuthenticated, nivel } = useAuth();
 
   /* login */
   const [usuario,           setUsuario]           = useState({ cuil_cuit: '', password: '' });
@@ -73,26 +76,19 @@ const Login = () => {
   const [errorRegistro,     setErrorRegistro]     = useState('');
   const [successRegistro,   setSuccessRegistro]   = useState('');
 
-  /* ── redirigir si ya está logueado ── */
+  /* ── si ya hay sesión válida, redirigir a su sección ── */
   useEffect(() => {
-    const json = window.localStorage.getItem('loggedNoteAppUser');
-    if (!json) return;
-    const u = JSON.parse(json);
-    const rutas = {
-      1: '/usuario/menu', 2: '/usuario2/clientes', 3: '/nivel3/',
-      4: '/legales/clientes', 5: '/usuariomapas/inicio', 6: '/nivel6/carga',
-    };
-    if (rutas[u.nivel]) navigate(rutas[u.nivel]);
-  }, [navigate]);
+    if (isAuthenticated) {
+      navigate(homeDe(nivel), { replace: true });
+    }
+  }, [isAuthenticated, nivel, navigate]);
 
-  /* ── helpers de navegación post-login ── */
-  const redirigir = (nivel) => {
-    const rutas = {
-      1: '/usuario/menu', 2: '/usuario2/clientes', 3: '/nivel3',
-      4: '/legales/clientes', 5: '/usuariomapas/inicio', 6: '/nivel6/carga', 7: '/mov2/remax',
-      10: '/admin/usuarios',
-    };
-    if (rutas[nivel]) { navigate(rutas[nivel]); window.location.reload(); }
+  /* ── navegación post-login ──
+     Se usa navegación "dura" (location.href) a propósito: varios services
+     leen el token de localStorage al cargar el módulo, así que necesitan
+     un reload para tomar la sesión recién creada. */
+  const redirigir = (nivelUsuario) => {
+    window.location.href = homeDe(nivelUsuario);
   };
 
   /* ── submit login ── */
@@ -102,8 +98,7 @@ const Login = () => {
     setErrorLogin('');
     try {
       const user = await loginService.login(usuario);
-      window.localStorage.setItem('loggedNoteAppUser', JSON.stringify(user));
-      servicioUsuario.setToken(user.token);
+      login(user); // guarda en localStorage + token + estado de sesión
       setLoading(false);
       redirigir(user.nivel);
     } catch {
@@ -194,13 +189,13 @@ const Login = () => {
                   type={showPass ? 'text' : 'password'}
                   value={usuario.password} onChange={handleLogin}
                   variant="outlined" error={!!errorLogin} sx={{ ...inputSx, mt:0 }}
-                  InputProps={{ endAdornment: (
+                  slotProps={{ input: { endAdornment: (
                     <InputAdornment position="end">
                       <IconButton onClick={() => setShowPass(p => !p)} edge="end" size="small" sx={{ color:'#94a3b8' }}>
                         {showPass ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
                       </IconButton>
                     </InputAdornment>
-                  )}} />
+                  ) } }} />
 
                 <FormControlLabel
                   control={
@@ -280,13 +275,13 @@ const Login = () => {
                   type={showPassReg ? 'text' : 'password'}
                   value={registro.password} onChange={handleRegistro}
                   variant="outlined" error={!!errorRegistro} sx={{ ...inputSx, mt:0 }}
-                  InputProps={{ endAdornment: (
+                  slotProps={{ input: { endAdornment: (
                     <InputAdornment position="end">
                       <IconButton onClick={() => setShowPassReg(p => !p)} edge="end" size="small" sx={{ color:'#94a3b8' }}>
                         {showPassReg ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
                       </IconButton>
                     </InputAdornment>
-                  )}} />
+                  ) } }} />
 
                 <Button type="submit" fullWidth variant="contained" disabled={loadingReg} sx={{ ...btnSx, mt:1 }}>
                   {loadingReg ? <CircularProgress size={22} sx={{ color:'#fff' }} /> : 'Crear cuenta'}

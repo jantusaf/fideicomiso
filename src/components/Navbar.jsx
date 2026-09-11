@@ -13,9 +13,11 @@ import {
 } from "@mui/material";
 import DrawerNav from "./DrawerNav";
 import serviciousuarios from "../services/usuarios"
+import { useAuth } from "../auth/AuthContext"
 
 const Navbar = (props) => {
   const usuario  = useUser().userContext
+  const { logout } = useAuth()
 
   
   const [user, setUser] = useState(null)
@@ -41,10 +43,26 @@ const traer = async () => {
 
   const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
-    const user = JSON.parse(loggedUserJSON)
-   
-  const notis = await serviciousuarios.traerusuario(user.cuil_cuit)
- 
+  if (!loggedUserJSON) {
+    setCargado(true)
+    return
+  }
+
+  let sesion = null
+  try {
+    sesion = JSON.parse(loggedUserJSON)
+  } catch {
+    setCargado(true)
+    return
+  }
+
+  if (!sesion || !sesion.cuil_cuit) {
+    setCargado(true)
+    return
+  }
+
+  const notis = await serviciousuarios.traerusuario(sesion.cuil_cuit)
+
   setUser(notis[0])
   setCargado(true)
 
@@ -59,17 +77,9 @@ const traer = async () => {
     navigate("/login");
   };
   const hanleLogout = () => {
- 
      setUser(null)
-     //servicioUsuario.setToken(user.token) 
-         navigate('/login')
-     
-   
-
-     window.localStorage.removeItem('loggedNoteAppUser')
-   
-
-   } 
+     logout() // limpia sesión (localStorage + estado) y redirige a /login
+   }
 
   const inicio = () => {
     navigate("/usuario2/clientes")

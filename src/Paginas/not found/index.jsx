@@ -1,42 +1,11 @@
-
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-
- 
-
-
-
-export default function Legajos() {
-  const navigate = useNavigate();
-  const [logueado, setLogueado] = useState(false) 
-
-
-useEffect(() => {
-  const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-  
-  if (loggedUserJSON) {
-    const user = JSON.parse(loggedUserJSON)
-    if (user.nivel != 3){
-      window.localStorage.removeItem('loggedNoteAppUser')
-   navigate('/login')
-
-    }else{
-
-      setLogueado(true)
-    }
-  
-    //servicioUsuario.setToken(user.token)  
-   
-    
-  }
- 
-}, [])
-
-    return (
-
-<>Not found</>
-    
-    );
-
+// La protección de acceso la maneja <RutaProtegida> en Rutas.jsx:
+// si se llega hasta acá es porque hay sesión válida y la ruta no existe.
+export default function NotFound() {
+  return (
+    <div style={{ padding: 40, fontFamily: "system-ui, sans-serif" }}>
+      <h2>Página no encontrada</h2>
+      <p>La dirección a la que intentaste ingresar no existe.</p>
+      <a href="/">Volver al inicio</a>
+    </div>
+  );
 }
