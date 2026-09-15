@@ -94,6 +94,7 @@ import Resumeness4 from '../Paginas/nivel6/resumen4'
 import Resumeness5 from '../Paginas/nivel6/resumen5'
 import Resumeness6 from '../Paginas/nivel6/resumen6'
 import ComparativoNiv6 from '../Paginas/nivel6/comparativo'
+import FlujoPitNiv6 from '../Paginas/nivel6/flujopit'
 
 const Rutas = [
 	<Navbar/> ,
@@ -174,6 +175,7 @@ const Rutas = [
 			{ path: '/nivel6/resumen6', element: <Resumeness6 /> },
 			{ path: '/nivel6/comparativo', element: <ComparativoNiv6 /> },
 			{ path: '/nivel6/carga', element: <Cargaa1 /> },
+			{ path: '/nivel6/flujopit', element: <FlujoPitNiv6 /> },
 		],
 	},
 

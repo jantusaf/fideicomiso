@@ -154,17 +154,20 @@ export default function PagarCuota() {
       return
     }
 
-setLoading(true)
-await  enviarr.append('datos', [pago.cuil_cuit, pago.id, pago.monto, pago.fecha]);///// aca en forma de array se envian datos del dormulario
+    setLoading(true)
+    try {
+      await  enviarr.append('datos', [pago.cuil_cuit, pago.id, pago.monto, pago.fecha]);///// aca en forma de array se envian datos del dormulario
 
-    const rta = await servicioUsuario1.pagarnivel2(enviarr)
-    console.log(rta)
-    alert(rta[0])
-    navigate('/usuario2/detallecliente/' + rta[1])
-
-
-
-
+      const rta = await servicioUsuario1.pagarnivel2(enviarr)
+      console.log(rta)
+      alert(rta[0])
+      navigate('/usuario2/detallecliente/' + rta[1])
+    } catch (error) {
+      console.error(error)
+      alert('No se pudo enviar el pago. Puede ser un problema de conexión con el servidor — probá de nuevo en unos segundos.')
+    } finally {
+      setLoading(false)
+    }
 
     //window.location.reload(true);
   }
@@ -177,16 +180,19 @@ await  enviarr.append('datos', [pago.cuil_cuit, pago.id, pago.monto, pago.fecha]
     }
 
     setLoading(true)
-    enviarr.append('datos', [pago.cuil_cuit, pago.fecha,pago.id, JSON.stringify(pagosVarios)]);///// aca en forma de array se envian datos del dormulario
+    try {
+      enviarr.append('datos', [pago.cuil_cuit, pago.fecha,pago.id, JSON.stringify(pagosVarios)]);///// aca en forma de array se envian datos del dormulario
 
-    const rta = await servicioUsuario1.pagarnivel2varios(enviarr)
-    console.log(rta)
-    alert(rta[0])
-    navigate('/usuario2/detallecliente/' + rta[1])
-
-
-
-
+      const rta = await servicioUsuario1.pagarnivel2varios(enviarr)
+      console.log(rta)
+      alert(rta[0])
+      navigate('/usuario2/detallecliente/' + rta[1])
+    } catch (error) {
+      console.error(error)
+      alert('No se pudo enviar el pago. Puede ser un problema de conexión con el servidor — probá de nuevo en unos segundos.')
+    } finally {
+      setLoading(false)
+    }
 
     //window.location.reload(true);
   }

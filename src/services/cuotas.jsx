@@ -311,4 +311,17 @@ const compensaric3 = async (datos) => {
 
     return data
 }
-export default {compensaric3, compensar, cancelarlote,traercuotasic3,vercuotas4,iefgralleg, traercuotasdisponiblesporlote,asignarloteacuotas,vercuotas2,modificarmontotal,borrarpago,agregarCuotasleg, traercuotaselcliente, agregarCuotasVarios,actualizarcuota,traercuota, listavarios, asignarICC, traercuotasdisponibles, vercuotas, agregarCuotas, cuotasDeUnLote, borrarcuota, verief,verief2, borrarcuotas };
+
+// Flujo de fondos PIT agregado (nivel6) — todos los clientes del Parque, por mes de un año
+const flujoPit = async (anio) => {
+
+    const { data } = await axios.get(baseUrl + 'flujopit/' + anio, config)
+    if (data === 'error login') {
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+    }
+
+    return data
+}
+
+export default {compensaric3, compensar, cancelarlote,traercuotasic3,vercuotas4,iefgralleg, traercuotasdisponiblesporlote,asignarloteacuotas,vercuotas2,modificarmontotal,borrarpago,agregarCuotasleg, traercuotaselcliente, agregarCuotasVarios,actualizarcuota,traercuota, listavarios, asignarICC, traercuotasdisponibles, vercuotas, agregarCuotas, cuotasDeUnLote, borrarcuota, verief,verief2, borrarcuotas, flujoPit };

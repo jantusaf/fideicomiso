@@ -6,6 +6,7 @@ import ModoOscuroContext, { PALETA_CLARA, PALETA_OSCURA } from "../../context/Mo
 
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import SummarizeIcon from '@mui/icons-material/Summarize';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BarChartIcon from '@mui/icons-material/BarChart';
@@ -64,6 +65,13 @@ const menuItems = [
     path: '/nivel6/resumen3',
     accent: '#2aaad1',
     accentSoft: 'rgba(42, 170, 209, 0.22)',
+  },
+  {
+    text: 'Flujo de Fondos PIT',
+    icon: <AccountBalanceIcon fontSize="small" />,
+    path: '/nivel6/flujopit',
+    accent: '#148d8d',
+    accentSoft: 'rgba(20, 141, 141, 0.22)',
   },
 
 ];
