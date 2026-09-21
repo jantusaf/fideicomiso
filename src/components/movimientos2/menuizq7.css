@@ -324,3 +324,99 @@
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(7, 28, 43, 0.32);
 }
+
+/* ---------- SIDEBAR NIVEL6: versión compacta, fija (sin resize) y prolija ----------
+   Todo lo de acá abajo está scopeado a .mi-sidebar--n6 (solo el sidebar de nivel6),
+   así que no afecta en nada al sidebar de /mov2 que usa las mismas clases base. */
+.mi-sidebar--n6 {
+  box-shadow: 2px 0 14px rgba(2, 12, 20, 0.18);
+}
+
+.mi-sidebar--n6 .mi-sidebar-brand {
+  padding: 14px 12px 10px;
+}
+
+.mi-sidebar--n6 .mi-brand-logo {
+  height: 32px;
+}
+
+.mi-sidebar--n6 .mi-sidebar-divider {
+  margin: 2px 14px 10px;
+}
+
+.mi-sidebar--n6 .mi-sidebar-nav {
+  padding: 0 10px;
+  gap: 5px;
+  /* Sin scrollbar visible: el contenido ya está dimensionado para entrar
+     entero, esto es solo una red de seguridad en ventanas muy chicas. */
+  scrollbar-width: none;
+}
+
+.mi-sidebar--n6 .mi-sidebar-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.mi-sidebar--n6 .mi-nav-item {
+  gap: 10px;
+  padding: 9px 11px;
+  border-radius: 11px;
+}
+
+.mi-sidebar--n6 .mi-nav-item.active {
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
+}
+
+.mi-sidebar--n6 .mi-nav-icon {
+  width: 29px;
+  height: 29px;
+  border-radius: 9px;
+  color: #ffffff;
+}
+
+.mi-sidebar--n6 .mi-nav-item.active .mi-nav-icon {
+  color: #ffffff;
+}
+
+.mi-sidebar--n6 .mi-nav-title {
+  font-size: 12.5px;
+}
+
+.mi-sidebar--n6 .mi-nav-arrow {
+  font-size: 15px;
+}
+
+.mi-sidebar--n6 .mi-sidebar-footer {
+  padding: 10px;
+}
+
+.mi-sidebar--n6 .mi-user-row {
+  padding: 6px 7px;
+  gap: 8px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+}
+
+.mi-sidebar--n6 .mi-user-avatar {
+  width: 27px;
+  height: 27px;
+  font-size: 11px;
+}
+
+.mi-sidebar--n6 .mi-user-name {
+  font-size: 11.5px;
+}
+
+.mi-sidebar--n6 .mi-user-role {
+  font-size: 9.5px;
+}
+
+.mi-sidebar--n6 .mi-logout-btn,
+.mi-sidebar--n6 .mi-modo-toggle-btn {
+  padding: 7px;
+  font-size: 11.5px;
+  border-radius: 9px;
+}
+
+.mi-sidebar--n6 .mi-modo-toggle-btn {
+  margin-bottom: 6px;
+}

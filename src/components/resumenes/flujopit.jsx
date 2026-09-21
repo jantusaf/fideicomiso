@@ -164,73 +164,80 @@ export default function FlujoPit() {
       textAlign: "center",
     },
     card: {
-      background: c.BG_CARD,
-      borderRadius: 16,
-      border: `1px solid ${c.BORDER}`,
-      boxShadow: c.SHADOW_CARD,
+      background: c.BG_PAGE,
       overflow: "hidden",
     },
     tablaWrap: {
-      overflowX: "auto",
+      width: "100%",
     },
     tabla: {
       borderCollapse: "collapse",
+      tableLayout: "fixed",
       width: "100%",
-      minWidth: 1180,
-      fontSize: 11.5,
+      fontSize: 10.5,
     },
     thConcepto: {
+      width: "10.5%",
       textAlign: "left",
-      padding: "8px 10px",
-      background: c.COLOR_NAVY,
-      color: "#fff",
-      fontWeight: 700,
-      position: "sticky",
-      left: 0,
-      zIndex: 1,
-      whiteSpace: "nowrap",
+      padding: "6.4px 6.4px",
+      background: c.BG_INPUT,
+      color: c.TEXT_FUERTE,
+      fontWeight: 800,
+      fontSize: 11,
+      borderBottom: `2px solid ${c.COLOR_TEAL}`,
+      whiteSpace: "normal",
+      wordBreak: "break-word",
+      lineHeight: 1.2,
     },
     th: {
+      width: "6.6%",
       textAlign: "right",
-      padding: "8px 8px",
-      background: c.COLOR_NAVY,
-      color: "#fff",
-      fontWeight: 700,
-      whiteSpace: "nowrap",
+      padding: "6.4px 4px",
+      background: c.BG_INPUT,
+      color: c.TEXT_FUERTE,
+      fontWeight: 800,
+      fontSize: 11,
+      borderBottom: `2px solid ${c.COLOR_TEAL}`,
+      whiteSpace: "normal",
     },
     thTotal: {
+      width: "9.3%",
       textAlign: "right",
-      padding: "8px 10px",
-      background: c.COLOR_TEAL,
-      color: "#fff",
+      padding: "6.4px 6.4px",
+      background: c.BG_INPUT,
+      color: c.TEXT_FUERTE,
       fontWeight: 800,
-      whiteSpace: "nowrap",
+      fontSize: 11,
+      borderBottom: `2px solid ${c.COLOR_TEAL}`,
+      whiteSpace: "normal",
     },
     tdConcepto: {
       textAlign: "left",
-      padding: "7px 10px",
+      padding: "5px 6px",
       fontWeight: 700,
       color: c.TEXT_FUERTE,
-      position: "sticky",
-      left: 0,
-      whiteSpace: "nowrap",
+      whiteSpace: "normal",
+      wordBreak: "break-word",
+      lineHeight: 1.2,
       borderBottom: `1px solid ${c.BORDER}`,
     },
     td: {
       textAlign: "right",
-      padding: "7px 6px",
+      padding: "5px 3px",
       color: c.TEXT_FUERTE,
       borderBottom: `1px solid ${c.BORDER}`,
-      whiteSpace: "nowrap",
+      whiteSpace: "normal",
+      wordBreak: "break-word",
     },
     tdTotal: {
       textAlign: "right",
-      padding: "7px 8px",
+      padding: "5px 6px",
       fontWeight: 800,
       color: c.TEXT_FUERTE,
       borderBottom: `1px solid ${c.BORDER}`,
       background: c.MODO === "dark" ? "rgba(32,178,178,0.10)" : "rgba(20,141,141,0.06)",
-      whiteSpace: "nowrap",
+      whiteSpace: "normal",
+      wordBreak: "break-word",
     },
     mensajeEstado: {
       padding: 40,
@@ -299,12 +306,20 @@ export default function FlujoPit() {
                         style={{
                           ...estilos.td,
                           fontWeight: fila.negrita ? 800 : 600,
+                          whiteSpace: fila.negrita ? "nowrap" : estilos.td.whiteSpace,
                         }}
                       >
                         {fila.formato(m[fila.key])}
                       </td>
                     ))}
-                    <td style={estilos.tdTotal}>{fila.formato(totalAnual(fila))}</td>
+                    <td
+                      style={{
+                        ...estilos.tdTotal,
+                        whiteSpace: fila.negrita ? "nowrap" : estilos.tdTotal.whiteSpace,
+                      }}
+                    >
+                      {fila.formato(totalAnual(fila))}
+                    </td>
                   </tr>
                 ))}
               </tbody>

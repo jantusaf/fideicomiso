@@ -22,7 +22,7 @@ import '../movimientos2/menuizq7.css';
 
 const MODO_OSCURO_STORAGE_KEY = "nivel6_modo_oscuro";
 
-const initialWidth = 260; // Ancho inicial del menú
+const SIDEBAR_WIDTH = 224; // Ancho fijo del menú (ya no es redimensionable)
 
 const menuItems = [
   {
@@ -81,8 +81,7 @@ export default function MenuIzq2({ children }) {
   const location = useLocation();
 
   const [user, setUser] = useState();
-  const [drawerWidth, setDrawerWidth] = useState(initialWidth);
-  const [resizing, setResizing] = useState(false);
+  const drawerWidth = SIDEBAR_WIDTH;
   const [menuVisible, setMenuVisible] = useState(true);
 
   // Modo oscuro/claro de la sección nivel6. Por defecto arranca en claro;
@@ -129,30 +128,6 @@ export default function MenuIzq2({ children }) {
     setUser(useer)
   }, [])
 
-  const handleMouseMove = (e) => {
-    if (resizing) {
-      const newWidth = Math.max(200, Math.min(e.clientX, 500)); // Limita entre 200 y 500px
-      setDrawerWidth(newWidth);
-    }
-  };
-
-  const handleMouseUp = () => {
-    setResizing(false);
-  };
-  useEffect(() => {
-    if (resizing) {
-      window.addEventListener("mousemove", handleMouseMove);
-      window.addEventListener("mouseup", handleMouseUp);
-    } else {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    }
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [resizing]);
-
   const handleClick = (path) => {
     navigate(path);
   };
@@ -177,7 +152,7 @@ export default function MenuIzq2({ children }) {
     <div className={`mi-shell${oscuro ? " mi-shell--dark" : ""}`}>
       {menuVisible && (
         <aside
-          className={`mi-sidebar${resizing ? " is-resizing" : ""}`}
+          className="mi-sidebar mi-sidebar--n6"
           style={{ width: drawerWidth }}
         >
           <div className="mi-sidebar-brand">
@@ -227,11 +202,6 @@ export default function MenuIzq2({ children }) {
               Cerrar sesión
             </button>
           </div>
-
-          <div
-            className="mi-resizer"
-            onMouseDown={() => setResizing(true)}
-          />
         </aside>
       )}
 
