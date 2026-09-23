@@ -64,7 +64,6 @@ export default function DetalleCliente() {
       {logueado ? <div> 
      
     <BarraLAteral>
-    <EmpresaOCliente/>
           {<DetalleC />}
         </BarraLAteral>
 </div>   :<div></div> } </div>
