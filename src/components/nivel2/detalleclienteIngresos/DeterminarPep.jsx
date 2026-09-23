@@ -134,19 +134,25 @@ export default function SelectTextFields(props) {
       noValidate
       autoComplete="off"
     >
-      <Button variant="contained" onClick={handleClickOpen} sx={{
-                      borderRadius: 2,
+      <Button variant="outlined" onClick={handleClickOpen} sx={{
+                      borderRadius: 1.5,
                       textTransform: "none",
-                      fontWeight: 900,
-                      px: 2,
-                      backgroundColor: "rgba(255,255,255,0.16)",
-                      color: "#fff",
-                      border: "1px solid rgba(255,255,255,0.25)",
-                      "&:hover": { backgroundColor: "rgba(255,255,255,0.24)" },
+                      fontWeight: 600,
+                      px: 2.25,
+                      color: "#1a303e",
+                      borderColor: "#c9d2d8",
+                      "&:hover": { borderColor: "#0d3a49", backgroundColor: "rgba(13, 58, 73, 0.04)" },
                     }}>
       Establecer PEP
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        slotProps={{
+          paper: { sx: { borderRadius: 3 } },
+          backdrop: { sx: { backgroundColor: 'rgba(15, 34, 48, 0.45)' } },
+        }}
+      >
         <DialogContent>
           <div>
           <InputLabel  color='success' variant="standard" htmlFor="uncontrolled-native">

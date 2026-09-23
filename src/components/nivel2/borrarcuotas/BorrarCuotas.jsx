@@ -51,77 +51,72 @@ export default function Borrarcuotas(props) {
   const sxDialogPaper = {
     borderRadius: 3,
     overflow: 'hidden',
-    boxShadow: '0 20px 60px rgba(10,59,79,0.22)',
-   
   };
 
   const sxDialogTitle = {
-    px: 2.4,
-    py: 1.8,
-    color: '#fff',
-    background: 'linear-gradient(135deg, #0b2a3a 0%, #01567c 60%, #148D8D 100%)',
-    fontWeight: 900,
-    letterSpacing: 0.2,
+    px: 3,
+    py: 2,
+    color: '#1a303e',
+    borderBottom: '1px solid #e2e6e9',
+    fontWeight: 700,
   };
 
   const sxDialogContent = {
-    px: 2.4,
-    py: 2.2,
+    px: 3,
+    py: 2.5,
     backgroundColor: '#ffffff',
   };
 
   const sxWarnBox = {
     marginTop: 10,
     padding: '12px 14px',
-    borderRadius: 12,
-    backgroundColor: 'rgba(211,47,47,0.07)',
-    border: '1px solid rgba(211,47,47,0.18)',
-    color: 'rgba(130,0,0,0.85)',
-    fontWeight: 700,
+    borderRadius: 8,
+    backgroundColor: 'rgba(198,40,40,0.05)',
+    border: '1px solid rgba(198,40,40,0.2)',
+    color: '#8a1c1c',
+    fontWeight: 500,
     fontSize: 13,
-    lineHeight: 1.35,
+    lineHeight: 1.4,
   };
 
   const sxActions = {
-    px: 2.4,
-    py: 1.6,
-    borderTop: '1px solid rgba(1,86,124,0.10)',
+    px: 3,
+    py: 2,
+    borderTop: '1px solid #e2e6e9',
     backgroundColor: '#fff',
+    gap: 1,
   };
 
   const sxCancelBtn = {
     textTransform: 'none',
-    fontWeight: 900,
-    borderRadius: 2,
-    px: 2,
-    color: 'rgba(10,59,79,0.85)',
-    backgroundColor: 'rgba(1,86,124,0.06)',
-    border: '1px solid rgba(1,86,124,0.10)',
-    '&:hover': { backgroundColor: 'rgba(1,86,124,0.10)' },
+    fontWeight: 600,
+    borderRadius: 1.5,
+    px: 2.25,
+    color: '#1a303e',
+    borderColor: '#c9d2d8',
+    '&:hover': { borderColor: '#0d3a49', backgroundColor: 'rgba(13, 58, 73, 0.04)' },
   };
 
   const sxConfirmBtn = {
     textTransform: 'none',
-    fontWeight: 900,
-    borderRadius: 2,
-    px: 2.2,
-    backgroundColor: '#d32f2f',
-    boxShadow: '0 10px 25px rgba(211,47,47,0.18)',
-    '&:hover': { backgroundColor: '#b71c1c' },
+    fontWeight: 600,
+    borderRadius: 1.5,
+    px: 2.25,
+    backgroundColor: '#c62828',
+    boxShadow: 'none',
+    '&:hover': { backgroundColor: '#a81f1f', boxShadow: 'none' },
   };
 
   return (
     <div>
-      <Button variant="contained"  sx={{
-          mb: 2,
-          px: 2.2,
-          py: 1.1,
-          borderRadius: 2,
+      <Button variant="outlined" sx={{
+          px: 2.25,
+          borderRadius: 1.5,
           textTransform: 'none',
-          fontWeight: 700, 
-          backgroundColor: '#01567c',
-          boxShadow: '0 10px 25px rgba(1,86,124,0.25)',
-          '&:hover': { backgroundColor: '#014a6b' }
+          fontWeight: 600,
+          color: '#c62828',
+          borderColor: '#e3b5b5',
+          '&:hover': { borderColor: '#c62828', backgroundColor: 'rgba(198, 40, 40, 0.04)' }
         }} onClick={handleClickOpen}>
         Borrar cuotas
       </Button>
@@ -130,7 +125,10 @@ export default function Borrarcuotas(props) {
         fullScreen={fullScreen}
         open={open}
         onClose={handleClose}
-        PaperProps={{ sx: sxDialogPaper }}
+        slotProps={{
+          paper: { sx: sxDialogPaper },
+          backdrop: { sx: { backgroundColor: 'rgba(15, 34, 48, 0.45)' } },
+        }}
         maxWidth="sm"
         fullWidth
       >
@@ -140,10 +138,10 @@ export default function Borrarcuotas(props) {
 
         <DialogContent sx={sxDialogContent}>
           <DialogContentText sx={{
-    fontWeight: 800,
-    color: '#0a3b4f',
-    mt: 2,   // 🔹 separa del encabezado
-    mb: 2    // 🔹 separa del bloque rojo
+    fontWeight: 600,
+    color: '#1a303e',
+    mt: 2,
+    mb: 2
   }}>
             Ingresá la contraseña para confirmar la eliminación.
           </DialogContentText>
@@ -167,55 +165,27 @@ export default function Borrarcuotas(props) {
             sx={{
               mt: 2,
               '& .MuiOutlinedInput-root': {
-                borderRadius: 2,
-                backgroundColor: '#fbfdff',
-              },
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'rgba(1,86,124,0.20)',
-              },
-              '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'rgba(1,86,124,0.40)',
-              },
-              '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                borderColor: '#01567c',
-                boxShadow: '0 0 0 3px rgba(1,86,124,0.12)',
+                borderRadius: 1.5,
               },
               '& .MuiInputLabel-root': {
-                fontWeight: 800,
-                color: '#2b3a42',
+                fontWeight: 600,
               },
             }}
           />
 
           {error && (
-            <div style={{ color: 'crimson', fontWeight: 800, marginTop: 10 }}>
+            <div style={{ color: '#c62828', fontWeight: 600, marginTop: 10 }}>
               {error}
             </div>
           )}
         </DialogContent>
 
         <DialogActions sx={sxActions}>
-          <Button onClick={handleClose} variant="contained" 
-        style={{
-          borderRadius: 8,
-          textTransform: "none",
-          fontWeight: 900,
-          backgroundColor: "#01567c",
-          boxShadow: "0 10px 25px rgba(1,86,124,0.25)",
-          color: "#fff",
-        }}>
+          <Button onClick={handleClose} variant="outlined" sx={sxCancelBtn}>
             Cancelar
           </Button>
 
-          <Button onClick={borarTodas} variant="contained" 
-        style={{
-          borderRadius: 8,
-          textTransform: "none",
-          fontWeight: 900,
-          backgroundColor: "#148D8D",
-          boxShadow: "0 10px 25px rgba(1,86,124,0.25)",
-          color: "#fff",
-        }}>
+          <Button onClick={borarTodas} variant="contained" sx={sxConfirmBtn}>
             Confirmar borrado
           </Button>
         </DialogActions>

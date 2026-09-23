@@ -91,17 +91,15 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
     {/* BOTÓN DISPARADOR */}
     <div style={{ display: "flex", justifyContent: "flex-end" }}>
       <Button
-        variant="contained"
+        variant="outlined"
         sx={{
-          mb: 2,
-          px: 2.4,
-          py: 1.1,
-          borderRadius: 2,
+          px: 2.25,
+          borderRadius: 1.5,
           textTransform: "none",
-          fontWeight: 800,
-          backgroundColor: "#01567c",
-          boxShadow: "0 10px 25px rgba(1,86,124,0.25)",
-          "&:hover": { backgroundColor: "#014a6b" },
+          fontWeight: 600,
+          color: "#1a303e",
+          borderColor: "#c9d2d8",
+          "&:hover": { borderColor: "#0d3a49", backgroundColor: "rgba(13, 58, 73, 0.04)" },
         }}
         onClick={() => {
           setOpen(true);
@@ -119,26 +117,22 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
       onClose={() => setOpen(false)}
       fullWidth
       maxWidth="sm"
-      PaperProps={{
-        sx: {
-          borderRadius: 3,
-          overflow: "hidden",
-          boxShadow: "0 25px 70px rgba(10,59,79,0.25)",
-        },
+      slotProps={{
+        paper: { sx: { borderRadius: 3, overflow: "hidden" } },
+        backdrop: { sx: { backgroundColor: "rgba(15, 34, 48, 0.45)" } },
       }}
     >
-      {/* HEADER */}
+      {/* ENCABEZADO */}
       <DialogTitle
         sx={{
-          color: "#fff",
-          fontWeight: 900,
-          background:
-            "linear-gradient(135deg, #0b2a3a 0%, #01567c 60%, #148D8D 100%)",
-          pb: 1.2,
+          color: "#1a303e",
+          fontWeight: 700,
+          borderBottom: "1px solid #e2e6e9",
+          pb: 1.5,
         }}
       >
         Anticipar cuotas
-        <Typography sx={{ fontSize: 13, opacity: 0.9, mt: 0.5 }}>
+        <Typography sx={{ fontSize: 13, color: "#6b7a86", fontWeight: 400, mt: 0.5 }}>
           Seleccioná cantidad, CBU y adjuntá comprobante
         </Typography>
       </DialogTitle>
@@ -149,9 +143,10 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
             {/* INFO */}
             <Typography
               sx={{
-                fontWeight: 700,
-                color: "#0a3b4f",
+                fontWeight: 600,
+                color: "#1a303e",
                 mb: 2,
+                mt: 1,
               }}
             >
               Podés anticipar hasta{" "}
@@ -165,8 +160,7 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
               fullWidth
               sx={{
                 mb: 2,
-                borderRadius: 2,
-                backgroundColor: "#fbfdff",
+                borderRadius: 1.5,
               }}
             >
               {[...Array(maxCuotas).keys()].map((i) => (
@@ -182,12 +176,12 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
                 style={{
                   marginTop: 12,
                   padding: 16,
-                  borderRadius: 12,
-                  background: "rgba(20,141,141,0.08)",
-                  border: "1px solid rgba(20,141,141,0.25)",
+                  borderRadius: 8,
+                  background: "#f6f8f9",
+                  border: "1px solid #e2e6e9",
                 }}
               >
-                <Typography sx={{ fontWeight: 900, fontSize: 16 }}>
+                <Typography sx={{ fontWeight: 700, fontSize: 16, color: "#1a303e" }}>
                   Total a pagar: $
                   {Number(totalAnticipado).toFixed(2)}
                 </Typography>
@@ -196,8 +190,8 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
                   sx={{
                     fontSize: 13,
                     mt: 0.5,
-                    color: cantidad >= 30 ? "red" : "rgba(10,59,79,0.75)",
-                    fontWeight: cantidad >= 30 ? 800 : 600,
+                    color: cantidad >= 30 ? "#c62828" : "#6b7a86",
+                    fontWeight: cantidad >= 30 ? 700 : 500,
                   }}
                 >
                   Incluye {cantidad} cuota(s) · Valor base: $
@@ -217,8 +211,7 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
               sx={{
                 mt: 3,
                 "& .MuiOutlinedInput-root": {
-                  borderRadius: 2,
-                  backgroundColor: "#fbfdff",
+                  borderRadius: 1.5,
                 },
               }}
             >
@@ -235,8 +228,8 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
               <Typography
                 sx={{
                   mt: 1,
-                  fontWeight: 700,
-                  color: "#0a3b4f",
+                  fontWeight: 600,
+                  color: "#1a303e",
                 }}
               >
                 Últimos números: {descripcionCBU}
@@ -248,15 +241,14 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
               fullWidth
               type="date"
               label="Fecha"
-              InputLabelProps={{ shrink: true }}
+              slotProps={{ inputLabel: { shrink: true } }}
               onChange={(e) =>
                 setPago({ ...pago, fecha: e.target.value })
               }
               sx={{
                 mt: 3,
                 "& .MuiOutlinedInput-root": {
-                  borderRadius: 2,
-                  backgroundColor: "#fbfdff",
+                  borderRadius: 1.5,
                 },
               }}
             />
@@ -267,9 +259,9 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
               style={{
                 marginTop: 24,
                 padding: 22,
-                borderRadius: 14,
-                border: "2px dashed rgba(1,86,124,0.35)",
-                backgroundColor: "rgba(1,86,124,0.04)",
+                borderRadius: 8,
+                border: "1px dashed #c9d2d8",
+                backgroundColor: "#fafbfc",
                 textAlign: "center",
                 cursor: "pointer",
               }}
@@ -294,19 +286,21 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
         sx={{
           px: 3,
           py: 2,
-          borderTop: "1px solid rgba(1,86,124,0.1)",
+          borderTop: "1px solid #e2e6e9",
+          gap: 1,
         }}
       >
         <Button
           onClick={() => setOpen(false)}
-          variant='contained'
-           sx={{
+          variant="outlined"
+          sx={{
             textTransform: "none",
-            fontWeight: 900,
-            borderRadius: 2,
-            backgroundColor: "#148D8D",
-            boxShadow: "0 10px 25px rgba(20,141,141,0.25)",
-            "&:hover": { backgroundColor: "#0f7a7a" },
+            fontWeight: 600,
+            borderRadius: 1.5,
+            px: 2.25,
+            color: "#1a303e",
+            borderColor: "#c9d2d8",
+            "&:hover": { borderColor: "#0d3a49", backgroundColor: "rgba(13, 58, 73, 0.04)" },
           }}
         >
           Cancelar
@@ -318,11 +312,12 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
           disabled={maxCuotas === 0 || loading}
           sx={{
             textTransform: "none",
-            fontWeight: 900,
-            borderRadius: 2,
-            backgroundColor: "#01567c",
-            boxShadow: "0 10px 25px rgba(20,141,141,0.25)",
-            "&:hover": { backgroundColor: "#014666ff" },
+            fontWeight: 600,
+            borderRadius: 1.5,
+            px: 2.25,
+            backgroundColor: "#1a303e",
+            boxShadow: "none",
+            "&:hover": { backgroundColor: "#0d3a49", boxShadow: "none" },
           }}
         >
           {loading ? <CircularProgress size={22} /> : "Enviar"}

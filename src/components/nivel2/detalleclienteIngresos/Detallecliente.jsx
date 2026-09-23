@@ -7,15 +7,9 @@ import servicioCliente from "../../../services/clientes";
 import PEP from "./DeterminarPep";
 import Cargadetabla from "../../CargaDeTabla";
 
-import {
-  Box,
-  Paper,
-  Typography,
-  Divider,
-  Stack,
-  Button,
-} from "@mui/material";
-import Alert from "@mui/material/Alert";
+import { Alert, Box, Button, Chip, Paper, Stack, Typography } from "@mui/material";
+import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, sxCard, sxBtnOutlined, sxBtnPrimary } from "./estilos";
 
 const DetalleCliente = () => {
   const navigate = useNavigate();
@@ -45,181 +39,106 @@ const DetalleCliente = () => {
   };
 
   return (
-    <Box
-      sx={{
-        minHeight: "calc(100vh - 64px)",
-        backgroundColor: "#f4f8fb",
-        px: { xs: 1.5, md: 3 },
-        py: { xs: 2, md: 3 },
-      }}
-    >
+    <Box sx={{ maxWidth: 1320, mx: "auto", px: { xs: 0, md: 1 }, pt: { xs: 1, md: 2 }, pb: 6 }}>
       {!carga ? (
-        <>
-          {/* HEADER */}
-          <Paper
-            elevation={0}
-            sx={{
-              borderRadius: 3,
-              overflow: "hidden",
-              border: "1px solid #e8eef5",
-              background:
-                "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-              mb: 2,
-            }}
-          >
-            <Box sx={{ p: { xs: 2, md: 2.5 }, color: "#fff" }}>
-              <Stack
-                direction={{ xs: "column", md: "row" }}
-                spacing={1.5}
-                alignItems={{ md: "center" }}
-                justifyContent="space-between"
-              >
-                <Box>
-                  <Typography sx={{ fontWeight: 950, letterSpacing: 0.2 }}>
-                  Cliente
-                  </Typography>
-                  <Typography
-                    sx={{
-                      opacity: 0.92,
-                      fontWeight: 700,
-                      fontSize: 13,
-                      mt: 0.2,
-                    }}
-                  >
-                    CUIT/CUIL: <b>{cuil_cuit}</b>
-                  </Typography>
+        <Stack spacing={2.5}>
+          {/* ENCABEZADO */}
+          <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 } }}>
+            <Stack
+              direction={{ xs: "column", md: "row" }}
+              spacing={2} sx={{ alignItems: { md: "center" }, justifyContent: "space-between" }}>
+              <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
+                <Box
+                  sx={{
+                    width: 46,
+                    height: 46,
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    bgcolor: "rgba(13,58,73,0.08)",
+                    flexShrink: 0,
+                  }}
+                >
+                  <PersonOutlineRoundedIcon sx={{ color: COLOR_ACCENT }} />
                 </Box>
 
-                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                  {/* NO CAMBIO PEP, solo lo ubico */}
-                  <PEP
-                    cuil_cuit={cuil_cuit}
-                    getData={async () => {
-                      const clientee = await servicioCliente.clientehabilitado(cuil_cuit);
-                      setCliente(clientee[1]);
+                <Box>
+                  <Stack direction="row" spacing={1.25} useFlexGap sx={{ alignItems: "center", flexWrap: "wrap" }}>
+                    <Typography variant="h5" sx={{ fontWeight: 700, color: COLOR_TEXT }}>
+                      Cliente
+                    </Typography>
+                    <Chip
+                      size="small"
+                      variant="outlined"
+                      color={habilitado ? "success" : "error"}
+                      label={habilitado ? "Habilitado" : "No habilitado"}
+                      sx={{ fontWeight: 600 }}
+                    />
+                  </Stack>
+                  <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
+                    CUIT/CUIL <b style={{ color: COLOR_TEXT }}>{cuil_cuit}</b>
+                    {cliente?.cuil_cuit ? (
+                      <>
+                        {" · "}
+                        {habilitado ? "Habilitado" : "Revisado"} por {cliente.cuil_cuit}
+                        {cliente?.fecha ? `, el día ${cliente.fecha}` : ""}
+                      </>
+                    ) : null}
+                  </Typography>
+                </Box>
+              </Stack>
 
-                      if (clientee[0][0].habilitado == "Si") sethabilitado(true);
-                      else sethabilitado(false);
+              <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: "wrap" }}>
+                <PEP
+                  cuil_cuit={cuil_cuit}
+                  getData={async () => {
+                    const clientee = await servicioCliente.clientehabilitado(cuil_cuit);
+                    setCliente(clientee[1]);
 
-                      if (clientee[0][0].expuesta == "SI") setExpuesta(true);
-                      else setExpuesta(false);
+                    if (clientee[0][0].habilitado == "Si") sethabilitado(true);
+                    else sethabilitado(false);
 
-                      setCarga(false);
-                    }}
-                  />
+                    if (clientee[0][0].expuesta == "SI") setExpuesta(true);
+                    else setExpuesta(false);
 
+                    setCarga(false);
+                  }}
+                />
+
+                <Button
+                  variant="outlined"
+                  onClick={() => navigate("/usuario2/actualizarcomporbantes/" + cuil_cuit)}
+                  sx={sxBtnOutlined}
+                >
+                  Actualizar comprobantes
+                </Button>
+
+                {!habilitado ? (
                   <Button
                     variant="contained"
-                    onClick={() =>
-                      navigate("/usuario2/actualizarcomporbantes/" + cuil_cuit)
-                    }
-                    sx={{
-                      borderRadius: 2,
-                      textTransform: "none",
-                      fontWeight: 900,
-                      px: 2,
-                      backgroundColor: "rgba(255,255,255,0.16)",
-                      color: "#fff",
-                      border: "1px solid rgba(255,255,255,0.25)",
-                      "&:hover": { backgroundColor: "rgba(255,255,255,0.24)" },
-                    }}
+                    onClick={() => navigate("/usuario2/legajoscliente/" + cuil_cuit)}
+                    sx={sxBtnPrimary}
                   >
-                    ACTUALIZAR COMPROBANTES
+                    Ir a legajos
                   </Button>
-
-                  {!habilitado ? (
-                    <Button
-                      variant="contained"
-                      onClick={() =>
-                        navigate("/usuario2/legajoscliente/" + cuil_cuit)
-                      }
-                      sx={{
-                        borderRadius: 2,
-                        textTransform: "none",
-                        fontWeight: 950,
-                        px: 2,
-                        backgroundColor: "#d32f2f",
-                        "&:hover": { backgroundColor: "#b71c1c" },
-                      }}
-                    >
-                      Ir a legajos
-                    </Button>
-                  ) : null}
-                </Stack>
+                ) : null}
               </Stack>
-            </Box>
+            </Stack>
+
+            {!habilitado ? (
+              <Alert severity="warning" sx={{ mt: 2, borderRadius: 1.5 }}>
+                No se puede asignar lote a un cliente no habilitado. Andá a <b>Legajos</b> para habilitarlo.
+              </Alert>
+            ) : null}
           </Paper>
 
-          {/* ESTADO / ALERTA */}
-         
-           
-            {habilitado ? (<>
-              <Alert
-                severity="success"
-                sx={{
-                  borderRadius: 2,
-                  "& .MuiAlert-message": { fontWeight: 800 },
-                }}
-              >
-                <b>Cliente habilitado</b> por {cliente.cuil_cuit}, el día{" "}
-                {cliente.fecha}
+          {/* DATOS DEL CLIENTE */}
+          <InfoCliente cuil_cuit={cuil_cuit} />
 
-             
-              </Alert>
-               </>
-            ) : (
-              <Alert
-                severity="error"
-                sx={{
-                  borderRadius: 2,
-                  "& .MuiAlert-message": { fontWeight: 800 },
-                }}
-              >
-                <b>Cliente no habilitado</b> por {cliente.cuil_cuit} el día{" "}
-                {cliente.fecha}. (No se puede asignar lote a un cliente no
-                habilitado). Ir a LEGAJOS para habilitar.
-              </Alert>
-            )}
-              
-          {/* CARD: DATOS */}
-          <Paper
-            elevation={0}
-            sx={{
-              borderRadius: 3,
-              border: "1px solid #e8eef5",
-              backgroundColor: "#ffffff",
-              p: { xs: 1.8, md: 2.2 },
-              mb: 2,
-            }}
-          >
-
-            {/* No toco el componente, solo wrapper */}
-            <Box>
-              <InfoCliente cuil_cuit={cuil_cuit} />
-            </Box>
-          </Paper>
-
-          {/* CARD: LOTES (solo si habilitado) */}
-          {habilitado ? (
-            <Paper
-              elevation={0}
-              sx={{
-                borderRadius: 3,
-                border: "1px solid #e8eef5",
-                backgroundColor: "#ffffff",
-                p: { xs: 1.8, md: 2.2 },
-              }}
-            >
-              <Typography sx={{ fontWeight: 950, color: "#1f2a33", mb: 1.2 }}>
-                Lote
-              </Typography>
-              <Divider sx={{ mb: 2 }} />
-              <Box>
-                <LotesCliente cuil_cuit={cuil_cuit} />
-              </Box>
-            </Paper>
-          ) : null}
-        </>
+          {/* LOTE Y CUADRO DE CUOTAS (solo si está habilitado) */}
+          {habilitado ? <LotesCliente cuil_cuit={cuil_cuit} /> : null}
+        </Stack>
       ) : (
         <Cargadetabla />
       )}

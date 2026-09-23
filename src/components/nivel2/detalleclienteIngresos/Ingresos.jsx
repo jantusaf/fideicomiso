@@ -95,55 +95,51 @@ export default function FormDialog(props) {
 
   // ====== estilos (solo frontend) ======
   const sxPrimaryBtn = {
-    mb: 2,
-    px: 2.2,
-    py: 1.1,
-    borderRadius: 2,
     textTransform: 'none',
-    fontWeight: 900,
-    backgroundColor: '#01567c',
-    boxShadow: '0 10px 25px rgba(1,86,124,0.25)',
-    '&:hover': { backgroundColor: '#014a6b' }
+    fontWeight: 600,
+    borderRadius: 1.5,
+    px: 2.25,
+    color: '#1a303e',
+    borderColor: '#c9d2d8',
+    '&:hover': { borderColor: '#0d3a49', backgroundColor: 'rgba(13, 58, 73, 0.04)' }
   };
 
   const sxDialogPaper = {
     borderRadius: 3,
     overflow: 'hidden',
-    boxShadow: '0 20px 60px rgba(10,59,79,0.22)',
-    
   };
 
   const sxDialogHeader = {
-    px: 2.4,
-    py: 1.8,
-    color: '#fff',
-    background: 'linear-gradient(135deg, #0b2a3a 0%, #01567c 60%, #148D8D 100%)',
+    px: 3,
+    py: 2,
+    color: '#1a303e',
+    borderBottom: '1px solid #e2e6e9',
   };
 
   const sxDropzone = {
     cursor: 'pointer',
     borderRadius: 2,
     p: 2,
-    background: isDragActive ? 'rgba(20,141,141,0.10)' : '#fbfdff',
-    border: isDragActive ? '2px dashed #148D8D' : '1px dashed rgba(1,86,124,0.25)',
-    transition: '0.18s ease',
+    background: isDragActive ? 'rgba(13,58,73,0.04)' : '#fafbfc',
+    border: '1px dashed',
+    borderColor: isDragActive ? '#0d3a49' : '#d5dbe0',
+    transition: 'border-color .15s ease',
     '&:hover': {
-      borderColor: 'rgba(1,86,124,0.45)',
-      background: 'rgba(1,86,124,0.04)'
+      borderColor: '#0d3a49',
     }
   };
 
   const sxChip = {
-    fontWeight: 800,
+    fontWeight: 600,
     borderRadius: 2,
-    backgroundColor: 'rgba(1,86,124,0.08)',
-    border: '1px solid rgba(1,86,124,0.14)',
+    backgroundColor: 'rgba(13,58,73,0.06)',
+    border: '1px solid #e2e6e9',
   };
 
   return (
     <div>
       <Button
-        variant="contained"
+        variant="outlined"
         sx={sxPrimaryBtn}
         onClick={handleClickOpen}
       >
@@ -153,16 +149,19 @@ export default function FormDialog(props) {
       <Dialog
         open={open}
         onClose={handleClose}
-        PaperProps={{ sx: sxDialogPaper }}
+        slotProps={{
+          paper: { sx: sxDialogPaper },
+          backdrop: { sx: { backgroundColor: 'rgba(15, 34, 48, 0.45)' } },
+        }}
         maxWidth="sm"
         fullWidth
       >
-        {/* Header moderno */}
+        {/* Encabezado */}
         <Box sx={sxDialogHeader}>
-          <Typography sx={{ fontWeight: 900, letterSpacing: 0.2, fontSize: 16 }}>
+          <Typography sx={{ fontWeight: 700, fontSize: 18 }}>
             Ingresos
           </Typography>
-          <Typography sx={{ opacity: 0.92, mt: 0.4, fontSize: 13, fontWeight: 700 }}>
+          <Typography sx={{ color: '#6b7a86', mt: 0.4, fontSize: 13 }}>
             Cargar documentación válida para los ingresos
           </Typography>
 
@@ -170,22 +169,17 @@ export default function FormDialog(props) {
             <Chip
               label={`CUIT/CUIL: ${cuil_cuit}`}
               size="small"
-              sx={{
-                ...sxChip,
-                color: '#fff',
-                backgroundColor: 'rgba(255,255,255,0.14)',
-                border: '1px solid rgba(255,255,255,0.22)',
-              }}
+              sx={sxChip}
             />
           </Box>
         </Box>
 
-        <DialogContent sx={{ p: 2.4 }}>
-          <Box sx={{ mb: 1.2 }}>
-            <Typography sx={{ fontWeight: 900, color: '#0a3b4f' }}>
+        <DialogContent sx={{ p: 3 }}>
+          <Box sx={{ mb: 1.5 }}>
+            <Typography sx={{ fontWeight: 700, color: '#1a303e' }}>
               Documentación
             </Typography>
-            <Typography sx={{ fontSize: 13, color: 'rgba(10,59,79,0.75)', mt: 0.4 }}>
+            <Typography sx={{ fontSize: 13, color: '#6b7a86', mt: 0.4 }}>
               Solo PDF. Arrastrá y soltá el archivo o hacé click para seleccionar.
             </Typography>
           </Box>
@@ -197,21 +191,20 @@ export default function FormDialog(props) {
                 sx={{
                   width: 36,
                   height: 36,
-                  borderRadius: 2,
+                  borderRadius: '50%',
                   display: 'grid',
                   placeItems: 'center',
-                  backgroundColor: 'rgba(20,141,141,0.12)',
-                  border: '1px solid rgba(20,141,141,0.22)',
+                  backgroundColor: 'rgba(13,58,73,0.08)',
                 }}
               >
-                <BackupIcon fontSize="small" />
+                <BackupIcon fontSize="small" sx={{ color: '#0d3a49' }} />
               </Box>
 
               <Box sx={{ flex: 1 }}>
-                <Typography sx={{ fontWeight: 900, color: '#0a3b4f', fontSize: 14 }}>
+                <Typography sx={{ fontWeight: 600, color: '#1a303e', fontSize: 14 }}>
                   {isDragActive ? 'Suelta aquí el documento' : 'Arrastrá el archivo o tocá para subir'}
                 </Typography>
-                <Typography sx={{ fontSize: 12.5, color: 'rgba(10,59,79,0.70)', mt: 0.2 }}>
+                <Typography sx={{ fontSize: 12.5, color: '#6b7a86', mt: 0.2 }}>
                   Extensiones aceptadas: pdf, doc, docx, jpg, png (pero se valida PDF).
                 </Typography>
               </Box>
@@ -219,8 +212,8 @@ export default function FormDialog(props) {
 
             {acceptedFiles?.length > 0 && (
               <>
-                <Divider sx={{ my: 1.4, borderColor: 'rgba(1,86,124,0.10)' }} />
-                <Typography sx={{ fontWeight: 900, color: '#0f7a7a', fontSize: 13, mb: 0.8 }}>
+                <Divider sx={{ my: 1.4, borderColor: '#e2e6e9' }} />
+                <Typography sx={{ fontWeight: 700, color: '#2e7d32', fontSize: 13, mb: 0.8 }}>
                   Archivo seleccionado
                 </Typography>
 
@@ -257,22 +250,10 @@ export default function FormDialog(props) {
             sx={{
               mt: 2,
               '& .MuiOutlinedInput-root': {
-                borderRadius: 2,
-                backgroundColor: '#fbfdff'
-              },
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'rgba(1,86,124,0.20)'
-              },
-              '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'rgba(1,86,124,0.40)'
-              },
-              '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                borderColor: '#01567c',
-                boxShadow: '0 0 0 3px rgba(1,86,124,0.12)',
+                borderRadius: 1.5,
               },
               '& .MuiInputLabel-root': {
-                fontWeight: 800,
-                color: '#2b3a42'
+                fontWeight: 600,
               }
             }}
           />
@@ -280,23 +261,23 @@ export default function FormDialog(props) {
 
         <DialogActions
           sx={{
-            px: 2.4,
-            py: 1.6,
-            borderTop: '1px solid rgba(1,86,124,0.10)',
+            px: 3,
+            py: 2,
+            borderTop: '1px solid #e2e6e9',
             backgroundColor: '#ffffff',
           }}
         >
           <Button
             onClick={handleClose}
+            variant="outlined"
             sx={{
               textTransform: 'none',
-              fontWeight: 900,
-              borderRadius: 2,
-              px: 2,
-              color: '#ffffffff',
-              backgroundColor: '#01567c',
-          boxShadow: '0 10px 25px rgba(1,86,124,0.25)',
-          '&:hover': { backgroundColor: '#014a6b' }
+              fontWeight: 600,
+              borderRadius: 1.5,
+              px: 2.25,
+              color: '#1a303e',
+              borderColor: '#c9d2d8',
+              '&:hover': { borderColor: '#0d3a49', backgroundColor: 'rgba(13, 58, 73, 0.04)' }
             }}
             disabled={cargando}
           >
@@ -309,12 +290,12 @@ export default function FormDialog(props) {
             disabled={cargando}
             sx={{
               textTransform: 'none',
-              fontWeight: 900,
-              borderRadius: 2,
-              px: 2.2,
-              backgroundColor: '#148D8D',
-              boxShadow: '0 10px 25px rgba(20,141,141,0.25)',
-              '&:hover': { backgroundColor: '#0f7a7a' }
+              fontWeight: 600,
+              borderRadius: 1.5,
+              px: 2.25,
+              boxShadow: 'none',
+              backgroundColor: '#1a303e',
+              '&:hover': { backgroundColor: '#0d3a49', boxShadow: 'none' }
             }}
           >
             {cargando ? (

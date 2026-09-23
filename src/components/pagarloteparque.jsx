@@ -155,72 +155,64 @@ export default function CancelarLoteCompleto(props) {
   // ======== Estilos (idénticos al otro modal) ========
   const inputSx = {
     "& .MuiOutlinedInput-root": {
-      borderRadius: 2,
-      background: "rgba(255,255,255,0.92)",
-      "& fieldset": { borderColor: alpha("#0b4f6c", 0.18) },
-      "&:hover fieldset": { borderColor: alpha("#0b4f6c", 0.30) },
-      "&.Mui-focused fieldset": { borderColor: "#148D8D", borderWidth: 2 },
+      borderRadius: 1.5,
     },
-    "& .MuiInputLabel-root": { fontWeight: 800, color: alpha("#0b4f6c", 0.9) },
+    "& .MuiInputLabel-root": { fontWeight: 600 },
   };
 
+  // Acción delicada: contorno rojo, sin sombras
   const sxBtnOpen = {
-    mb: 2,
-    px: 2.2,
-    py: 1.1,
-    borderRadius: 2,
+    px: 2.25,
+    borderRadius: 1.5,
     textTransform: "none",
-    fontWeight: 900,
-    backgroundColor: "#0b4f6c",
-    boxShadow: "0 10px 25px rgba(11,79,108,0.25)",
-    "&:hover": { backgroundColor: "#0a3b4f" },
+    fontWeight: 600,
+    color: "#c62828",
+    borderColor: "#e3b5b5",
+    "&:hover": { borderColor: "#c62828", backgroundColor: "rgba(198, 40, 40, 0.04)" },
   };
 
   const sxBtnCancel = {
-    borderRadius: 2,
-    px: 2.2,
-    py: 1,
+    borderRadius: 1.5,
+    px: 2.25,
     textTransform: "none",
-    fontWeight: 900,
-    background: alpha("#0b4f6c", 0.10),
-    color: "#0b4f6c",
-    "&:hover": { background: alpha("#0b4f6c", 0.14) },
+    fontWeight: 600,
+    color: "#1a303e",
+    borderColor: "#c9d2d8",
+    "&:hover": { borderColor: "#0d3a49", backgroundColor: "rgba(13, 58, 73, 0.04)" },
   };
 
   const sxBtnNext = {
-    borderRadius: 2,
-    px: 2.2,
-    py: 1,
+    borderRadius: 1.5,
+    px: 2.25,
     textTransform: "none",
-    fontWeight: 900,
-    background: "#0b4f6c",
-    boxShadow: "0 12px 26px rgba(11,79,108,0.22)",
-    "&:hover": { background: "#0a3b4f" },
+    fontWeight: 600,
+    backgroundColor: "#1a303e",
+    boxShadow: "none",
+    "&:hover": { backgroundColor: "#0d3a49", boxShadow: "none" },
     "&.Mui-disabled": {
-      background: alpha("#0b4f6c", 0.18),
-      color: alpha("#0b2b3a", 0.45),
+      backgroundColor: "#e2e6e9",
+      color: "#9aa7b0",
     },
   };
 
   const sxBtnEnviar = {
-    borderRadius: 2,
-    px: 2.2,
-    py: 1,
+    borderRadius: 1.5,
+    px: 2.25,
     textTransform: "none",
-    fontWeight: 900,
-    background: "#148D8D",
-    boxShadow: "0 12px 26px rgba(20,141,141,0.22)",
-    "&:hover": { background: "#0f7f86" },
+    fontWeight: 600,
+    backgroundColor: "#c62828",
+    boxShadow: "none",
+    "&:hover": { backgroundColor: "#a81f1f", boxShadow: "none" },
     "&.Mui-disabled": {
-      background: alpha("#148D8D", 0.18),
-      color: alpha("#0b2b3a", 0.45),
+      backgroundColor: "#e2e6e9",
+      color: "#9aa7b0",
     },
   };
 
   return (
     <>
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button variant="contained" sx={sxBtnOpen} onClick={() => setOpen(true)}>
+        <Button variant="outlined" sx={sxBtnOpen} onClick={() => setOpen(true)}>
           Cancelar lote
         </Button>
       </div>
@@ -234,30 +226,25 @@ export default function CancelarLoteCompleto(props) {
         }}
         maxWidth="sm"
         fullWidth
-        PaperProps={{
-          sx: {
-            borderRadius: 3,
-            overflow: "hidden",
-            boxShadow: "0 24px 70px rgba(0,0,0,0.22)",
-            
-          },
+        slotProps={{
+          paper: { sx: { borderRadius: 3, overflow: "hidden" } },
+          backdrop: { sx: { backgroundColor: "rgba(15, 34, 48, 0.45)" } },
         }}
       >
-        {/* Header sin borde blanco */}
+        {/* Encabezado */}
         <DialogTitle sx={{ p: 0 }}>
           <Box
             sx={{
               px: 3,
               py: 2,
-              background:
-                "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-              color: "#fff",
+              color: "#1a303e",
+              borderBottom: "1px solid #e2e6e9",
             }}
           >
-            <Typography sx={{ fontWeight: 900, fontSize: 18, lineHeight: 1.1 }}>
+            <Typography sx={{ fontWeight: 700, fontSize: 18, lineHeight: 1.2 }}>
               Cancelar lote
             </Typography>
-            <Typography sx={{ mt: 0.4, opacity: 0.92, fontWeight: 650, fontSize: 13.5 }}>
+            <Typography sx={{ mt: 0.4, color: "#6b7a86", fontWeight: 400, fontSize: 13.5 }}>
               {paso === 1
                 ? "Seleccioná el mes/año de referencia y confirmá con contraseña."
                 : "Seleccioná CBU, fecha y adjuntá documentación (PDF/imagen)."}
@@ -270,13 +257,11 @@ export default function CancelarLoteCompleto(props) {
             pt: 2.5,
             pb: 2.5,
             px: 3,
-            background:
-              "linear-gradient(180deg, rgba(20,141,141,0.06) 0%, rgba(255,255,255,0.95) 55%, #fff 100%)",
           }}
         >
           {paso == 1 ? (
             <>
-              <Typography sx={{ fontWeight: 900, color: "#0b2b3a", mb: 1 }}>
+              <Typography sx={{ fontWeight: 700, color: "#1a303e", mb: 1 }}>
                 Período
               </Typography>
 
@@ -499,6 +484,7 @@ export default function CancelarLoteCompleto(props) {
               setPaso(1);
               setPassword("");
             }}
+            variant="outlined"
             sx={sxBtnCancel}
           >
             Cancelar

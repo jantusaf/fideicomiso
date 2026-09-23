@@ -27,28 +27,32 @@ const BeneficiariosDialog = (props) => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log('Beneficiarios:', beneficiarios);
-    servicioCliente.agregarbeneficiarios(beneficiarios)
-    setOpen(false);
+    try {
+      await servicioCliente.agregarbeneficiarios(beneficiarios)
+      setOpen(false);
+      if (props.traer) await props.traer();
+    } catch (error) {
+      console.error(error);
+      alert('No se pudieron guardar los beneficiarios. Probá de nuevo.');
+    }
   };
 
   return (
     <div>
-      <Button variant="contained"   sx={{
-          mb: 2,
-          px: 2.2,
-          py: 1.1,
-          borderRadius: 2,
+      <Button variant="outlined" onClick={() => setOpen(true)} sx={{
           textTransform: 'none',
-          fontWeight: 700,
-          backgroundColor: '#01567c',
-          boxShadow: '0 10px 25px rgba(1,86,124,0.25)',
-          '&:hover': { backgroundColor: '#014a6b' }
+          fontWeight: 600,
+          borderRadius: 1.5,
+          px: 2.25,
+          color: '#1a303e',
+          borderColor: '#c9d2d8',
+          '&:hover': { borderColor: '#0d3a49', backgroundColor: 'rgba(13, 58, 73, 0.04)' }
         }}>
-        Agregar Beneficiarios
+        Agregar beneficiarios
       </Button>
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      <Dialog open={open} onClose={() => setOpen(false)} slotProps={{ paper: { sx: { borderRadius: 3 } } }}>
         <DialogTitle>Agregar Beneficiarios</DialogTitle>
         <DialogContent>
           <Select value={cantidad} onChange={handleChange} fullWidth>

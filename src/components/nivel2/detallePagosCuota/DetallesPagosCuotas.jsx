@@ -108,12 +108,12 @@ export default function DetallesPagos() {
         {/* Encabezado */}
         <Stack
           direction={{ xs: "column", sm: "row" }}
-          justifyContent="space-between"
-          alignItems={{ xs: "flex-start", sm: "center" }}
+         
+         
           spacing={2}
-          sx={{ p: { xs: 2.5, sm: 3.5 }, pb: 2 }}
+          sx={{ alignItems: { xs: "flex-start", sm: "center" }, justifyContent: "space-between", p: { xs: 2.5, sm: 3.5 }, pb: 2 }}
         >
-          <Stack direction="row" spacing={2} alignItems="center">
+          <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
             <Box
               sx={{
                 width: 42,
@@ -184,7 +184,7 @@ export default function DetallesPagos() {
                         {formatoARS(p.monto)}
                       </TableCell>
                       <TableCell>
-                        <Stack direction="row" spacing={0.75} flexWrap="wrap" useFlexGap>
+                        <Stack direction="row" spacing={0.75} useFlexGap sx={{ flexWrap: "wrap" }}>
                           {p.monto_distinto === "Si" ? (
                             <Chip size="small" color="warning" variant="outlined" label="No coincide con banco" />
                           ) : (
@@ -206,7 +206,7 @@ export default function DetallesPagos() {
                             Ver comprobante
                           </Button>
                         ) : (
-                          <Stack direction="row" spacing={0.5} alignItems="center" sx={{ color: "#b26a00" }}>
+                          <Stack direction="row" spacing={0.5} sx={{ alignItems: "center", color: "#b26a00" }}>
                             <ErrorOutlineRoundedIcon fontSize="small" />
                             <Typography variant="body2" sx={{ fontWeight: 700 }}>
                               Sin comprobante
@@ -215,7 +215,7 @@ export default function DetallesPagos() {
                         )}
                       </TableCell>
                       <TableCell align="right">
-                        <Stack direction="row" spacing={1} justifyContent="flex-end">
+                        <Stack direction="row" spacing={1} sx={{ justifyContent: "flex-end" }}>
                           <ModalEditarPago pago={p} onGuardado={traer} />
                           <ModalCancelarPago pago={p} onCancelado={traer} />
                         </Stack>

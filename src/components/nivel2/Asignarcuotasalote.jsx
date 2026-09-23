@@ -46,17 +46,15 @@ export default function Borrarcuotas(props) {
     <div>
       {/* Botón principal (tu estilo) */}
       <Button
-        variant="contained"
+        variant="outlined"
         sx={{
-          mb: 2,
-          px: 2.2,
-          py: 1.1,
-          borderRadius: 2,
+          px: 2.25,
+          borderRadius: 1.5,
           textTransform: 'none',
-          fontWeight: 800,
-          backgroundColor: '#01567c',
-          boxShadow: '0 10px 25px rgba(1,86,124,0.25)',
-          '&:hover': { backgroundColor: '#014a6b' },
+          fontWeight: 600,
+          color: '#1a303e',
+          borderColor: '#c9d2d8',
+          '&:hover': { borderColor: '#0d3a49', backgroundColor: 'rgba(13, 58, 73, 0.04)' },
         }}
         onClick={handleClickOpen}
       >
@@ -68,24 +66,19 @@ export default function Borrarcuotas(props) {
         open={open}
         onClose={handleClose}
         aria-labelledby="Estas seguro"
-        PaperProps={{
-          sx: {
-            borderRadius: fullScreen ? 0 : 3,
-            overflow: 'hidden',
-            border: '1px solid #e8eef5',
-            boxShadow: '0 18px 45px rgba(10,59,79,0.18)',
-          },
+        slotProps={{
+          paper: { sx: { borderRadius: fullScreen ? 0 : 3, overflow: 'hidden' } },
+          backdrop: { sx: { backgroundColor: 'rgba(15, 34, 48, 0.45)' } },
         }}
       >
-        {/* Header con tu paleta */}
         <DialogTitle
           id="responsive-dialog-title"
           sx={{
             px: 3,
             py: 2,
-            fontWeight: 950,
-            color: '#fff',
-            background: 'linear-gradient(135deg, #071f2b 0%, #0b2a3a 35%, #01567c 70%, #148D8D 100%)',
+            fontWeight: 700,
+            color: '#1a303e',
+            borderBottom: '1px solid #e2e6e9',
           }}
         >
           {"¿Estás seguro?"}
@@ -103,10 +96,10 @@ export default function Borrarcuotas(props) {
               <FormLabel
                 component="legend"
                 sx={{
-                  fontWeight: 900,
-                  color: '#0a3b4f',
+                  fontWeight: 700,
+                  color: '#1a303e',
                   mb: 1,
-                  '&.Mui-focused': { color: '#0a3b4f' },
+                  '&.Mui-focused': { color: '#1a303e' },
                 }}
               >
                 Seleccioná un lote
@@ -122,31 +115,31 @@ export default function Borrarcuotas(props) {
                       control={
                         <Radio
                           sx={{
-                            color: '#01567c',
-                            '&.Mui-checked': { color: '#148D8D' },
+                            color: '#9aa7b0',
+                            '&.Mui-checked': { color: '#1a303e' },
                           }}
                         />
                       }
                       sx={{
                         width: '100%',
+                        mx: 0,
                         mb: 1.2,
                         px: 1.6,
                         py: 1.2,
-                        borderRadius: 2,
-                        border: '1px solid #e8eef5',
-                        backgroundColor: '#f7fbfd',
+                        borderRadius: 1.5,
+                        border: '1px solid #e2e6e9',
+                        backgroundColor: '#ffffff',
                         '&:hover': {
-                          backgroundColor: '#e6f4f8',
-                          borderColor: '#cfe3ef',
+                          backgroundColor: '#f6f8f9',
                         },
-                        // “tarjetita” marcada
+                        // opción marcada
                         ...(String(selectedLote) === String(item.id) && {
-                          backgroundColor: 'rgba(20,141,141,0.08)',
-                          borderColor: 'rgba(20,141,141,0.28)',
+                          backgroundColor: 'rgba(13,58,73,0.05)',
+                          borderColor: '#1a303e',
                         }),
                       }}
                       label={
-                        <span style={{ fontWeight: 750, color: '#0a3b4f' }}>
+                        <span style={{ fontWeight: 600, color: '#1a303e' }}>
                           {`Zona: ${item.zona}, Manzana: ${item.manzana}${item.zona === 'PIT' ? `, Parcela: ${item.parcela}` : ''
                             } - Tiene cuotas`}
                         </span>
@@ -180,7 +173,7 @@ export default function Borrarcuotas(props) {
             px: 3,
             py: 2,
             backgroundColor: '#ffffff',
-            borderTop: '1px solid #e8eef5',
+            borderTop: '1px solid #e2e6e9',
             gap: 1,
           }}
         >
@@ -189,14 +182,15 @@ export default function Borrarcuotas(props) {
             onClick={handleClose}
             variant="outlined"
             sx={{
-              borderRadius: 2,
+              borderRadius: 1.5,
               textTransform: 'none',
-              fontWeight: 800,
-              borderColor: '#cfe3ef',
-              color: '#0a3b4f',
+              fontWeight: 600,
+              px: 2.25,
+              borderColor: '#c9d2d8',
+              color: '#1a303e',
               '&:hover': {
-                borderColor: '#b9d6e8',
-                backgroundColor: '#f5fbff',
+                borderColor: '#0d3a49',
+                backgroundColor: 'rgba(13, 58, 73, 0.04)',
               },
             }}
           >
@@ -209,17 +203,16 @@ export default function Borrarcuotas(props) {
             disabled={!selectedLote}
             variant="contained"
             sx={{
-              borderRadius: 2,
+              borderRadius: 1.5,
               textTransform: 'none',
-              fontWeight: 900,
-              px: 2.2,
-              backgroundColor: '#01567c',
-              boxShadow: '0 10px 25px rgba(1,86,124,0.20)',
-              '&:hover': { backgroundColor: '#014a6b' },
+              fontWeight: 600,
+              px: 2.25,
+              backgroundColor: '#1a303e',
+              boxShadow: 'none',
+              '&:hover': { backgroundColor: '#0d3a49', boxShadow: 'none' },
               '&.Mui-disabled': {
-                backgroundColor: '#d7e6f0',
-                color: '#6c8796',
-                boxShadow: 'none',
+                backgroundColor: '#e2e6e9',
+                color: '#9aa7b0',
               },
             }}
           >
