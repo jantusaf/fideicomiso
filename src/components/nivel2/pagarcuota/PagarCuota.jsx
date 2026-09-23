@@ -156,7 +156,12 @@ export default function PagarCuota() {
 
     setLoading(true)
     try {
-      await  enviarr.append('datos', [pago.cuil_cuit, pago.id, pago.monto, pago.fecha]);///// aca en forma de array se envian datos del dormulario
+      // El backend (pagonivel2) lee estos campos por separado desde req.body.
+      // Se usa set() para que un reintento no duplique los campos.
+      enviarr.set('cuil_cuit', pago.cuil_cuit)
+      enviarr.set('id_cuota', pago.id)
+      enviarr.set('pago', pago.monto)
+      enviarr.set('fecha', pago.fecha)
 
       const rta = await servicioUsuario1.pagarnivel2(enviarr)
       console.log(rta)
@@ -293,6 +298,11 @@ export default function PagarCuota() {
                         name="monto"
                         onChange={handleChange}
                         type="number"
+                        helperText={
+                          pago.monto
+                            ? new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(pago.monto)
+                            : 'Usá punto solo para decimales, sin separador de miles'
+                        }
                         slotProps={{
                           input: {
                             startAdornment: <InputAdornment position="start">$</InputAdornment>,

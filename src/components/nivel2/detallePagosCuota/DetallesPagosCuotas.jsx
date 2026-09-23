@@ -1,560 +1,233 @@
-import * as React from 'react';
-import { useParams } from "react-router-dom"
-
-import { useState, useEffect } from "react";
-import servicioPagos from '../../../services/pagos'
-import { PDFDownloadLink, pdf } from '@react-pdf/renderer';
-import ComprobantePDF from './ComprobantePDF';
-import Borrar from './modalborrar';
-import { useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
-import Modif from './modalactcomp';
-import Borrarcomp from './modalborrarcomprobante';
-import { Box, Paper, Typography, Chip } from "@mui/material";
-import { alpha } from "@mui/material/styles";
-
+import React, { useEffect, useState, useCallback } from "react";
+import { useParams } from "react-router-dom";
+import {
+  Alert,
+  Box,
+  Button,
+  Chip,
+  CircularProgress,
+  Paper,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import ReceiptLongRoundedIcon from "@mui/icons-material/ReceiptLongRounded";
-import PictureAsPdfRoundedIcon from "@mui/icons-material/PictureAsPdfRounded";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
-import TableRowsRoundedIcon from "@mui/icons-material/TableRowsRounded";
 import ErrorOutlineRoundedIcon from "@mui/icons-material/ErrorOutlineRounded";
-import Tooltip from "@mui/material/Tooltip";
+import servicioPagos from "../../../services/pagos";
+import ModalEditarPago, { fechaAISO } from "./ModalEditarPago";
+import ModalCancelarPago from "./ModalCancelarPago";
 
+const COLOR_TEXT = "#1a303e";
+const COLOR_ACCENT = "#0d3a49";
 
+const formatoARS = (n) =>
+  new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS" }).format(Number(n) || 0);
 
-function abrirComprobante(pago) {
-    const win = window.open('', '_blank');
-    const fecha = new Date().toLocaleDateString();
+// AAAA-MM-DD o DD/MM/AAAA -> DD/MM/AAAA (si no se puede interpretar, se muestra tal cual)
+const formatoFecha = (texto) => {
+  const iso = fechaAISO(texto);
+  if (!iso) return texto || "—";
+  const [a, m, d] = iso.split("-");
+  return `${d}/${m}/${a}`;
+};
 
-    const contenido = ` 
-    <html>
-      <head>
-        <title>Comprobante de Pago</title>
-        <style>
-          body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 10px;
-          }
-          h2 {
-            color: #333;
-            text-align: center;
-          }
-          table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-          }
-          td, th {
-            padding: 10px;
-            border: 1px solid #ddd;
-          }
-        </style>
-      </head>
-      <body>
-        <h2>Comprobante de Pago</h2>
-        <table>
-          <tr>
-            <th>Fecha</th>
-            <td>${fecha}</td>
-          </tr>
-          <tr>
-            <th>De</th>
-            <td>________ (emisor)</td>
-          </tr>
-          <tr>
-            <th>Para</th>
-            <td>________ (receptor)</td>
-          </tr>
-          <tr>
-            <th>Monto</th>
-            <td>$ ${pago.monto.toFixed(2)}</td>
-          </tr>
-          <tr>
-            <th>Mes/Año</th>
-            <td>${pago.mes} / ${pago.anio}</td>
-          </tr>
-          <tr>
-            <th>Detalle</th>
-            <td>Pago registrado bajo el ID: ${pago.id}</td>
-          </tr>
-        </table>
-        <p style="margin-top:40px; text-align:center">Gracias por su pago.</p>
-      </body>
-    </html>
-  `;
-
-    win.document.open();
-    win.document.write(contenido);
-    win.document.close();
-}
-export default function DetallesPagos(props) {
-    let params = useParams()
-    let id = params.id
-    const navigate = useNavigate();
-    const [pagos, setPagos] = useState([]);
-    useEffect(() => {
-        console.log(id)
-        traer()
-
-    }, [])
-
-
-
-    const generarPDF = async (fila) => {
-        const blob = await pdf(<ComprobantePDF datos={fila} />).toBlob();
-        const url = URL.createObjectURL(blob);
-        window.open(url, '_blank');
-    };
-    const traer = async () => {
-        const aux = {
-            id: id
-        }
-        const pag = await servicioPagos.detallesPago(aux)
-
-        setPagos(pag)
-
-
-
-
+// Los comprobantes nuevos se guardan en la carpeta pública del backend; los
+// más viejos pueden estar en el visor histórico. Se prueba primero la ruta
+// directa y, si no está, el visor histórico.
+const verComprobante = async (pago) => {
+  const base = import.meta.env.VITE_API_URL;
+  const url = `${base}/${encodeURIComponent(pago.ubicacion)}`;
+  try {
+    const r = await fetch(url, { method: "HEAD" });
+    const tipo = r.headers.get("content-type") || "";
+    if (r.ok && !tipo.includes("text/html")) {
+      window.open(url, "_blank");
+      return;
     }
-    function emitirComprobante(pago) {
-        return (
-            <Button
-                variant="outlined"
-                size="small"
-                onClick={() => abrirComprobante(pago)}
-            >
-                Comprobante
-            </Button>
-        );
+  } catch (e) {
+    // sigue con el visor histórico
+  }
+  try {
+    const blob = await servicioPagos.traerPdfConstanciadepago(pago.id);
+    if (blob && blob.size > 0 && !String(blob.type).includes("html") && !String(blob.type).includes("json")) {
+      window.open(URL.createObjectURL(blob), "_blank");
+      return;
     }
+  } catch (e) {
+    // cae al aviso
+  }
+  alert("No se encontró el archivo del comprobante en el servidor.");
+};
 
-    const columns = [
-        {
-            name: "id",
-            label: "id",
-        },
-        {
-            name: "mes",
-            label: "mes",
+export default function DetallesPagos() {
+  const params = useParams();
+  const idCuota = params.id;
 
+  const [pagos, setPagos] = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState(null);
 
-        },
-        {
-            name: "anio",
-            label: "año",
-
-        },
-        {
-            name: "Monto",
-            options: {
-                setCellHeaderProps: () => ({
-                    style: { textAlign: "right" },
-                }),
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    monto(dataIndex, rowIndex),
-            },
-        },
-
-
-        {
-            name: "cuil_cuit_administrador",
-            label: "Cuil administrador",
-        },
-        {
-            name: "Borrar comprobante",
-
-            options: {
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    borrarcomp(
-                        dataIndex,
-                        rowIndex,
-                        // overbookingData,
-                        // handleEditOpen
-                    )
-            }
-        },
-
-        {
-            name: "Modificar",
-            options: {
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    modifa(
-                        dataIndex,
-                        rowIndex,
-                        // overbookingData,
-                        // handleEditOpen
-                    )
-            }
-
-
-        },
-        {
-            name: "comprobante",
-            options: {
-                customBodyRenderLite: (dataIndex) => (
-                    <Button
-                        size="small"
-                        startIcon={<PictureAsPdfRoundedIcon style={{ color: "#fff" }} />}
-                        onClick={() => generarPDF(pagos[dataIndex])}
-                        sx={{
-                            textTransform: "none",
-                            fontWeight: 900,
-                            borderRadius: 999,
-                            px: 1.6,
-                            color: "#fff",
-                            background: "linear-gradient(90deg, #b71c1c 0%, #ef5350 100%)",
-                            boxShadow: "0 10px 22px rgba(239,83,80,0.20)",
-                            "&:hover": {
-                                transform: "translateY(-1px)",
-                                boxShadow: "0 14px 30px rgba(239,83,80,0.28)",
-                            },
-                            transition: "0.2s ease",
-                            whiteSpace: "nowrap",
-                        }}
-                    >
-                        PDF
-                    </Button>
-
-                )
-            }
-        },
-
-        {
-            name: "Ver/borrar",
-            options: {
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    downloadFile(
-                        dataIndex,
-                        rowIndex,
-                        // overbookingData,
-                        // handleEditOpen
-                    )
-            }
-
-        },
-
-    ];
-
-    async function download(index, rowIndex, data) {
-        try {
-            const pdfBlob = await servicioPagos.traerPdfConstanciadepago(pagos[index].id);
-            const url = URL.createObjectURL(pdfBlob);
-            window.open(url, '_blank');
-        } catch (error) {
-            console.error('Error al obtener el PDF:', error);
-            alert('Error al cargar el PDF');
-        }
-
-
+  const traer = useCallback(async () => {
+    setError(null);
+    try {
+      const data = await servicioPagos.detallesPago({ id: idCuota });
+      setPagos(Array.isArray(data) ? [...data].sort((a, b) => b.id - a.id) : []);
+    } catch (e) {
+      console.error(e);
+      setError("No se pudieron cargar los pagos. Revisá la conexión con el servidor.");
+    } finally {
+      setCargando(false);
     }
+  }, [idCuota]);
 
+  useEffect(() => {
+    traer();
+  }, [traer]);
 
-    function modifa(index, rowIndex, data) {
+  const totalPagado = pagos.reduce((acc, p) => acc + (Number(p.monto) || 0), 0);
 
-        return (
-            <>
+  return (
+    <Box sx={{ width: "100%", maxWidth: 1100, mx: "auto", px: { xs: 0, md: 1 }, pb: 6 }}>
+      <Paper
+        elevation={0}
+        sx={{
+          borderRadius: 2.5,
+          overflow: "hidden",
+          border: "1px solid #e2e6e9",
+          boxShadow: "0 10px 30px rgba(15, 34, 48, 0.08)",
+        }}
+      >
+        <Box sx={{ height: 4, background: `linear-gradient(90deg, ${COLOR_TEXT}, ${COLOR_ACCENT})` }} />
 
-
-                <Modif
-
-                    id={pagos[index].id}
-                    getData={async () => {
-                        const aux = {
-                            id: id
-                        }
-                        const pag = await servicioPagos.detallesPago(aux)
-
-                        setPagos(pag)
-
-
-
-
-                    }} />
-
-            </>
-        );
-    }
-    function borrarcomp(index, rowIndex, data) {
-        return (
-            <>
-                {pagos[index].ubicacion == null ? (
-                    <Tooltip title="Pago sin comprobante">
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-                            <ErrorOutlineRoundedIcon style={{ color: "#f9a825" }} />
-                            <Typography
-                                sx={{
-                                    fontWeight: 800,
-                                    color: "#f9a825",
-                                    fontSize: 13,
-                                    whiteSpace: "nowrap",
-                                }}
-                            >
-                                Sin comprobante
-                            </Typography>
-                        </Box>
-                    </Tooltip>
-                ) : (
-                    <Borrarcomp
-                        id={pagos[index].id}
-                        getData={async () => {
-                            const aux = { id: id };
-                            const pag = await servicioPagos.detallesPago(aux);
-                            setPagos(pag);
-                        }}
-                    />
-                )}
-            </>
-        );
-    }
-
-
-
-    function monto(index, rowIndex, data) {
-        const v = pagos[index]?.monto;
-
-        const montoFormateado = new Intl.NumberFormat("es-AR", {
-            style: "currency",
-            currency: "ARS",
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        }).format(Number(v) || 0);
-
-        const esDistinto = pagos[index]?.monto_distinto === "Si";
-
-        return (
+        {/* Encabezado */}
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          justifyContent="space-between"
+          alignItems={{ xs: "flex-start", sm: "center" }}
+          spacing={2}
+          sx={{ p: { xs: 2.5, sm: 3.5 }, pb: 2 }}
+        >
+          <Stack direction="row" spacing={2} alignItems="center">
             <Box
-                sx={{
-                    fontWeight: 900,
-                    textAlign: "right",
-                    whiteSpace: "nowrap",
-                    width: "100%",
-                    color: esDistinto ? "crimson" : "#0b2b3a",
-                }}
+              sx={{
+                width: 42,
+                height: 42,
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                bgcolor: "rgba(13,58,73,0.08)",
+              }}
             >
-                {montoFormateado}
+              <ReceiptLongRoundedIcon sx={{ color: COLOR_ACCENT }} />
             </Box>
-        );
-    }
-
-    function downloadFile(index, rowIndex, data) {
-        return (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
-                <Button
-                    size="small"
-                    variant="contained"
-                    startIcon={<VisibilityRoundedIcon style={{ color: "#fff" }} />}
-                    onClick={() => download(index)}
-                    sx={{
-                        textTransform: "none",
-                        fontWeight: 900,
-                        borderRadius: 999,
-                        px: 1.6,
-                        color: "#fff",
-                        background: "linear-gradient(90deg, #01567c 0%, #148D8D 100%)",
-                        boxShadow: "0 10px 22px rgba(20,141,141,0.18)",
-                        "&:hover": {
-                            transform: "translateY(-1px)",
-                            boxShadow: "0 14px 30px rgba(20,141,141,0.28)",
-                        },
-                        transition: "0.2s ease",
-                        whiteSpace: "nowrap",
-                    }}
-                >
-                    Ver online
-                </Button>
-
-                <Borrar
-                    id={pagos[index].id}
-                    traer={async () => {
-                        const aux = { id: id };
-                        const pag = await servicioPagos.detallesPago(aux);
-                        setPagos(pag);
-                    }}
-                />
+            <Box>
+              <Typography variant="h5" sx={{ fontWeight: 700, color: COLOR_TEXT }}>
+                Pagos de la cuota
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Revisá los pagos cargados; podés corregir un monto o cancelar un pago.
+              </Typography>
             </Box>
-        );
-    }
+          </Stack>
 
-    const options = {
-        selectableRows: "none",
-        responsive: "standard",
-        rowsPerPage: 10,
-        rowsPerPageOptions: [5, 10, 15],
-        downloadOptions: { filename: "tableDownload.csv", separator: "," },
-        print: true,
-        filter: true,
-        viewColumns: true,
-        search: true,
-        pagination: true,
+          <Stack direction="row" spacing={1}>
+            <Chip label={`Pagos: ${pagos.length}`} variant="outlined" sx={{ fontWeight: 700 }} />
+            <Chip
+              label={`Total: ${formatoARS(totalPagado)}`}
+              sx={{ fontWeight: 700, bgcolor: "rgba(13,58,73,0.08)", color: COLOR_TEXT }}
+            />
+          </Stack>
+        </Stack>
 
-        textLabels: {
-            body: { noMatch: "No se encontraron registros", toolTip: "Ordenar" },
-            pagination: {
-                next: "Siguiente",
-                previous: "Anterior",
-                rowsPerPage: "Filas por página:",
-                displayRows: "de",
-            },
-            toolbar: {
-                search: "Buscar",
-                downloadCsv: "Descargar CSV",
-                print: "Imprimir",
-                viewColumns: "Ver columnas",
-                filterTable: "Filtrar tabla",
-            },
-            filter: { all: "Todos", title: "FILTROS", reset: "RESETEAR" },
-            viewColumns: { title: "Mostrar columnas", titleAria: "Mostrar/ocultar columnas de la tabla" },
-            selectedRows: {
-                text: "fila(s) seleccionada(s)",
-                delete: "Eliminar",
-                deleteAria: "Eliminar filas seleccionadas",
-            },
-        },
-    };
-
-
-
-    return (
-        <Box sx={{ width: "100%", maxWidth: "100%", flex: 1, minWidth: 0 }}>
-            {/* CARD PRINCIPAL */}
-            <Paper
-                elevation={0}
-                sx={{
-                    borderRadius: 4,
-                    overflow: "hidden",
-                    border: `1px solid ${alpha("#0b4f6c", 0.14)}`,
-                    background: "rgba(255,255,255,0.92)",
-                    backdropFilter: "blur(10px)",
-                    boxShadow: "0 22px 55px rgba(15, 127, 134, 0.10)",
-                }}
-            >
-                {/* HEADER (GRADIENT) */}
-                <Box
-                    sx={{
-                        px: { xs: 2, md: 3 },
-                        py: { xs: 2, md: 2.5 },
-                        background:
-                            "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-                        color: "#fff",
-                        display: "flex",
-                        alignItems: { xs: "flex-start", md: "center" },
-                        justifyContent: "space-between",
-                        gap: 2,
-                        flexWrap: "wrap",
-                    }}
-                >
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-                        <Box
-                            sx={{
-                                width: 44,
-                                height: 44,
-                                borderRadius: "14px",
-                                display: "grid",
-                                placeItems: "center",
-                                background: "rgba(255,255,255,0.18)",
-                                border: "1px solid rgba(255,255,255,0.35)",
-                                flexShrink: 0,
-                            }}
-                        >
-                            <ReceiptLongRoundedIcon sx={{ color: "#fff" }} />
-                        </Box>
-
-                        <Box>
-                            <Typography
-                                sx={{
-                                    fontWeight: 900,
-                                    fontSize: { xs: 18, md: 22 },
-                                    lineHeight: 1.1,
-                                }}
-                            >
-                                Lista de pagos
+        {/* Contenido */}
+        <Box sx={{ px: { xs: 1.5, sm: 3.5 }, pb: 3.5 }}>
+          {cargando ? (
+            <Box sx={{ py: 6, textAlign: "center" }}>
+              <CircularProgress size={28} />
+            </Box>
+          ) : error ? (
+            <Alert severity="error" sx={{ borderRadius: 1.5 }}>
+              {error}
+            </Alert>
+          ) : pagos.length === 0 ? (
+            <Alert severity="info" sx={{ borderRadius: 1.5 }}>
+              Esta cuota todavía no tiene pagos cargados.
+            </Alert>
+          ) : (
+            <TableContainer sx={{ border: "1px solid #e2e6e9", borderRadius: 2 }}>
+              <Table size="small">
+                <TableHead>
+                  <TableRow sx={{ "& th": { bgcolor: COLOR_TEXT, color: "#fff", fontWeight: 700, py: 1.4 } }}>
+                    <TableCell>Fecha de pago</TableCell>
+                    <TableCell>Período</TableCell>
+                    <TableCell align="right">Monto</TableCell>
+                    <TableCell>Control</TableCell>
+                    <TableCell>Comprobante</TableCell>
+                    <TableCell align="right">Acciones</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {pagos.map((p) => (
+                    <TableRow key={p.id} hover sx={{ "& td": { py: 1.4 } }}>
+                      <TableCell sx={{ whiteSpace: "nowrap" }}>{formatoFecha(p.fecha)}</TableCell>
+                      <TableCell sx={{ whiteSpace: "nowrap" }}>
+                        {String(p.mes).padStart(2, "0")}/{p.anio}
+                      </TableCell>
+                      <TableCell align="right" sx={{ fontWeight: 800, whiteSpace: "nowrap", color: COLOR_TEXT }}>
+                        {formatoARS(p.monto)}
+                      </TableCell>
+                      <TableCell>
+                        <Stack direction="row" spacing={0.75} flexWrap="wrap" useFlexGap>
+                          {p.monto_distinto === "Si" ? (
+                            <Chip size="small" color="warning" variant="outlined" label="No coincide con banco" />
+                          ) : (
+                            <Chip size="small" color="success" variant="outlined" label="Coincide con banco" />
+                          )}
+                          {p.monto_inusual === "Si" && (
+                            <Chip size="small" color="error" variant="outlined" label="Monto inusual" />
+                          )}
+                        </Stack>
+                      </TableCell>
+                      <TableCell>
+                        {p.ubicacion ? (
+                          <Button
+                            size="small"
+                            startIcon={<VisibilityRoundedIcon fontSize="small" />}
+                            onClick={() => verComprobante(p)}
+                            sx={{ textTransform: "none", fontWeight: 700, color: COLOR_ACCENT }}
+                          >
+                            Ver comprobante
+                          </Button>
+                        ) : (
+                          <Stack direction="row" spacing={0.5} alignItems="center" sx={{ color: "#b26a00" }}>
+                            <ErrorOutlineRoundedIcon fontSize="small" />
+                            <Typography variant="body2" sx={{ fontWeight: 700 }}>
+                              Sin comprobante
                             </Typography>
-                            <Typography sx={{ mt: 0.35, fontWeight: 650, opacity: 0.9, fontSize: 14 }}>
-                                Detalle, comprobantes y acciones sobre cada pago.
-                            </Typography>
-                        </Box>
-                    </Box>
-
-                    <Chip
-                        icon={<TableRowsRoundedIcon />}
-                        label={`Registros: ${pagos.length}`}
-                        sx={{
-                            color: "#fff",
-                            fontWeight: 900,
-                            borderRadius: 999,
-                            background: "rgba(255,255,255,0.18)",
-                            border: "1px solid rgba(255,255,255,0.35)",
-                            "& .MuiChip-icon": { color: "#fff" },
-                        }}
-                    />
-                </Box>
-
-                {/* CONTENEDOR TABLA */}
-                <Box
-                    sx={{
-                        p: { xs: 1.5, md: 2 },
-
-                        /* ===== HEADER TABLE ===== */
-                        "& .MuiTableHead-root .MuiTableCell-root": {
-                            borderBottom: "0px",
-                            color: "#01567c",
-                            fontWeight: 900,
-                            background: "transparent",
-                        },
-
-                        /* ===== BODY ===== */
-                        "& .MuiTableBody-root .MuiTableCell-root": {
-                            borderBottom: `1px solid ${alpha("#01567c", 0.08)}`,
-                            fontWeight: 650,
-                            color: "#0b2b3a",
-                        },
-
-                        /* ===== TOOLBAR ===== */
-                        "& .MuiToolbar-root": {
-                            px: 2,
-                            color: "#01567c",
-                        },
-                        "& .MuiToolbar-root .MuiInputBase-input": {
-                            color: "#0b2b3a",
-                            fontWeight: 700,
-                        },
-
-                        /* ===== ICONOS ===== */
-                        "& .MuiIconButton-root, & svg": {
-                            color: alpha("#01567c", 0.75),
-                            transition: "all 0.2s ease",
-                        },
-                        "& .MuiIconButton-root:hover, & svg:hover": {
-                            color: "#148D8D",
-                            transform: "translateY(-1px)",
-                        },
-
-                        /* ===== HOVER FILAS ===== */
-                        "& .MuiTableRow-root:hover td": {
-                            backgroundColor: `${alpha("#148D8D", 0.06)} !important`,
-                        },
-
-                        /* ===== PAGINACIÓN ===== */
-                        "& .MuiTablePagination-root, & .MuiTablePagination-root *": {
-                            color: "#01567c",
-                            fontWeight: 700,
-                        },
-
-                        /* ===== “Paper” interno de MUIDataTable ===== */
-                        "& .MuiPaper-root": { boxShadow: "none" },
-                    }}
-                >
-                 {/*    <MUIDataTable
-                        title={""}
-                        data={pagos}
-                        columns={columns}
-                        options={options}
-                    /> */}
-                </Box>
-            </Paper>
+                          </Stack>
+                        )}
+                      </TableCell>
+                      <TableCell align="right">
+                        <Stack direction="row" spacing={1} justifyContent="flex-end">
+                          <ModalEditarPago pago={p} onGuardado={traer} />
+                          <ModalCancelarPago pago={p} onCancelado={traer} />
+                        </Stack>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
         </Box>
-    );
-
+      </Paper>
+    </Box>
+  );
 }

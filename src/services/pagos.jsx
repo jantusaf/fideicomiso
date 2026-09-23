@@ -123,6 +123,14 @@ const detallesPago = async (id) =>
 const detallesPagoic3 = async (id) =>
     authPost('pagos/detallesPagoic3', id)
 
+// Editar monto/fecha de un pago ya cargado (body: { id, monto, fecha, motivo })
+const editarPago = async (body) =>
+    authPost('pagos/editarpago', body)
+
+// Cancelar (eliminar con auditoría) un pago cargado (body: { id, motivo })
+const cancelarPago = async (body) =>
+    authPost('pagos/cancelarpago', body)
+
 const VerExtracto = async (id) =>
     authPost('pagos/extractoid', id)
 
@@ -265,6 +273,8 @@ export default {
     rechazararpago,
     pagarnivel2,
     cantidadpendientes,
-    detallesPago
+    detallesPago,
+    editarPago,
+    cancelarPago
 
 }
