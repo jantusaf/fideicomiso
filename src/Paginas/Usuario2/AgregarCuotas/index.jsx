@@ -8,7 +8,9 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { Alert, Checkbox, FormControlLabel } from '@mui/material';
+import { Alert, Checkbox, FormControlLabel, Typography, Chip } from '@mui/material';
+import PlaylistAddOutlinedIcon from '@mui/icons-material/PlaylistAddOutlined';
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, sxCard, sxBtnPrimary } from '../../../components/nivel2/detalleclienteIngresos/estilos';
 
 import { useEffect, useState } from "react";
 import servicioCuotas from '../../../services/cuotas';
@@ -65,107 +67,47 @@ export default function MenuUsuario2() {
     }
   };
 
-  // ===== SOLO ESTILO (no lógica) =====
-  const sxPage = {
-    px: { xs: 1.5, md: 3 },
-    py: 2.5,
-    minHeight: "100vh",
-    background:
-      "radial-gradient(1100px 520px at 10% 0%, rgba(1,86,124,0.14), transparent 55%), radial-gradient(900px 420px at 90% 10%, rgba(20,141,141,0.10), transparent 45%), #f4f8fb",
-  };
-
-  const sxHeader = {
-    borderRadius: 3,
-    overflow: "hidden",
-    border: "1px solid rgba(1,86,124,0.12)",
-    boxShadow: "0 18px 45px rgba(10,59,79,0.10)",
-    background: "linear-gradient(135deg, #0b2a3a 0%, #01567c 60%, #148D8D 100%)",
-    color: "#fff",
-    px: { xs: 2, md: 3 },
-    py: { xs: 2, md: 2.4 },
-    mb: 2,
-  };
-
-  const sxCard = {
-    borderRadius: 3,
-    border: "1px solid #e8eef5",
-    boxShadow: "0 18px 45px rgba(10,59,79,0.08)",
-    overflow: "hidden",
-    backgroundColor: "#fff",
-  };
+  // ===== SOLO ESTILO (no lógica): mismo sistema visual que el resto de Nivel 2 =====
+  const sxPage = { maxWidth: 980, mx: "auto", px: { xs: 0, md: 1 }, pt: { xs: 1, md: 2 }, pb: 6 };
 
   const sxSectionTitle = {
-    fontWeight: 900,
-    color: "#0a3b4f",
-    fontSize: 14,
-    mb: 1,
-    letterSpacing: 0.2,
+    fontWeight: 700,
+    color: COLOR_TEXT,
+    fontSize: 15,
   };
 
   const sxSelectWrap = {
     width: "100%",
-    borderRadius: 2,
-    border: "1px solid rgba(1,86,124,0.18)",
-    backgroundColor: "#fbfdff",
-    px: 1.4,
-    py: 1.1,
-    transition: "0.18s ease",
-    "&:hover": {
-      borderColor: "rgba(1,86,124,0.35)",
-      backgroundColor: "rgba(1,86,124,0.03)",
-    },
+    borderRadius: 1.5,
+    border: "1px solid #c9d2d8",
+    backgroundColor: "#fff",
+    px: 1.5,
+    height: 40,
+    display: "flex",
+    alignItems: "center",
+    "&:hover": { borderColor: COLOR_ACCENT },
+    "&:focus-within": { borderColor: COLOR_ACCENT, boxShadow: `0 0 0 1px ${COLOR_ACCENT}` },
   };
 
   const sxNativeSelect = {
     width: "100%",
-    fontWeight: 800,
-    color: "#0a3b4f",
-    outline: "none",
-    border: "none",
-    background: "transparent",
-    fontSize: 14,
+    color: COLOR_TEXT,
+    fontSize: 15,
   };
 
-  const sxInput = {
-    "& .MuiOutlinedInput-root": {
-      borderRadius: 2,
-      backgroundColor: "#fbfdff",
-      "& fieldset": { borderColor: "rgba(1,86,124,0.18)" },
-      "&:hover fieldset": { borderColor: "rgba(1,86,124,0.35)" },
-      "&.Mui-focused fieldset": { borderColor: "#01567c" },
-      "&.Mui-focused": { boxShadow: "0 0 0 3px rgba(1,86,124,0.12)" },
-    },
-    "& .MuiInputLabel-root": {
-      fontWeight: 900,
-      color: "#2b3a42",
-    },
-    "& input::placeholder": {
-      opacity: 0.75,
-      fontWeight: 700,
-    },
-  };
+  const sxLabelMini = { fontWeight: 600, fontSize: 13, color: COLOR_TEXT, mb: 0.6 };
 
+  const sxInput = { "& .MuiOutlinedInput-root": { borderRadius: 1.5 } };
 
-  const sxPrimaryBtn = {
-    px: 2.4,
-    py: 1.1,
-    borderRadius: 2,
-    textTransform: "none",
-    fontWeight: 900,
-    backgroundColor: "#01567c",
-    boxShadow: "0 10px 25px rgba(1,86,124,0.22)",
-    "&:hover": { backgroundColor: "#014a6b" },
-  };
+  const sxPrimaryBtn = { ...sxBtnPrimary, py: 1, px: 3 };
 
   const sxDisabledHint = {
-    mt: 1,
-    px: 1.4,
-    py: 1,
-    borderRadius: 2,
-    backgroundColor: "rgba(211,47,47,0.06)",
-    border: "1px solid rgba(211,47,47,0.14)",
-    color: "#b71c1c",
-    fontWeight: 900,
+    px: 1.5,
+    py: 0.75,
+    borderRadius: 999,
+    border: `1px solid ${COLOR_BORDER}`,
+    color: COLOR_MUTED,
+    fontWeight: 600,
     fontSize: 13,
   };
 
@@ -175,47 +117,53 @@ export default function MenuUsuario2() {
         <div> 
           <MenuIzq2>
             <Box sx={sxPage}>
-              {/* Header */}
-              <Box sx={sxHeader}>
+              {/* Encabezado */}
+              <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 }, mb: 2.5 }}>
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 2, flexWrap: "wrap" }}>
-                  <Box>
-                    <Box sx={{ fontWeight: 900, letterSpacing: 0.3, fontSize: 16 }}>
-                      Agregar cuotas
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                    <Box
+                      sx={{
+                        width: 46,
+                        height: 46,
+                        borderRadius: "50%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        bgcolor: "rgba(13,58,73,0.08)",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <PlaylistAddOutlinedIcon sx={{ color: COLOR_ACCENT }} />
                     </Box>
-                    <Box sx={{ opacity: 0.92, mt: 0.4, fontSize: 13, fontWeight: 700 }}>
-                      Configurá anticipo, fecha de inicio y parámetros del lote.
+                    <Box>
+                      <Typography
+                        variant="h5"
+                        sx={{ fontWeight: 700, fontSize: 20, textTransform: "none", color: COLOR_TEXT, m: 0, pt: 0 }}
+                      >
+                        Agregar cuotas
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
+                        Configurá anticipo, fecha de inicio y parámetros del lote
+                      </Typography>
                     </Box>
                   </Box>
 
-                  <Box
-                    sx={{
-                      px: 1.2,
-                      py: 0.7,
-                      borderRadius: 2,
-                      backgroundColor: "rgba(255,255,255,0.14)",
-                      border: "1px solid rgba(255,255,255,0.22)",
-                      fontWeight: 900,
-                      fontSize: 13,
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    ID: {params.id}
-                  </Box>
+                  <Chip variant="outlined" label={`ID: ${params.id}`} sx={{ fontWeight: 600 }} />
                 </Box>
-              </Box>
+              </Paper>
 
               {/* Form Card */}
-              <Paper sx={sxCard}>
-                <Box sx={{ p: { xs: 2, md: 2.6 } }}>
+              <Paper elevation={0} sx={sxCard}>
+                <Box sx={{ p: { xs: 2.5, md: 3 } }}>
                   <form onSubmit={agregarCuotas}>
                     <Grid container spacing={2}>
                       {/* Fecha Anticipo */}
-                      <Grid item xs={12}>
+                      <Grid size={12}>
                         <Box sx={sxSectionTitle}>Fecha Anticipo</Box>
                       </Grid>
 
-                      <Grid item xs={12} md={6}>
-                        <Box sx={{ fontWeight: 900, fontSize: 12.5, color: "rgba(10,59,79,0.75)", mb: 0.6 }}>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Box sx={sxLabelMini}>
                           Mes
                         </Box>
 
@@ -243,8 +191,8 @@ export default function MenuUsuario2() {
                         </Box>
                       </Grid>
 
-                      <Grid item xs={12} md={6}>
-                        <Box sx={{ fontWeight: 900, fontSize: 12.5, color: "rgba(10,59,79,0.75)", mb: 0.6 }}>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Box sx={sxLabelMini}>
                           Año
                         </Box>
 
@@ -274,13 +222,13 @@ export default function MenuUsuario2() {
                       </Grid>
 
                       {/* Fecha inicio */}
-                      <Grid item xs={12} sx={{ mt: 0.5 }}>
+                      <Grid size={12} sx={{ mt: 0.5 }}>
                         <Box sx={sxSectionTitle}>Fecha inicio de las cuotas</Box>
                       </Grid>
 
 
-                      <Grid item xs={12} md={6}>
-                        <Box sx={{ fontWeight: 900, fontSize: 12.5, color: "rgba(10,59,79,0.75)", mb: 0.6 }}>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Box sx={sxLabelMini}>
                           Mes
                         </Box>
 
@@ -308,7 +256,7 @@ export default function MenuUsuario2() {
                         </Box>
                       </Grid>
 
-                      <Grid item xs={12} md={6}><Box sx={{ fontWeight: 900, fontSize: 12.5, color: "rgba(10,59,79,0.75)", mb: 0.6 }}>
+                      <Grid size={{ xs: 12, md: 6 }}><Box sx={sxLabelMini}>
                         Año
                       </Box>
 
@@ -337,10 +285,9 @@ export default function MenuUsuario2() {
                       </Grid>
 
                       {/* Inputs */}
-                      <Grid item xs={12} md={4}>
+                      <Grid size={{ xs: 12, md: 4 }}>
                         <TextField
                           autoFocus
-                          margin="dense"
                           id="name"
                           label="Cantidad de Cuotas"
                           placeholder="Ej: 36"
@@ -348,19 +295,20 @@ export default function MenuUsuario2() {
                           onChange={handleChange}
                           fullWidth
                           variant="outlined"
+                          size="small"
                           sx={sxInput}
                         />
                       </Grid>
 
-                      <Grid item xs={12} md={8}>
+                      <Grid size={{ xs: 12, md: 8 }}>
                         <Box
                           sx={{
                             mt: 0.5,
                             px: 1.4,
                             py: 1.1,
                             borderRadius: 2,
-                            border: "1px solid rgba(1,86,124,0.12)",
-                            backgroundColor: "rgba(1,86,124,0.04)",
+                            border: `1px solid ${COLOR_BORDER}`,
+                            backgroundColor: "#f9fafb",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "space-between",
@@ -374,13 +322,13 @@ export default function MenuUsuario2() {
                                 checked={isValorLoteEnabled}
                                 onChange={handleCheckboxChange}
                                 sx={{
-                                  color: "#01567c",
-                                  "&.Mui-checked": { color: "#148D8D" },
+                                  color: "#9aa7b0",
+                                  "&.Mui-checked": { color: COLOR_ACCENT },
                                 }}
                               />
                             }
                             label={
-                              <span style={{ fontWeight: 900, color: "#0a3b4f" }}>
+                              <span style={{ fontWeight: 600, color: COLOR_TEXT, fontSize: 14 }}>
                                 Habilitar cambiar valor total
                               </span>
                             }
@@ -388,8 +336,8 @@ export default function MenuUsuario2() {
 
                           <Box
                             sx={{
-                              fontWeight: 900,
-                              color: "rgba(10,59,79,0.70)",
+                              fontWeight: 500,
+                              color: COLOR_MUTED,
                               fontSize: 12.5,
                             }}
                           >
@@ -398,10 +346,9 @@ export default function MenuUsuario2() {
                         </Box>
                       </Grid>
 
-                      <Grid item xs={12} md={6}>
+                      <Grid size={{ xs: 12, md: 6 }}>
                         <TextField
                           autoFocus
-                          margin="dense"
                           id="name"
                           label="Cambiar valor total"
                           placeholder="Ej: 1500000"
@@ -409,15 +356,15 @@ export default function MenuUsuario2() {
                           onChange={handleChange}
                           fullWidth
                           variant="outlined"
+                          size="small"
                           disabled={!isValorLoteEnabled}
                           sx={sxInput}
                         />
                       </Grid>
 
-                      <Grid item xs={12} md={6}>
+                      <Grid size={{ xs: 12, md: 6 }}>
                         <TextField
                           autoFocus
-                          margin="dense"
                           id="name"
                           label="Cambiar el porcentaje de anticipo"
                           placeholder="Ej: 30"
@@ -425,13 +372,14 @@ export default function MenuUsuario2() {
                           onChange={handleChange}
                           fullWidth
                           variant="outlined"
+                          size="small"
                           sx={sxInput}
                         />
                       </Grid>
 
                       {/* Acciones */}
-                      <Grid item xs={12} sx={{ mt: 0.5 }}>
-                        <DialogActions sx={{ px: 0, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <Grid size={12} sx={{ mt: 0.5 }}>
+                        <DialogActions sx={{ px: 0, display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
                           {estadoCuotas.mesanticipo && estadoCuotas.mes && estadoCuotas.anio && estadoCuotas.anioanticipo ? (
                             <Button type="submit" variant="contained" sx={sxPrimaryBtn}>
                               Enviar

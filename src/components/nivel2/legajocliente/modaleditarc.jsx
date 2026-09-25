@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Box, Typography, TextField, Button } from '@mui/material';
 import servicioLegajos from '../../../services/legajos';
+import { COLOR_TEXT, sxBtnPrimary, sxBtnOutlined, sxCard } from '../detalleclienteIngresos/estilos';
 
 const tiposCbu = ["Cbu personal", "Cbu familiar", "Socio/Gerente/Apoderado", "Propio"];
 
@@ -33,33 +34,47 @@ const ModalEditarDescripcion = ({ open, handleClose, data, getData }) => {
 
   return (
     <Modal open={open} onClose={handleClose}>
-      <Box sx={{ width: 400, p: 3, bgcolor: 'white', mx: 'auto', mt: 10, borderRadius: 2 }}>
-        <Typography variant="h6">Editar Descripción</Typography>
+      <Box
+        sx={{
+          ...sxCard,
+          width: { xs: "calc(100% - 32px)", sm: 440 },
+          p: 3,
+          mx: "auto",
+          mt: 10,
+          outline: "none",
+          boxShadow: "0 20px 50px rgba(15, 34, 48, 0.25)",
+        }}
+      >
+        <Typography sx={{ fontSize: 17, fontWeight: 700, color: COLOR_TEXT }}>Editar descripción</Typography>
 
         <TextField
           fullWidth
+          size="small"
           label="Tipo"
           variant="outlined"
           value={data?.tipo || ''}
           disabled
           margin="normal"
+          sx={{ mt: 2.5, "& .MuiOutlinedInput-root": { borderRadius: 1.5 } }}
         />
 
         <TextField
           fullWidth
+          size="small"
           label="Descripción"
           variant="outlined"
           value={descripcion}
           onChange={(e) => setDescripcion(e.target.value)}
           margin="normal"
+          sx={{ "& .MuiOutlinedInput-root": { borderRadius: 1.5 } }}
         />
 
-        <Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-between' }}>
-          <Button variant="contained" color="primary" onClick={handleGuardar}>
-            Guardar
-          </Button>
-          <Button variant="contained" color="secondary" onClick={handleClose}>
+        <Box sx={{ mt: 2.5, display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+          <Button variant="outlined" onClick={handleClose} sx={sxBtnOutlined}>
             Cerrar
+          </Button>
+          <Button variant="contained" onClick={handleGuardar} sx={sxBtnPrimary}>
+            Guardar
           </Button>
         </Box>
       </Box>

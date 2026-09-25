@@ -15,6 +15,9 @@ import Deshabilitar from "./ModalDeshabilitar";
 import Estadisticas from "./Estadisticas";
 import ModalSeguro from "./Modalseguroborrar";
 import ModalEditarDescripcion from "./modaleditarc";
+import { Box, Paper, Typography, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import FolderOpenOutlinedIcon from "@mui/icons-material/FolderOpenOutlined";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, COLOR_OK, COLOR_ERROR, sxCard, sxBtnOutlined } from "../detalleclienteIngresos/estilos";
 const thStyle = {
   padding: "12px",
   textAlign: "left",
@@ -202,8 +205,22 @@ const LegajoCliente = (props) => {
     },
   };
 
+  const sxTh = {
+    backgroundColor: "#f6f8f9",
+    color: COLOR_TEXT,
+    fontWeight: 700,
+    fontSize: 11.5,
+    letterSpacing: 0.4,
+    borderBottom: `1px solid ${COLOR_BORDER}`,
+    whiteSpace: "nowrap",
+    py: 1.25,
+  };
+  const sxTd = { fontSize: 13.5, color: COLOR_TEXT, borderBottom: "1px solid #eef1f3", py: 1.1 };
+
+  const habilitado = products ? products[1][0].habilitado === "Si" : false;
+
   return (
-    <div style={{ padding: "20px", background: "#f5f7fa" }}>
+    <Box sx={{ maxWidth: 1320, mx: "auto", px: { xs: 0, md: 1 }, pt: { xs: 1, md: 2 }, pb: 6 }}>
       <ModalEditarDescripcion
         open={openModal}
         handleClose={handleCloseModal}
@@ -211,254 +228,181 @@ const LegajoCliente = (props) => {
         getData={getData}
       />
 
-      {/* HEADER + KPI */}
-      <div
-  style={{
-    background: "linear-gradient(135deg, #0f4c5c, #1f7a8c)",
-    borderRadius: "16px",
-    padding: "18px 22px",
-    color: "white",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "20px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
-  }}
->
-  {/* IZQUIERDA */}
-  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-    
-    <div style={{
-      background: "rgba(255,255,255,0.15)",
-      borderRadius: "10px",
-      padding: "10px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
-    }}>
-      📁
-    </div>
+      {/* ENCABEZADO */}
+      <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 } }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: { xs: "stretch", md: "center" },
+            justifyContent: "space-between",
+            gap: 2,
+            flexDirection: { xs: "column", md: "row" },
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <Box
+              sx={{
+                width: 46,
+                height: 46,
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                bgcolor: "rgba(13,58,73,0.08)",
+                flexShrink: 0,
+              }}
+            >
+              <FolderOpenOutlinedIcon sx={{ color: COLOR_ACCENT }} />
+            </Box>
+            <Box>
+              <Typography
+                variant="h5"
+                sx={{ fontWeight: 700, fontSize: 20, textTransform: "none", color: COLOR_TEXT, m: 0, pt: 0 }}
+              >
+                Legajo del cliente
+              </Typography>
+              <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
+                Gestión y administración de documentación
+              </Typography>
+            </Box>
+          </Box>
 
-    <div>
-      <div style={{ fontWeight: "bold", fontSize: "16px" }}>
-        Legajo del Cliente
-      </div>
-      <div style={{ fontSize: "13px", opacity: 0.8 }}>
-        Gestión y administración de documentación
-      </div>
-    </div>
-  </div>
-
-  {/* DERECHA */}
-  <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-    
-    {/* KPI */}
-    <div style={{
-      background: "rgba(255,255,255,0.15)",
-      padding: "6px 14px",
-      borderRadius: "20px",
-      fontSize: "13px"
-    }}>
-      Documentos: {products ? products[0].length : 0}
-    </div>
-
-  </div>
-</div>
+          <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", alignItems: "center" }}>
+            <Chip variant="outlined" label={`Documentos: ${products ? products[0].length : 0}`} sx={{ fontWeight: 600 }} />
+            {products && (
+              <Chip
+                variant="outlined"
+                label={habilitado ? "Habilitado" : "Deshabilitado"}
+                sx={{
+                  fontWeight: 600,
+                  color: habilitado ? COLOR_OK : COLOR_ERROR,
+                  borderColor: habilitado ? COLOR_OK : COLOR_ERROR,
+                }}
+              />
+            )}
+          </Box>
+        </Box>
+      </Paper>
 
       {/* ACCIONES */}
-     <div
-  style={{
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "20px",
-    flexWrap: "wrap",
-    gap: "10px"
-  }}
->
-  {/* IZQUIERDA */}
-  <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-    
-    <Button
-      onClick={volver}
-      startIcon={<ArrowBackIcon />}
-      style={{
-        borderRadius: "25px",
-        background: "#e0f2f1",
-        color: "#0f4c5c",
-        fontWeight: "bold"
-      }}
-    >
-      Volver
-    </Button>
-
-    {products && (
-      <ModalLegajo
-        razon={products[1][0].razon}
-        tiposExistentes={products[0].map((l) => l.tipo)}
-        getData={getData}
-        getData2={actualizarEstadisticas}
-      />
-    )}
-  </div>
-
-  {/* DERECHA */}
-  {products && (
-    <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-      
-      {/* BOTON HABILITAR / DESHABILITAR */}
-      {products[1][0].habilitado === "Si" ? (
-        <Deshabilitar
-          cuil_cuit_user={props.cuil_cuit_user}
-          getData={getData}
-        />
-      ) : (
-        <Habilitar
-          cuil_cuit_user={props.cuil_cuit_user}
-          getData={getData}
-        />
-      )}
-
-      {/* BADGE ESTADO */}
-      <div
-        style={{
-          padding: "6px 14px",
-          borderRadius: "20px",
-          fontSize: "12px",
-          fontWeight: "bold",
-          background:
-            products[1][0].habilitado === "Si"
-              ? "#e6f4ea"
-              : "#fdecea",
-          color:
-            products[1][0].habilitado === "Si"
-              ? "#2e7d32"
-              : "#c62828"
+      <Box
+        sx={{
+          mt: 2.5,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: 1.5,
         }}
       >
-        {products[1][0].habilitado === "Si"
-          ? "Habilitado"
-          : "Deshabilitado"}
-      </div>
+        <Box sx={{ display: "flex", gap: 1.25, flexWrap: "wrap", alignItems: "center" }}>
+          <Button onClick={volver} startIcon={<ArrowBackIcon />} variant="outlined" sx={sxBtnOutlined}>
+            Volver
+          </Button>
 
-    </div>
-  )}
-</div>
-        
+          {products && (
+            <ModalLegajo
+              razon={products[1][0].razon}
+              tiposExistentes={products[0].map((l) => l.tipo)}
+              getData={getData}
+              getData2={actualizarEstadisticas}
+            />
+          )}
+        </Box>
+
+        {products && (
+          <Box sx={{ display: "flex", gap: 1.25, alignItems: "center" }}>
+            {habilitado ? (
+              <Deshabilitar cuil_cuit_user={props.cuil_cuit_user} getData={getData} />
+            ) : (
+              <Habilitar cuil_cuit_user={props.cuil_cuit_user} getData={getData} />
+            )}
+          </Box>
+        )}
+      </Box>
 
       {/* TABLA */}
-      <div
-        style={{
-          background: "white",
-          borderRadius: "16px",
-          padding: "20px",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
-        }}
-      >
-     {products && (
-  <div style={{ overflowX: "auto" }}>
-    <table
-      style={{
-        width: "100%",
-        borderCollapse: "collapse",
-        fontFamily: "Arial, sans-serif",
-      }}
-    >
-      <thead>
-        <tr style={{ background: "#f1f5f9" }}>
-          <th style={thStyle}>Tipo</th>
-          <th style={thStyle}>Descripción</th>
-          <th style={thStyle}>Fecha</th>
-          <th style={thStyle}>Estado</th>
-          <th style={thStyle}>Editar</th>
-          <th style={thStyle}>Ver</th>
-          <th style={thStyle}>Borrar</th>
-        </tr>
-      </thead>
+      <Paper elevation={0} sx={{ ...sxCard, mt: 2.5, overflow: "hidden", width: 0, minWidth: "100%" }}>
+        {products && (
+          <TableContainer>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  {["TIPO", "DESCRIPCIÓN", "FECHA", "ESTADO", "EDITAR", "VER", "BORRAR"].map((h) => (
+                    <TableCell key={h} sx={sxTh}>{h}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
 
-      <tbody>
-        {products[0].map((item, index) => (
-          <tr
-            key={item.id}
-            style={{
-              backgroundColor: index % 2 === 0 ? "#fff" : "#f8fafc",
-            }}
-          >
-            <td style={tdStyle}>{item.tipo}</td>
+              <TableBody>
+                {products[0].map((item) => (
+                  <TableRow key={item.id} hover sx={{ "&:last-child td": { borderBottom: 0 } }}>
+                    <TableCell sx={{ ...sxTd, fontWeight: 600 }}>{item.tipo}</TableCell>
+                    <TableCell sx={sxTd}>{item.descripcion}</TableCell>
+                    <TableCell sx={{ ...sxTd, whiteSpace: "nowrap" }}>{item.fecha}</TableCell>
+                    <TableCell sx={{ ...sxTd, color: COLOR_OK, fontWeight: 600 }}>{item.estado}</TableCell>
 
-            <td style={tdStyle}>{item.descripcion}</td>
+                    <TableCell sx={sxTd}>
+                      <Button
+                        onClick={() => handleOpenModal(item)}
+                        variant="outlined"
+                        size="small"
+                        sx={{ ...sxBtnOutlined, px: 1.75 }}
+                      >
+                        Editar
+                      </Button>
+                    </TableCell>
 
-            <td style={tdStyle}>{item.fecha}</td>
+                    <TableCell sx={sxTd}>
+                      {["Cbu personal", "Cbu familiar", "Socio/Gerente/Apoderado", "Propio"].includes(item.tipo) ? (
+                        <Modalveronlinecbu id={item.id} />
+                      ) : (
+                        <Modalveronline id={item.id} />
+                      )}
+                    </TableCell>
 
-            <td style={tdStyle}>
-              <span
-                style={{
-                  color: "#2e7d32",
-                  fontWeight: "bold",
-                }}
-              >
-                {item.estado}
-              </span>
-            </td>
+                    <TableCell sx={sxTd}>
+                      <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+                        <ModalSeguro id={item.id} getData={getData} />
 
-            <td style={tdStyle}>
-              <Button
-                onClick={() => handleOpenModal(item)}
-                style={{
-                  background: "#1f7a8c",
-                  color: "#fff",
-                  borderRadius: "20px",
-                  textTransform: "none",
-                }}
-              >
-                Editar
-              </Button>
-            </td>
+                        {item.comprobanteok === "No" && (
+                          <Box
+                            component="span"
+                            title="Comprobante pendiente"
+                            sx={{
+                              width: 22,
+                              height: 22,
+                              borderRadius: "50%",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              fontWeight: 700,
+                              fontSize: 13,
+                              color: COLOR_ERROR,
+                              border: `1px solid ${COLOR_ERROR}`,
+                            }}
+                          >
+                            !
+                          </Box>
+                        )}
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                ))}
 
-            <td style={tdStyle}>
-              {[
-                "Cbu personal",
-                "Cbu familiar",
-                "Socio/Gerente/Apoderado",
-                "Propio",
-              ].includes(item.tipo) ? (
-                <Modalveronlinecbu id={item.id} />
-              ) : (
-                <Modalveronline id={item.id} />
-              )}
-            </td>
-
-            <td style={tdStyle}>
-              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                <ModalSeguro id={item.id} getData={getData} />
-
-                {item.comprobanteok === "No" && (
-                  <span
-                    style={{
-                      background: "#ffebee",
-                      color: "#c62828",
-                      width: 24,
-                      height: 24,
-                      borderRadius: "50%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    !
-                  </span>
+                {products[0].length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={7} sx={{ ...sxTd, textAlign: "center", color: COLOR_MUTED, py: 4 }}>
+                      No hay documentación cargada
+                    </TableCell>
+                  </TableRow>
                 )}
-              </div>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-)}
-      </div>
-    </div>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+      </Paper>
+    </Box>
   );
 };
 

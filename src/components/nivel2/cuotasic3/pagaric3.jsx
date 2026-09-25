@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect, Fragment } from "react";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, COLOR_OK, sxBtnPrimary as sxBtnPrimaryBase, sxBtnOutlined as sxBtnOutlinedBase, slotPropsDialog } from "../detalleclienteIngresos/estilos";
 import Box from "@mui/material/Box";
 import {
   Button,
@@ -45,91 +46,45 @@ export default function SelectTextFields(props) {
   // =========================
   // ESTILOS (mismo lenguaje visual que venís usando)
   // =========================
-  const sxDialogPaper = {
-    borderRadius: 4,
-    overflow: "hidden",
-
-    background: "rgba(255,255,255,0.96)",
-    backdropFilter: "blur(10px)",
-    boxShadow: "0 22px 55px rgba(15, 127, 134, 0.16)",
-  };
+  const sxDialogPaper = { borderRadius: 3 };
 
   const sxHeader = {
-    px: { xs: 2, md: 2.5 },
-    py: { xs: 1.6, md: 2 },
-    background: "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-    color: "#fff",
+    px: { xs: 2, md: 3 },
+    py: 2,
+    borderBottom: `1px solid ${COLOR_BORDER}`,
+    color: COLOR_TEXT,
   };
 
   const sxBody = {
-    px: { xs: 2, md: 2.5 },
-    py: 2,
-    background:
-      "linear-gradient(180deg, rgba(20,141,141,0.06) 0%, rgba(255,255,255,0.96) 50%, #fff 100%)",
+    px: { xs: 2, md: 3 },
+    py: 2.5,
   };
 
   const sxCard = {
-    borderRadius: 3,
-    border: `1px solid ${alpha("#0b4f6c", 0.12)}`,
+    borderRadius: 2,
+    border: `1px solid ${COLOR_BORDER}`,
     background: "#fff",
     overflow: "hidden",
-    boxShadow: "0 18px 45px rgba(10,59,79,0.08)",
   };
 
   const sxField = {
-    "& .MuiInputLabel-root": { fontWeight: 800 },
-    "& .MuiOutlinedInput-root": {
-      borderRadius: 2,
-      background: "rgba(255,255,255,0.92)",
-      "& fieldset": { borderColor: alpha("#0b4f6c", 0.18) },
-      "&:hover fieldset": { borderColor: alpha("#0b4f6c", 0.35) },
-      "&.Mui-focused fieldset": {
-        borderColor: "#148D8D",
-        borderWidth: 2,
-        boxShadow: "0 0 0 3px rgba(20,141,141,0.12)",
-      },
-    },
-    "& .MuiFilledInput-root": {
-      borderRadius: 2,
-      background: alpha("#0f7f86", 0.06),
-    },
+    "& .MuiOutlinedInput-root": { borderRadius: 1.5 },
+    "& .MuiFilledInput-root": { borderRadius: 1.5 },
   };
 
-  const sxBtnPrimary = {
-    borderRadius: 2,
+  const sxBtnPrimary = { ...sxBtnOutlinedBase };
 
-    textTransform: "none",
-    fontWeight: 900,
-    backgroundColor: "#01567c",
-    boxShadow: "0 10px 25px rgba(1,86,124,0.25)",
-    "&:hover": { backgroundColor: "#014a6b" },
-  };
-
-  const sxBtnAccent = {
-    borderRadius: 2,
-    px: 2.2,
-    py: 1.05,
-    textTransform: "none",
-    fontWeight: 900,
-    backgroundColor: "#148D8D",
-    boxShadow: "0 10px 25px rgba(20,141,141,0.22)",
-    "&:hover": { backgroundColor: "#0f7a7a" },
-  };
+  const sxBtnAccent = { ...sxBtnPrimaryBase };
 
   const sxDropzone = (isActive) => ({
     cursor: "pointer",
-    borderRadius: 3,
-    border: `1px dashed ${isActive ? "#148D8D" : alpha("#0b4f6c", 0.25)}`,
-    background: isActive
-      ? "linear-gradient(180deg, rgba(20,141,141,0.10) 0%, rgba(255,255,255,0.92) 100%)"
-      : "rgba(250,250,250,0.9)",
-    color: alpha("#0b4f6c", 0.75),
-    boxShadow: isActive ? "0 14px 30px rgba(20,141,141,0.12)" : "none",
-    transition: "all 180ms ease",
-    "&:hover": {
-      borderColor: alpha("#0b4f6c", 0.45),
-      boxShadow: "0 14px 30px rgba(11,79,108,0.10)",
-    },
+    borderRadius: 2,
+    boxShadow: "none",
+    border: `1px dashed ${isActive ? COLOR_ACCENT : "#b7c2c9"}`,
+    background: isActive ? "#f4f7f8" : "#f9fafb",
+    color: COLOR_MUTED,
+    transition: "border-color .15s ease, background-color .15s ease",
+    "&:hover": { borderColor: COLOR_ACCENT, background: "#f4f7f8" },
   });
 
   // =========================
@@ -262,11 +217,7 @@ export default function SelectTextFields(props) {
          <Button
                   variant="contained"
                   size="small"
-                  sx={{
-                    ...sxBtnAccent,
-                    backgroundColor: "#0799B6",
-                    "&:hover": { backgroundColor: "#014a6b" },
-                  }}
+                  sx={{ ...sxBtnPrimaryBase, px: 1.1, py: 0.35, minHeight: 26, fontSize: "0.72rem" }}
                   onClick={handleClickOpen}
                 >
                   Pagar
@@ -276,16 +227,16 @@ export default function SelectTextFields(props) {
       <Dialog
         open={open}
         onClose={handleClose}
-        PaperProps={{ sx: sxDialogPaper }}
+        slotProps={slotPropsDialog}
         maxWidth="sm"
         fullWidth
       >
-        {/* HEADER GRADIENT */}
+        {/* ENCABEZADO */}
         <Box sx={sxHeader}>
-          <Typography sx={{ fontWeight: 950, letterSpacing: 0.2, fontSize: 18 }}>
+          <Typography sx={{ fontWeight: 700, fontSize: 17, color: COLOR_TEXT }}>
             Pagar cuota(s)
           </Typography>
-          <Typography sx={{ mt: 0.4, opacity: 0.92, fontWeight: 700, fontSize: 13 }}>
+          <Typography sx={{ mt: 0.25, fontWeight: 400, fontSize: 13, color: COLOR_MUTED }}>
             Cargá los datos del pago y subí el comprobante.
           </Typography>
         </Box>
@@ -323,11 +274,11 @@ export default function SelectTextFields(props) {
                       ))}
                     </TextField>
 
-                    <Divider sx={{ borderColor: alpha("#0b4f6c", 0.12) }} />
+                    <Divider sx={{ borderColor: COLOR_BORDER }} />
 
                     {/* FECHA + MONTO */}
-                    <Grid container spacing={2} alignItems="stretch">
-                      <Grid item xs={12} md={6}>
+                    <Grid container spacing={2} sx={{ alignItems: "stretch", mt: 1.5 }}>
+                      <Grid size={{ xs: 12, md: 6 }}>
                         <TextField
                           onChange={handleChange}
                           name="fecha"
@@ -336,34 +287,14 @@ export default function SelectTextFields(props) {
                           type="date"
                           fullWidth
                           variant="outlined"
-                          InputLabelProps={{ shrink: true }}
-                          sx={{
-                            "& .MuiOutlinedInput-root": {
-                              height: 56,
-                              borderRadius: 2,
-                              background: "rgba(255,255,255,0.92)",
-                              boxShadow: "0 12px 22px rgba(11,79,108,0.10)",
-                              alignItems: "center",
-                              "& fieldset": { borderColor: alpha("#0b4f6c", 0.18) },
-                              "&:hover fieldset": { borderColor: alpha("#0b4f6c", 0.35) },
-                              "&.Mui-focused fieldset": { borderColor: "#148D8D", borderWidth: 2 },
-                            },
-                            "& input": {
-                              padding: "16.5px 14px",
-                              fontWeight: 800,
-                              color: "#0b2b3a",
-                            },
-                            "& .MuiInputLabel-root": {
-                              fontWeight: 800,
-                              color: alpha("#0b4f6c", 0.85),
-                            },
-                          }}
+                          slotProps={{ inputLabel: { shrink: true } }}
+                          sx={sxField}
                         />
 
 
                       </Grid>
 
-                      <Grid item xs={12} md={6}>
+                      <Grid size={{ xs: 12, md: 6 }}>
                         {eleccion.tipo === "1" ? (
                           <TextField
                             autoFocus
@@ -375,28 +306,8 @@ export default function SelectTextFields(props) {
                             type="number"
                             variant="outlined"
                             fullWidth
-                            InputLabelProps={{ shrink: true }}
-                            sx={{
-                              "& .MuiOutlinedInput-root": {
-                                height: 56,
-                                borderRadius: 2,
-                                background: "rgba(255,255,255,0.92)",
-                                boxShadow: "0 12px 22px rgba(11,79,108,0.10)",
-                                alignItems: "center",
-                                "& fieldset": { borderColor: alpha("#0b4f6c", 0.18) },
-                                "&:hover fieldset": { borderColor: alpha("#0b4f6c", 0.35) },
-                                "&.Mui-focused fieldset": { borderColor: "#148D8D", borderWidth: 2 },
-                              },
-                              "& input": {
-                                padding: "16.5px 14px",
-                                fontWeight: 800,
-                                color: "#0b2b3a",
-                              },
-                              "& .MuiInputLabel-root": {
-                                fontWeight: 800,
-                                color: alpha("#0b4f6c", 0.85),
-                              },
-                            }}
+                            slotProps={{ inputLabel: { shrink: true } }}
+                            sx={sxField}
                           />
 
                         ) : null}
@@ -409,16 +320,16 @@ export default function SelectTextFields(props) {
                       <Paper
                         elevation={0}
                         sx={{
-                          borderRadius: 3,
+                          borderRadius: 2,
                           p: { xs: 2, md: 2.25 },
-                          border: `1px solid ${alpha("#0b4f6c", 0.12)}`,
-                          background: "linear-gradient(180deg, rgba(20,141,141,0.05) 0%, #fff 55%)",
+                          border: `1px solid ${COLOR_BORDER}`,
+                          background: "#fff",
                         }}
                       >
                         <Stack spacing={1.2}>
                           <Box>
-                            <Typography sx={{ fontWeight: 950, color: "#0a3b4f" }}>
-                              SUBIR COMPROBANTE
+                            <Typography sx={{ fontWeight: 700, fontSize: 14, color: COLOR_TEXT }}>
+                              Subir comprobante
                             </Typography>
                             <Typography
                               sx={{
@@ -431,15 +342,15 @@ export default function SelectTextFields(props) {
                             </Typography>
                           </Box>
 
-                          <Paper sx={{ ...sxDropzone(isDragActive), borderRadius: 3 }}>
+                          <Paper elevation={0} sx={{ ...sxDropzone(isDragActive), borderRadius: 2 }}>
                             <Box sx={{ p: { xs: 2.2, md: 2.6 } }} {...getRootProps()}>
                               <input {...getInputProps()} />
 
                               <Typography
                                 sx={{
-                                  fontWeight: 900,
-                                  fontSize: 14.5,
-                                  color: isDragActive ? "#148D8D" : alpha("#0b4f6c", 0.85),
+                                  fontWeight: 600,
+                                  fontSize: 14,
+                                  color: COLOR_TEXT,
                                 }}
                               >
                                 {isDragActive
@@ -451,7 +362,7 @@ export default function SelectTextFields(props) {
                                 sx={{
                                   mt: 0.8,
                                   fontSize: 12.5,
-                                  color: alpha("#0b4f6c", 0.65),
+                                  color: COLOR_MUTED,
                                   lineHeight: 1.35,
                                 }}
                               >
@@ -479,16 +390,17 @@ export default function SelectTextFields(props) {
                     {pago.monto > 0 && pago.fecha ? (
                       <Box
                         sx={{
-                          borderRadius: 3,
+                          borderRadius: 2,
                           p: 1.6,
-                          border: `1px solid ${alpha("#148D8D", 0.22)}`,
-                          background: alpha("#148D8D", 0.06),
+                          border: `1px solid ${COLOR_BORDER}`,
+                          background: "#f9fafb",
                         }}
                       >
                         <Typography
                           sx={{
-                            fontWeight: 950,
-                            color: "#0f7a7a",
+                            fontWeight: 600,
+                            fontSize: 14,
+                            color: COLOR_OK,
                             display: "flex",
                             alignItems: "center",
                             gap: 1,
@@ -503,16 +415,16 @@ export default function SelectTextFields(props) {
                             mt: 0.8,
                             mb: 1.2,
                             pl: 2.2,
-                            color: alpha("#0b4f6c", 0.85),
-                            fontWeight: 650,
+                            color: COLOR_TEXT,
+                            fontWeight: 500,
                             fontSize: 13,
                           }}
                         >
                           {acceptedFileItems}
                         </Box>
 
-                        <Stack direction="row" justifyContent="flex-end" spacing={1.2} flexWrap="wrap">
-                          <Button variant="contained" sx={sxBtnPrimary} onClick={handleClose}>
+                        <Stack direction="row" spacing={1.2} useFlexGap sx={{ justifyContent: "flex-end", flexWrap: "wrap" }}>
+                          <Button variant="outlined" sx={sxBtnPrimary} onClick={handleClose}>
                             Cancelar
                           </Button>
 
@@ -526,7 +438,7 @@ export default function SelectTextFields(props) {
                         </Stack>
                       </Box>
                     ) : (
-                      <Typography sx={{ fontSize: 12.5, color: alpha("#0b4f6c", 0.7), mt: 2,}}>
+                      <Typography sx={{ fontSize: 12.5, color: COLOR_MUTED, mt: 2 }}>
                         Completá <b>CBU</b>, <b>Fecha</b> y <b>Monto</b> para habilitar el envío.
                       </Typography>
                     )}
@@ -545,11 +457,11 @@ export default function SelectTextFields(props) {
                       background: "#fff",
                     }}
                   >
-                    <Typography sx={{ fontWeight: 950, color: "#0a3b4f", mb: 1 }}>
+                    <Typography sx={{ fontWeight: 700, fontSize: 14, color: COLOR_TEXT, mb: 1 }}>
                       Cargar montos por cuota
                     </Typography>
 
-                    <Divider sx={{ mb: 1.5, borderColor: alpha("#0b4f6c", 0.12) }} />
+                    <Divider sx={{ mb: 1.5, borderColor: COLOR_BORDER }} />
 
                     {cuotas ? (
                       <Stack spacing={1.2}>
@@ -575,8 +487,9 @@ export default function SelectTextFields(props) {
                       <Box sx={{ mt: 2 }}>
                         <Typography
                           sx={{
-                            fontWeight: 900,
-                            color: "#0f7a7a",
+                            fontWeight: 600,
+                            fontSize: 14,
+                            color: COLOR_OK,
                             display: "flex",
                             alignItems: "center",
                             gap: 1,
@@ -591,16 +504,16 @@ export default function SelectTextFields(props) {
                             mt: 0.8,
                             mb: 1.2,
                             pl: 2.2,
-                            color: alpha("#0b4f6c", 0.85),
-                            fontWeight: 650,
+                            color: COLOR_TEXT,
+                            fontWeight: 500,
                             fontSize: 13,
                           }}
                         >
                           {acceptedFileItems}
                         </Box>
 
-                        <Stack direction="row" justifyContent="flex-end" spacing={1.2} flexWrap="wrap">
-                          <Button variant="contained" sx={sxBtnPrimary} onClick={handleClose}>
+                        <Stack direction="row" spacing={1.2} useFlexGap sx={{ justifyContent: "flex-end", flexWrap: "wrap" }}>
+                          <Button variant="outlined" sx={sxBtnPrimary} onClick={handleClose}>
                             Cancelar
                           </Button>
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, CircularProgress, Backdrop } from "@mui/material";
+import { sxBtnOutlined } from "../detalleclienteIngresos/estilos";
 import servicioLegajos from "../../../services/legajos"; // Ajusta la ruta según sea necesario
 
 const PdfViewer = ({ id }) => {
@@ -27,7 +28,7 @@ const PdfViewer = ({ id }) => {
         </div>
       </Backdrop>
 
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" size="small" onClick={handleClickOpen} sx={{ ...sxBtnOutlined, px: 1.75, whiteSpace: "nowrap" }}>
         Ver PDF
       </Button>
     </div>

@@ -12,6 +12,7 @@ import {
   TablePagination,
   TextField,
   InputAdornment,
+  Divider,
 } from "@mui/material";
 
 import SearchIcon from "@mui/icons-material/Search";
@@ -19,7 +20,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Box, Paper, Typography, alpha, Button, Chip } from "@mui/material";
 
 import ReportProblemRoundedIcon from "@mui/icons-material/ReportProblemRounded";
-import TableRowsRoundedIcon from "@mui/icons-material/TableRowsRounded";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, COLOR_OK, COLOR_ERROR, sxCard, sxBtnPrimary } from "../detalleclienteIngresos/estilos";
 
 const PagosInusuales = () => {
     const [pagos, setPagos] = useState([]);
@@ -170,7 +171,7 @@ const [rowsPerPage, setRowsPerPage] = useState(5);
                             borderRadius: 999,
                             px: 2,
                             color: "#fff",
-                            background: "linear-gradient(90deg, #01567c 0%, #148D8D 100%)",
+                            background: "#1a303e",
                             boxShadow: "0 10px 22px rgba(20,141,141,0.22)",
                             "&:hover": {
                                 transform: "translateY(-1px)",
@@ -238,340 +239,208 @@ const pagosFiltrados = pagos.filter((p) => {
         p?.tipologia?.toLowerCase().includes(texto)
     );
 });
+    const sxTh = {
+        backgroundColor: "#f6f8f9",
+        color: COLOR_TEXT,
+        fontWeight: 700,
+        fontSize: 11.5,
+        letterSpacing: 0.4,
+        borderBottom: `1px solid ${COLOR_BORDER}`,
+        whiteSpace: "nowrap",
+        py: 1.25,
+    };
+    const sxTd = { fontSize: 13.5, color: COLOR_TEXT, borderBottom: "1px solid #eef1f3", py: 1.1 };
+
+    const colorRiesgo = (v) =>
+        Number(v) > 70 ? COLOR_ERROR : Number(v) > 40 ? "#ed6c02" : COLOR_OK;
+
+    const textoEstado = (proceso) => {
+        if (proceso === "averificarnivel2") return "Pendiente carga documentación";
+        if (proceso === "averificarnivel3") return "Pendiente clasificación";
+        if (proceso === "Inusual") return "Cerrado (Sin alerta)";
+        if (proceso === "Sospechoso") return "Cerrado (Con alerta)";
+        return "";
+    };
+
     return (
-        <Box
-            sx={{
-                width: "100%",
-                maxWidth: "100%",
-                flex: 1,
-                minWidth: 0,
-            }}
-        >
-            {/* CARD PRINCIPAL */}
-            <Paper
-                elevation={0}
-                sx={{
-                    borderRadius: 4,
-                    overflow: "hidden",
-                    border: `1px solid ${alpha("#0b4f6c", 0.14)}`,
-                    background: "rgba(255,255,255,0.92)",
-                    backdropFilter: "blur(10px)",
-                    boxShadow: "0 22px 55px rgba(15, 127, 134, 0.10)",
-                }}
-            >
-                {/* HEADER (GRADIENT) */}
+        <Box sx={{ maxWidth: 1320, mx: "auto", px: { xs: 0, md: 1 }, pt: { xs: 1, md: 2 }, pb: 6 }}>
+            {/* ENCABEZADO */}
+            <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 } }}>
                 <Box
                     sx={{
-                        px: { xs: 2, md: 3 },
-                        py: { xs: 2, md: 2.5 },
-                        background:
-                            "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-                        color: "#fff",
                         display: "flex",
-                        alignItems: { xs: "flex-start", md: "center" },
+                        alignItems: { xs: "stretch", md: "center" },
                         justifyContent: "space-between",
                         gap: 2,
-                        flexWrap: "wrap",
-
+                        flexDirection: { xs: "column", md: "row" },
                     }}
                 >
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                         <Box
                             sx={{
-                                width: 44,
-                                height: 44,
-                                borderRadius: "14px",
-                                display: "grid",
-                                placeItems: "center",
-                                background: "rgba(255,255,255,0.18)",
-                                border: "1px solid rgba(255,255,255,0.35)",
+                                width: 46,
+                                height: 46,
+                                borderRadius: "50%",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                bgcolor: "rgba(13,58,73,0.08)",
                                 flexShrink: 0,
                             }}
                         >
-                            <ReportProblemRoundedIcon sx={{ color: "#fff" }} />
+                            <ReportProblemRoundedIcon sx={{ color: COLOR_ACCENT }} />
                         </Box>
-
                         <Box>
                             <Typography
-                                sx={{
-                                    fontWeight: 900,
-                                    fontSize: { xs: 18, md: 22 },
-                                    lineHeight: 1.1,
-                                }}
+                                variant="h5"
+                                sx={{ fontWeight: 700, fontSize: 20, textTransform: "none", color: COLOR_TEXT, m: 0, pt: 0 }}
                             >
                                 Pagos inusuales
                             </Typography>
-                            <Typography
-                                sx={{ mt: 0.35, fontWeight: 650, opacity: 0.9, fontSize: 14 }}
-                            >
-                                Revisá, filtrá y gestioná pagos inusuales / sospechosos.
+                            <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
+                                Revisá, filtrá y gestioná pagos inusuales / sospechosos
                             </Typography>
                         </Box>
                     </Box>
 
-                    <Chip
-                        icon={<TableRowsRoundedIcon />}
-                        label={`Registros: ${pagos.length}`}
-                        sx={{
-                            color: "#fff",
-                            fontWeight: 900,
-                            borderRadius: 999,
-                            background: "rgba(255,255,255,0.18)",
-                            border: "1px solid rgba(255,255,255,0.35)",
-                            "& .MuiChip-icon": { color: "#fff" },
+                    <Chip variant="outlined" label={`Registros: ${pagos.length}`} sx={{ fontWeight: 600 }} />
+                </Box>
+            </Paper>
+
+            {/* LISTADO */}
+            <Paper elevation={0} sx={{ ...sxCard, mt: 2.5, overflow: "hidden", width: 0, minWidth: "100%" }}>
+                <Box sx={{ px: { xs: 2, md: 3 }, py: 2 }}>
+                    <TextField
+                        size="small"
+                        placeholder="Buscar por CUIL, nombre o tipología"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        slotProps={{
+                            input: {
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchIcon sx={{ color: COLOR_MUTED, fontSize: 20 }} />
+                                    </InputAdornment>
+                                ),
+                            },
                         }}
+                        sx={{ width: { xs: "100%", md: 420 }, "& .MuiOutlinedInput-root": { borderRadius: 1.5 } }}
                     />
                 </Box>
-            </Paper>
-            <Paper
-                elevation={0}
-                sx={{
-                    mt: { xs: 2, md: 3 }, // 👈 separación arriba
-                    borderRadius: 4,
-                    overflow: "hidden",
-                    border: `1px solid ${alpha("#01567c", 0.12)}`,
-                    background: "rgba(255,255,255,0.92)",
-                    backdropFilter: "blur(10px)",
-                    boxShadow: "0 22px 55px rgba(20, 141, 141, 0.10)",
-                }}
-            >
-                {/* ✅ SOLO TABLA: estilo “como CBU” (toolbar + íconos) */}
-                <Box
-                    sx={{
-                        p: { xs: 1.5, md: 2 },
 
-                        /* ===== BODY ===== */
-                        "& .MuiTableBody-root .MuiTableCell-root": {
-                            borderBottom: `1px solid ${alpha("#01567c", 0.08)}`,
-                            fontWeight: 650,
-                            color: "#0b2b3a",
-                        },
+                <Divider sx={{ borderColor: COLOR_BORDER }} />
 
-                        /* ===== HEADER ===== */
-                        "& .MuiTableHead-root .MuiTableCell-root": {
-                            borderBottom: "0px",
-                            color: "#01567c",
-                            fontWeight: 800,
-                        },
+                <TableContainer>
+                    <Table stickyHeader size="small">
+                        <TableHead>
+                            <TableRow>
+                                {["ID", "CUIL/CUIT", "TIPOLOGÍA", "F. NOTIFICACIÓN", "F. VENCIMIENTO", "IMPORTE", "RIESGO", "ESTADO", "FECHA", "ACCIONES", "DESCARGA"].map((h) => (
+                                    <TableCell key={h} sx={sxTh}>{h}</TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
 
-                        /* ===== TOOLBAR ===== */
-                        "& .MuiToolbar-root": {
-                            px: 2,
-                            color: "#01567c",
-                        },
-                        "& .MuiToolbar-root .MuiInputBase-input": {
-                            color: "#0b2b3a",
-                            fontWeight: 700,
-                        },
+                        <TableBody>
+                            {pagosFiltrados
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((p, index) => (
+                                    <TableRow key={index} hover sx={{ "&:last-child td": { borderBottom: 0 } }}>
+                                        <TableCell sx={sxTd}>{p.id}</TableCell>
 
-                        /* ===== ICONOS ===== */
-                        "& .MuiIconButton-root, & svg": {
-                            color: alpha("#01567c", 0.75),
-                            transition: "all 0.2s ease",
-                        },
-                        "& .MuiIconButton-root:hover, & svg:hover": {
-                            color: "#148D8D",
-                            transform: "translateY(-1px)",
-                        },
+                                        <TableCell
+                                            sx={{ ...sxTd, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}
+                                            onClick={() => navigate("/usuario2/detallecliente/" + p?.cuil_cuitc)}
+                                        >
+                                            {p.cuil_cuitc}
+                                        </TableCell>
 
-                        /* ===== HOVER FILAS ===== */
-                        "& .MuiTableRow-root:hover td": {
-                            backgroundColor: `${alpha("#148D8D", 0.06)} !important`,
-                        },
+                                        <TableCell sx={sxTd}>{p.tipologia}</TableCell>
+                                        <TableCell sx={sxTd}>{p.fechanotificacion}</TableCell>
+                                        <TableCell sx={sxTd}>{p.fechavencimiento}</TableCell>
 
-                        /* ===== PAGINACIÓN ===== */
-                        "& .MuiTablePagination-root, & .MuiTablePagination-root *": {
-                            color: "#01567c",
-                            fontWeight: 700,
-                        },
+                                        <TableCell sx={{ ...sxTd, fontWeight: 600, whiteSpace: "nowrap" }}>
+                                            $
+                                            {isNaN(Number(p.monto)) ? p.monto : Number(p.monto).toFixed(2)}
+                                        </TableCell>
 
-                        /* (Opcional) “card” interna de la tabla sin sombra extra */
-                        "& .MuiPaper-root": { boxShadow: "none" },
+                                        <TableCell sx={sxTd}>
+                                            <Chip
+                                                label={`${p.riesgo}%`}
+                                                size="small"
+                                                variant="outlined"
+                                                sx={{
+                                                    fontWeight: 600,
+                                                    color: colorRiesgo(p.riesgo),
+                                                    borderColor: colorRiesgo(p.riesgo),
+                                                }}
+                                            />
+                                        </TableCell>
+
+                                        <TableCell sx={sxTd}>{textoEstado(p.proceso)}</TableCell>
+
+                                        <TableCell sx={{ ...sxTd, whiteSpace: "nowrap" }}>
+                                            Pago({p.fecha})
+                                            <br />
+                                            Cuota({p.mesc}/{p.anioc})
+                                        </TableCell>
+
+                                        <TableCell sx={sxTd}>
+                                            <BotonRechazo id={p.id} getPagosi={getPagosi} />
+                                        </TableCell>
+
+                                        <TableCell sx={sxTd}>
+                                            <Button
+                                                variant="contained"
+                                                size="small"
+                                                onClick={() =>
+                                                    navigate(
+                                                        p?.zona === "IC3"
+                                                            ? `/usuario2/cuotaic3/${p?.id_cuota}`
+                                                            : `/usuario2/pagoscuotas/${p?.id_cuota}`
+                                                    )
+                                                }
+                                                sx={{ ...sxBtnPrimary, px: 1.75, whiteSpace: "nowrap" }}
+                                            >
+                                                Ver pagos
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+
+                            {pagosFiltrados.length === 0 && (
+                                <TableRow>
+                                    <TableCell colSpan={11} sx={{ ...sxTd, textAlign: "center", color: COLOR_MUTED, py: 4 }}>
+                                        No se encontraron registros.
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
+                <TablePagination
+                    component="div"
+                    count={pagosFiltrados.length}
+                    page={page}
+                    rowsPerPage={rowsPerPage}
+                    onPageChange={(e, newPage) => setPage(newPage)}
+                    onRowsPerPageChange={(e) => {
+                        setRowsPerPage(parseInt(e.target.value, 10));
+                        setPage(0);
                     }}
-                >
-             <Box sx={{ mb: 2 }}>
-    <TextField
-        fullWidth
-        size="small"
-        placeholder="Buscar por CUIL, nombre o tipología..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        InputProps={{
-            startAdornment: (
-                <InputAdornment position="start">
-                    <SearchIcon />
-                </InputAdornment>
-            ),
-        }}
-    />
-</Box>
-
-<TableContainer>
-    <Table stickyHeader>
-        <TableHead>
-            <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell>CUIL/CUIT</TableCell>
-                <TableCell>Tipología</TableCell>
-                <TableCell>Fecha Notificación</TableCell>
-                <TableCell>Fecha Vencimiento</TableCell>
-                <TableCell>Importe</TableCell>
-                <TableCell>Riesgo</TableCell>
-                <TableCell>Estado</TableCell>
-                <TableCell>Fecha</TableCell>
-                <TableCell>Acciones</TableCell>
-                <TableCell>Descarga</TableCell>
-            </TableRow>
-        </TableHead>
-
-        <TableBody>
-            {pagosFiltrados
-                .slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                )
-                .map((p, index) => (
-                    <TableRow key={index} hover>
-                        <TableCell>{p.id}</TableCell>
-
-                        <TableCell>
-                            <Box
-                                onClick={() =>
-                                    navigate(
-                                        "/usuario2/detallecliente/" +
-                                            p?.cuil_cuitc
-                                    )
-                                }
-                                sx={{
-                                    cursor: "pointer",
-                                    fontWeight: 900,
-                                    color: "#01567c",
-                                    textDecoration: "underline",
-                                    textUnderlineOffset: "3px",
-                                }}
-                            >
-                                {p.cuil_cuitc}
-                            </Box>
-                        </TableCell>
-
-                        <TableCell>{p.tipologia}</TableCell>
-
-                        <TableCell>
-                            {p.fechanotificacion}
-                        </TableCell>
-
-                        <TableCell>
-                            {p.fechavencimiento}
-                        </TableCell>
-
-                        <TableCell
-                            sx={{
-                                fontWeight: 900,
-                            }}
-                        >
-                            $
-                            {isNaN(Number(p.monto))
-                                ? p.monto
-                                : Number(p.monto).toFixed(2)}
-                        </TableCell>
-
-                        <TableCell>
-                            <Chip
-                                label={`${p.riesgo}%`}
-                                color={
-                                    Number(p.riesgo) > 70
-                                        ? "error"
-                                        : Number(p.riesgo) > 40
-                                        ? "warning"
-                                        : "success"
-                                }
-                                size="small"
-                            />
-                        </TableCell>
-
-                        <TableCell>
-                            {p.proceso ===
-                                "averificarnivel2" &&
-                                "Pendiente carga documentación"}
-
-                            {p.proceso ===
-                                "averificarnivel3" &&
-                                "Pendiente clasificación"}
-
-                            {p.proceso === "Inusual" &&
-                                "Cerrado (Sin alerta)"}
-
-                            {p.proceso ===
-                                "Sospechoso" &&
-                                "Cerrado (Con alerta)"}
-                        </TableCell>
-
-                        <TableCell
-                            sx={{
-                                whiteSpace: "nowrap",
-                            }}
-                        >
-                            Pago({p.fecha})
-                            <br />
-                            Cuota({p.mesc}/{p.anioc})
-                        </TableCell>
-
-                        <TableCell>
-                            <BotonRechazo
-                                id={p.id}
-                                getPagosi={getPagosi}
-                            />
-                        </TableCell>
-
-                        <TableCell>
-                            <Button
-                                onClick={() =>
-                                    navigate(
-                                        p?.zona === "IC3"
-                                            ? `/usuario2/cuotaic3/${p?.id_cuota}`
-                                            : `/usuario2/pagoscuotas/${p?.id_cuota}`
-                                    )
-                                }
-                                sx={{
-                                    textTransform: "none",
-                                    fontWeight: 900,
-                                    borderRadius: 999,
-                                    px: 2,
-                                    color: "#fff",
-                                    background:
-                                        "linear-gradient(90deg, #01567c 0%, #148D8D 100%)",
-                                }}
-                            >
-                                Ver pagos
-                            </Button>
-                        </TableCell>
-                    </TableRow>
-                ))}
-        </TableBody>
-    </Table>
-
-    <TablePagination
-        component="div"
-        count={pagosFiltrados.length}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        onPageChange={(e, newPage) =>
-            setPage(newPage)
-        }
-        onRowsPerPageChange={(e) => {
-            setRowsPerPage(
-                parseInt(e.target.value, 10)
-            );
-            setPage(0);
-        }}
-        rowsPerPageOptions={[5, 10, 15, 20]}
-    />
-</TableContainer>
-                </Box>
+                    rowsPerPageOptions={[5, 10, 15, 20]}
+                    labelRowsPerPage="Filas por página:"
+                    sx={{
+                        borderTop: `1px solid ${COLOR_BORDER}`,
+                        "& .MuiTablePagination-toolbar": { minHeight: 48 },
+                        "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows": {
+                            fontSize: 13,
+                            color: COLOR_MUTED,
+                        },
+                    }}
+                />
             </Paper>
-
         </Box>
-
     );
 };
 

@@ -8,8 +8,10 @@ import {
   Chip,
   Stack,
   Typography,
-  Divider,
 } from "@mui/material";
+import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
+import Cargadetabla from "../../CargaDeTabla";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, sxCard, sxBtnOutlined } from "../detalleclienteIngresos/estilos";
 
 import LotesCliente from "../../LotesCliente";
 import InfoCliente from "../detalleclienteIngresos/FichaAxios";
@@ -44,182 +46,117 @@ const DetalleCliente = () => {
     setCarga(false);
   };
 
-  if (carga) return <>Cargando</>;
+  if (carga) return <Cargadetabla />;
 
   return (
-    <Box
-      sx={{
-        // ✅ evita “cortes” por altura y permite scroll vertical
-        minHeight: "100vh",
-        width: "100%",
-        boxSizing: "border-box",
-        overflowX: "hidden",
-        overflowY: "auto",
-
-        // ✅ paddings más “notebook friendly”
-        p: { xs: 1.25, sm: 2, md: 2.5 },
-
-        background:
-          "linear-gradient(180deg, rgba(10,59,79,0.05) 0%, rgba(255,255,255,1) 100%)",
-      }}
-    >
-      {/* HEADER CLIENTE */}
-      <Paper
-        elevation={0}
-        sx={{
-          borderRadius: 3,
-          overflow: "hidden",
-          border: "1px solid #e8eef5",
-          background:
-            "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-          mb: { xs: 1.25, md: 2 },
-        }}
-      >
-        <Box sx={{ p: { xs: 1.5, md: 2.5 }, color: "#fff" }}>
+    <Box sx={{ maxWidth: 1320, mx: "auto", px: { xs: 0, md: 1 }, pt: { xs: 1, md: 2 }, pb: 6 }}>
+      <Stack spacing={2.5}>
+        {/* ENCABEZADO */}
+        <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 } }}>
           <Stack
             direction={{ xs: "column", md: "row" }}
-            spacing={1.5}
-            alignItems={{ md: "center" }}
-            justifyContent="space-between"
+            spacing={2}
+            sx={{ alignItems: { md: "center" }, justifyContent: "space-between" }}
           >
-            <Box>
-              <Typography sx={{ fontWeight: 950, letterSpacing: 0.2 }}>
-                Cliente
-              </Typography>
-              <Typography
-                sx={{
-                  opacity: 0.92,
-                  fontWeight: 700,
-                  fontSize: 13,
-                  mt: 0.2,
-                }}
-              >
-                CUIT/CUIL: <b>{cuil_cuit}</b>
-              </Typography>
-            </Box>
-
-            {/* ACCIONES */}
-            <Box
-              sx={{
-                display: "flex",
-                gap: 1.25,
-                justifyContent: { xs: "flex-start", md: "flex-end" },
-                flexWrap: "wrap",
-              }}
-            >
-              {/* PEP */}
+            <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
               <Box
                 sx={{
-                  "& .MuiButton-root": {
-                    borderRadius: 2,
-                    px: 2.2,
-                    py: 1.05,
-                    textTransform: "none",
-                    fontWeight: 900,
-                    backgroundColor: "rgba(255,255,255,0.18)",
-                    border: "1px solid rgba(255,255,255,0.25)",
-                    boxShadow: "0 10px 20px rgba(0,0,0,0.12)",
-                    color: "#fff",
-                    "&:hover": {
-                      backgroundColor: "rgba(255,255,255,0.24)",
-                    },
-                  },
+                  width: 46,
+                  height: 46,
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  bgcolor: "rgba(13,58,73,0.08)",
+                  flexShrink: 0,
                 }}
               >
-                <PEP cuil_cuit={cuil_cuit} />
+                <PersonOutlineRoundedIcon sx={{ color: COLOR_ACCENT }} />
               </Box>
 
-              {/* ACTUALIZAR COMPROBANTES */}
+              <Box>
+                <Stack direction="row" spacing={1.25} useFlexGap sx={{ alignItems: "center", flexWrap: "wrap" }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, fontSize: 20, textTransform: "none", color: COLOR_TEXT, m: 0, pt: 0 }}>
+                    Cliente IC3
+                  </Typography>
+                  <Chip
+                    size="small"
+                    variant="outlined"
+                    color={habilitado ? "success" : "error"}
+                    label={habilitado ? "Habilitado" : "No habilitado"}
+                    sx={{ fontWeight: 600 }}
+                  />
+                  <Chip
+                    size="small"
+                    variant="outlined"
+                    color={expuesta ? "warning" : "default"}
+                    label={expuesta ? "Persona PEP" : "Persona no PEP"}
+                    sx={{ fontWeight: 600 }}
+                  />
+                </Stack>
+                <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
+                  CUIT/CUIL <b style={{ color: COLOR_TEXT }}>{cuil_cuit}</b>
+                  {cliente?.cuil_cuit ? (
+                    <>
+                      {" · "}
+                      {habilitado ? "Habilitado" : "Revisado"} por {cliente.cuil_cuit}
+                      {cliente?.fecha ? `, el día ${cliente.fecha}` : ""}
+                    </>
+                  ) : null}
+                </Typography>
+              </Box>
+            </Stack>
+
+            <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: "wrap" }}>
+              <PEP cuil_cuit={cuil_cuit} />
+
               {idd && (
                 <Button
-                  variant="contained"
-                  onClick={() =>
-                    navigate("/usuario2/actualizarcomporbantes/" + cuil_cuit)
-                  }
-                  sx={{
-                    borderRadius: 2,
-                    textTransform: "none",
-                    fontWeight: 900,
-                    px: 2,
-                    backgroundColor: "rgba(255,255,255,0.16)",
-                    color: "#fff",
-                    border: "1px solid rgba(255,255,255,0.25)",
-                    "&:hover": { backgroundColor: "rgba(255,255,255,0.24)" },
-                  }}
+                  variant="outlined"
+                  onClick={() => navigate("/usuario2/actualizarcomporbantes/" + cuil_cuit)}
+                  sx={sxBtnOutlined}
                 >
-                  ACTUALIZAR COMPROBANTES
+                  Actualizar comprobantes
                 </Button>
               )}
-            </Box>
+            </Stack>
           </Stack>
-        </Box>
-      </Paper>
 
-      <Paper elevation={0} sx={{ p: 0.5, background: "transparent", mb: 1 }}>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            flexWrap: "wrap",
-            justifyContent: "flex-end",
-          }}
-        >
-          {expuesta ? (
-            <Alert severity="warning" variant="filled">
-              Persona PEP
+          {!habilitado && (
+            <Alert severity="error" sx={{ mt: 2, borderRadius: 1.5 }}>
+              Cliente no habilitado por <b>{cliente.cuil_cuit}</b>, el día {cliente.fecha}. No se puede asignar lote.
             </Alert>
-          ) : (
-            <Chip label="Persona no PEP" color="success" />
           )}
-        </Box>
-      </Paper>
-
-      {habilitado ? (
-        <>
-          <Alert severity="success" sx={{ mb: 2 }}>
-            <b>
-              Cliente habilitado por {cliente.cuil_cuit}, el día {cliente.fecha}
-            </b>
-          </Alert>
-
-          <Ingreso />
-
-          <Divider sx={{ my: 2 }} />
-
-          <LotesCliente cuil_cuit={cuil_cuit} />
-        </>
-      ) : (
-        <Alert severity="error">
-          <b>
-            Cliente no habilitado por {cliente.cuil_cuit}, el día {cliente.fecha}
-          </b>
-          . No se puede asignar lote.
-        </Alert>
-      )}
-
-      {/* INFO CLIENTE */}
-      <Paper sx={{ borderRadius: 3, p: { xs: 1.5, md: 2.5 }, mb: 2 }}>
-        <InfoCliente cuil_cuit={cuil_cuit} />
-      </Paper>
-
-      {/* CUOTAS */}
-      {cuil_cuit && (
-        <Paper
-          sx={{
-            borderRadius: 3,
-            p: { xs: 1, md: 2 },
-            overflow: "hidden", // ✅ evita que “rompa” el paper
-          }}
-        >
-          {/* ✅ este wrapper hace que la tabla NO se corte: scrollea horizontal */}
-          <Box sx={{ width: "100%", overflowX: "auto" }}>
-            {/* ✅ minWidth para que en notebook se mantenga la tabla completa */}
-            <Box sx={{ minWidth: 1100 }}>
-              <Cuotas cuil_cuit={cuil_cuit} />
-            </Box>
-          </Box>
         </Paper>
-      )}
+
+        {habilitado && (
+          <>
+            <Alert severity="success" sx={{ borderRadius: 1.5 }}>
+              Cliente habilitado por <b>{cliente.cuil_cuit}</b>, el día {cliente.fecha}
+            </Alert>
+
+            <Box>
+              <Ingreso />
+            </Box>
+
+            <LotesCliente cuil_cuit={cuil_cuit} />
+          </>
+        )}
+
+        {/* DATOS DEL CLIENTE */}
+        <InfoCliente cuil_cuit={cuil_cuit} />
+
+        {/* CUOTAS */}
+        {cuil_cuit && (
+          <Paper elevation={0} sx={{ ...sxCard, p: { xs: 1, md: 2 }, overflow: "hidden", width: 0, minWidth: "100%" }}>
+            <Box sx={{ width: "100%", overflowX: "auto" }}>
+              <Box sx={{ minWidth: 1100 }}>
+                <Cuotas cuil_cuit={cuil_cuit} />
+              </Box>
+            </Box>
+          </Paper>
+        )}
+      </Stack>
     </Box>
   );
 };

@@ -9,6 +9,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from "react";
 import servicioCliente from '../../../services/clientes'
+import { COLOR_TEXT, COLOR_MUTED, sxBtnPrimary, sxBtnOutlined, sxBtnDangerOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions } from "../detalleclienteIngresos/estilos";
 
 
 export default function Ingresos(props) {
@@ -60,27 +61,26 @@ console.log(ingreso)
     setOpen(false);
   };
 
+
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} sx={sxBtnOutlined}>
         Habilitar
       </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Habilitar legajo</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Atencion: se habilitará y por lo tanto de determinará como completo los legajos del cliente
+
+      <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth slotProps={slotPropsDialog}>
+        <DialogTitle sx={sxDialogTitle}>Habilitar legajo</DialogTitle>
+
+        <DialogContent sx={{ px: 3, py: 2 }}>
+          <DialogContentText sx={{ mt: 1, color: COLOR_TEXT, lineHeight: 1.5, fontSize: 14 }}>
+            Atención: se habilitará y por lo tanto se determinará como completo los legajos del cliente.
           </DialogContentText>
-
-          <DialogActions>
-            <Button onClick={handleClose}>Cancelar</Button>
-            <Button onClick={handleDeterminar} >Habilitar </Button>
-          </DialogActions>
-
         </DialogContent>
 
-
-
+        <DialogActions sx={sxDialogActions}>
+          <Button onClick={handleClose} variant="outlined" sx={sxBtnOutlined}>Cancelar</Button>
+          <Button onClick={handleDeterminar} variant="contained" sx={sxBtnPrimary}>Habilitar</Button>
+        </DialogActions>
       </Dialog>
     </div>
   );

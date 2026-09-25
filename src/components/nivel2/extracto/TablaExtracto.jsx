@@ -10,9 +10,9 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import MuiAlert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
-import { Box, Paper, Typography, Divider, alpha, Chip } from "@mui/material";
+import { Box, Paper, Typography, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, sxCard, sxBtnPrimary } from "../detalleclienteIngresos/estilos";
 import EventAvailableRoundedIcon from "@mui/icons-material/EventAvailableRounded";
-import TableRowsRoundedIcon from "@mui/icons-material/TableRowsRounded";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -63,360 +63,175 @@ const Estracto = () => {
         Array.isArray(todos)
             ? (todos.find((o) => String(o.id) === String(fecha?.id))?.fecha || "")
             : "";
+    const sxTh = {
+        backgroundColor: "#f6f8f9",
+        color: COLOR_TEXT,
+        fontWeight: 700,
+        fontSize: 11.5,
+        letterSpacing: 0.4,
+        borderBottom: `1px solid ${COLOR_BORDER}`,
+        whiteSpace: "nowrap",
+        py: 1.25,
+    };
+    const sxTd = { fontSize: 13.5, color: COLOR_TEXT, borderBottom: "1px solid #eef1f3", py: 1.1 };
+
     return (
-
-        <Box
-            sx={{
-                width: "100%",
-                maxWidth: "100%",
-                flex: 1,
-                minWidth: 0,
-            }}
-        >
-            {/* CARD PRINCIPAL */}
-            <Paper
-                elevation={0}
-                sx={{
-                    borderRadius: 4,
-                    overflow: "hidden",
-                    border: `1px solid ${alpha("#0b4f6c", 0.14)}`,
-                    background: "rgba(255,255,255,0.92)",
-                    backdropFilter: "blur(10px)",
-                    boxShadow: "0 22px 55px rgba(15, 127, 134, 0.10)",
-                }}
-            >
-
-                {/* HEADER (GRADIENT) */}
+        <Box sx={{ maxWidth: 1320, mx: "auto", px: { xs: 0, md: 1 }, pt: { xs: 1, md: 2 }, pb: 6 }}>
+            {/* ENCABEZADO */}
+            <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 } }}>
                 <Box
                     sx={{
-
-                        px: { xs: 2, md: 3 },
-                        py: { xs: 2, md: 2.5 },
-                        background:
-                            "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-                        color: "#fff",
                         display: "flex",
-                        alignItems: { xs: "flex-start", md: "center" },
+                        alignItems: { xs: "stretch", md: "center" },
                         justifyContent: "space-between",
                         gap: 2,
-                        flexWrap: "wrap",
+                        flexDirection: { xs: "column", md: "row" },
                     }}
                 >
-
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                         <Box
                             sx={{
-                                width: 44,
-                                height: 44,
-                                borderRadius: "14px",
-                                display: "grid",
-                                placeItems: "center",
-                                background: "rgba(255,255,255,0.18)",
-                                border: "1px solid rgba(255,255,255,0.35)",
+                                width: 46,
+                                height: 46,
+                                borderRadius: "50%",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                bgcolor: "rgba(13,58,73,0.08)",
                                 flexShrink: 0,
                             }}
                         >
-                            <EventAvailableRoundedIcon sx={{ color: "#fff" }} />
+                            <EventAvailableRoundedIcon sx={{ color: COLOR_ACCENT }} />
                         </Box>
-
                         <Box>
                             <Typography
-                                sx={{
-                                    fontWeight: 900,
-                                    fontSize: { xs: 18, md: 22 },
-                                    lineHeight: 1.1,
-                                    letterSpacing: 0.2,
-                                }}
+                                variant="h5"
+                                sx={{ fontWeight: 700, fontSize: 20, textTransform: "none", color: COLOR_TEXT, m: 0, pt: 0 }}
                             >
                                 Extracto
                             </Typography>
-                            <Typography
-                                sx={{
-                                    mt: 0.4,
-                                    fontWeight: 600,
-                                    opacity: 0.9,
-                                    fontSize: 14,
-                                }}
-                            >
-                                Elegí una fecha y consultá los movimientos del extracto.
+                            <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
+                                Elegí una fecha y consultá los movimientos del extracto
                             </Typography>
                         </Box>
                     </Box>
 
                     <Chip
-                        icon={<TableRowsRoundedIcon />}
+                        variant="outlined"
                         label={`Registros: ${Array.isArray(dats) ? dats.length : 0}`}
-                        sx={{
-                            color: "#fff",
-                            fontWeight: 900,
-                            borderRadius: 999,
-                            background: "rgba(255,255,255,0.18)",
-                            border: "1px solid rgba(255,255,255,0.35)",
-                            "& .MuiChip-icon": { color: "#fff" },
-                        }}
+                        sx={{ fontWeight: 600 }}
                     />
                 </Box>
             </Paper>
 
-            {/* CONTENIDO */}
-            <Box sx={{ p: { xs: 2, md: 3 } }}>
-                {/* PANEL DE FILTRO (CENTRADO Y “GRANDE”) */}
-                <Paper
-                    elevation={0}
+            {/* FILTRO */}
+            <Paper elevation={0} sx={{ ...sxCard, mt: 2.5, p: { xs: 2.5, md: 3 } }}>
+                <Box
                     sx={{
-                        borderRadius: 4,
-                        p: { xs: 2, md: 2.25 },
-                        border: `1px solid ${alpha("#0b4f6c", 0.14)}`,
-                        background:
-                            "linear-gradient(180deg, rgba(10,59,79,0.06) 0%, rgba(15,127,134,0.04) 50%, rgba(255,255,255,0.92) 100%)",
-                        boxShadow: "0 14px 35px rgba(15,127,134,0.10)",
+                        display: "flex",
+                        alignItems: { xs: "stretch", md: "flex-start" },
+                        gap: 2,
+                        flexDirection: { xs: "column", md: "row" },
                     }}
                 >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            alignItems: { xs: "stretch", md: "flex-start" },
-                            gap: 2,
-                            flexWrap: "wrap",
-                        }}
-                    >
-                        {/* IZQUIERDA: select + tip */}
-                        <Box sx={{ flex: 1, minWidth: { xs: "100%", md: 520 } }}>
-                            <TextField
-                                component="form"
-                                noValidate
-                                id="outlined-select-currency"
-                                select
-                                label="Elegir Fecha"
-                                name="id"
-                                onChange={handleChange}
-                                value={fecha?.id ?? ""} // ✅ queda marcada
-                                helperText={
-                                    fecha?.id != undefined && selectedFechaLabel
-                                        ? `Seleccionada: ${selectedFechaLabel}`
-                                        : "Seleccionar fecha"
-                                }
-                                fullWidth
-                                sx={{
-                                    "& .MuiOutlinedInput-root": {
-                                        borderRadius: 3,
-                                        backgroundColor: "rgba(255,255,255,0.85)",
-                                    },
-                                    "& .MuiInputLabel-root": { fontWeight: 800 },
-                                    "& .MuiFormHelperText-root": { fontWeight: 700, opacity: 0.85 },
-                                }}
-                            >
-                                {todos.map((option) => (
-                                    <MenuItem
-                                        key={option.id}
-                                        value={option.id}
-                                        sx={{
-                                            fontWeight: 700,
-                                            "&.Mui-selected": {
-                                                backgroundColor: alpha("#0f7f86", 0.14),
-                                            },
-                                            "&.Mui-selected:hover": {
-                                                backgroundColor: alpha("#0f7f86", 0.2),
-                                            },
-                                        }}
-                                    >
-                                        {option.fecha}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-
-                            <Typography
-                                sx={{
-                                    mt: 1,
-                                    fontSize: 13,
-                                    fontWeight: 700,
-                                    color: alpha("#0a3b4f", 0.75),
-                                }}
-                            >
-                                Elegí una fecha, luego tocá <b>“Ver extracto”</b>.
-                            </Typography>
-                        </Box>
-
-                        {/* DERECHA: botón al lado del select */}
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: { xs: "stretch", md: "flex-end" },
-                                justifyContent: { xs: "flex-start", md: "flex-end" },
-                                minWidth: { xs: "100%", md: 220 },
-                            }}
+                    <Box sx={{ flex: 1 }}>
+                        <TextField
+                            component="form"
+                            noValidate
+                            id="outlined-select-currency"
+                            select
+                            size="small"
+                            label="Elegir fecha"
+                            name="id"
+                            onChange={handleChange}
+                            value={fecha?.id ?? ""}
+                            helperText={
+                                fecha?.id != undefined && selectedFechaLabel
+                                    ? `Seleccionada: ${selectedFechaLabel}`
+                                    : "Elegí una fecha y luego tocá Ver extracto"
+                            }
+                            fullWidth
+                            sx={{ maxWidth: { md: 520 }, "& .MuiOutlinedInput-root": { borderRadius: 1.5 } }}
                         >
-                            {fecha.id != undefined ? (
-                                <Button
-                                    onClick={getClients}
-                                    startIcon={<VisibilityRoundedIcon />}
-                                    sx={{
-                                        width: { xs: "100%", md: "auto" },
-                                        textTransform: "none",
-                                        fontWeight: 900,
-                                        borderRadius: 999,
-                                        px: 3,
-                                        py: 1.2,
-                                        color: "#fff",
-                                        background:
-                                            "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-                                        boxShadow: "0 14px 35px rgba(15,127,134,0.28)",
-                                        "&:hover": {
-                                            transform: "translateY(-1px)",
-                                            boxShadow: "0 18px 40px rgba(15,127,134,0.34)",
-                                        },
-                                        transition: "0.25s ease",
-                                        whiteSpace: "nowrap",
-                                    }}
-                                >
-                                    Ver extracto
-                                </Button>
-                            ) : (
-                                <Button
-                                    disabled
-                                    sx={{
-                                        width: { xs: "100%", md: "auto" },
-                                        textTransform: "none",
-                                        fontWeight: 900,
-                                        borderRadius: 999,
-                                        px: 3,
-                                        py: 1.2,
-                                        whiteSpace: "nowrap",
-                                    }}
-                                >
-                                    Ver extracto
-                                </Button>
-                            )}
-                        </Box>
+                            {todos.map((option) => (
+                                <MenuItem key={option.id} value={option.id}>
+                                    {option.fecha}
+                                </MenuItem>
+                            ))}
+                        </TextField>
                     </Box>
-                </Paper>
-            </Box>
 
-
+                    <Button
+                        onClick={getClients}
+                        disabled={fecha.id == undefined}
+                        variant="contained"
+                        startIcon={<VisibilityRoundedIcon />}
+                        sx={{ ...sxBtnPrimary, whiteSpace: "nowrap", height: 40 }}
+                    >
+                        Ver extracto
+                    </Button>
+                </Box>
+            </Paper>
 
             {/* RESULTADO */}
-            {
-                activo ? (
-                    <>
-                        {loading ? (
-                            <Box sx={{ py: 2 }}>
-                                <CargaDeTabla />
-                            </Box>
-                        ) : (
-                            <Paper
-                                elevation={0}
-                                sx={{
-                                    borderRadius: 4,
-                                    overflow: "hidden",
-                                    border: `1px solid ${alpha("#0b4f6c", 0.14)}`,
-                                    background: "rgba(255,255,255,0.92)",
-                                    backdropFilter: "blur(10px)",
-                                    boxShadow: "0 22px 55px rgba(15, 127, 134, 0.10)",
-                                }}
-                            >
-                                <Box
-                                    sx={{
-                                        /* =========================
-                                           TEXTO GENERAL (BODY)
-                                        ========================== */
-                                        "& .MuiTableBody-root .MuiTableCell-root": {
-                                            borderBottom: `1px solid ${alpha("#01567c", 0.08)}`,
-                                            fontWeight: 650,
-                                            color: "#0b2b3a", // ✅ color letra filas
-                                        },
-
-                                        /* =========================
-                                           TEXTO HEADER
-                                        ========================== */
-                                        "& .MuiTableHead-root .MuiTableCell-root": {
-                                            borderBottom: "0px",
-                                            color: "#01567c", // ✅ texto blanco en header
-                                            fontWeight: 800,
-                                        },
-
-                                        /* =========================
-                                           TOOLBAR (buscar, icons)
-                                        ========================== */
-                                        "& .MuiToolbar-root": {
-                                            px: 2,
-                                            color: "#01567c",
-                                        },
-
-                                        "& .MuiToolbar-root .MuiInputBase-input": {
-                                            color: "#0b2b3a", // texto del buscador
-                                            fontWeight: 700,
-                                        },
-
-                                        /* =========================
-                                           ICONOS (DEFAULT)
-                                        ========================== */
-                                        "& .MuiIconButton-root, & svg": {
-                                            color: alpha("#01567c", 0.75),
-                                            transition: "all 0.2s ease",
-                                        },
-
-                                        /* =========================
-                                           ICONOS HOVER
-                                        ========================== */
-                                        "& .MuiIconButton-root:hover, & svg:hover": {
-                                            color: "#148D8D", // ✅ color hover íconos
-                                            transform: "translateY(-1px)",
-                                        },
-
-                                        /* =========================
-                                           HOVER FILAS
-                                        ========================== */
-
-
-                                        /* =========================
-                                           PAGINACIÓN
-                                        ========================== */
-                                        "& .MuiTablePagination-root, & .MuiTablePagination-root *": {
-                                            color: "#01567c",
-                                            fontWeight: 700,
-                                        },
-                                    }}>
-                                   {/*  <MUIDataTable
-
-                                        data={dats}
-                                        columns={columns}
-                                        actions={[
-                                            {
-                                                icon: "save",
-                                                tooltip: "Save User",
-                                                onClick: (event, rowData) => alert("You saved " + rowData.name),
-                                            },
-                                        ]}
-                                        options={options}
-                                    /> */}
-                                </Box>
-                            </Paper>
-                        )}
-                    </>
-                ) : (
-                    // Estado vacío “lindo” (solo UI)
-                    <Box
-                        sx={{
-                            borderRadius: 4,
-                            p: { xs: 2, md: 3 },
-                            border: `1px dashed ${alpha("#0b4f6c", 0.22)}`,
-                            background: alpha("#0f7f86", 0.04),
-                            textAlign: "center",
-                        }}
-                    >
-                        <Typography sx={{ fontWeight: 900, color: alpha("#0a3b4f", 0.9) }}>
-                            Elegí una fecha para ver el extracto
-                        </Typography>
-                        <Typography sx={{ mt: 0.5, fontWeight: 650, color: alpha("#0a3b4f", 0.7) }}>
-                            Cuando selecciones una fecha, habilitamos el botón “Ver extracto”.
-                        </Typography>
+            {activo ? (
+                loading ? (
+                    <Box sx={{ py: 2 }}>
+                        <CargaDeTabla />
                     </Box>
+                ) : (
+                    <Paper elevation={0} sx={{ ...sxCard, mt: 2.5, overflow: "hidden", width: 0, minWidth: "100%" }}>
+                        <TableContainer sx={{ maxHeight: "68vh" }}>
+                            <Table stickyHeader size="small">
+                                <TableHead>
+                                    <TableRow>
+                                        {["FECHA", "CUIL/CUIT", "NOMBRE", "REFERENCIA", "CRÉDITOS"].map((h) => (
+                                            <TableCell key={h} sx={sxTh}>{h}</TableCell>
+                                        ))}
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {Array.isArray(dats) && dats.map((r, i) => (
+                                        <TableRow key={i} hover sx={{ "&:last-child td": { borderBottom: 0 } }}>
+                                            <TableCell sx={{ ...sxTd, whiteSpace: "nowrap" }}>{r.fecha}</TableCell>
+                                            <TableCell sx={{ ...sxTd, whiteSpace: "nowrap" }}>{r.descripcion}</TableCell>
+                                            <TableCell sx={{ ...sxTd, fontWeight: 600 }}>{r.nombre}</TableCell>
+                                            <TableCell sx={sxTd}>{r.referencia}</TableCell>
+                                            <TableCell sx={{ ...sxTd, whiteSpace: "nowrap" }}>{r.creditos}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                    {(!Array.isArray(dats) || dats.length === 0) && (
+                                        <TableRow>
+                                            <TableCell colSpan={5} sx={{ ...sxTd, textAlign: "center", color: COLOR_MUTED, py: 4 }}>
+                                                No hay movimientos para la fecha elegida.
+                                            </TableCell>
+                                        </TableRow>
+                                    )}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Paper>
                 )
-            }
-
-        </Box >
-
-
+            ) : (
+                <Box
+                    sx={{
+                        mt: 2.5,
+                        borderRadius: 2.5,
+                        p: { xs: 2.5, md: 3.5 },
+                        border: `1px dashed #b7c2c9`,
+                        backgroundColor: "#f9fafb",
+                        textAlign: "center",
+                    }}
+                >
+                    <Typography sx={{ fontWeight: 600, color: COLOR_TEXT }}>
+                        Elegí una fecha para ver el extracto
+                    </Typography>
+                    <Typography sx={{ mt: 0.5, fontSize: 13.5, color: COLOR_MUTED }}>
+                        Cuando selecciones una fecha, se habilita el botón Ver extracto.
+                    </Typography>
+                </Box>
+            )}
+        </Box>
     );
 };
 

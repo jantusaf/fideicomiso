@@ -13,8 +13,22 @@ import {
   Typography,
   Box,
   Divider,
-  Grid
+  Grid,
+  Chip
 } from '@mui/material';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, COLOR_OK, sxCard, sxBtnPrimary } from '../detalleclienteIngresos/estilos';
+
+const Campo = ({ label, children, ayuda }) => (
+  <Box>
+    <InputLabel sx={{ mb: 0.5, fontSize: 13, fontWeight: 600, color: COLOR_TEXT }}>{label}</InputLabel>
+    {children}
+    {ayuda && (
+      <Typography sx={{ fontSize: 12, mt: 0.5, color: COLOR_MUTED }}>{ayuda}</Typography>
+    )}
+  </Box>
+);
+
 
 export default function ClienteNuevo({ getClients }) {
   let { cuil_cuit } = useParams();
@@ -51,278 +65,193 @@ export default function ClienteNuevo({ getClients }) {
     setLoading(false);
   };
 
-  // ✅ solo estilos (frontend)
-  const sxInput = {
-    "& .MuiOutlinedInput-root": {
-      borderRadius: 2,
-      backgroundColor: "#fbfdff",
-    },
-    "& .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#cfd8e3",
-    },
-    "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
-      borderColor: "rgba(1,86,124,0.55)",
-    },
-    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#01567c",
-      boxShadow: "0 0 0 3px rgba(1,86,124,0.12)",
-    },
-    "& .MuiInputLabel-root": {
-      fontWeight: 800,
-      color: "#2b3a42",
-    },
-  };
+  // Solo estilos (frontend): mismo sistema visual que el resto de Nivel 2
+  const sxInput = { "& .MuiOutlinedInput-root": { borderRadius: 1.5 } };
 
   return (
-    <Box
-      sx={{
-        py: 3,
-        px: { xs: 1.5, sm: 2 },
-        background:
-          "radial-gradient(1000px 450px at 10% 0%, rgba(1,86,124,0.14), transparent 55%), radial-gradient(900px 420px at 90% 10%, rgba(20,141,141,0.10), transparent 45%), #f4f8fb",
-      }}
-    >
-      <Paper
-        elevation={0}
-        sx={{
-          maxWidth: 980,
-          mx: 'auto',
-          borderRadius: 4,
-          overflow: "hidden",
-          border: "1px solid rgba(1,86,124,0.12)",
-          backgroundColor: "#ffffff",
-          boxShadow: "0 18px 45px rgba(10,59,79,0.10)",
-        }}
-      >
-        {/* HEADER (tipo banner, estilo tu modelo) */}
-        <Box
-          sx={{
-            px: { xs: 2.2, md: 3 },
-            py: { xs: 2, md: 2.4 },
-            color: "#fff",
-            background: "linear-gradient(135deg, #0b2a3a 0%, #01567c 60%, #148D8D 100%)",
-          }}
-        >
-          <Typography sx={{ fontWeight: 900, letterSpacing: 0.4, lineHeight: 1.1, fontSize: 20 }}>
-            Solicitud de Alta de Cliente
-          </Typography>
-
-          <Typography sx={{ opacity: 0.9, mt: 0.7, fontSize: 13.5 }}>
-            Complete la siguiente información para registrar un nuevo cliente en el sistema.
-          </Typography>
-        </Box>
-
-        {/* BODY */}
-        <Box sx={{ backgroundColor: "#f4f8fb", p: { xs: 2, md: 2.4 } }}>
-          <Paper
-            elevation={0}
+    <Box sx={{ maxWidth: 980, mx: "auto", px: { xs: 0, md: 1 }, pt: { xs: 1, md: 2 }, pb: 6 }}>
+      {/* ENCABEZADO */}
+      <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 } }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <Box
             sx={{
-              backgroundColor: "#ffffff",
-              borderRadius: 3,
-              border: "1px solid #e8eef5",
-              p: { xs: 2, md: 2.4 },
+              width: 46,
+              height: 46,
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              bgcolor: "rgba(13,58,73,0.08)",
+              flexShrink: 0,
             }}
           >
-            <form onSubmit={handleSubmit}>
-              {/* DATOS */}
-              <Box sx={{ mb: 1.8 }}>
-                <Typography sx={{ fontWeight: 900, color: "#0a3b4f", mb: 0.6 }}>
-                  Datos del Cliente
-                </Typography>
-                <Divider sx={{ borderColor: "rgba(1,86,124,0.10)" }} />
-              </Box>
+            <PersonAddAlt1Icon sx={{ color: COLOR_ACCENT }} />
+          </Box>
+          <Box>
+            <Typography
+              variant="h5"
+              sx={{ fontWeight: 700, fontSize: 20, textTransform: "none", color: COLOR_TEXT, m: 0, pt: 0 }}
+            >
+              Alta de cliente
+            </Typography>
+            <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
+              Complete la siguiente información para registrar un nuevo cliente en el sistema
+            </Typography>
+          </Box>
+        </Box>
+      </Paper>
 
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                   
-                  <TextField
-                    label="Nombre / Razón Social"
-                    name="Nombre"
-                    value={form.Nombre || ''}
-                    onChange={handleChange}
-                    fullWidth
-                    required
-                    margin="dense"
-                    sx={sxInput}
-                  />
-                </Grid>
-                  <Grid item xs={12} md={6}>
-                  <TextField
-                    label="CUIL / CUIT"
-                    name="cuil_cuit"
-                    value={form.cuil_cuit || ''}
-                    onChange={handleChange}
-                    fullWidth
-                    required
-                    margin="dense"
-                    sx={sxInput}
-                  />
-                </Grid>
+      {/* FORMULARIO */}
+      <Paper elevation={0} sx={{ ...sxCard, mt: 2.5, p: { xs: 2.5, md: 3 } }}>
+        <form onSubmit={handleSubmit}>
+          <Typography sx={{ fontWeight: 700, color: COLOR_TEXT, fontSize: 15 }}>Datos del cliente</Typography>
+          <Divider sx={{ mt: 1, mb: 2.5, borderColor: COLOR_BORDER }} />
 
-                <Grid item xs={12} md={6}>
-                  <InputLabel
-                    sx={{ mb: 0.5, fontWeight: 900, color: "#2b3a42" }}
-                  >
-                    Tipo de Cliente
-                  </InputLabel>
-
-                  <Box
-                    sx={{
-                      border: "1px solid #cfd8e3",
-                      borderRadius: 2,
-                      backgroundColor: "#fbfdff",
-                      px: 1.2,
-                      py: 1.3,
-                      "&:focus-within": {
-                        borderColor: "#01567c",
-                        boxShadow: "0 0 0 3px rgba(1,86,124,0.12)",
-                      },
-                    }}
-                  >
-                    <NativeSelect
-                      name="razon"
-                      value={form.razon || ''}
-                      onChange={handleChange}
-                      fullWidth
-                      disableUnderline
-                      sx={{
-                        width: "100%",
-                        fontSize: 16,
-                        color: "#1f2a33",
-                      }}
-                    >
-                      <option value="">Seleccionar</option>
-                      <option value="Empresa">Empresa</option>
-                      <option value="Persona">Persona</option>
-                    </NativeSelect>
-                  </Box>
-
-                  <Typography sx={{ fontSize: 12, mt: 0.6, color: "rgba(31,42,51,0.65)", fontWeight: 600 }}>
-                    Elija si corresponde a empresa o persona
-                  </Typography>
-                </Grid>
-
-              
-
-                <Grid item xs={12} md={6}>
-                   <InputLabel
-                    sx={{ fontWeight: 900, color: "#2b3a42" }}
-                  >Telefono
-                  </InputLabel>
-                  <TextField
-                    label="Teléfono"
-                    name="telefono"
-                    value={form.telefono || ''}
-                    onChange={handleChange}
-                    fullWidth
-                    required
-                    margin="dense"
-                    sx={sxInput}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    label="Domicilio"
-                    name="domicilio"
-                    value={form.domicilio || ''}
-                    onChange={handleChange}
-                    fullWidth
-                    required
-                    margin="dense"
-                    sx={sxInput}
-                  />
-                </Grid>
-              </Grid>
-
-              {/* OBSERVACIONES */}
-              <Box sx={{ mt: 2.2 }}>
-                <Typography sx={{ fontWeight: 900, color: "#0a3b4f", mb: 0.6 }}>
-                  Observaciones
-                </Typography>
-                <Divider sx={{ mb: 1.3, borderColor: "rgba(1,86,124,0.10)" }} />
-
+          <Grid container spacing={2.5}>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Campo label="Nombre / Razón social">
                 <TextField
-                  name="observaciones"
-                  value={form.observaciones || ''}
+                  name="Nombre"
+                  value={form.Nombre || ''}
                   onChange={handleChange}
                   fullWidth
-                  multiline
-                  rows={4}
-                  placeholder="Ingrese cualquier observación relevante"
-                  margin="dense"
+                  required
+                  size="small"
                   sx={sxInput}
                 />
-              </Box>
+              </Campo>
+            </Grid>
 
-              {/* FOOTER ACCIÓN */}
-              <Box
-                sx={{
-                  mt: 2.4,
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  gap: 1,
-                  flexWrap: "wrap",
-                }}
-              >
-                {/* estado visual (solo UI) */}
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Campo label="CUIL / CUIT">
+                <TextField
+                  name="cuil_cuit"
+                  value={form.cuil_cuit || ''}
+                  onChange={handleChange}
+                  fullWidth
+                  required
+                  size="small"
+                  sx={sxInput}
+                />
+              </Campo>
+            </Grid>
+
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Campo label="Tipo de cliente" ayuda="Elija si corresponde a empresa o persona">
                 <Box
                   sx={{
-                    px: 1.2,
-                    py: 0.75,
-                    borderRadius: 2,
-                    backgroundColor: formCompleto ? "rgba(20,141,141,0.10)" : "rgba(211,47,47,0.08)",
-                    border: formCompleto ? "1px solid rgba(20,141,141,0.22)" : "1px solid rgba(211,47,47,0.18)",
+                    border: "1px solid #c9d2d8",
+                    borderRadius: 1.5,
+                    px: 1.5,
+                    height: 40,
+                    display: "flex",
+                    alignItems: "center",
+                    "&:hover": { borderColor: COLOR_ACCENT },
+                    "&:focus-within": { borderColor: COLOR_ACCENT, boxShadow: `0 0 0 1px ${COLOR_ACCENT}` },
                   }}
                 >
-                  <Typography
-                    sx={{
-                      fontSize: 13,
-                      fontWeight: 800,
-                      color: formCompleto ? "#0f7a7a" : "#b71c1c",
-                    }}
+                  <NativeSelect
+                    name="razon"
+                    value={form.razon || ''}
+                    onChange={handleChange}
+                    fullWidth
+                    disableUnderline
+                    sx={{ fontSize: 15, color: COLOR_TEXT }}
                   >
-                    {formCompleto ? "Formulario completo" : "Complete todos los campos"}
-                  </Typography>
+                    <option value="">Seleccionar</option>
+                    <option value="Empresa">Empresa</option>
+                    <option value="Persona">Persona</option>
+                  </NativeSelect>
                 </Box>
+              </Campo>
+            </Grid>
 
-                <Button
-                  type="submit"
-                  variant="contained"
-                  disabled={!formCompleto || loading}
-                  sx={{
-                    minWidth: 220,
-                    px: 2.2,
-                    py: 1.05,
-                    borderRadius: 2,
-                    textTransform: "none",
-                    fontWeight: 900,
-                    backgroundColor: formCompleto ? "#01567c" : "rgba(1,86,124,0.30)",
-                    boxShadow: formCompleto ? "0 10px 25px rgba(1,86,124,0.25)" : "none",
-                    "&:hover": {
-                      backgroundColor: formCompleto ? "#014a6b" : "rgba(1,86,124,0.30)",
-                    },
-                  }}
-                >
-                  Registrar Cliente
-                </Button>
-              </Box>
-            </form>
-          </Paper>
-        </Box>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <Campo label="Teléfono">
+                <TextField
+                  name="telefono"
+                  value={form.telefono || ''}
+                  onChange={handleChange}
+                  fullWidth
+                  required
+                  size="small"
+                  sx={sxInput}
+                />
+              </Campo>
+            </Grid>
 
-        {/* LOADING */}
-        <Backdrop sx={{ color: '#fff', zIndex: 9999 }} open={loading}>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <CircularProgress color="inherit" />
-            <Box>
-              <Typography sx={{ fontWeight: 900 }}>Guardando información...</Typography>
-              <Typography sx={{ opacity: 0.9, fontSize: 13 }}>Por favor espere</Typography>
-            </Box>
+            <Grid size={12}>
+              <Campo label="Domicilio">
+                <TextField
+                  name="domicilio"
+                  value={form.domicilio || ''}
+                  onChange={handleChange}
+                  fullWidth
+                  required
+                  size="small"
+                  sx={sxInput}
+                />
+              </Campo>
+            </Grid>
+          </Grid>
+
+          <Typography sx={{ fontWeight: 700, color: COLOR_TEXT, fontSize: 15, mt: 3.5 }}>Observaciones</Typography>
+          <Divider sx={{ mt: 1, mb: 2, borderColor: COLOR_BORDER }} />
+
+          <TextField
+            name="observaciones"
+            value={form.observaciones || ''}
+            onChange={handleChange}
+            fullWidth
+            multiline
+            rows={4}
+            placeholder="Ingrese cualquier observación relevante"
+            sx={sxInput}
+          />
+
+          {/* ACCIÓN */}
+          <Box
+            sx={{
+              mt: 3,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: 1.5,
+              flexWrap: "wrap",
+            }}
+          >
+            <Chip
+              variant="outlined"
+              label={formCompleto ? "Formulario completo" : "Complete todos los campos"}
+              sx={{
+                fontWeight: 600,
+                color: formCompleto ? COLOR_OK : COLOR_MUTED,
+                borderColor: formCompleto ? COLOR_OK : COLOR_BORDER,
+              }}
+            />
+
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={!formCompleto || loading}
+              sx={{ ...sxBtnPrimary, minWidth: 200, py: 1 }}
+            >
+              Registrar cliente
+            </Button>
           </Box>
-        </Backdrop>
+        </form>
       </Paper>
+
+      {/* LOADING */}
+      <Backdrop sx={{ color: '#fff', zIndex: 9999 }} open={loading}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <CircularProgress color="inherit" />
+          <Box>
+            <Typography sx={{ fontWeight: 700 }}>Guardando información...</Typography>
+            <Typography sx={{ opacity: 0.9, fontSize: 13 }}>Por favor espere</Typography>
+          </Box>
+        </Box>
+      </Backdrop>
     </Box>
   );
 }

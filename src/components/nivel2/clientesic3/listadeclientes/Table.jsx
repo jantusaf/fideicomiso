@@ -3,19 +3,11 @@ import servicioClientes from "../../../../services/clientes";
 import Nuevo from "./ClienteNuevo";
 import CargaDeTabla from "../../../CargaDeTabla";
 import { useNavigate } from "react-router-dom";
-
 import SearchIcon from "@mui/icons-material/Search";
-import Stack from "@mui/material/Stack";
-import MuiAlert from "@mui/material/Alert";
 import Tooltip from "@mui/material/Tooltip";
-import Box from "@mui/material/Box";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import InputAdornment from "@mui/material/InputAdornment";
-import Button from "@mui/material/Button";
-import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
-import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
-
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
 import {
   Table,
   TableBody,
@@ -28,11 +20,22 @@ import {
   TextField,
   Chip,
   Divider,
+  InputAdornment,
 } from "@mui/material";
-
-import { alpha } from "@mui/material/styles";
-
-const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
+import Button from "@mui/material/Button";
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  COLOR_OK,
+  COLOR_ERROR,
+  sxCard,
+  sxBtnPrimary,
+  sxBtnOutlined,
+} from "../../detalleclienteIngresos/estilos";
 
 const Lotes = () => {
   const [clients, setClients] = useState([]);
@@ -40,8 +43,8 @@ const Lotes = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [orderCuota, setOrderCuota] = useState("asc"); // asc | desc
   const [search, setSearch] = useState("");
+  const [orderCuota, setOrderCuota] = useState("asc"); // asc | desc
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,13 +61,11 @@ const Lotes = () => {
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setSearch(value);
-
     const filtered = clients.filter(
       (c) =>
         c.cuil_cuit?.toLowerCase().includes(value) ||
         c.Nombre?.toLowerCase().includes(value)
     );
-
     setFilteredClients(filtered);
     setPage(0);
   };
@@ -83,28 +84,29 @@ const Lotes = () => {
 
   if (loading) return <CargaDeTabla />;
 
+  // Encabezado de tabla: claro y discreto (sin fondos de color)
+  const sxTh = {
+    backgroundColor: "#f6f8f9",
+    color: COLOR_TEXT,
+    fontWeight: 700,
+    fontSize: 11.5,
+    letterSpacing: 0.4,
+    borderBottom: `1px solid ${COLOR_BORDER}`,
+    whiteSpace: "nowrap",
+    py: 1.25,
+  };
+
+  const sxTd = {
+    fontSize: 13.5,
+    color: COLOR_TEXT,
+    borderBottom: "1px solid #eef1f3",
+    py: 1.1,
+  };
+
   return (
-    <Box
-      sx={{
-        p: { xs: 2, md: 3 },
-        minHeight: "100vh",
-        background:
-          "linear-gradient(180deg, rgba(10,59,79,0.06) 0%, rgba(15,127,134,0.04) 45%, rgba(255,255,255,0.92) 100%)",
-      }}
-    >
-      {/* HEADER (como la 1er imagen) */}
-      <Paper
-        elevation={0}
-        sx={{
-          borderRadius: 3,
-          p: { xs: 2, md: 2.25 },
-          background:
-            "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-          boxShadow: "0 14px 35px rgba(15,127,134,0.25)",
-          color: "#fff",
-          border: `1px solid ${alpha("#ffffff", 0.12)}`,
-        }}
-      >
+    <Box sx={{ maxWidth: 1320, mx: "auto", px: { xs: 0, md: 1 }, pt: { xs: 1, md: 2 }, pb: 6 }}>
+      {/* ENCABEZADO */}
+      <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 } }}>
         <Box
           sx={{
             display: "flex",
@@ -114,26 +116,30 @@ const Lotes = () => {
             flexDirection: { xs: "column", md: "row" },
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1.25 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <Box
               sx={{
-                width: 40,
-                height: 40,
-                borderRadius: 2,
-                background: "rgba(255,255,255,0.14)",
-                border: "1px solid rgba(255,255,255,0.22)",
-                display: "grid",
-                placeItems: "center",
+                width: 46,
+                height: 46,
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                bgcolor: "rgba(13,58,73,0.08)",
+                flexShrink: 0,
               }}
             >
-              <PeopleRoundedIcon sx={{ color: "#fff" }} />
+              <PeopleRoundedIcon sx={{ color: COLOR_ACCENT }} />
             </Box>
 
             <Box>
-              <Typography sx={{ fontWeight: 900, letterSpacing: 0.3 }}>
+              <Typography
+                variant="h5"
+                sx={{ fontWeight: 700, fontSize: 20, textTransform: "none", color: COLOR_TEXT, m: 0, pt: 0 }}
+              >
                 Clientes (IC3)
               </Typography>
-              <Typography sx={{ opacity: 0.9, fontSize: 13 }}>
+              <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
                 Listado y acceso rápido a detalle / edición
               </Typography>
             </Box>
@@ -148,31 +154,13 @@ const Lotes = () => {
               flexWrap: "wrap",
             }}
           >
-            <Chip
-              label={`Cantidad: ${clients.length}`}
-              sx={{
-                color: "#fff",
-                fontWeight: 900,
-                background: "rgba(255,255,255,0.16)",
-                border: "1px solid rgba(255,255,255,0.22)",
-                px: 0.75,
-              }}
-            />
+            <Chip variant="outlined" label={`Cantidad: ${clients.length}`} sx={{ fontWeight: 600 }} />
 
             <Button
               variant="contained"
               startIcon={<PersonAddAlt1Icon />}
               onClick={() => navigate("/usuario2/nuevocliente/")}
-              sx={{
-                  borderRadius: 2,
-                      textTransform: "none",
-                      fontWeight: 900,
-                      px: 2,
-                      backgroundColor: "rgba(255,255,255,0.16)",
-                      color: "#fff",
-                      border: "1px solid rgba(255,255,255,0.25)",
-                      "&:hover": { backgroundColor: "rgba(255,255,255,0.24)" },
-              }}
+              sx={sxBtnPrimary}
             >
               Agregar cliente
             </Button>
@@ -180,20 +168,13 @@ const Lotes = () => {
         </Box>
       </Paper>
 
-      {/* BARRA DE FILTRO (prolija como card) */}
-      <Paper
-        elevation={0}
-        sx={{
-          mt: 2,
-          borderRadius: 3,
-          p: { xs: 2, md: 2.25 },
-          border: `1px solid ${alpha("#0b4f6c", 0.12)}`,
-          background: "#fff",
-          boxShadow: "0 10px 30px rgba(2,85,123,0.08)",
-        }}
-      >
+      {/* LISTADO */}
+      <Paper elevation={0} sx={{ ...sxCard, mt: 2.5, overflow: "hidden" }}>
+        {/* Barra de herramientas: búsqueda + orden */}
         <Box
           sx={{
+            px: { xs: 2, md: 3 },
+            py: 2,
             display: "flex",
             alignItems: { xs: "stretch", md: "center" },
             justifyContent: "space-between",
@@ -201,123 +182,53 @@ const Lotes = () => {
             flexDirection: { xs: "column", md: "row" },
           }}
         >
-          <Box>
-            <Typography sx={{ fontWeight: 900, color: "#063a52" }}>
-              Búsqueda
-            </Typography>
-            <Typography sx={{ fontSize: 13, color: "rgba(0,0,0,0.6)" }}>
-              Filtrá por CUIL/CUIT o nombre
-            </Typography>
-          </Box>
-
           <TextField
-            label="Buscar por CUIL, nombre o razón"
+            placeholder="Buscar por CUIL/CUIT o nombre"
             variant="outlined"
             size="small"
             value={search}
             onChange={handleSearch}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: "#148D8D" }} />
-                </InputAdornment>
-              ),
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon sx={{ color: COLOR_MUTED, fontSize: 20 }} />
+                  </InputAdornment>
+                ),
+              },
             }}
             sx={{
               width: { xs: "100%", md: 420 },
-              backgroundColor: "#ffffff",
-              borderRadius: "14px",
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "14px",
-                "& fieldset": { borderColor: "#e6e6e6" },
-                "&:hover fieldset": { borderColor: "#148D8D" },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#01567c",
-                  borderWidth: "2px",
-                },
-              },
-              "& .MuiInputLabel-root": { color: "#666" },
-              "& .MuiInputLabel-root.Mui-focused": { color: "#01567c" },
+              "& .MuiOutlinedInput-root": { borderRadius: 1.5 },
             }}
           />
-        </Box>
-      </Paper>
-
-      {/* TABLA (card grande) */}
-      <Paper
-        elevation={0}
-        sx={{
-          mt: 2,
-          borderRadius: 3,
-          overflow: "hidden",
-          border: `1px solid ${alpha("#0b4f6c", 0.12)}`,
-          background: "#fff",
-          boxShadow: "0 14px 35px rgba(15,127,134,0.10)",
-        }}
-      >
-        <Box
-          sx={{
-            px: { xs: 2, md: 2.25 },
-            py: 1.6,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 2,
-            background:
-              "linear-gradient(180deg, rgba(10,59,79,0.06) 0%, rgba(255,255,255,1) 100%)",
-          }}
-        >
-          <Typography sx={{ fontWeight: 900, color: "#063a52" }}>
-            Listado
-          </Typography>
 
           <Button
+            variant="outlined"
             onClick={() => {
               const sorted = [...filteredClients].sort((a, b) => {
                 const aVal = parseCuota(a.ultimaCuota);
                 const bVal = parseCuota(b.ultimaCuota);
                 return orderCuota === "asc" ? aVal - bVal : bVal - aVal;
               });
-
               setFilteredClients(sorted);
               setOrderCuota(orderCuota === "asc" ? "desc" : "asc");
             }}
-            sx={{
-              color: "#01567c",
-              fontWeight: 900,
-              textTransform: "none",
-              borderRadius: 2,
-              px: 1.5,
-              background: alpha("#01567c", 0.06),
-              border: `1px solid ${alpha("#01567c", 0.14)}`,
-              "&:hover": {
-                background: alpha("#01567c", 0.10),
-              },
-            }}
+            sx={sxBtnOutlined}
           >
-            Ordenar por última cuota {orderCuota === "asc" ? "⬆" : "⬇"}
+            Ordenar por última cuota {orderCuota === "asc" ? "↑" : "↓"}
           </Button>
         </Box>
 
-        <Divider />
+        <Divider sx={{ borderColor: COLOR_BORDER }} />
 
-        <TableContainer sx={{ maxHeight: "66vh" }}>
-          <Table stickyHeader>
+        <TableContainer sx={{ maxHeight: "68vh" }}>
+          <Table stickyHeader size="small">
             <TableHead>
               <TableRow>
                 {["CUIL / CUIT", "NOMBRE", "RIESGO", "ULTIMA CUOTA", "OPCIONES"].map(
                   (h) => (
-                    <TableCell
-                      key={h}
-                      sx={{
-                        fontWeight: 900,
-                        color: "#fff",
-                        backgroundColor: "#0799b6",
-                        borderBottom: "none",
-                        py: 1.4,
-                        letterSpacing: 0.2,
-                      }}
-                    >
+                    <TableCell key={h} sx={{ ...sxTh, ...(h === "OPCIONES" ? { textAlign: "right" } : {}) }}>
                       {h}
                     </TableCell>
                   )
@@ -331,118 +242,75 @@ const Lotes = () => {
                 .map((client, index) => {
                   const value = client.riesgo || 0;
 
-                  let emoji = "⚪";
-                  let barColor = "#bdbdbd";
-                  let chipLabel = "Sin datos";
+                  // Mismos rangos de siempre; solo cambia cómo se dibuja (punto de color)
+                  let colorRiesgo = "#9aa7b0";
+                  if (value > 0 && value <= 58) colorRiesgo = COLOR_OK;
+                  else if (value > 59 && value <= 70) colorRiesgo = "#ed6c02";
+                  else if (value > 70) colorRiesgo = COLOR_ERROR;
 
-                  if (value > 0 && value <= 58) {
-                    emoji = "🟢";
-                    barColor = "#1b8f3a";
-                    chipLabel = "Bajo";
-                  } else if (value > 59 && value <= 70) {
-                    emoji = "🟡";
-                    barColor = "#c9a600";
-                    chipLabel = "Medio";
-                  } else if (value > 70) {
-                    emoji = "🔴";
-                    barColor = "#c62828";
-                    chipLabel = "Alto";
-                  }
+                  const irAlDetalle = () => navigate(`/usuario2/detalleclic3/${client.cuil_cuit}`);
 
                   return (
                     <TableRow
                       key={index}
                       hover
                       sx={{
-                        cursor: "default",
-                        "&:nth-of-type(odd)": {
-                          backgroundColor: alpha("#0f7f86", 0.03),
-                        },
-                        "&:hover": {
-                          backgroundColor: alpha("#0799b6", 0.07),
-                        },
+                        "&:hover td": { backgroundColor: "rgba(13, 58, 73, 0.03)" },
+                        "&:last-child td": { borderBottom: 0 },
                       }}
                     >
                       <TableCell
-                        sx={{ cursor: "pointer", fontWeight: 700, color: "#063a52" }}
-                        onClick={() =>
-                          navigate(`/usuario2/detalleclic3/${client.cuil_cuit}`)
-                        }
+                        sx={{ ...sxTd, cursor: "pointer", fontWeight: 600, whiteSpace: "nowrap" }}
+                        onClick={irAlDetalle}
                       >
                         {client.cuil_cuit}
                       </TableCell>
 
-                      <TableCell
-                        sx={{ cursor: "pointer", fontWeight: 700 }}
-                        onClick={() =>
-                          navigate(`/usuario2/detalleclic3/${client.cuil_cuit}`)
-                        }
-                      >
+                      <TableCell sx={{ ...sxTd, cursor: "pointer", fontWeight: 600 }} onClick={irAlDetalle}>
                         {client.Nombre}
                       </TableCell>
 
-                      <TableCell>
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                          <Box sx={{ minWidth: 26, textAlign: "center" }}>
-                            <span>{emoji}</span>
-                          </Box>
+                      <TableCell sx={{ ...sxTd, minWidth: 190 }}>
+                        <Box sx={{ display: "flex", alignItems: "center", gap: 1.25 }}>
+                          <Box
+                            sx={{ width: 9, height: 9, borderRadius: "50%", bgcolor: colorRiesgo, flexShrink: 0 }}
+                          />
 
-                          <Box sx={{ flex: 1, minWidth: 120 }}>
-                            <LinearProgress
-                              variant="determinate"
-                              value={value}
-                              sx={{
-                                height: 10,
-                                borderRadius: 999,
-                                backgroundColor: alpha(barColor, 0.15),
-                                "& .MuiLinearProgress-bar": {
-                                  borderRadius: 999,
-                                  backgroundColor: barColor,
-                                },
-                              }}
-                            />
-                          </Box>
-
-                          <Chip
-                            size="small"
-                            label={`${chipLabel} • ${value}%`}
+                          <LinearProgress
+                            variant="determinate"
+                            value={Math.min(value, 100)}
                             sx={{
-                              fontWeight: 900,
-                              borderRadius: 999,
-                              background: alpha(barColor, 0.10),
-                              border: `1px solid ${alpha(barColor, 0.22)}`,
-                              color: "#063a52",
+                              flex: 1,
+                              height: 5,
+                              borderRadius: 99,
+                              backgroundColor: "#eef1f3",
+                              "& .MuiLinearProgress-bar": {
+                                borderRadius: 99,
+                                backgroundColor: colorRiesgo,
+                              },
                             }}
                           />
+
+                          <Typography
+                            variant="body2"
+                            sx={{ minWidth: 40, textAlign: "right", fontWeight: 600, color: COLOR_TEXT }}
+                          >
+                            {value ? `${value}%` : "0%"}
+                          </Typography>
                         </Box>
                       </TableCell>
-{/* 
-                      <TableCell sx={{ color: "rgba(0,0,0,0.75)" }}>
-                        {client.razon}
-                      </TableCell> */}
 
-                      <TableCell sx={{ fontWeight: 800, color: "#01567c" }}>
+                      <TableCell sx={{ ...sxTd, fontWeight: 600, whiteSpace: "nowrap" }}>
                         {client.ultimaCuota}
                       </TableCell>
 
-                      <TableCell>
+                      <TableCell sx={{ ...sxTd, whiteSpace: "nowrap", textAlign: "right" }}>
                         <Tooltip title="Editar cliente">
                           <Button
-                            variant="contained"
+                            variant="outlined"
                             size="small"
-                            onClick={() =>
-                              navigate(`/usuario2/modificarcliente/${client.cuil_cuit}`)
-                            }
-                            sx={{
-                              mr: 1,
-                              px: 1.6,
-                              borderRadius: 2,
-                              textTransform: "none",
-                              fontWeight: 900,
-                              backgroundColor: "#01567c",
-                              boxShadow: "0 10px 20px rgba(1,86,124,0.18)",
-                              "&:hover": { backgroundColor: "#01445f" },
-                            }}
+                            onClick={() => navigate(`/usuario2/modificarcliente/${client.cuil_cuit}`)}
+                            sx={{ ...sxBtnOutlined, mr: 1, px: 1.75 }}
                           >
                             Editar
                           </Button>
@@ -452,18 +320,8 @@ const Lotes = () => {
                           <Button
                             variant="contained"
                             size="small"
-                            onClick={() =>
-                              navigate(`/usuario2/detalleclic3/${client.cuil_cuit}`)
-                            }
-                            sx={{
-                              px: 1.6,
-                              borderRadius: 2,
-                              textTransform: "none",
-                              fontWeight: 900,
-                              backgroundColor: "#148D8D",
-                              boxShadow: "0 10px 20px rgba(20,141,141,0.18)",
-                              "&:hover": { backgroundColor: "#0f6f6f" },
-                            }}
+                            onClick={() => navigate(`/usuario2/detalleclic3/${client.cuil_cuit}`)}
+                            sx={{ ...sxBtnPrimary, px: 1.75 }}
                           >
                             Ver
                           </Button>
@@ -472,9 +330,19 @@ const Lotes = () => {
                     </TableRow>
                   );
                 })}
+
+              {filteredClients.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={5} sx={{ ...sxTd, textAlign: "center", color: COLOR_MUTED, py: 4 }}>
+                    No se encontraron clientes con ese criterio.
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </TableContainer>
+
+        <Divider sx={{ borderColor: COLOR_BORDER }} />
 
         <Box sx={{ px: { xs: 1, md: 2 } }}>
           <TablePagination
@@ -487,12 +355,10 @@ const Lotes = () => {
             onRowsPerPageChange={handleChangeRowsPerPage}
             labelRowsPerPage="Filas por página:"
             sx={{
-              "& .MuiTablePagination-toolbar": {
-                py: 0.75,
-              },
+              "& .MuiTablePagination-toolbar": { minHeight: 48 },
               "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows": {
-                fontWeight: 700,
-                color: "rgba(0,0,0,0.7)",
+                fontSize: 13,
+                color: COLOR_MUTED,
               },
             }}
           />

@@ -103,7 +103,7 @@ export default function DetallesPagos() {
           boxShadow: "0 10px 30px rgba(15, 34, 48, 0.08)",
         }}
       >
-        <Box sx={{ height: 4, background: `linear-gradient(90deg, ${COLOR_TEXT}, ${COLOR_ACCENT})` }} />
+        <Box sx={{ height: 4, backgroundColor: COLOR_TEXT }} />
 
         {/* Encabezado */}
         <Stack

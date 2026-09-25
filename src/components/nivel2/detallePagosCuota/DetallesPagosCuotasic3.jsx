@@ -3,33 +3,44 @@ import { useParams } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 import servicioPagos from "../../../services/pagos";
-import serviciousuario1 from "../../../services/usuario1"; // (no lo uso, lo dejo como estaba)
 import Borrar from "./modalborraric3";
-import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Modif from "./modalactcompic3";
 import Borrarcomp from "./modalborrarcomprobanteic3";
 
-import { Box, Paper, Typography, Chip } from "@mui/material";
-import { alpha } from "@mui/material/styles";
+import {
+  Box,
+  Paper,
+  Typography,
+  Chip,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 
 import ReceiptLongRoundedIcon from "@mui/icons-material/ReceiptLongRounded";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
-import TableRowsRoundedIcon from "@mui/icons-material/TableRowsRounded";
-
 import ErrorOutlineRoundedIcon from "@mui/icons-material/ErrorOutlineRounded";
 import Tooltip from "@mui/material/Tooltip";
-
 import PictureAsPdfRoundedIcon from "@mui/icons-material/PictureAsPdfRounded";
-
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  COLOR_ERROR,
+  sxCard,
+  sxBtnOutlined,
+} from "../detalleclienteIngresos/estilos";
 
 export default function DetallesPagoic3s(props) {
   let params = useParams();
   let id = params.id;
-  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(id);
     traer();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -42,7 +53,13 @@ export default function DetallesPagoic3s(props) {
     setPagos(pag);
   };
 
-  async function download(index, rowIndex, data) {
+  const recargar = async () => {
+    const aux = { id: id };
+    const pag = await servicioPagos.detallesPagoic3(aux);
+    setPagos(pag);
+  };
+
+  async function download(index) {
     try {
       const pdfBlob = await servicioPagos.traerPdfConstanciadepagoic3(pagos[index].id);
       const url = URL.createObjectURL(pdfBlob);
@@ -53,55 +70,30 @@ export default function DetallesPagoic3s(props) {
     }
   }
 
-  function modifa(index, rowIndex, data) {
-    return (
-      <>
-        <Modif
-          id={pagos[index].id}
-          getData={async () => {
-            const aux = { id: id };
-            const pag = await servicioPagos.detallesPagoic3(aux);
-            setPagos(pag);
-          }}
-        />
-      </>
+  const sinComprobante = (texto) => (
+    <Tooltip title={texto}>
+      <Box sx={{ display: "inline-flex", alignItems: "center", gap: 0.5, color: "#ed6c02" }}>
+        <ErrorOutlineRoundedIcon sx={{ fontSize: 18 }} />
+        <Typography sx={{ fontWeight: 600, fontSize: 12.5, whiteSpace: "nowrap", color: "inherit" }}>
+          Sin comprobante
+        </Typography>
+      </Box>
+    </Tooltip>
+  );
+
+  function modifa(index) {
+    return <Modif id={pagos[index].id} getData={recargar} />;
+  }
+
+  function borrarcomp(index) {
+    return pagos[index].ubicacion == null ? (
+      sinComprobante("Pago sin comprobante")
+    ) : (
+      <Borrarcomp id={pagos[index].id} getData={recargar} />
     );
   }
 
- function borrarcomp(index, rowIndex, data) {
-  return (
-    <>
-      {pagos[index].ubicacion == null ? (
-        <Tooltip title="Pago sin comprobante">
-          <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-            <ErrorOutlineRoundedIcon style={{ color: "#f9a825" }} />
-            <Typography
-              sx={{
-                fontWeight: 800,
-                color: "#f9a825",
-                fontSize: 13,
-                whiteSpace: "nowrap",
-              }}
-            >
-              Sin comprobante
-            </Typography>
-          </Box>
-        </Tooltip>
-      ) : (
-        <Borrarcomp
-          id={pagos[index].id}
-          getData={async () => {
-            const aux = { id: id };
-            const pag = await servicioPagos.detallesPagoic3(aux);
-            setPagos(pag);
-          }}
-        />
-      )}
-    </>
-  );
-}
-
-  function monto(index, rowIndex, data) {
+  function monto(index) {
     const v = pagos[index]?.monto;
 
     const montoFormateado = new Intl.NumberFormat("es-AR", {
@@ -116,11 +108,11 @@ export default function DetallesPagoic3s(props) {
     return (
       <Box
         sx={{
-          fontWeight: 900,
+          fontWeight: 600,
           textAlign: "right",
           whiteSpace: "nowrap",
           width: "100%",
-          color: esDistinto ? "crimson" : "#0b2b3a",
+          color: esDistinto ? COLOR_ERROR : COLOR_TEXT,
         }}
       >
         {montoFormateado}
@@ -128,29 +120,15 @@ export default function DetallesPagoic3s(props) {
     );
   }
 
-  function downloadFile(index, rowIndex, data) {
+  function downloadFile(index) {
     return (
       <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
         <Button
           size="small"
-          variant="contained"
-          startIcon={<VisibilityRoundedIcon style={{ color: "#fff" }} />}
+          variant="outlined"
+          startIcon={<VisibilityRoundedIcon />}
           onClick={() => download(index)}
-          sx={{
-            textTransform: "none",
-            fontWeight: 900,
-            borderRadius: 999,
-            px: 1.6,
-            color: "#fff",
-            background: "linear-gradient(90deg, #01567c 0%, #148D8D 100%)",
-            boxShadow: "0 10px 22px rgba(20,141,141,0.18)",
-            "&:hover": {
-              transform: "translateY(-1px)",
-              boxShadow: "0 14px 30px rgba(20,141,141,0.28)",
-            },
-            transition: "0.2s ease",
-            whiteSpace: "nowrap",
-          }}
+          sx={{ ...sxBtnOutlined, px: 1.5, whiteSpace: "nowrap" }}
         >
           Ver online
         </Button>
@@ -161,265 +139,143 @@ export default function DetallesPagoic3s(props) {
   }
 
   const generarPDFIC3 = async (index) => {
-  try {
-    const pdfBlob = await servicioPagos.traerPdfConstanciadepagoic3(pagos[index].id);
-    const url = URL.createObjectURL(pdfBlob);
-    window.open(url, "_blank");
-  } catch (error) {
-    console.error("Error al obtener el PDF:", error);
-    alert("Error al cargar el PDF");
-  }
-};
-
-function comprobantePDF(index) {
-  const sinPdf = pagos[index]?.ubicacion == null;
-
-  return sinPdf ? (
-    <Tooltip title="Pago sin comprobante PDF">
-      <Box sx={{ display: "inline-flex", alignItems: "center", gap: 0.6 }}>
-        <ErrorOutlineRoundedIcon style={{ color: "#f9a825" }} />
-      
-          <Typography
-              sx={{
-                fontWeight: 800,
-                color: "#f9a825",
-                fontSize: 13,
-                whiteSpace: "nowrap",
-              }}
-            >
-          Sin comprobante
-        </Typography>
-      </Box>
-    </Tooltip>
-  ) : (
-    <Button
-      size="small"
-      startIcon={<PictureAsPdfRoundedIcon style={{ color: "#fff" }} />}
-      onClick={() => generarPDFIC3(index)}
-      sx={{
-        textTransform: "none",
-        fontWeight: 900,
-        borderRadius: 999,
-        px: 1.6,
-        color: "#fff",
-        background: "linear-gradient(90deg, #b71c1c 0%, #ef5350 100%)",
-        boxShadow: "0 10px 22px rgba(239,83,80,0.20)",
-        "&:hover": {
-          transform: "translateY(-1px)",
-          boxShadow: "0 14px 30px rgba(239,83,80,0.28)",
-        },
-        transition: "0.2s ease",
-        whiteSpace: "nowrap",
-      }}
-    >
-      PDF
-    </Button>
-  );
-}
-
-
-  const columns = [
-  { name: "id", label: "Id" },
-  { name: "mes", label: "Mes" },
-  { name: "anio", label: "Año" },
-  {
-    name: "Monto",
-    options: {
-      setCellHeaderProps: () => ({ style: { textAlign: "right" } }),
-      customBodyRenderLite: (dataIndex, rowIndex) => monto(dataIndex, rowIndex),
-    },
-  },
-  { name: "cuil_cuit_administrador", label: "Cuil Administrador" },
-  {
-    name: "Borrar comprobante",
-    options: {
-      customBodyRenderLite: (dataIndex, rowIndex) => borrarcomp(dataIndex, rowIndex),
-    },
-  },
-  {
-    name: "Modificar",
-    options: {
-      customBodyRenderLite: (dataIndex, rowIndex) => modifa(dataIndex, rowIndex),
-    },
-  },
-
-  // ✅ NUEVA COLUMNA PDF
-  {
-    name: "Comprobante (PDF)",
-    options: {
-      customBodyRenderLite: (dataIndex) => comprobantePDF(dataIndex),
-    },
-  },
-
-  {
-    name: "Ver/borrar",
-    options: {
-      customBodyRenderLite: (dataIndex, rowIndex) => downloadFile(dataIndex, rowIndex),
-    },
-  },
-];
-
-  const options = {
-    selectableRows: "none",
-    responsive: "standard",
-    rowsPerPage: 10,
-    rowsPerPageOptions: [5, 10, 15],
-    downloadOptions: { filename: "tableDownload.csv", separator: "," },
-    print: true,
-    filter: true,
-    viewColumns: true,
-    search: true,
-    pagination: true,
-    textLabels: {
-      body: { noMatch: "No se encontraron registros", toolTip: "Ordenar" },
-      pagination: {
-        next: "Siguiente",
-        previous: "Anterior",
-        rowsPerPage: "Filas por página:",
-        displayRows: "de",
-      },
-      toolbar: {
-        search: "Buscar",
-        downloadCsv: "Descargar CSV",
-        print: "Imprimir",
-        viewColumns: "Ver columnas",
-        filterTable: "Filtrar tabla",
-      },
-      filter: { all: "Todos", title: "FILTROS", reset: "RESETEAR" },
-      viewColumns: { title: "Mostrar columnas", titleAria: "Mostrar/ocultar columnas de la tabla" },
-      selectedRows: {
-        text: "fila(s) seleccionada(s)",
-        delete: "Eliminar",
-        deleteAria: "Eliminar filas seleccionadas",
-      },
-    },
+    try {
+      const pdfBlob = await servicioPagos.traerPdfConstanciadepagoic3(pagos[index].id);
+      const url = URL.createObjectURL(pdfBlob);
+      window.open(url, "_blank");
+    } catch (error) {
+      console.error("Error al obtener el PDF:", error);
+      alert("Error al cargar el PDF");
+    }
   };
 
-  return (
-    <Box sx={{ width: "100%", maxWidth: "100%", flex: 1, minWidth: 0 }}>
-      {/* CARD PRINCIPAL */}
-      <Paper
-        elevation={0}
-        sx={{
-          borderRadius: 4,
-          overflow: "hidden",
-          border: `1px solid ${alpha("#0b4f6c", 0.14)}`,
-          background: "rgba(255,255,255,0.92)",
-          backdropFilter: "blur(10px)",
-          boxShadow: "0 22px 55px rgba(15, 127, 134, 0.10)",
-        }}
+  function comprobantePDF(index) {
+    const sinPdf = pagos[index]?.ubicacion == null;
+
+    return sinPdf ? (
+      sinComprobante("Pago sin comprobante PDF")
+    ) : (
+      <Button
+        size="small"
+        variant="outlined"
+        startIcon={<PictureAsPdfRoundedIcon />}
+        onClick={() => generarPDFIC3(index)}
+        sx={{ ...sxBtnOutlined, px: 1.5, whiteSpace: "nowrap" }}
       >
-        {/* HEADER (GRADIENT) */}
+        PDF
+      </Button>
+    );
+  }
+
+  const sxTh = {
+    backgroundColor: "#f6f8f9",
+    color: COLOR_TEXT,
+    fontWeight: 700,
+    fontSize: 11.5,
+    letterSpacing: 0.4,
+    borderBottom: `1px solid ${COLOR_BORDER}`,
+    whiteSpace: "nowrap",
+    py: 1.25,
+  };
+  const sxTd = { fontSize: 13.5, color: COLOR_TEXT, borderBottom: "1px solid #eef1f3", py: 1.1 };
+
+  const columnas = [
+    "ID",
+    "MES",
+    "AÑO",
+    "MONTO",
+    "CUIL ADMINISTRADOR",
+    "BORRAR COMPROBANTE",
+    "MODIFICAR",
+    "COMPROBANTE (PDF)",
+    "VER / BORRAR",
+  ];
+
+  return (
+    <Box sx={{ width: "100%", maxWidth: 1320, mx: "auto", minWidth: 0 }}>
+      {/* ENCABEZADO */}
+      <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 } }}>
         <Box
           sx={{
-            px: { xs: 2, md: 3 },
-            py: { xs: 2, md: 2.5 },
-            background: "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-            color: "#fff",
             display: "flex",
-            alignItems: { xs: "flex-start", md: "center" },
+            alignItems: { xs: "stretch", md: "center" },
             justifyContent: "space-between",
             gap: 2,
-            flexWrap: "wrap",
+            flexDirection: { xs: "column", md: "row" },
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <Box
               sx={{
-                width: 44,
-                height: 44,
-                borderRadius: "14px",
-                display: "grid",
-                placeItems: "center",
-                background: "rgba(255,255,255,0.18)",
-                border: "1px solid rgba(255,255,255,0.35)",
+                width: 46,
+                height: 46,
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                bgcolor: "rgba(13,58,73,0.08)",
                 flexShrink: 0,
               }}
             >
-              <ReceiptLongRoundedIcon sx={{ color: "#fff" }} />
+              <ReceiptLongRoundedIcon sx={{ color: COLOR_ACCENT }} />
             </Box>
 
             <Box>
-              <Typography sx={{ fontWeight: 900, fontSize: { xs: 18, md: 22 }, lineHeight: 1.1 }}>
+              <Typography
+                variant="h5"
+                sx={{ fontWeight: 700, fontSize: 20, textTransform: "none", color: COLOR_TEXT, m: 0, pt: 0 }}
+              >
                 Lista de pagos IC3
               </Typography>
-              <Typography sx={{ mt: 0.35, fontWeight: 650, opacity: 0.9, fontSize: 14 }}>
-                Detalle, comprobantes y acciones sobre cada pago.
+              <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
+                Detalle, comprobantes y acciones sobre cada pago
               </Typography>
             </Box>
           </Box>
 
-          <Chip
-            icon={<TableRowsRoundedIcon />}
-            label={`Registros: ${pagos.length}`}
-            sx={{
-              color: "#fff",
-              fontWeight: 900,
-              borderRadius: 999,
-              background: "rgba(255,255,255,0.18)",
-              border: "1px solid rgba(255,255,255,0.35)",
-              "& .MuiChip-icon": { color: "#fff" },
-            }}
-          />
+          <Chip variant="outlined" label={`Registros: ${pagos.length}`} sx={{ fontWeight: 600 }} />
         </Box>
+      </Paper>
 
-        {/* CONTENEDOR TABLA */}
-        <Box
-          sx={{
-            p: { xs: 1.5, md: 2 },
+      {/* LISTADO */}
+      <Paper elevation={0} sx={{ ...sxCard, mt: 2.5, overflow: "hidden", width: 0, minWidth: "100%" }}>
+        <TableContainer>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                {columnas.map((h) => (
+                  <TableCell key={h} sx={{ ...sxTh, ...(h === "MONTO" ? { textAlign: "right" } : {}) }}>
+                    {h}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
 
-            /* ===== HEADER TABLE ===== */
-            "& .MuiTableHead-root .MuiTableCell-root": {
-              borderBottom: "0px",
-              color: "#01567c",
-              fontWeight: 900,
-              background: "transparent",
-            },
+            <TableBody>
+              {pagos.map((p, index) => (
+                <TableRow key={p.id ?? index} hover sx={{ "&:last-child td": { borderBottom: 0 } }}>
+                  <TableCell sx={sxTd}>{p.id}</TableCell>
+                  <TableCell sx={sxTd}>{p.mes}</TableCell>
+                  <TableCell sx={sxTd}>{p.anio}</TableCell>
+                  <TableCell sx={sxTd}>{monto(index)}</TableCell>
+                  <TableCell sx={sxTd}>{p.cuil_cuit_administrador}</TableCell>
+                  <TableCell sx={sxTd}>{borrarcomp(index)}</TableCell>
+                  <TableCell sx={sxTd}>{modifa(index)}</TableCell>
+                  <TableCell sx={sxTd}>{comprobantePDF(index)}</TableCell>
+                  <TableCell sx={sxTd}>{downloadFile(index)}</TableCell>
+                </TableRow>
+              ))}
 
-            /* ===== BODY ===== */
-            "& .MuiTableBody-root .MuiTableCell-root": {
-              borderBottom: `1px solid ${alpha("#01567c", 0.08)}`,
-              fontWeight: 650,
-              color: "#0b2b3a",
-            },
-
-            /* ===== TOOLBAR ===== */
-            "& .MuiToolbar-root": {
-              px: 2,
-              color: "#01567c",
-            },
-            "& .MuiToolbar-root .MuiInputBase-input": {
-              color: "#0b2b3a",
-              fontWeight: 700,
-            },
-
-            /* ===== ICONOS ===== */
-            "& .MuiIconButton-root, & svg": {
-              color: alpha("#01567c", 0.75),
-              transition: "all 0.2s ease",
-            },
-            "& .MuiIconButton-root:hover, & svg:hover": {
-              color: "#148D8D",
-              transform: "translateY(-1px)",
-            },
-
-            /* ===== HOVER FILAS ===== */
-            "& .MuiTableRow-root:hover td": {
-              backgroundColor: `${alpha("#148D8D", 0.06)} !important`,
-            },
-
-            /* ===== PAGINACIÓN ===== */
-            "& .MuiTablePagination-root, & .MuiTablePagination-root *": {
-              color: "#01567c",
-              fontWeight: 700,
-            },
-
-            /* ===== “Paper” interno de MUIDataTable ===== */
-            "& .MuiPaper-root": { boxShadow: "none" },
-          }}
-        >
-       {/*    <MUIDataTable title={""} data={pagos} columns={columns} options={options} /> */}
-        </Box>
+              {pagos.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={columnas.length} sx={{ ...sxTd, textAlign: "center", color: COLOR_MUTED, py: 4 }}>
+                    No se encontraron registros.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Paper>
     </Box>
   );

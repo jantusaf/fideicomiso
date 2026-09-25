@@ -275,36 +275,34 @@ const handleIrADetalle = () => {
       onClose={onClose}
       fullWidth
       maxWidth="sm"
-      PaperProps={{
-        sx: {
-          borderRadius: 3,
-          overflow: "hidden",
-          boxShadow: "0 18px 60px rgba(0,0,0,0.18)",
-        },
+      slotProps={{
+        paper: { sx: { borderRadius: 3 } },
+        backdrop: { sx: { backgroundColor: "rgba(15, 34, 48, 0.45)" } },
       }}
     >
       <DialogTitle
         sx={{
-          background:
-            "linear-gradient(90deg, rgba(10,59,79,0.95) 0%, rgba(11,79,108,0.95) 55%, rgba(15,127,134,0.95) 100%)",
-          color: "#fff",
+          color: "#1a303e",
+          borderBottom: "1px solid #e2e6e9",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           gap: 2,
+          px: 3,
+          py: 2,
           mb: 1,
         }}
       >
         <Box sx={{ minWidth: 0 }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <ReceiptLongRoundedIcon fontSize="small" />
-            <Typography fontWeight={900} sx={{ lineHeight: 1.15 }}>
+            <Typography fontWeight={700} sx={{ lineHeight: 1.15 }}>
               Detalle de deuda
             </Typography>
           </Box>
         </Box>
 
-        <IconButton onClick={onClose} sx={{ color: "#fff" }}>
+        <IconButton onClick={onClose} sx={{ color: "#6b7a86" }}>
           <CloseRoundedIcon />
         </IconButton>
       </DialogTitle>
@@ -316,17 +314,15 @@ const handleIrADetalle = () => {
           sx={{
             p: 1.75,
             borderRadius: 2.5,
-            border: `1px solid ${alpha("#0b4f6c", 0.14)}`,
-            background:
-              "linear-gradient(180deg, rgba(15,127,134,0.06) 0%, rgba(255,255,255,0.92) 100%)",
+            border: "1px solid #e2e6e9",
+            background: "#fff",
             mb: 2,
           }}
         >
           <Stack
             direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            gap={1.5}
+            useFlexGap
+            sx={{ alignItems: "center", justifyContent: "space-between", gap: 1.5 }}
           >
             <Typography
               fontSize={13}
@@ -342,13 +338,13 @@ const handleIrADetalle = () => {
               onClick={handleIrADetalle}
               endIcon={<OpenInNewRoundedIcon />}
               sx={{
-                borderRadius: 2,
-                fontWeight: 900,
+                borderRadius: 1.5,
+                fontWeight: 600,
                 textTransform: "none",
-                backgroundColor: "#148D8D",
-                boxShadow: "0 10px 26px rgba(0,0,0,0.12)",
+                backgroundColor: "#1a303e",
+                boxShadow: "none",
                 whiteSpace: "nowrap",
-                "&:hover": { backgroundColor: "#0f6f6f" },
+                "&:hover": { backgroundColor: "#0d3a49", boxShadow: "none" },
               }}
             >
               Ver cuadro de cuotas
@@ -362,26 +358,26 @@ const handleIrADetalle = () => {
             </Stack>
           ) : (
             <>
-              <Stack direction="row" flexWrap="wrap" gap={1} sx={{ mt: 1 }}>
+              <Stack direction="row" useFlexGap sx={{ flexWrap: "wrap", gap: 1, mt: 1 }}>
                 <Chip
                   size="small"
                   label={`Fracción: ${fraccion ?? "-"}`}
-                  sx={{ fontWeight: 800 }}
+                  sx={{ fontWeight: 600 }}
                 />
                 <Chip
                   size="small"
                   label={`Manzana: ${manzana ?? "-"}`}
-                  sx={{ fontWeight: 800 }}
+                  sx={{ fontWeight: 600 }}
                 />
                 <Chip
                   size="small"
                   label={`Parcela: ${parcela ?? "-"}`}
-                  sx={{ fontWeight: 800 }}
+                  sx={{ fontWeight: 600 }}
                 />
                 <Chip
                   size="small"
                   label={`Lote: ${lote ?? "-"}`}
-                  sx={{ fontWeight: 800 }}
+                  sx={{ fontWeight: 600 }}
                 />
               </Stack>
 
@@ -407,28 +403,27 @@ const handleIrADetalle = () => {
           sx={{
             p: 1.75,
             borderRadius: 2.5,
-            border: `1px solid ${alpha("#0b4f6c", 0.14)}`,
-            background:
-              "linear-gradient(180deg, rgba(10,59,79,0.04) 0%, rgba(20,141,141,0.03) 45%, rgba(255,255,255,0.95) 100%)",
+            border: "1px solid #e2e6e9",
+            background: "#fff",
             mb: 2,
           }}
         >
-          <Typography fontWeight={900} sx={{ color: "#063a52", mb: 1 }}>
+          <Typography fontWeight={700} sx={{ color: "#1a303e", mb: 1 }}>
             Estado de cuotas / montos
           </Typography>
 
-          <Stack direction="row" flexWrap="wrap" gap={1} sx={{ mb: 2 }}>
+          <Stack direction="row" useFlexGap sx={{ flexWrap: "wrap", gap: 1, mb: 2 }}>
             <Chip
               label={`Liquidadas: ${detalle?.liquidadas ?? clienteBase?.liquidadas ?? "-"}`}
-              sx={{ fontWeight: 900, backgroundColor: alpha("#1565c0", 0.08) }}
+              variant="outlined" sx={{ fontWeight: 600, color: "#1565c0", borderColor: "#1565c0", backgroundColor: "transparent" }}
             />
             <Chip
               label={`Debe: ${detalle?.debe ?? clienteBase?.debe ?? "-"}`}
-              sx={{ fontWeight: 900, backgroundColor: alpha("#c62828", 0.08) }}
+              variant="outlined" sx={{ fontWeight: 600, color: "#c62828", borderColor: "#c62828", backgroundColor: "transparent" }}
             />
             <Chip
               label={`Pagadas: ${detalle?.pagadas ?? clienteBase?.pagadas ?? "-"}`}
-              sx={{ fontWeight: 900, backgroundColor: alpha("#2e7d32", 0.08) }}
+              variant="outlined" sx={{ fontWeight: 600, color: "#2e7d32", borderColor: "#2e7d32", backgroundColor: "transparent" }}
             />
           </Stack>
 
@@ -439,7 +434,7 @@ const handleIrADetalle = () => {
         <Divider sx={{ mb: 1.5 }} />
 
         {/* mini estado */}
-        <Stack direction="row" gap={1} flexWrap="wrap">
+        <Stack direction="row" useFlexGap sx={{ gap: 1, flexWrap: "wrap" }}>
           {totalDevengado - totalPagado > 0 ? (
             <Chip
               label={`Deuda actual: ${moneyARS(totalDevengado - totalPagado)}`}

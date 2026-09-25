@@ -13,8 +13,11 @@ import {
   Chip,
   Stack,
   Divider,
-  TextField
+  TextField,
+  InputAdornment
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, sxCard, sxBtnPrimary, sxBtnOutlined } from "../../nivel2/detalleclienteIngresos/estilos";
 import {
   Table,
   TableBody,
@@ -375,318 +378,153 @@ const textoOk =
       },
     },
   };
-  // =======================
-  // THEME (solo estética)
-  // =======================
-  const theme = createTheme({
-    typography: {
-      fontFamily:
-        'Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
-    },
-    shape: { borderRadius: 14 },
-    components: {
-      MuiPaper: {
-        styleOverrides: {
-          root: { backgroundImage: "none" },
-        },
-      },
-      MuiInputLabel: {
-        styleOverrides: {
-          root: { fontWeight: 800 },
-        },
-      },
-      MuiOutlinedInput: {
-        styleOverrides: {
-          root: {
-            borderRadius: 12,
-            backgroundColor: alpha("#ffffff", 0.9),
-            boxShadow: "0 10px 22px rgba(15,127,134,0.07)",
-            transition: "all .18s ease",
-            "&:hover .MuiOutlinedInput-notchedOutline": {
-              borderColor: alpha("#148D8D", 0.55),
-            },
-            "&.Mui-focused": {
-              boxShadow: "0 14px 28px rgba(20,141,141,0.14)",
-            },
-          },
-          notchedOutline: {
-            borderColor: alpha("#0b4f6c", 0.18),
-          },
-        },
-      },
-      MuiButton: {
-        styleOverrides: {
-          root: {
-            borderRadius: 12,
-            textTransform: "none",
-            fontWeight: 900,
-            paddingInline: 14,
-            paddingBlock: 10,
-          },
-        },
-      },
-      MuiTableCell: {
-        styleOverrides: {
-          head: {
-            fontWeight: 900,
-            color: "#0b4f6c",
-            borderBottom: `1px solid ${alpha("#0b4f6c", 0.12)}`,
-            backgroundColor: "transparent",
-            paddingTop: 14,
-            paddingBottom: 14,
-          },
-          body: {
-            borderBottom: `1px solid ${alpha("#0b4f6c", 0.08)}`,
-          },
-        },
-      },
-      MuiTableRow: {
-        styleOverrides: {
-          root: {
-            "&:hover td": {
-              backgroundColor: alpha("#148D8D", 0.06),
-            },
-          },
-        },
-      },
-    },
-  });
+
+  const sxTh = {
+    backgroundColor: "#f6f8f9",
+    color: COLOR_TEXT,
+    fontWeight: 700,
+    fontSize: 11.5,
+    letterSpacing: 0.4,
+    borderBottom: `1px solid ${COLOR_BORDER}`,
+    whiteSpace: "nowrap",
+    py: 1.25,
+  };
+  const sxTd = { fontSize: 13.5, color: COLOR_TEXT, borderBottom: "1px solid #eef1f3", py: 1.1 };
+  const sxSel = { minWidth: 120, "& .MuiOutlinedInput-root": { borderRadius: 1.5 } };
 
   const registros = pagosFiltrados?.length || 0;
 
   return (
     <>
-      <Box
-        sx={{
-          width: "100%",
-          maxWidth: "100%",
-          flex: 1,
-          minWidth: 0,
-        }}
-      >
-        {/* HEADER */}
-        <Paper
-          elevation={0}
-          sx={{
-            borderRadius: 3,
-            px: { xs: 2, md: 3 },
-            py: { xs: 2, md: 2.25 },
-            border: `1px solid ${alpha("#0b4f6c", 0.18)}`,
-            background:
-              "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-            boxShadow: "0 16px 40px rgba(8,58,82,0.22)",
-            color: "#fff",
-            overflow: "hidden",
-            position: "relative",
-          }}
-        >
+      <Box sx={{ width: "100%", maxWidth: 1320, mx: "auto", px: { xs: 0, md: 1 }, pt: { xs: 1, md: 2 }, pb: 6, minWidth: 0 }}>
+        {/* ENCABEZADO */}
+        <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 } }}>
           <Box
             sx={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "radial-gradient(700px 220px at 10% 0%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 60%)",
-              pointerEvents: "none",
+              display: "flex",
+              alignItems: { xs: "stretch", md: "center" },
+              justifyContent: "space-between",
+              gap: 2,
+              flexDirection: { xs: "column", md: "row" },
             }}
-          />
-
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            spacing={2}
-            sx={{ position: "relative" }}
           >
-            <Stack direction="row" spacing={1.5} alignItems="center">
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <Box
                 sx={{
-                  width: 44,
-                  height: 44,
-                  borderRadius: 3,
-                  display: "grid",
-                  placeItems: "center",
-                  backgroundColor: alpha("#ffffff", 0.14),
-                  border: `1px solid ${alpha("#ffffff", 0.22)}`,
-                  backdropFilter: "blur(8px)",
+                  width: 46,
+                  height: 46,
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  bgcolor: "rgba(13,58,73,0.08)",
+                  flexShrink: 0,
                 }}
               >
-                <AssessmentIcon sx={{ fontSize: 22, color: "#fff" }} />
+                <AssessmentIcon sx={{ color: COLOR_ACCENT }} />
               </Box>
 
               <Box>
                 <Typography
-                  sx={{
-                    fontWeight: 900,
-                    fontSize: { xs: 18, md: 20 },
-                    lineHeight: 1.15,
-                  }}
+                  variant="h5"
+                  sx={{ fontWeight: 700, fontSize: 20, textTransform: "none", color: COLOR_TEXT, m: 0, pt: 0 }}
                 >
-                  Reporte de los pagos registrados
+                  Reporte de pagos registrados
                 </Typography>
-                <Typography
-                  sx={{
-                    opacity: 0.9,
-                    fontSize: { xs: 12.5, md: 13.5 },
-                    mt: 0.4,
-                  }}
-                >
-                  Revisá, filtrá y gestioná pagos inusuales / sospechosos.
+                <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
+                  Consultá los pagos por rango de fechas y zona
                 </Typography>
               </Box>
-            </Stack>
+            </Box>
 
-            <Chip
-              label={`Registros: ${registros}`}
-              sx={{
-                height: 34,
-                fontWeight: 900,
-                color: "#fff",
-                backgroundColor: alpha("#ffffff", 0.14),
-                border: `1px solid ${alpha("#ffffff", 0.22)}`,
-                backdropFilter: "blur(8px)",
-                "& .MuiChip-label": { px: 1.4 },
-              }}
-            />
-          </Stack>
+            <Chip variant="outlined" label={`Registros: ${registros}`} sx={{ fontWeight: 600 }} />
+          </Box>
         </Paper>
 
-        {/* PANEL DE FILTROS */}
-        <Paper
-          elevation={0}
-          sx={{
-            mt: 2,
-            borderRadius: 4,
-            p: { xs: 1.5, md: 2 },
-            border: `1px solid ${alpha("#0b4f6c", 0.14)}`,
-            background:
-              "linear-gradient(180deg, rgba(10,59,79,0.045) 0%, rgba(20,141,141,0.035) 45%, rgba(255,255,255,0.98) 100%)",
-            boxShadow: "0 14px 35px rgba(15,127,134,0.10)",
-          }}
-        >
-          <Stack
-            direction={{ xs: "column", md: "row" }}
-            alignItems={{ xs: "stretch", md: "center" }}
-            justifyContent="space-between"
-            spacing={1.25}
+        {/* FILTROS */}
+        <Paper elevation={0} sx={{ ...sxCard, mt: 2.5, p: { xs: 2, md: 2.5 } }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" },
+              alignItems: { xs: "stretch", md: "center" },
+              justifyContent: "space-between",
+              gap: 1.5,
+            }}
           >
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={1.25}
-              sx={{ flexWrap: "wrap" }}
-            >
+            <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, flexWrap: "wrap", gap: 1.25 }}>
+              <FormControl size="small" sx={{ ...sxSel, minWidth: 160 }}>
+                <InputLabel>Tipo fecha</InputLabel>
+                <Select value={tipoFecha} label="Tipo fecha" onChange={(e) => setTipoFecha(e.target.value)}>
+                  <MenuItem value="pago">Fecha de Pago</MenuItem>
+                  <MenuItem value="cuota">Fecha de Cuota</MenuItem>
+                </Select>
+              </FormControl>
 
+              <FormControl size="small" sx={sxSel}>
+                <InputLabel>Desde mes</InputLabel>
+                <Select value={desdeMes} label="Desde mes" onChange={(e) => setDesdeMes(e.target.value)}>
+                  {[...Array(12)].map((_, i) => (
+                    <MenuItem key={i + 1} value={i + 1}>
+                      {i + 1}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
+              <FormControl size="small" sx={sxSel}>
+                <InputLabel>Desde año</InputLabel>
+                <Select value={desdeAnio} label="Desde año" onChange={(e) => setDesdeAnio(e.target.value)}>
+                  {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map((a) => (
+                    <MenuItem key={a} value={a}>
+                      {a}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
-<FormControl size="small" sx={{ minWidth: 160 }}>
-  <InputLabel>Tipo Fecha</InputLabel>
-  <Select
-    value={tipoFecha}
-    label="Tipo Fecha"
-    onChange={(e) => setTipoFecha(e.target.value)}
-  >
-    <MenuItem value="pago">Fecha de Pago</MenuItem>
-    <MenuItem value="cuota">Fecha de Cuota</MenuItem>
-  </Select>
-</FormControl>
+              <FormControl size="small" sx={sxSel}>
+                <InputLabel>Hasta mes</InputLabel>
+                <Select value={hastaMes} label="Hasta mes" onChange={(e) => setHastaMes(e.target.value)}>
+                  {[...Array(12)].map((_, i) => (
+                    <MenuItem key={i + 1} value={i + 1}>
+                      {i + 1}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
-<FormControl size="small" sx={{ minWidth: 120 }}>
-  <InputLabel>Desde Mes</InputLabel>
-  <Select
-    value={desdeMes}
-    label="Desde Mes"
-    onChange={(e) => setDesdeMes(e.target.value)}
-  >
-    {[...Array(12)].map((_, i) => (
-      <MenuItem key={i + 1} value={i + 1}>
-        {i + 1}
-      </MenuItem>
-    ))}
-  </Select>
-</FormControl>
+              <FormControl size="small" sx={sxSel}>
+                <InputLabel>Hasta año</InputLabel>
+                <Select value={hastaAnio} label="Hasta año" onChange={(e) => setHastaAnio(e.target.value)}>
+                  {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map((a) => (
+                    <MenuItem key={a} value={a}>
+                      {a}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
-<FormControl size="small" sx={{ minWidth: 120 }}>
-  <InputLabel>Desde Año</InputLabel>
-  <Select
-    value={desdeAnio}
-    label="Desde Año"
-    onChange={(e) => setDesdeAnio(e.target.value)}
-  >
-    {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map((a) => (
-      <MenuItem key={a} value={a}>
-        {a}
-      </MenuItem>
-    ))}
-  </Select>
-</FormControl>
-
-
-<FormControl size="small" sx={{ minWidth: 120 }}>
-  <InputLabel>Hasta Mes</InputLabel>
-  <Select
-    value={hastaMes}
-    label="Hasta Mes"
-    onChange={(e) => setHastaMes(e.target.value)}
-  >
-    {[...Array(12)].map((_, i) => (
-      <MenuItem key={i + 1} value={i + 1}>
-        {i + 1}
-      </MenuItem>
-    ))}
-  </Select>
-</FormControl>
-
-<FormControl size="small" sx={{ minWidth: 120 }}>
-  <InputLabel>Hasta Año</InputLabel>
-  <Select
-    value={hastaAnio}
-    label="Hasta Año"
-    onChange={(e) => setHastaAnio(e.target.value)}
-  >
-    {[2020, 2021, 2022, 2023, 2024, 2025, 2026].map((a) => (
-      <MenuItem key={a} value={a}>
-        {a}
-      </MenuItem>
-    ))}
-  </Select>
-</FormControl>
-
-           
-<Button
-  variant="contained"
-  onClick={getPagos}
->
-  Buscar
-</Button>
-              
-
-              <FormControl size="small" sx={{ minWidth: 140 }}>
+              <FormControl size="small" sx={{ ...sxSel, minWidth: 140 }}>
                 <InputLabel>Zona</InputLabel>
-                <Select
-                  value={filtroZona}
-                  label="Zona"
-                  onChange={(e) => setFiltroZona(e.target.value)}
-                >
+                <Select value={filtroZona} label="Zona" onChange={(e) => setFiltroZona(e.target.value)}>
                   <MenuItem value="">Todas</MenuItem>
                   <MenuItem value="IC3">IC3</MenuItem>
                   <MenuItem value="PIT">PIT</MenuItem>
                 </Select>
               </FormControl>
-            </Stack>
 
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={1}>
+              <Button variant="contained" onClick={getPagos} sx={sxBtnPrimary}>
+                Buscar
+              </Button>
+            </Box>
+
+            <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 1 }}>
               <Button
-                variant="contained"
+                variant="outlined"
                 startIcon={<FileDownloadIcon />}
                 onClick={exportarExcel}
-                sx={{
-                  background:
-                    "linear-gradient(90deg, #0b4f6c 0%, #148D8D 100%)",
-                  boxShadow: "0 16px 28px rgba(11,79,108,0.18)",
-                  "&:hover": {
-                    background:
-                      "linear-gradient(90deg, #0a415a 0%, #117777 100%)",
-                  },
-                }}
+                sx={sxBtnOutlined}
               >
                 Excel
               </Button>
@@ -695,169 +533,152 @@ const textoOk =
                 variant="outlined"
                 startIcon={<PrintIcon />}
                 onClick={() => window.print()}
-                sx={{
-                  borderColor: alpha("#0b4f6c", 0.35),
-                  color: "#0b4f6c",
-                  "&:hover": {
-                    borderColor: alpha("#148D8D", 0.6),
-                    backgroundColor: alpha("#148D8D", 0.08),
-                  },
-                }}
+                sx={sxBtnOutlined}
               >
                 Imprimir
               </Button>
 
               <Button
                 variant="outlined"
-               onClick={() => {
-  setFiltroZona("");
-  setDesdeMes("");
-  setDesdeAnio("");
-  setHastaMes("");
-  setHastaAnio("");
-  setTipoFecha("pago");
-}}
-                sx={{
-                  borderColor: alpha("#0b4f6c", 0.35),
-                  color: "#0b4f6c",
-                  "&:hover": {
-                    borderColor: alpha("#148D8D", 0.6),
-                    backgroundColor: alpha("#148D8D", 0.08),
-                  },
+                onClick={() => {
+                  setFiltroZona("");
+                  setDesdeMes("");
+                  setDesdeAnio("");
+                  setHastaMes("");
+                  setHastaAnio("");
+                  setTipoFecha("pago");
                 }}
+                sx={sxBtnOutlined}
               >
                 Limpiar
               </Button>
-            </Stack>
-          </Stack>
+            </Box>
+          </Box>
         </Paper>
 
-  <InputLabel>Buscar</InputLabel>
-  <TextField
-  size="small"
-  label="Buscar por Nombre o CUIT"
-  value={filtroTexto}
-  onChange={(e) => setFiltroTexto(e.target.value)}
-  sx={{ minWidth: 260 }}
-/>  
-<TableContainer>
-  <Table>
-    <TableHead>
-      <TableRow>
-        <TableCell>Mes</TableCell>
-        <TableCell>Año</TableCell>
-        <TableCell>Zona</TableCell>
-        <TableCell>Fracción</TableCell>
-        <TableCell>Manzana</TableCell>
+        {/* LISTADO */}
+        <Paper elevation={0} sx={{ ...sxCard, mt: 2.5, overflow: "hidden", width: 0, minWidth: "100%" }}>
+          <Box sx={{ px: { xs: 2, md: 3 }, py: 2 }}>
+            <TextField
+              size="small"
+              placeholder="Buscar por nombre o CUIT"
+              value={filtroTexto}
+              onChange={(e) => setFiltroTexto(e.target.value)}
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon sx={{ color: COLOR_MUTED, fontSize: 20 }} />
+                    </InputAdornment>
+                  ),
+                },
+              }}
+              sx={{ width: { xs: "100%", md: 380 }, "& .MuiOutlinedInput-root": { borderRadius: 1.5 } }}
+            />
+          </Box>
 
-        {filtroZona !== "PIT" && (
-          <TableCell>Lote</TableCell>
-        )}
+          <Divider sx={{ borderColor: COLOR_BORDER }} />
 
-        {filtroZona !== "IC3" && (
-          <TableCell>Parcela</TableCell>
-        )}
+          <TableContainer sx={{ maxHeight: "68vh" }}>
+            <Table stickyHeader size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={sxTh}>MES</TableCell>
+                  <TableCell sx={sxTh}>AÑO</TableCell>
+                  <TableCell sx={sxTh}>ZONA</TableCell>
+                  <TableCell sx={sxTh}>FRACCIÓN</TableCell>
+                  <TableCell sx={sxTh}>MANZANA</TableCell>
 
-        <TableCell>CUIL / CUIT</TableCell>
-        <TableCell>Nombre</TableCell>
-        <TableCell>Monto</TableCell>
-      </TableRow>
-    </TableHead>
+                  {filtroZona !== "PIT" && <TableCell sx={sxTh}>LOTE</TableCell>}
 
-    <TableBody>
-      {pagosFiltrados
-        .slice(
-          page * rowsPerPage,
-          page * rowsPerPage + rowsPerPage
-        )
-        .map((p, index) => {
-          const esIC3 = p.origen === "ic3";
-          const esPIT = p.origen === "normal";
+                  {filtroZona !== "IC3" && <TableCell sx={sxTh}>PARCELA</TableCell>}
 
-          return (
-            <TableRow key={index} hover>
-              <TableCell>{p.mes}</TableCell>
+                  <TableCell sx={sxTh}>CUIL / CUIT</TableCell>
+                  <TableCell sx={sxTh}>NOMBRE</TableCell>
+                  <TableCell sx={{ ...sxTh, textAlign: "right" }}>MONTO</TableCell>
+                </TableRow>
+              </TableHead>
 
-              <TableCell>{p.anio}</TableCell>
+              <TableBody>
+                {pagosFiltrados
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((p, index) => {
+                    const esIC3 = p.origen === "ic3";
+                    const esPIT = p.origen === "normal";
 
-              <TableCell>
-                <Chip
-                  label={esIC3 ? "IC3" : "PIT"}
-                  color={esIC3 ? "secondary" : "primary"}
-                  size="small"
-                />
-              </TableCell>
+                    return (
+                      <TableRow key={index} hover sx={{ "&:last-child td": { borderBottom: 0 } }}>
+                        <TableCell sx={sxTd}>{p.mes}</TableCell>
 
-              <TableCell>
-                {p.fraccion || "-"}
-              </TableCell>
+                        <TableCell sx={sxTd}>{p.anio}</TableCell>
 
-              <TableCell>
-                {p.manzana || "-"}
-              </TableCell>
+                        <TableCell sx={sxTd}>
+                          <Chip
+                            label={esIC3 ? "IC3" : "PIT"}
+                            size="small"
+                            variant="outlined"
+                            sx={{ fontWeight: 600 }}
+                          />
+                        </TableCell>
 
-              {filtroZona !== "PIT" && (
-                <TableCell>
-                  {esPIT
-                    ? "No corresponde"
-                    : p.lote || "-"}
-                </TableCell>
-              )}
+                        <TableCell sx={sxTd}>{p.fraccion || "-"}</TableCell>
 
-              {filtroZona !== "IC3" && (
-                <TableCell>
-                  {esIC3
-                    ? "No corresponde"
-                    : p.parcela || "-"}
-                </TableCell>
-              )}
+                        <TableCell sx={sxTd}>{p.manzana || "-"}</TableCell>
 
-              <TableCell>
-                {p.cuil_cuit}
-              </TableCell>
+                        {filtroZona !== "PIT" && (
+                          <TableCell sx={sxTd}>{esPIT ? "No corresponde" : p.lote || "-"}</TableCell>
+                        )}
 
-              <TableCell>
-                {p.nombre}
-              </TableCell>
+                        {filtroZona !== "IC3" && (
+                          <TableCell sx={sxTd}>{esIC3 ? "No corresponde" : p.parcela || "-"}</TableCell>
+                        )}
 
-              <TableCell>
-                ${formatMoney(p.monto)}
-              </TableCell>
-            </TableRow>
-          );
-        })}
-    </TableBody>
-  </Table>
+                        <TableCell sx={{ ...sxTd, whiteSpace: "nowrap" }}>{p.cuil_cuit}</TableCell>
 
-  <TablePagination
-    component="div"
-    count={pagosFiltrados.length}
-    page={page}
-    rowsPerPage={rowsPerPage}
-    onPageChange={(e, newPage) => setPage(newPage)}
-    onRowsPerPageChange={(e) => {
-      setRowsPerPage(parseInt(e.target.value, 10));
-      setPage(0);
-    }}
-    rowsPerPageOptions={[5, 10, 20, 50]}
-  />
-</TableContainer>
-        {/* TABLA */}
-        <Paper
-          elevation={0}
-          sx={{
-            mt: 2,
-            borderRadius: 2,
-            border: `1px solid ${alpha("#0b4f6c", 0.14)}`,
-            background:
-              "linear-gradient(180deg, rgba(10,59,79,0.035) 0%, rgba(20,141,141,0.03) 35%, rgba(255,255,255,0.98) 100%)",
-            boxShadow: "0 14px 35px rgba(15,127,134,0.10)",
-            overflow: "hidden",
-          }}
-        >
-        {/*   <MUIDataTable data={pagosFiltrados} columns={columns} options={options} /> */}
+                        <TableCell sx={{ ...sxTd, fontWeight: 600 }}>{p.nombre}</TableCell>
+
+                        <TableCell sx={{ ...sxTd, textAlign: "right", whiteSpace: "nowrap" }}>
+                          ${formatMoney(p.monto)}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+
+                {pagosFiltrados.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={10} sx={{ ...sxTd, textAlign: "center", color: COLOR_MUTED, py: 4 }}>
+                      No hay pagos para mostrar. Elegí un rango de fechas y tocá Buscar.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          <TablePagination
+            component="div"
+            count={pagosFiltrados.length}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            onPageChange={(e, newPage) => setPage(newPage)}
+            onRowsPerPageChange={(e) => {
+              setRowsPerPage(parseInt(e.target.value, 10));
+              setPage(0);
+            }}
+            rowsPerPageOptions={[5, 10, 20, 50]}
+            labelRowsPerPage="Filas por página:"
+            sx={{
+              borderTop: `1px solid ${COLOR_BORDER}`,
+              "& .MuiTablePagination-toolbar": { minHeight: 48 },
+              "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows": {
+                fontSize: 13,
+                color: COLOR_MUTED,
+              },
+            }}
+          />
         </Paper>
       </Box>
+
 
       {/* ===== VISTA SOLO IMPRESIÓN ===== */}
       <div id="print-area" style={{ display: "none" }}>

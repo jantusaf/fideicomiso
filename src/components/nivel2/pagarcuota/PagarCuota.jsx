@@ -234,7 +234,7 @@ export default function PagarCuota() {
             overflow: 'hidden',
           }}
         >
-          <Box sx={{ height: 4, background: `linear-gradient(90deg, ${COLOR_TEXT}, ${COLOR_ACCENT})` }} />
+          <Box sx={{ height: 4, backgroundColor: COLOR_TEXT }} />
           <Box sx={{ p: { xs: 3, sm: 5 } }}>
 
             <Stack direction="row" spacing={2} sx={{ alignItems: "center", mb: 0.5 }}>

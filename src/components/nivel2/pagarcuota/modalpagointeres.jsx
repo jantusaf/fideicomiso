@@ -141,7 +141,7 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(0,0,0,0.55)",
+    backgroundColor: "rgba(15,34,48,0.45)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -151,17 +151,18 @@ const styles = {
   modal: {
     background: "#fff",
     borderRadius: 14,
-    minWidth: 320,
-    boxShadow: "0 15px 35px rgba(1,86,124,0.35)",
+    minWidth: 340,
+    boxShadow: "0 20px 50px rgba(15,34,48,0.25)",
     overflow: "hidden",
   },
 
   header: {
-    background: "linear-gradient(135deg, #148D8D, #01567c)",
-    color: "#fff",
-    fontWeight: 900,
-    padding: "12px 16px",
+    background: "#fff",
+    color: "#1a303e",
+    fontWeight: 700,
+    padding: "14px 18px",
     fontSize: 16,
+    borderBottom: "1px solid #e2e6e9",
   },
 
   body: {
@@ -169,9 +170,9 @@ const styles = {
   },
 
   label: {
-    fontWeight: 800,
+    fontWeight: 600,
     fontSize: 13,
-    color: "#01567c",
+    color: "#1a303e",
     display: "block",
     marginTop: 10,
     marginBottom: 6,
@@ -181,8 +182,8 @@ const styles = {
     width: "100%",
     padding: "8px 10px",
     borderRadius: 8,
-    border: "1px solid #148D8D",
-    fontWeight: 700,
+    border: "1px solid #c9d2d8",
+    fontWeight: 500,
   },
 
   botones: {
@@ -194,21 +195,20 @@ const styles = {
 
   botonEnviar: {
     borderRadius: 8,
-    background: "linear-gradient(135deg, #148D8D, #01567c)",
+    background: "#1a303e",
     color: "#fff",
-    fontWeight: 900,
+    fontWeight: 600,
     border: "none",
-    padding: "8px 14px",
+    padding: "8px 16px",
     cursor: "pointer",
-    boxShadow: "0 8px 20px rgba(1,86,124,0.25)",
   },
 
   botonCerrar: {
     borderRadius: 8,
     background: "#fff",
-    border: "1px solid #01567c",
-    color: "#01567c",
-    fontWeight: 800,
+    border: "1px solid #c9d2d8",
+    color: "#1a303e",
+    fontWeight: 600,
     padding: "8px 14px",
     cursor: "pointer",
   },

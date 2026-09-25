@@ -20,6 +20,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Skeleton from "@mui/material/Skeleton";
 import { styled, alpha } from "@mui/material/styles";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, COLOR_OK, COLOR_ERROR, sxCard, sxBtnPrimary, sxBtnOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions } from "../detalleclienteIngresos/estilos";
 
 import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
@@ -31,12 +32,12 @@ import MenuItem from "@mui/material/MenuItem";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#064B63",
-    color: "#fff",
-    fontWeight: 900,
-    fontSize: 12,
-    letterSpacing: 0.25,
-    borderBottom: "0px",
+    backgroundColor: "#f6f8f9",
+    color: COLOR_TEXT,
+    fontWeight: 700,
+    fontSize: 11.5,
+    letterSpacing: 0.4,
+    borderBottom: `1px solid ${COLOR_BORDER}`,
     whiteSpace: "nowrap",
     paddingTop: 10,
     paddingBottom: 10,
@@ -45,9 +46,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 13,
-    fontWeight: 650,
-    color: "#0b2b3a",
-    borderBottom: `1px solid ${alpha("#01567c", 0.10)}`,
+    fontWeight: 500,
+    color: COLOR_TEXT,
+    borderBottom: "1px solid #eef1f3",
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 10,
@@ -65,11 +66,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(even)": {
-    backgroundColor: alpha("#148D8D", 0.04),
-  },
   "&:hover td": {
-    backgroundColor: `${alpha("#148D8D", 0.08)} !important`,
+    backgroundColor: "rgba(13, 58, 73, 0.03) !important",
   },
   "&:last-child td, &:last-child th": {
     border: 0,
@@ -208,22 +206,13 @@ const Lotes = (props) => {
       {/* ===== HEADER CARD ===== */}
       <Paper
         elevation={0}
-        sx={{
-          borderRadius: 4,
-          overflow: "hidden",
-          border: `1px solid ${alpha("#0b4f6c", 0.14)}`,
-          background: "rgba(255,255,255,0.92)",
-          backdropFilter: "blur(10px)",
-          boxShadow: "0 22px 55px rgba(15, 127, 134, 0.10)",
-        }}
+        sx={{ ...sxCard, overflow: "hidden" }}
       >
         <Box
           sx={{
             px: { xs: 2, md: 3 },
             py: { xs: 2, md: 2.5 },
-            background:
-              "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-            color: "#fff",
+            color: COLOR_TEXT,
             display: "flex",
             alignItems: { xs: "flex-start", md: "center" },
             justifyContent: "space-between",
@@ -234,22 +223,21 @@ const Lotes = (props) => {
           <Box>
             <Typography
               sx={{
-                fontWeight: 900,
-                fontSize: { xs: 18, md: 22 },
-                lineHeight: 1.1,
-                textShadow: "0 2px 10px rgba(0,0,0,0.35)",
+                fontWeight: 700,
+                fontSize: 18,
+                lineHeight: 1.2,
+                color: COLOR_TEXT,
               }}
             >
-              CUADRO DE CUOTAS
+              Cuadro de cuotas
             </Typography>
 
             <Typography
               sx={{
                 mt: 0.35,
-                fontWeight: 650,
-                opacity: 0.9,
-                fontSize: 14,
-                textShadow: "0 1px 6px rgba(0,0,0,0.25)",
+                fontWeight: 400,
+                color: COLOR_MUTED,
+                fontSize: 13.5,
               }}
             >
               Seleccioná un cliente para ver sus cuotas.
@@ -274,25 +262,7 @@ const Lotes = (props) => {
                 maxWidth: "100%",
                 flexShrink: 0,
                 minWidth: 0,
-                "& .MuiInputLabel-root": {
-                  color: alpha("#0b4f6c", 0.85),
-                  fontWeight: 800,
-                },
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: 2,
-                  background: "rgba(255,255,255,0.92)",
-                  boxShadow: "0 12px 22px rgba(11,79,108,0.10)",
-                  "& fieldset": {
-                    borderColor: alpha("#0b4f6c", 0.18),
-                  },
-                  "&:hover fieldset": {
-                    borderColor: alpha("#0b4f6c", 0.35),
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "#148D8D",
-                    borderWidth: 2,
-                  },
-                },
+                "& .MuiOutlinedInput-root": { borderRadius: 1.5 },
               }}
             >
               <InputLabel id="cliente-select-label">Cliente</InputLabel>
@@ -338,8 +308,8 @@ const Lotes = (props) => {
                     sx: {
                       borderRadius: 2,
                       mt: 1,
-                      border: `1px solid ${alpha("#0b4f6c", 0.12)}`,
-                      boxShadow: "0 18px 40px rgba(0,0,0,0.12)",
+                      border: `1px solid ${COLOR_BORDER}`,
+                      boxShadow: "0 12px 30px rgba(15, 34, 48, 0.12)",
                       maxWidth: 360,
                       overflowX: "hidden",
                     },
@@ -362,13 +332,12 @@ const Lotes = (props) => {
               <Box
                 sx={{
                   px: 1.25,
-                  py: 0.75,
+                  py: 0.5,
                   borderRadius: 999,
-                  fontWeight: 900,
+                  fontWeight: 600,
                   fontSize: 12.5,
-                  color: "#0b4f6c",
-                  background: alpha("#0f7f86", 0.10),
-                  border: `1px solid ${alpha("#0f7f86", 0.16)}`,
+                  color: COLOR_TEXT,
+                  border: `1px solid ${COLOR_BORDER}`,
                 }}
               >
                 Registros: {filteredCuotas?.length || 0}
@@ -376,22 +345,14 @@ const Lotes = (props) => {
             </Box>
           </Box>
 
-          <Divider sx={{ mt: 2, borderColor: alpha("#0b4f6c", 0.12) }} />
+          <Divider sx={{ mt: 2, borderColor: COLOR_BORDER }} />
         </Box>
       </Paper>
 
       {/* ===== CONTENIDO ===== */}
       <Paper
         elevation={0}
-        sx={{
-          mt: { xs: 2, md: 3 },
-          borderRadius: 4,
-          overflow: "hidden",
-          border: `1px solid ${alpha("#01567c", 0.12)}`,
-          background: "rgba(255,255,255,0.92)",
-          backdropFilter: "blur(10px)",
-          boxShadow: "0 22px 55px rgba(20, 141, 141, 0.10)",
-        }}
+        sx={{ ...sxCard, mt: { xs: 2, md: 3 }, overflow: "hidden" }}
       >
         {!cuotas ? (
           <Box sx={{ p: 2 }}>
@@ -410,74 +371,69 @@ const Lotes = (props) => {
                     return (
                       <Paper
                         elevation={0}
-                        sx={{
-                          borderRadius: 3,
-                          overflow: "hidden",
-                          border: `1px solid ${alpha("#0b4f6c", 0.12)}`,
-                          background: "#fff",
-                          boxShadow: "0 18px 45px rgba(0,0,0,0.06)",
-                        }}
+                        sx={{ ...sxCard, overflow: "hidden", boxShadow: "none" }}
                       >
                         <Box
                           sx={{
                             px: 2.2,
                             py: 1.3,
-                            backgroundColor: "#064B63",
-                            color: "#fff",
+                            backgroundColor: "#f6f8f9",
+                            color: COLOR_TEXT,
+                            borderBottom: `1px solid ${COLOR_BORDER}`,
                           }}
                         >
-                          <Typography sx={{ fontWeight: 900 }}>
+                          <Typography sx={{ fontWeight: 700, fontSize: 14 }}>
                             Estado Financiero del Cliente {selectedClient}
                           </Typography>
                         </Box>
 
                         <Box sx={{ p: 2, display: "grid", gap: 1.1 }}>
                           <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
-                            <Typography sx={{ fontWeight: 700, color: "#0b2b3a" }}>
+                            <Typography sx={{ fontWeight: 500, color: COLOR_TEXT }}>
                               Cuotas calculadas
                             </Typography>
-                            <Typography sx={{ fontWeight: 900, color: "#0b4f6c" }}>
+                            <Typography sx={{ fontWeight: 700, color: COLOR_TEXT }}>
                               {resumen.cuotasCalculadas}
                             </Typography>
                           </Box>
 
                           <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
-                            <Typography sx={{ fontWeight: 700, color: "#0b2b3a" }}>
+                            <Typography sx={{ fontWeight: 500, color: COLOR_TEXT }}>
                               Cuotas no calculadas
                             </Typography>
-                            <Typography sx={{ fontWeight: 900, color: "#0b4f6c" }}>
+                            <Typography sx={{ fontWeight: 700, color: COLOR_TEXT }}>
                               {resumen.cuotasNoCalculadas}
                             </Typography>
                           </Box>
 
-                          <Divider sx={{ borderColor: alpha("#01567c", 0.12) }} />
+                          <Divider sx={{ borderColor: COLOR_BORDER }} />
 
                           <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
-                            <Typography sx={{ fontWeight: 700, color: "#0b2b3a" }}>
+                            <Typography sx={{ fontWeight: 500, color: COLOR_TEXT }}>
                               Total Pagado
                             </Typography>
-                            <Typography sx={{ fontWeight: 900, color: "#148D8D" }}>
+                            <Typography sx={{ fontWeight: 700, color: COLOR_OK }}>
                               ${resumen.totalPagado}
                             </Typography>
                           </Box>
 
                           <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
-                            <Typography sx={{ fontWeight: 700, color: "#0b2b3a" }}>
+                            <Typography sx={{ fontWeight: 500, color: COLOR_TEXT }}>
                               Total Cuotas con Ajuste
                             </Typography>
-                            <Typography sx={{ fontWeight: 900, color: "#148D8D" }}>
+                            <Typography sx={{ fontWeight: 700, color: COLOR_OK }}>
                               ${new Intl.NumberFormat("de-DE").format(resumen.totalCuotas)}
                             </Typography>
                           </Box>
 
                           <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
-                            <Typography sx={{ fontWeight: 800, color: "#0b2b3a" }}>
+                            <Typography sx={{ fontWeight: 600, color: COLOR_TEXT }}>
                               Diferencia
                             </Typography>
                             <Typography
                               sx={{
                                 fontWeight: 900,
-                                color: parseFloat(resumen.diferencia) < 0 ? "crimson" : "#148D8D",
+                                color: parseFloat(resumen.diferencia) < 0 ? COLOR_ERROR : COLOR_OK,
                               }}
                             >
                               ${resumen.diferencia}
@@ -503,8 +459,8 @@ const Lotes = (props) => {
                 <Box sx={{ px: { xs: 1.5, md: 2 }, pt: 2, pb: 2 }}>
                   <Box
                     sx={{
-                      borderRadius: 3,
-                      border: `1px solid ${alpha("#01567c", 0.10)}`,
+                      borderRadius: 2,
+                      border: `1px solid ${COLOR_BORDER}`,
                       overflow: "hidden",
                       background: "#fff",
                     }}
@@ -516,7 +472,7 @@ const Lotes = (props) => {
                         overflowX: "hidden", // ✅ sin scroll horizontal
                         "&::-webkit-scrollbar": { width: 10 },
                         "&::-webkit-scrollbar-thumb": {
-                          background: alpha("#0b4f6c", 0.28),
+                          background: alpha("#0d3a49", 0.25),
                           borderRadius: 999,
                         },
                       }}
@@ -580,7 +536,7 @@ const Lotes = (props) => {
                               <StyledTableCell>
                                 {row.excedente < 0 ? (
                                   <Box sx={{ display: "flex", flexDirection: "column", gap: 0.2 }}>
-                                    <Typography sx={{ fontWeight: 900, color: "crimson" }}>
+                                    <Typography sx={{ fontWeight: 900, color: COLOR_ERROR }}>
                                       {new Intl.NumberFormat("de-DE").format(row.excedente)}
                                     </Typography>
 
@@ -596,7 +552,7 @@ const Lotes = (props) => {
                                     })()}
                                   </Box>
                                 ) : (
-                                  <Typography sx={{ fontWeight: 900, color: "#148D8D" }}>
+                                  <Typography sx={{ fontWeight: 700, color: COLOR_OK }}>
                                     {new Intl.NumberFormat("de-DE").format(row.excedente)}
                                   </Typography>
                                 )}
@@ -623,7 +579,7 @@ const Lotes = (props) => {
                                         fontSize: "0.72rem",
                                         fontWeight: 900,
                                         textTransform: "none",
-                                        boxShadow: "0 8px 14px rgba(0,0,0,0.08)",
+                                        boxShadow: "none",
                                         whiteSpace: "nowrap",
                                       },
                                     }}
@@ -655,13 +611,15 @@ const Lotes = (props) => {
                                       px: 1.1,
                                       py: 0.35,
                                       minHeight: 26,
-                                      borderRadius: 2,
+                                      borderRadius: 1.5,
                                       textTransform: "none",
-                                      fontWeight: 900,
+                                      fontWeight: 600,
                                       fontSize: "0.72rem",
-                                      backgroundColor: "#0f7f86",
-                                      boxShadow: "0 8px 14px rgba(20,141,141,0.16)",
-                                      "&:hover": { backgroundColor: "#0c6b71" },
+                                      backgroundColor: "#fff",
+                                      color: COLOR_TEXT,
+                                      border: "1px solid #c9d2d8",
+                                      boxShadow: "none",
+                                      "&:hover": { backgroundColor: "rgba(13, 58, 73, 0.04)", borderColor: COLOR_ACCENT, boxShadow: "none" },
                                       whiteSpace: "nowrap",
                                     }}
                                     onClick={() => abrirCompensar(row.id)}
@@ -681,14 +639,14 @@ const Lotes = (props) => {
                                     px: 1.1,
                                     py: 0.35,
                                     minHeight: 26,
-                                    borderRadius: 2,
+                                    borderRadius: 1.5,
                                     textTransform: "none",
-                                    fontWeight: 900,
+                                    fontWeight: 600,
                                     fontSize: "0.72rem",
-                                    background: "#0b4f6c",
-                                    boxShadow: "0 8px 14px rgba(11,79,108,0.14)",
+                                    background: COLOR_TEXT,
+                                    boxShadow: "none",
                                     whiteSpace: "nowrap",
-                                    "&:hover": { background: "#0a3b4f" },
+                                    "&:hover": { background: COLOR_ACCENT, boxShadow: "none" },
                                   }}
                                 >
                                   Ver
@@ -717,67 +675,17 @@ const Lotes = (props) => {
         onClose={cerrarCompensar}
         maxWidth="sm"
         fullWidth
-        PaperProps={{
-          sx: {
-            borderRadius: 4,
-            overflow: "hidden",
-            background: "rgba(255,255,255,0.94)",
-            backdropFilter: "blur(10px)",
-            boxShadow: "0 28px 80px rgba(0,0,0,0.28)",
-          },
-        }}
-        BackdropProps={{
-          sx: {
-            backgroundColor: "rgba(0,0,0,0.55)",
-            backdropFilter: "blur(6px)",
-          },
-        }}
+        slotProps={slotPropsDialog}
       >
-        <DialogTitle
-          sx={{
-            px: 3,
-            py: 2.2,
-            color: "#fff",
-            fontWeight: 900,
-            letterSpacing: 0.2,
-            background:
-              "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-            textShadow: "0 2px 10px rgba(0,0,0,0.35)",
-          }}
-        >
+        <DialogTitle sx={sxDialogTitle}>
           Compensar cuota IC3
         </DialogTitle>
 
-        <DialogContent
-          dividers
-          sx={{
-            px: 3,
-            py: 2.5,
-            background:
-              "linear-gradient(180deg, rgba(20,141,141,0.06) 0%, rgba(255,255,255,0.96) 55%, #fff 100%)",
-            borderColor: alpha("#0b4f6c", 0.10),
-          }}
-        >
+        <DialogContent sx={{ px: 3, py: 2.5 }}>
           <FormControl
             fullWidth
             size="small"
-            sx={{
-              "& .MuiInputLabel-root": {
-                color: alpha("#0b4f6c", 0.85),
-                fontWeight: 900,
-              },
-              "& .MuiOutlinedInput-root": {
-                borderRadius: 2,
-                background: "rgba(255,255,255,0.92)",
-                boxShadow: "0 12px 22px rgba(11,79,108,0.10)",
-                "& fieldset": { borderColor: alpha("#0b4f6c", 0.18) },
-                "&:hover fieldset": { borderColor: alpha("#0b4f6c", 0.35) },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#148D8D",
-                  borderWidth: 2,
-                },
-              },
-            }}
+            sx={{ mt: 1, "& .MuiOutlinedInput-root": { borderRadius: 1.5 } }}
           >
             <InputLabel>Seleccione cuota destino</InputLabel>
 
@@ -790,8 +698,8 @@ const Lotes = (props) => {
                   sx: {
                     borderRadius: 2,
                     mt: 1,
-                    border: `1px solid ${alpha("#0b4f6c", 0.12)}`,
-                    boxShadow: "0 18px 45px rgba(0,0,0,0.14)",
+                    border: `1px solid ${COLOR_BORDER}`,
+                    boxShadow: "0 12px 30px rgba(15, 34, 48, 0.12)",
                     overflow: "hidden",
                     maxWidth: "100%",
                   },
@@ -814,13 +722,13 @@ const Lotes = (props) => {
                       key={c.id}
                       value={c.id}
                       sx={{
-                        fontWeight: 850,
-                        color: "#0b2b3a",
+                        fontWeight: 500,
+                        color: COLOR_TEXT,
                         "&.Mui-selected": {
-                          backgroundColor: alpha("#148D8D", 0.12),
+                          backgroundColor: "rgba(13, 58, 73, 0.08)",
                         },
                         "&.Mui-selected:hover": {
-                          backgroundColor: alpha("#148D8D", 0.16),
+                          backgroundColor: "rgba(13, 58, 73, 0.12)",
                         },
                       }}
                     >
@@ -835,8 +743,8 @@ const Lotes = (props) => {
               sx={{
                 mt: 1.2,
                 fontSize: 12.5,
-                fontWeight: 750,
-                color: alpha("#0b4f6c", 0.75),
+                fontWeight: 400,
+                color: COLOR_MUTED,
               }}
             >
               Elegí la cuota destino para compensar la cuota seleccionada.
@@ -844,51 +752,12 @@ const Lotes = (props) => {
           </FormControl>
         </DialogContent>
 
-        <DialogActions
-          sx={{
-            px: 3,
-            py: 2,
-            backgroundColor: "rgba(255,255,255,0.92)",
-            borderTop: `1px solid ${alpha("#0b4f6c", 0.10)}`,
-            gap: 1,
-          }}
-        >
-          <Button
-            onClick={cerrarCompensar}
-            variant="outlined"
-            sx={{
-              borderRadius: 2,
-              textTransform: "none",
-              fontWeight: 900,
-              px: 2.2,
-              py: 1.05,
-              borderColor: alpha("#0b4f6c", 0.35),
-              color: "#0b4f6c",
-              "&:hover": {
-                borderColor: alpha("#0b4f6c", 0.55),
-                backgroundColor: alpha("#0b4f6c", 0.06),
-              },
-            }}
-          >
+        <DialogActions sx={sxDialogActions}>
+          <Button onClick={cerrarCompensar} variant="outlined" sx={sxBtnOutlined}>
             Cancelar
           </Button>
 
-          <Button
-            variant="contained"
-            onClick={confirmarCompensar}
-            sx={{
-              borderRadius: 2,
-              textTransform: "none",
-              fontWeight: 900,
-              px: 2.2,
-              py: 1.05,
-              background: "linear-gradient(135deg, #148D8D 0%, #01567c 100%)",
-              boxShadow: "0 12px 26px rgba(1,86,124,0.22)",
-              "&:hover": {
-                background: "linear-gradient(135deg, #0f7a7a 0%, #014a6b 100%)",
-              },
-            }}
-          >
+          <Button variant="contained" onClick={confirmarCompensar} sx={sxBtnPrimary}>
             Aceptar
           </Button>
         </DialogActions>

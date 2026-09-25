@@ -8,7 +8,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Tooltip from "@mui/material/Tooltip";
 import { useDropzone } from 'react-dropzone';
-import { Box, Typography, alpha } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_OK, sxBtnPrimary, sxBtnOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions } from "./../detalleclienteIngresos/estilos";
 
 import serviciousuario1 from '../../../services/usuario1';
 
@@ -89,234 +90,110 @@ export default function FormDialog(props) {
       <Tooltip title="Clasificar" arrow>
         <Button
           onClick={handleClickOpen}
-          variant="contained"
+          variant="outlined"
           size="small"
-          disableElevation
-          sx={{
-            px: 1.6,
-            borderRadius: 2,
-            textTransform: "none",
-            fontWeight: 900,
-            backgroundColor: "#148D8D",
-            boxShadow: "0 10px 20px rgba(20,141,141,0.18)",
-            "&:hover": { backgroundColor: "#0f6f6f" },
-            transition: "0.2s ease",
-            whiteSpace: "nowrap",
-            ...(props.sx || {}), // permite que tu tabla le pase estilos
-          }}
+          sx={{ ...sxBtnOutlined, px: 1.75, whiteSpace: "nowrap", ...(props.sx || {}) }}
         >
           Atender
         </Button>
       </Tooltip>
 
-
-    <Dialog
-  open={open}
-  onClose={handleClose}
-  fullWidth
-  maxWidth="sm"
-  PaperProps={{
-    sx: {
-      borderRadius: 4,
-      overflow: "hidden",
-      background: "rgba(255,255,255,0.94)",
-      backdropFilter: "blur(10px)",
-      boxShadow: "0 22px 55px rgba(15, 127, 134, 0.18)",
-    
-    },
-  }}
->
-  {/* HEADER con gradiente (estilo como tus cards) */}
-  <DialogTitle
-    sx={{
-      px: { xs: 2, md: 3 },
-      py: { xs: 2, md: 2.25 },
-      background:
-        "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-      color: "#fff",
-      fontWeight: 900,
-      letterSpacing: 0.2,
-      
-    }}
-  >
-    Clasificación del pago
-    <Typography sx={{ mt: 0.5, opacity: 0.92, fontWeight: 650, fontSize: 13 }}>
-      Cargá el motivo y adjuntá documentación (PDF) si corresponde.
-    </Typography>
-  </DialogTitle>
-
-  <DialogContent
-    sx={{
-      p: { xs: 2, md: 3, },
-      background:
-        "linear-gradient(180deg, rgba(10,59,79,0.05) 0%, rgba(15,127,134,0.04) 50%, rgba(255,255,255,0.94) 100%)",
-    }}
-  >
-    <form onSubmit={handleSubmit}>
-      {/* Campo detalle */}
-      <TextField
-        margin="dense"
-        id="detalle"
-        name="detalle"
-        label="Detalle del motivo"
-        placeholder="Ingrese una descripción (máx. 256 caracteres)"
-        multiline
-        rows={4}
-        value={form.detalle}
-        onChange={handleChange}
+      <Dialog
+        open={open}
+        onClose={handleClose}
         fullWidth
-        inputProps={{ maxLength: 256 }}
-        variant="outlined"
-        sx={{
-          mt: 2.5,
-          "& .MuiOutlinedInput-root": {
-            borderRadius: 3,
-            backgroundColor: "rgba(255,255,255,0.92)",
-            boxShadow: "0 10px 24px rgba(1, 86, 124, 0.08)",
-            transition: "0.2s ease",
-            "& fieldset": {
-              borderColor: alpha("#01567c", 0.22),
-            },
-            "&:hover fieldset": {
-              borderColor: alpha("#148D8D", 0.45),
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: "#148D8D",
-              borderWidth: 2,
-            },
-          },
-          "& .MuiInputLabel-root": {
-            fontWeight: 750,
-            color: alpha("#0b2b3a", 0.72),
-          },
-          "& .MuiInputLabel-root.Mui-focused": {
-            color: "#148D8D",
-          },
-        }}
-      />
-
-      {/* Contador */}
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          mt: 0.75,
-          fontSize: "0.85rem",
-          fontWeight: 750,
-          color: alpha("#0b2b3a", 0.65),
-        }}
+        maxWidth="sm"
+        slotProps={slotPropsDialog}
       >
-        Caracteres: {form.detalle.length} / 256
-      </Box>
+        <DialogTitle sx={sxDialogTitle}>
+          Clasificación del pago
+          <Typography sx={{ mt: 0.5, color: COLOR_MUTED, fontWeight: 500, fontSize: 13 }}>
+            Cargá el motivo y adjuntá documentación (PDF) si corresponde.
+          </Typography>
+        </DialogTitle>
 
-      {/* Dropzone PDF */}
-      <Box
-        {...getRootProps()}
-        sx={{
-          mt: 2,
-          borderRadius: 3,
-          border: `2px dashed ${alpha("#01567c", 0.28)}`,
-          background: "rgba(255,255,255,0.85)",
-          p: 2,
-          textAlign: "center",
-          cursor: "pointer",
-          transition: "0.2s ease",
-          boxShadow: "0 12px 28px rgba(20,141,141,0.10)",
-          "&:hover": {
-            borderColor: alpha("#148D8D", 0.55),
-            transform: "translateY(-1px)",
-            boxShadow: "0 16px 34px rgba(20,141,141,0.16)",
-          },
-          userSelect: "none",
-        }}
-      >
-        <input {...getInputProps()} />
+        <form onSubmit={handleSubmit}>
+          <DialogContent sx={{ px: 3, py: 2 }}>
+            <TextField
+              margin="dense"
+              id="detalle"
+              name="detalle"
+              label="Detalle del motivo"
+              placeholder="Ingrese una descripción (máx. 256 caracteres)"
+              multiline
+              rows={4}
+              value={form.detalle}
+              onChange={handleChange}
+              fullWidth
+              slotProps={{ htmlInput: { maxLength: 256 } }}
+              variant="outlined"
+              sx={{ mt: 1.5, "& .MuiOutlinedInput-root": { borderRadius: 1.5 } }}
+            />
 
-        <Typography sx={{ fontWeight: 900, color: "#01567c" }}>
-          {fileUpload ? "PDF listo para enviar" : "Adjuntar documentación (PDF)"}
-        </Typography>
+            <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 0.75, fontSize: 12.5, color: COLOR_MUTED }}>
+              Caracteres: {form.detalle.length} / 256
+            </Box>
 
-        <Typography sx={{ mt: 0.5, fontWeight: 650, color: alpha("#0b2b3a", 0.7) }}>
-          {fileUpload ? `Archivo seleccionado: ${fileUpload.name}` : "Arrastrá un PDF acá, o hacé clic para seleccionar"}
-        </Typography>
+            {/* Dropzone PDF */}
+            <Box
+              {...getRootProps()}
+              sx={{
+                mt: 2,
+                borderRadius: 2,
+                border: `1px dashed #b7c2c9`,
+                backgroundColor: "#f9fafb",
+                p: 2.25,
+                textAlign: "center",
+                cursor: "pointer",
+                transition: "border-color .15s ease, background-color .15s ease",
+                "&:hover": { borderColor: COLOR_ACCENT, backgroundColor: "#f4f7f8" },
+                userSelect: "none",
+              }}
+            >
+              <input {...getInputProps()} />
 
-        {/* mini “badge” opcional */}
-        {fileUpload && (
-          <Box
-            sx={{
-              mt: 1.2,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 1,
-              px: 1.25,
-              py: 0.6,
-              borderRadius: 999,
-              fontWeight: 900,
-              fontSize: 12,
-              color: "#0f7f86",
-              background: alpha("#148D8D", 0.12),
-              border: `1px solid ${alpha("#148D8D", 0.25)}`,
-            }}
-          >
-            Documento adjuntado
-          </Box>
-        )}
-      </Box>
+              <Typography sx={{ fontWeight: 600, fontSize: 14, color: COLOR_TEXT }}>
+                {fileUpload ? "PDF listo para enviar" : "Adjuntar documentación (PDF)"}
+              </Typography>
 
-      <DialogActions
-        sx={{
-          px: 0,
-          pt: 2.2,
-          display: "flex",
-          gap: 1.2,
-          justifyContent: "flex-end",
-        }}
-      >
-        <Button
-          onClick={handleClose}
-          variant="outlined"
-          sx={{
-            textTransform: "none",
-            fontWeight: 900,
-            borderRadius: 999,
-            px: 2.2,
-            borderColor: alpha("#01567c", 0.35),
-            color: "#01567c",
-            "&:hover": {
-              borderColor: alpha("#148D8D", 0.75),
-              backgroundColor: alpha("#148D8D", 0.06),
-            },
-          }}
-        >
-          Cancelar
-        </Button>
+              <Typography sx={{ mt: 0.5, fontSize: 13, color: COLOR_MUTED }}>
+                {fileUpload
+                  ? `Archivo seleccionado: ${fileUpload.name}`
+                  : "Arrastrá un PDF acá, o hacé clic para seleccionar"}
+              </Typography>
 
-        <Button
-          type="submit"
-          variant="contained"
-          disableElevation
-          sx={{
-            textTransform: "none",
-            fontWeight: 900,
-            borderRadius: 999,
-            px: 2.4,
-            color: "#fff",
-            background: "linear-gradient(90deg, #01567c 0%, #148D8D 100%)",
-            boxShadow: "0 12px 26px rgba(20,141,141,0.22)",
-            "&:hover": {
-              transform: "translateY(-1px)",
-              boxShadow: "0 16px 34px rgba(20,141,141,0.30)",
-            },
-            transition: "0.2s ease",
-          }}
-        >
-          Confirmar clasificación
-        </Button>
-      </DialogActions>
-    </form>
-  </DialogContent>
-</Dialog>
+              {fileUpload && (
+                <Box
+                  sx={{
+                    mt: 1.25,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    px: 1.25,
+                    py: 0.4,
+                    borderRadius: 999,
+                    fontWeight: 600,
+                    fontSize: 12,
+                    color: COLOR_OK,
+                    border: `1px solid ${COLOR_OK}`,
+                  }}
+                >
+                  Documento adjuntado
+                </Box>
+              )}
+            </Box>
+          </DialogContent>
 
+          <DialogActions sx={sxDialogActions}>
+            <Button onClick={handleClose} variant="outlined" sx={sxBtnOutlined}>
+              Cancelar
+            </Button>
+
+            <Button type="submit" variant="contained" disableElevation sx={sxBtnPrimary}>
+              Confirmar clasificación
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
     </div>
   );
 }

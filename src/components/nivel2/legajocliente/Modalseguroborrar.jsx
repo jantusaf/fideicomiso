@@ -88,7 +88,7 @@ export default function SelectTextFields(props) {
       autoComplete="off"
     >
        < Tooltip title="Leer">
-      <DeleteForeverIcon variant="outlined" onClick={handleClickOpen}/>
+      <DeleteForeverIcon fontSize="small" onClick={handleClickOpen} sx={{ cursor: "pointer", color: "#6b7a86", "&:hover": { color: "#c62828" } }} />
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>

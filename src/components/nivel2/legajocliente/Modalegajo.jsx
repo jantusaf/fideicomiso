@@ -20,6 +20,7 @@ import { useDropzone } from "react-dropzone";
 import { useParams } from "react-router-dom";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import servicioLegajo from "../../../services/legajos";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_OK, COLOR_ERROR, sxBtnPrimary, sxBtnOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions } from "../detalleclienteIngresos/estilos";
 
 export default function FormDialog(props) {
   const params = useParams();
@@ -201,22 +202,17 @@ export default function FormDialog(props) {
       <Button
         variant="contained"
         onClick={abrirModal}
-        sx={{
-          borderRadius: "20px",
-          background: "#1f7a8c",
-          textTransform: "none",
-          fontWeight: "bold"
-        }}
+        sx={sxBtnPrimary}
       >
-        + Agregar Legajo
+        + Agregar legajo
       </Button>
 
-      <Dialog open={open} onClose={cerrarModal} maxWidth="sm" fullWidth>
-        <DialogTitle sx={{ fontWeight: "bold" }}>
-          📄 Nuevo Legajo
+      <Dialog open={open} onClose={cerrarModal} maxWidth="sm" fullWidth slotProps={slotPropsDialog}>
+        <DialogTitle sx={sxDialogTitle}>
+          Nuevo legajo
         </DialogTitle>
 
-        <DialogContent>
+        <DialogContent sx={{ px: 3, pb: 1 }}>
           <FormControl fullWidth sx={{ mt: 2 }}>
             <InputLabel>Tipo de documento</InputLabel>
 
@@ -225,7 +221,7 @@ export default function FormDialog(props) {
               value={legform.tipo}
               onChange={handleChange}
               label="Tipo de documento"
-              sx={{ borderRadius: "12px" }}
+              sx={{ borderRadius: 1.5 }}
             >
               <MenuItem value="">Elegir</MenuItem>
 
@@ -234,7 +230,7 @@ export default function FormDialog(props) {
                   key={documento.value}
                   value={documento.value}
                   sx={{
-                    color: esTipoExistente(documento.value) ? "blue" : "red"
+                    color: esTipoExistente(documento.value) ? "#1565c0" : COLOR_ERROR
                   }}
                 >
                   {documento.label}
@@ -248,30 +244,33 @@ export default function FormDialog(props) {
               {...getRootProps()}
               sx={{
                 mt: 3,
-                p: 4,
+                p: 3.5,
                 textAlign: "center",
-                borderRadius: "16px",
-                border: "2px dashed #1f7a8c",
-                background: "#f8fafc",
+                borderRadius: 2,
+                boxShadow: "none",
+                border: "1px dashed #b7c2c9",
+                background: "#f9fafb",
+                color: COLOR_TEXT,
                 cursor: "pointer",
-                transition: "0.3s",
+                transition: "border-color .15s ease, background-color .15s ease",
                 "&:hover": {
-                  background: "#eef6f8"
+                  borderColor: COLOR_ACCENT,
+                  background: "#f4f7f8"
                 }
               }}
             >
               <input {...getInputProps()} />
 
-              <CloudUploadIcon sx={{ fontSize: 40, color: "#1f7a8c" }} />
+              <CloudUploadIcon sx={{ fontSize: 36, color: COLOR_ACCENT }} />
 
-              <p style={{ marginTop: 10 }}>
+              <p style={{ marginTop: 10, fontSize: 14, color: COLOR_MUTED }}>
                 {isDragActive
                   ? "Soltá el archivo acá"
                   : "Arrastrá o hacé click para subir"}
               </p>
 
               {fileUpload && (
-                <p style={{ color: "green", fontWeight: "bold" }}>
+                <p style={{ color: COLOR_OK, fontWeight: 600, fontSize: 13.5 }}>
                   Archivo seleccionado: {fileUpload.name}
                 </p>
               )}
@@ -291,8 +290,8 @@ export default function FormDialog(props) {
           )}
         </DialogContent>
 
-        <DialogActions sx={{ p: 2 }}>
-          <Button onClick={cerrarModal} disabled={cargando}>
+        <DialogActions sx={sxDialogActions}>
+          <Button onClick={cerrarModal} disabled={cargando} variant="outlined" sx={sxBtnOutlined}>
             Cancelar
           </Button>
 
@@ -302,11 +301,7 @@ export default function FormDialog(props) {
             <Button
               onClick={enviar}
               variant="contained"
-              sx={{
-                borderRadius: "20px",
-                background: "#1f7a8c",
-                textTransform: "none"
-              }}
+              sx={sxBtnPrimary}
             >
               Guardar
             </Button>

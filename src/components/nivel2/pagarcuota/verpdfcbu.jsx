@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
+import { sxBtnOutlined } from "../detalleclienteIngresos/estilos";
 import servicioLegajos from '../../../services/legajos'; // Ajusta la ruta según sea necesario
 
 const PdfViewer = ({ id }) => {
@@ -17,7 +18,7 @@ const PdfViewer = ({ id }) => {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" size="small" onClick={handleClickOpen} sx={{ ...sxBtnOutlined, px: 1.75, whiteSpace: "nowrap" }}>
         Ver PDF
       </Button>
     </>
