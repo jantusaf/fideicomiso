@@ -24,8 +24,34 @@ import {
 
 import SearchIcon from "@mui/icons-material/Search";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
-import { alpha } from "@mui/material/styles";
 import ReceiptLongRoundedIcon from "@mui/icons-material/ReceiptLongRounded";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  COLOR_OK,
+  COLOR_ERROR,
+  sxCard,
+} from "../detalleclienteIngresos/estilos";
+
+const sxTh = {
+  backgroundColor: "#f6f8f9",
+  color: COLOR_TEXT,
+  fontWeight: 700,
+  fontSize: 11.5,
+  letterSpacing: 0.4,
+  borderBottom: `1px solid ${COLOR_BORDER}`,
+  whiteSpace: "nowrap",
+  py: 1.25,
+};
+
+const sxTd = {
+  fontSize: 13.5,
+  color: COLOR_TEXT,
+  borderBottom: "1px solid #eef1f3",
+  py: 1.1,
+};
 
 
 import ModalDetalleDeudor from "./ModalDetalleDeudor";
@@ -224,80 +250,87 @@ const Deudores = () => {
   if (loading) return <CargaDeTabla />;
 
   return (
-    <Box sx={{ p: { xs: 2, md: 3 } }}>
-    
-      <Paper
-        elevation={0}
-        sx={{
-          borderRadius: 3,
-          p: 2,
-          background:
-            "linear-gradient(90deg, #0a3b4f 0%, #0b4f6c 55%, #0f7f86 100%)",
-          color: "#fff",
-          display: "flex",
-          alignItems: "center",
-          gap: 2,
-        }}
-      >
-        <PeopleRoundedIcon />
-        <Box>
-          <Typography fontWeight={900}>Estado de cuotas - Zona PIT</Typography>
-          <Typography fontSize={13} sx={{ opacity: 0.9 }}>
-            Deudores y cuotas pagadas por cliente
-          </Typography>
+    <Box sx={{ maxWidth: 1320, mx: "auto", px: { xs: 0, md: 1 }, pt: { xs: 1, md: 2 }, pb: 6 }}>
+      <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 } }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: { xs: "stretch", md: "center" },
+            justifyContent: "space-between",
+            gap: 2,
+            flexDirection: { xs: "column", md: "row" },
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <Box
+              sx={{
+                width: 46,
+                height: 46,
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                bgcolor: "rgba(13,58,73,0.08)",
+                flexShrink: 0,
+              }}
+            >
+              <PeopleRoundedIcon sx={{ color: COLOR_ACCENT }} />
+            </Box>
+            <Box>
+              <Typography
+                variant="h5"
+                sx={{ fontWeight: 700, fontSize: 20, textTransform: "none", color: COLOR_TEXT, m: 0, pt: 0 }}
+              >
+                Estado de cuotas - Zona PIT
+              </Typography>
+              <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
+                Deudores y cuotas pagadas por cliente
+              </Typography>
+            </Box>
+          </Box>
+
+          {resumen && (
+            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", alignItems: "center" }}>
+              <Chip
+                variant="outlined"
+                label={`Debe: ${resumen.debe}`}
+                sx={{ fontWeight: 600, color: COLOR_ERROR, borderColor: COLOR_ERROR }}
+              />
+              <Chip
+                variant="outlined"
+                label={`Pagadas: ${resumen.pagadas}`}
+                sx={{ fontWeight: 600, color: COLOR_OK, borderColor: COLOR_OK }}
+              />
+              <Chip variant="outlined" label={`Total: ${resumen.total}`} sx={{ fontWeight: 600 }} />
+            </Box>
+          )}
         </Box>
       </Paper>
 
-      {resumen && (
-        <Paper
-          elevation={0}
-          sx={{
-            mt: 2,
-            borderRadius: 3,
-            p: 2,
-            display: "flex",
-            gap: 2,
-            flexWrap: "wrap",
-            border: `1px solid ${alpha("#0b4f6c", 0.12)}`,
-          }}
-        >
-          <Chip label={`Debe: ${resumen.debe}`} color="error" />
-          <Chip label={`Pagadas: ${resumen.pagadas}`} color="success" />
-          <Chip label={`Total: ${resumen.total}`} />
-        </Paper>
-      )}
+      <Paper elevation={0} sx={{ ...sxCard, mt: 2.5, overflow: "hidden", width: 0, minWidth: "100%" }}>
+        <Box sx={{ px: { xs: 2, md: 3 }, py: 2 }}>
+          <TextField
+            placeholder="Buscar por CUIL o nombre"
+            size="small"
+            value={search}
+            onChange={handleSearch}
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon sx={{ color: COLOR_MUTED, fontSize: 20 }} />
+                  </InputAdornment>
+                ),
+              },
+            }}
+            sx={{ width: { xs: "100%", md: 420 }, "& .MuiOutlinedInput-root": { borderRadius: 1.5 } }}
+          />
+        </Box>
 
-      <Paper sx={{ mt: 2, p: 2, borderRadius: 3 }}>
-        <TextField
-          fullWidth
-          size="small"
-          label="Buscar por CUIL o Nombre"
-          value={search}
-          onChange={handleSearch}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Paper>
-
-      
-      <Paper
-        elevation={0}
-        sx={{
-          mt: 2,
-          borderRadius: 3,
-          overflow: "hidden",
-          border: `1px solid ${alpha("#0b4f6c", 0.12)}`,
-        }}
-      >
-        <Divider />
+        <Divider sx={{ borderColor: COLOR_BORDER }} />
 
         <TableContainer sx={{ maxHeight: "65vh" }}>
-          <Table stickyHeader>
+          <Table stickyHeader size="small">
             <TableHead>
               <TableRow>
                 {[
@@ -313,11 +346,7 @@ const Deudores = () => {
                 ].map((h) => (
                   <TableCell
                     key={h}
-                    sx={{
-                      backgroundColor: "#0799b6",
-                      color: "#fff",
-                      fontWeight: 900,
-                    }}
+                    sx={sxTh}
                   >
                     {h}
                   </TableCell>
@@ -335,62 +364,58 @@ const Deudores = () => {
                     <TableRow
                       key={rowKey}
                       hover
-                      sx={{
-                        "&:nth-of-type(odd)": {
-                          backgroundColor: alpha("#0f7f86", 0.03),
-                        },
-                      }}
+                      sx={{ "&:last-child td": { borderBottom: 0 } }}
                     >
                       <TableCell
-                        sx={{ fontWeight: 700, color: "#063a52", cursor: "pointer" }}
+                        sx={{ ...sxTd, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}
                         onClick={() => navigate(`/usuario2/detallecliente/${c.cuil_cuit}`)}
                       >
                         {c.cuil_cuit}
                       </TableCell>
 
-                      <TableCell>
+                      <TableCell sx={{ ...sxTd, fontWeight: 600 }}>
                         {c.nombre} {c.apellido}
                       </TableCell>
 
-                      <TableCell sx={{ color: "#1565c0", fontWeight: 700 }}>
+                      <TableCell sx={{ ...sxTd, fontWeight: 600 }}>
                         {c.liquidadas}
                       </TableCell>
 
-                      <TableCell sx={{ color: "#c62828", fontWeight: 700 }}>
+                      <TableCell sx={{ ...sxTd, color: COLOR_ERROR, fontWeight: 600 }}>
                         {c.debe}
                       </TableCell>
 
-                      <TableCell sx={{ color: "#2e7d32", fontWeight: 700 }}>
+                      <TableCell sx={{ ...sxTd, color: COLOR_OK, fontWeight: 600 }}>
                         {c.pagadas}
                       </TableCell>
 
-                      <TableCell sx={{ fontWeight: 700 }}>
+                      <TableCell sx={{ ...sxTd, whiteSpace: "nowrap" }}>
                         {Number(c.total_devengado).toLocaleString("es-AR", {
                           style: "currency",
                           currency: "ARS",
                         })}
                       </TableCell>
 
-                      <TableCell sx={{ fontWeight: 700 }}>
+                      <TableCell sx={{ ...sxTd, whiteSpace: "nowrap" }}>
                         {Number(c.pagado).toLocaleString("es-AR", {
                           style: "currency",
                           currency: "ARS",
                         })}
                       </TableCell>
 
-                      <TableCell sx={{ fontWeight: 700 }}>
+                      <TableCell sx={{ ...sxTd, fontWeight: 700, whiteSpace: "nowrap" }}>
                         {(Number(c.total_devengado) - Number(c.pagado)).toLocaleString("es-AR", {
                           style: "currency",
                           currency: "ARS",
                         })}
                       </TableCell>
 
-                      <TableCell>
-                                <Tooltip title="Ver cuotas adeudadas">
-                            <IconButton size="small" onClick={() => handleOpenDetalle(c)}>
-                              <ReceiptLongRoundedIcon fontSize="small" />
-                            </IconButton>
-                          </Tooltip>
+                      <TableCell sx={sxTd}>
+                        <Tooltip title="Ver cuotas adeudadas">
+                          <IconButton size="small" onClick={() => handleOpenDetalle(c)} sx={{ color: COLOR_ACCENT }}>
+                            <ReceiptLongRoundedIcon fontSize="small" />
+                          </IconButton>
+                        </Tooltip>
                       </TableCell>
                     </TableRow>
                   );
@@ -411,6 +436,14 @@ const Deudores = () => {
             setPage(0);
           }}
           labelRowsPerPage="Filas por página:"
+          sx={{
+            borderTop: `1px solid ${COLOR_BORDER}`,
+            "& .MuiTablePagination-toolbar": { minHeight: 48 },
+            "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows": {
+              fontSize: 13,
+              color: COLOR_MUTED,
+            },
+          }}
         />
       </Paper>
 
