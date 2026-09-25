@@ -4,9 +4,8 @@ import logo from "../Assets/marcas.png";
 import  useUser from '../hooks/useUser'
 import {
   AppBar,
+  Box,
   Button,
-  Tab,
-  Tabs,
   Toolbar,
   useMediaQuery,
   useTheme,
@@ -28,9 +27,9 @@ const Navbar = (props) => {
 
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
  const islogo = {
-  width: "100px",
+  height: "38px",
+  width: "auto",
   marginRight: "16px",
-  filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.5))"
 };
 
   const navigate = useNavigate();
@@ -86,56 +85,72 @@ const traer = async () => {
     
 
   }
-  //1a303e COLOR AZUL OSCURO DEL NAV
+  // Barra superior: color sólido (sin degradé) y altura fija de 64px, que es lo que
+  // reservan los <Toolbar /> espaciadores del resto del sistema (antes la barra medía
+  // ~80px y tapaba el borde superior del contenido).
+  const sxBotonBarra = {
+    color: "rgba(255,255,255,0.78)",
+    textTransform: "none",
+    fontWeight: 600,
+    fontSize: 14,
+    borderRadius: 1.5,
+    px: 1.75,
+    "&:hover": { color: "#fff", backgroundColor: "rgba(255,255,255,0.08)" },
+  };
+
+  const sxBotonBarraContorno = {
+    ...sxBotonBarra,
+    color: "#fff",
+    border: "1px solid rgba(255,255,255,0.3)",
+    "&:hover": { borderColor: "#fff", backgroundColor: "rgba(255,255,255,0.08)" },
+  };
+
   return (
     <React.Fragment>
-      <AppBar    sx={{
-   background:
-  "linear-gradient(90deg, #051821 0%, #051821 30%, #0b2a3a 45%, #01567c 65%, #148D8D 100%)",
-
-    boxShadow: "0 3px 10px rgba(0,0,0,0.35)",
-  }}> 
-        <Toolbar>
-
-          
-            <img style={islogo} src={logo} alt="logo" />
+      <AppBar
+        elevation={0}
+        sx={{
+          backgroundColor: "#0f2230",
+          backgroundImage: "none",
+          // línea inferior como sombra interna: no suma alto (la barra mide exactamente 64px)
+          boxShadow: "inset 0 -1px 0 rgba(255,255,255,0.08)",
+        }}
+      >
+        <Toolbar sx={{ minHeight: "64px !important", px: { xs: 2, md: 3 } }}>
+          <img style={islogo} src={logo} alt="Santa Catalina Fideicomiso" />
           {isMatch ? (
             <>
               <DrawerNav />
             </>
           ) : (
-            <>
-              <Tabs
-                sx={{ marginLeft: "auto" }}
-                indicatorColor="Secondary"
-                textColor="inherit"
-                value={value}
-                onChange={(e, value) => setValue(value)}
-              >
-                  {usuario &&  <Button onClick={inicio} sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab label="inicio" />
-              </Button>  }
-            
-                {cargado ? <div> <Button onClick={inicio} sx={{ marginLeft: "10px" }} variant="Outlined">
-                  {user != undefined ? <> <Tab label= {`hola ${user.nombre}!`}/></>: <><Tab /></>}
-                  
-              </Button> </div>:<div></div>}
-              
-              </Tabs>
-              {usuario ?  <div> <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
-                Cerrar Sesión
-              </Button> </div>:<div></div>}
+            <Box sx={{ ml: "auto", display: "flex", alignItems: "center", gap: 0.75 }}>
+              {usuario && (
+                <Button onClick={inicio} sx={sxBotonBarra}>
+                  Inicio
+                </Button>
+              )}
 
+              {cargado && user != undefined && (
+                <Button onClick={inicio} sx={sxBotonBarra}>
+                  {`Hola ${user.nombre}!`}
+                </Button>
+              )}
 
-              {!usuario && <div>    <Button sx={{ marginLeft: "10px" }} variant="Outlined">
-                Registrarse
-              </Button>
-              <Button onClick={handleClick} sx={{ marginLeft: "auto" }} variant="Outlined">
-                Ingresar
-              </Button></div>}
-             
+              {usuario && (
+                <Button onClick={hanleLogout} variant="outlined" sx={sxBotonBarraContorno}>
+                  Cerrar sesión
+                </Button>
+              )}
 
-            </>
+              {!usuario && (
+                <>
+                  <Button sx={sxBotonBarra}>Registrarse</Button>
+                  <Button onClick={handleClick} variant="outlined" sx={sxBotonBarraContorno}>
+                    Ingresar
+                  </Button>
+                </>
+              )}
+            </Box>
           )}
         </Toolbar>
       </AppBar>

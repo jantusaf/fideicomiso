@@ -32,10 +32,13 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 import { useLocation } from "react-router-dom";
+import ListItemButton from '@mui/material/ListItemButton';
+import Typography from '@mui/material/Typography';
+import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 
 
-const initialWidth = 240; // Ancho inicial del menú
+const initialWidth = 224; // Ancho del menú (igual que el de nivel 6)
 export default function MenuIzq2({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -318,16 +321,88 @@ export default function MenuIzq2({ children }) {
     </Box>
 </>
 );*/
+  // ===== Presentación del menú (compacto, sin degradés; mismo criterio que el resto de la vista) =====
+  const COLOR_TEXT = "#1a303e";
+  const COLOR_BORDER = "#e2e6e9";
+
+  const renderItem = (item) => {
+    const activo = location.pathname === item.path;
+    return (
+      <ListItemButton
+        key={item.text}
+        onClick={() => handleClick(item.path)}
+        selected={activo}
+        disableRipple
+        sx={{
+          position: "relative",
+          mx: 1.25,
+          my: 0.25,
+          px: 1.25,
+          py: 0.75,
+          minHeight: 42,
+          gap: 1.25,
+          borderRadius: 1.5,
+          color: COLOR_TEXT,
+          "&:hover": { backgroundColor: "#f6f8f9" },
+          "&.Mui-selected": {
+            backgroundColor: "rgba(13, 58, 73, 0.07)",
+            "&:hover": { backgroundColor: "rgba(13, 58, 73, 0.10)" },
+          },
+          // barra de acento del ítem activo, pegada al borde del menú
+          "&.Mui-selected::before": {
+            content: '""',
+            position: "absolute",
+            left: -10,
+            top: 8,
+            bottom: 8,
+            width: 3,
+            borderRadius: "0 3px 3px 0",
+            backgroundColor: COLOR_TEXT,
+          },
+          "&:hover .flecha-menu": { opacity: 1 },
+        }}
+      >
+        <Box
+          sx={{
+            width: 30,
+            height: 30,
+            flexShrink: 0,
+            borderRadius: 1.25,
+            display: "grid",
+            placeItems: "center",
+            backgroundColor: activo ? COLOR_TEXT : "rgba(13, 58, 73, 0.06)",
+            color: activo ? "#fff" : COLOR_TEXT,
+            "& svg": { fontSize: 18, color: "inherit !important" },
+          }}
+        >
+          {item.icon}
+        </Box>
+
+        <Typography
+          noWrap
+          sx={{ flex: 1, minWidth: 0, fontSize: 14, fontWeight: activo ? 700 : 500, color: COLOR_TEXT }}
+        >
+          {item.text}
+        </Typography>
+
+        <ChevronRightRoundedIcon
+          className="flecha-menu"
+          sx={{ fontSize: 18, color: "#9aa7b0", opacity: activo ? 1 : 0, transition: "opacity .15s ease" }}
+        />
+      </ListItemButton>
+    );
+  };
+
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
 
   return (
     <>
-      <Box sx={{ background: '#fffff', display: 'flex' }}>
+      <Box sx={{ display: 'flex' }}>
         <CssBaseline />
 
-        {/* Drawer lateral */}
+        {/* Menú lateral */}
         {menuVisible && (
           <Drawer
             sx={{
@@ -335,8 +410,10 @@ export default function MenuIzq2({ children }) {
               flexShrink: 0,
               "& .MuiDrawer-paper": {
                 width: drawerWidth,
-
-                bgcolor: '#fffff',
+                boxSizing: "border-box",
+                backgroundColor: "#ffffff",
+                borderRight: `1px solid ${COLOR_BORDER}`,
+                boxShadow: "none",
               },
             }}
             variant="permanent"
@@ -344,188 +421,36 @@ export default function MenuIzq2({ children }) {
           >
             <Navbar />
             <Toolbar />
-            <Divider />
-            <List
+
+            <Box
               sx={{
-               
-                background: "transparent",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                pl: 2.5,
+                pr: 1.25,
+                pt: 1.5,
+                pb: 0.5,
               }}
             >
+              <Typography
+                sx={{ fontSize: 11.5, fontWeight: 700, letterSpacing: 0.8, color: "#6b7a86", textTransform: "uppercase" }}
+              >
+                Menú
+              </Typography>
+              <IconButton
+                size="small"
+                onClick={toggleMenu}
+                title="Ocultar menú"
+                sx={{ color: "#6b7a86", "&:hover": { color: COLOR_TEXT, backgroundColor: "#f6f8f9" } }}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </Box>
 
-              {/* Botón solo dentro del Drawer cuando el menú está visible */}
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <IconButton
-                  onClick={toggleMenu}
-                  sx={{
-                    color: '#1a303e',
-                    '&:hover': {
-                      backgroundColor: 'transparent',
-                      color: '#0d3a49',
-                    },
-                  }}
-                >
-                  <CloseIcon />
-                </IconButton>
-              </Box>
-
-
-              {user ? (
-                user.nivel === 2 ? (
-                  menuItems.map((item) => (
-                    <ListItem
-                      button
-                      key={item.text}
-                      onClick={() => handleClick(item.path)}
-                      sx={{
-                        my: 0.4,
-                        px: 1.25,
-                        py: 1.05,
-          
-                        transition: "all .18s ease",
-                        border: "1px solid transparent",
-
-                        // 👉 ITEM ACTIVO
-                        backgroundColor:
-                          location.pathname === item.path
-                            ? "rgba(42, 170, 209, 0.18)"
-                            : "transparent",
-
-                        borderColor:
-                          location.pathname === item.path
-                            ? "rgba(7, 153, 182, 0.85)"
-                            : "transparent",
-
-                        boxShadow:
-                          location.pathname === item.path
-                            ? "0 12px 26px rgba(7, 115, 182, 0.15)"
-                            : "none",
-
-                        "&:hover": {
-                          backgroundColor:
-                            location.pathname === item.path
-                              ? "rgba(27, 153, 206, 0.22)"
-                              : "rgba(34, 157, 222, 0.04)",
-                          borderColor: "rgba(11, 84, 136, 0.3)",
-                          transform: "translateY(-1px)",
-                        },
-                      }}
-                    >
-
-                      <ListItemIcon
-                        sx={{
-                          minWidth: 42,
-                          "& svg": {
-                            fontSize: 22,
-                            color:
-                              location.pathname === item.path
-                                ? "#0d3a49"
-                                : "#1a303e",
-                          },
-                        }}
-                      >
-                        {item.icon}
-                      </ListItemIcon>
-
-
-                      <ListItemText
-                        primary={item.text}
-                        primaryTypographyProps={{
-                          sx: {
-                            fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial",
-                            fontWeight: location.pathname === item.path ? 800 : 700,
-                            fontSize: 14.2,
-                            color:
-                              location.pathname === item.path
-                                ? "#0d3a49"
-                                : "#0f2230",
-                            letterSpacing: 0.15,
-                          },
-                        }}
-                      />
-
-                    </ListItem>
-
-                  ))
-                ) : (
-                  menuItems2.map((item) => (
-                    <ListItem
-                      button
-                      key={item.text}
-                      onClick={() => handleClick(item.path)}
-                      sx={{
-                        my: 0.4,
-                        px: 1.25,
-                        py: 1.05,
-                        borderRadius: 2.2,
-                        transition: "all .18s ease",
-                        border: "1px solid transparent",
-
-                        // 👉 ITEM ACTIVO
-                        backgroundColor:
-                          location.pathname === item.path
-                            ? "rgba(20,141,141,0.18)"
-                            : "transparent",
-
-                        borderColor:
-                          location.pathname === item.path
-                            ? "rgba(20,141,141,0.45)"
-                            : "transparent",
-
-                        boxShadow:
-                          location.pathname === item.path
-                            ? "0 12px 26px rgba(20,141,141,0.35)"
-                            : "none",
-
-                        "&:hover": {
-                          backgroundColor:
-                            location.pathname === item.path
-                              ? "rgba(20,141,141,0.22)"
-                              : "rgba(20,141,141,0.10)",
-                          borderColor: "rgba(20,141,141,0.30)",
-                          transform: "translateY(-1px)",
-                        },
-                      }}
-                    >
-
-                      <ListItemIcon
-                        sx={{
-                          minWidth: 42,
-                          "& svg": {
-                            fontSize: 22,
-                            color:
-                              location.pathname === item.path
-                                ? "#0d3a49"
-                                : "#1a303e",
-                          },
-                        }}
-                      >
-                        {item.icon}
-                      </ListItemIcon>
-
-
-                      <ListItemText
-                        primary={item.text}
-                        primaryTypographyProps={{
-                          sx: {
-                            fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial",
-                            fontWeight: location.pathname === item.path ? 800 : 700,
-                            fontSize: 14.2,
-                            color:
-                              location.pathname === item.path
-                                ? "#0d3a49"
-                                : "#0f2230",
-                            letterSpacing: 0.15,
-                          },
-                        }}
-                      />
-
-                    </ListItem>
-
-                  ))
-                )
-              ) : null}
+            <List sx={{ py: 0.5 }}>
+              {user ? (user.nivel === 2 ? menuItems.map(renderItem) : menuItems2.map(renderItem)) : null}
             </List>
-           
           </Drawer>
         )}
 
@@ -541,22 +466,24 @@ export default function MenuIzq2({ children }) {
         >
           <Navbar />
           <Toolbar />
-    
-
-
 
           {/* Mostrar botón SOLO cuando el menú está oculto */}
           {!menuVisible && (
             <Button
-              variant="contained"
+              variant="outlined"
               onClick={toggleMenu}
               sx={{
                 mb: 2,
-                backgroundColor: '#1a303e',
-                '&:hover': { backgroundColor: '#0d3a49' },
+                textTransform: 'none',
+                fontWeight: 600,
+                borderRadius: 1.5,
+                px: 2.25,
+                color: COLOR_TEXT,
+                borderColor: '#c9d2d8',
+                '&:hover': { borderColor: '#0d3a49', backgroundColor: 'rgba(13, 58, 73, 0.04)' },
               }}
             >
-              Mostrar Menú
+              Mostrar menú
             </Button>
           )}
 
