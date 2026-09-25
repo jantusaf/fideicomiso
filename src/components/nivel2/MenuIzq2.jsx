@@ -112,7 +112,7 @@ export default function MenuIzq2({ children }) {
   }
   const menuItems = [
     {
-      text: 'Clientes Parque',
+      text: 'Clientes PIT',
       icon: <GroupIcon style={{ color: "#1a303e" }} />,
       path: '/usuario2/clientes'
     },

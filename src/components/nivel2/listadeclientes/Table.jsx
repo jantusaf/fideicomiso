@@ -138,7 +138,7 @@ const Lotes = () => {
                 variant="h5"
                 sx={{ fontWeight: 700, fontSize: 20, textTransform: "none", color: COLOR_TEXT, m: 0, pt: 0 }}
               >
-                Clientes (parque)
+                Clientes PIT
               </Typography>
               <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
                 Listado y acceso rápido a detalle / edición
