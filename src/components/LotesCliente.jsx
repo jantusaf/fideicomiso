@@ -558,7 +558,9 @@ const exportarExcel = () => {
             TABLA DE CUOTAS
         ========================== */}
         {act ? (
-          <Paper elevation={0} sx={{ ...sxCard, overflow: "hidden" }}>
+          /* width 0 + minWidth 100%: la tabla ancha se desplaza dentro de su tarjeta y no
+             empuja el ancho de toda la página (ajuste local; no se toca el layout global) */
+          <Paper elevation={0} sx={{ ...sxCard, overflow: "hidden", width: 0, minWidth: "100%" }}>
             <TableContainer
               sx={{
                 maxHeight: "72vh",

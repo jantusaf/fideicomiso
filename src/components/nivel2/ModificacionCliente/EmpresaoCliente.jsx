@@ -23,7 +23,7 @@ import {
   COLOR_MUTED,
 } from "../detalleclienteIngresos/estilos";
 
-export default function Empresaocliente({ onListo }) {
+export default function Empresaocliente({ onListo, razonActual }) {
   const [open, setOpen] = useState(false);
   const [guardando, setGuardando] = useState(false);
   const [error, setError] = useState(null);
@@ -31,12 +31,11 @@ export default function Empresaocliente({ onListo }) {
   let params = useParams();
   let cuil_cuit = params.cuil_cuit;
 
-  // La razón arranca en "Empresa" (lo que muestra el desplegable), así que
-  // apretar "Determinar" sin tocarlo también envía un valor válido.
-  const [establecer, setEstablecer] = useState({
-    cuil_cuit,
-    razon: "Empresa",
-  });
+  // Sin tocar el desplegable se conserva la razón ACTUAL del cliente, así que
+  // apretar "Determinar" sin cambiar nada no modifica el dato (el backend
+  // guardaría NULL si la razón llegara vacía).
+  const [establecer, setEstablecer] = useState({ cuil_cuit });
+  const razonElegida = establecer.razon ?? razonActual ?? "Empresa";
 
   const handleClickOpen = () => {
     setError(null);
@@ -55,7 +54,7 @@ export default function Empresaocliente({ onListo }) {
     setGuardando(true);
     setError(null);
     try {
-      await servicioClientes.determinarEmpresa(establecer);
+      await servicioClientes.determinarEmpresa({ ...establecer, razon: razonElegida });
       setOpen(false);
       if (onListo) await onListo();
     } catch (e) {
@@ -80,7 +79,7 @@ export default function Empresaocliente({ onListo }) {
             <Typography variant="caption" sx={{ display: "block", mb: 0.5, ml: 0.25, fontWeight: 600, color: "text.secondary" }}>
               Razón
             </Typography>
-            <TextField select fullWidth size="small" name="razon" value={establecer.razon} onChange={handleChange}>
+            <TextField select fullWidth size="small" name="razon" value={razonElegida} onChange={handleChange}>
               <MenuItem value="Empresa">Empresa</MenuItem>
               <MenuItem value="Persona">Persona</MenuItem>
             </TextField>

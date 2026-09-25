@@ -91,13 +91,14 @@ const TIPOS_PERSONA = [
   ["Persona Humana con Actividad Comercial", 3],
 ];
 
-// Los valores deben coincidir exactamente con las claves de riesgoAntiguedad del backend
+// Mismos valores que ya ofrecía esta pantalla. Si un cliente tiene guardado otro valor
+// (dato heredado, ej. "Mayor a 21 años."), conActual lo muestra tal cual sin modificarlo.
 const ANTIGUEDADES = [
   "Mayor a 21 años",
   "Entre 11 y 20 años",
   "Entre 6 y 10 años",
   "Entre 2 y 5 años",
-  "Menor o igual a 1 años",
+  "Menor o igual a 1 año",
 ];
 
 // Si el cliente tiene guardado un valor que no está en la lista (dato heredado),
@@ -359,14 +360,9 @@ const getBase64Image = (url) => {
     const clienteResponse = await servicioCliente.cliente(cuil_cuit);
     const client = clienteResponse[0];
     setCliente(clienteResponse);
-    const normalizado = { ...client };
-    // Dato heredado: "Mayor a 21 años." (con punto final) no coincide con la
-    // tabla de riesgo del backend; se normaliza para que el desplegable lo reconozca.
-    // Solo en empresas: en personas el campo no se muestra y no se debe tocar.
-    if (normalizado.razon !== "Persona" && typeof normalizado.antiguedad === "string") {
-      normalizado.antiguedad = normalizado.antiguedad.trim().replace(/\.$/, "");
-    }
-    setModificaciones(normalizado);
+    // Los datos se conservan tal cual están en la base: guardar desde esta pantalla
+    // no debe modificar valores que el usuario no tocó (afectan el cálculo de riesgo).
+    setModificaciones({ ...client });
     // La base devuelve la fecha con hora (1969-03-01T03:00:00.000Z); el campo de
     // fecha solo entiende AAAA-MM-DD.
     setFechaNacimiento(String(client.fechaNacimiento || "").slice(0, 10));
@@ -461,7 +457,7 @@ const getBase64Image = (url) => {
             </Box>
 
             <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: "wrap", alignItems: "center" }}>
-              <Empresaocliente onListo={traerCliente} />
+              <Empresaocliente onListo={traerCliente} razonActual={cliente[0]?.razon} />
             </Stack>
           </Stack>
         </Paper>

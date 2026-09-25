@@ -534,8 +534,6 @@ export default function MenuIzq2({ children }) {
           component="main"
           sx={{
             flexGrow: 1,
-            // Sin esto un contenido ancho (tablas) empuja el layout fuera de la pantalla
-            minWidth: 0,
             bgcolor: 'background.default',
             p: 3,
             transition: 'margin 0.3s ease-in-out',

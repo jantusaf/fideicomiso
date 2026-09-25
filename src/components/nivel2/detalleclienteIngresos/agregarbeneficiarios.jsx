@@ -27,21 +27,19 @@ const BeneficiariosDialog = (props) => {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     console.log('Beneficiarios:', beneficiarios);
-    try {
-      await servicioCliente.agregarbeneficiarios(beneficiarios)
-      setOpen(false);
-      if (props.traer) await props.traer();
-    } catch (error) {
-      console.error(error);
-      alert('No se pudieron guardar los beneficiarios. Probá de nuevo.');
-    }
+    servicioCliente.agregarbeneficiarios(beneficiarios)
+    setOpen(false);
   };
 
+  // OJO: este botón NO tiene onClick a propósito (así estaba originalmente).
+  // El endpoint /agregarbeneficiarios sobrescribe los 3 beneficiarios con lo que
+  // envía el diálogo (que arranca vacío) y no exige login: activarlo sin corregir
+  // eso podría borrar beneficiarios existentes.
   return (
     <div>
-      <Button variant="outlined" onClick={() => setOpen(true)} sx={{
+      <Button variant="outlined" sx={{
           textTransform: 'none',
           fontWeight: 600,
           borderRadius: 1.5,
