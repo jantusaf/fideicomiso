@@ -883,14 +883,14 @@ const toggleTodasLasZonas = () => {
         layer.on({ click: handleFeatureClick });
     };
 
-    const sinInteraccion = ["Barrios", "rutas1", "area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4", "usosuelopit", "verdumzalazar", "lotespit"];
+    const sinInteraccion = ["Barrios", "rutas1", "area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4", "usosuelopit", "lotespit"];
     const crearOnEachFeature = (nombreCapa) => (feature, layer) => {
         if (sinInteraccion.includes(nombreCapa)) {
             layer.options.interactive = false;
             return;
         }
         layer.on({ click: handleFeatureClick });
-        if (["Barrios", "rutas1", "area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4", "usosuelopit", "verdumzalazar"].includes(nombreCapa)) return;
+        if (["Barrios", "rutas1", "area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4", "usosuelopit"].includes(nombreCapa)) return;
         layer.bindTooltip(() => {
             if (mostrarEtiquetasRef.current) return "";
             const id =
@@ -2273,7 +2273,7 @@ useEffect(() => {
                             // ic4 no se pinta como capa propia; ic42 y las UE cubren sus sub-áreas
                             if (nombre === "ic4") return null;
 
-                            if (nombre === "unidad-ejecutora2y3" || nombre === "invico2") {
+                            if (nombre === "unidad-ejecutora2y3") {
                                 return (
                                     <GeoJSON
                                         key={`${nombre}-${geoJsonKey}`}
@@ -2288,6 +2288,26 @@ useEffect(() => {
                                         onEachFeature={(feature, layer) => {
                                             layer.options.interactive = false;
                                         }}
+                                    />
+                                );
+                            }
+                            if (nombre === "invico2") {
+                                return (
+                                    <GeoJSON
+                                        key={`${nombre}-${geoJsonKey}`}
+                                        data={geojsonData[nombre]}
+                                        style={(feature) => {
+                                            const DASH = { fillColor: "transparent", fillOpacity: 0, dashArray: "6 5", weight: 3.5, opacity: 1 };
+                                            const id = feature?.properties?.id;
+                                            const poligono = buscarPoligonoDB(poligonosGuardados, id, nombre);
+                                            if (!poligono) return { ...DASH, color: "#ff0000" };
+                                            if (poligono.privado === "reserva municipal") return { ...DASH, color: "#F227F5" };
+                                            if (poligono.privado === "equipamiento publico") return { ...DASH, color: "#00eeff" };
+                                            if (poligono.privado === "privado") return { ...DASH, color: "#ff0000" };
+                                            if (poligono.privado === "publico") return { ...DASH, color: "#00ff00" };
+                                            return { ...DASH, color: "#aaaaaa" };
+                                        }}
+                                        onEachFeature={crearOnEachFeature(nombre)}
                                     />
                                 );
                             }
