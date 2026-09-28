@@ -83,6 +83,7 @@ const MapaConCapas = () => {
         restante: false,
         Mensura30922U: false,
         mensura31548Unuevo: false,
+        "zona-arroyo": false,
         ib5: false,
         ib2: false,
         ib3: false,
@@ -156,7 +157,7 @@ const clavesZonas = [
   "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3", "unidad-ejecutora2y3",
   "ib2", "ib3", "area5", "ib5", "area6",
   "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "area1", "area2", "zonaesperanza", "area4",
-  "mensura31548Unuevo", "Mensura30922U", "fraccionIE", "clubesHipico",
+  "mensura31548Unuevo", "Mensura30922U", "fraccionIE", "clubesHipico", "zona-arroyo",
 ];
 const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras", "fraccionIG", "ZRU Predios La Caja"].every((key) => !!capasActivas[key]);
 const zonasActivasCount = clavesZonas.filter((k) => !!capasActivas[k]).length;
@@ -466,7 +467,7 @@ const toggleTodasLasZonas = () => {
         "PLC-C": false,
         "PLC-F": false
     });
-    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg", "hipico1", "hipico2", "hipico3", "hipico4"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
 
@@ -771,6 +772,14 @@ const toggleTodasLasZonas = () => {
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "Mensura30922U");
                 setGeojsonData((prev) => ({ ...prev, "Mensura30922U": normalizado }));
+            })
+            .catch(console.error);
+
+        fetch("/zona-arroyo.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "zona-arroyo");
+                setGeojsonData((prev) => ({ ...prev, "zona-arroyo": normalizado }));
             })
             .catch(console.error);
         fetch("/rutas1.geojson")
@@ -1626,6 +1635,7 @@ useEffect(() => {
         { key: "invico2", label: "Invico 2" },
         { key: "mensura31548Unuevo", label: "Mensura 31548-U" },
         { key: "Mensura30922U", label: "Mensura 30922-U" },
+        { key: "zona-arroyo", label: "Zona Arroyo" },
         { key: "zonaesperanza", label: "Zona Esperanza" },
       ].map(({ key, label }) => (
         <div key={key}>
@@ -2263,7 +2273,7 @@ useEffect(() => {
                         ) : null
                     )}
 
-                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "hipico1", "hipico2", "hipico3", "hipico4"].map(
+                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo"].map(
                         (nombre) => {
                             // verdumzalazar se muestra cuando mensura31548Unuevo está activa
                             if (nombre === "verdumzalazar") {
@@ -2436,7 +2446,7 @@ useEffect(() => {
                         "ic3", "ic42", "ib2", "ib3", "area5", "ib5", "area6",
                         "invicoresidencial", "invicomontana", "parc1", "parc2", "parc3",
                         "area1", "area2", "zonaesperanza", "area4",
-                        "mensura31548Unuevo", "verdumzalazar", "Mensura30922U",
+                        "mensura31548Unuevo", "verdumzalazar", "Mensura30922U", "zona-arroyo",
                         "nuevazona", "ejercitoarg",
                         "hipico1", "hipico2", "hipico3", "hipico4",
                         "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3",
