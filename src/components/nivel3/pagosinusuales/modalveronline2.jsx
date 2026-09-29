@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, CircularProgress, Backdrop } from "@mui/material";
 import servicioLegajos from "../../../services/legajos"; // Ajusta la ruta según sea necesario
+import { sxBtnOutlined } from "../../nivel2/detalleclienteIngresos/estilos";
 
 const PdfViewer = ({ id }) => {
   const [loadingPdf, setLoadingPdf] = useState(false); // Estado para mostrar la pantalla de carga
@@ -27,8 +28,8 @@ const PdfViewer = ({ id }) => {
         </div>
       </Backdrop>
 
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Ver 
+      <Button variant="outlined" size="small" onClick={handleClickOpen} sx={{ ...sxBtnOutlined, px: 1.75 }}>
+        Ver
       </Button>
     </div>
   );

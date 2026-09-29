@@ -1,77 +1,69 @@
 import { useState, useEffect } from "react";
 
-
-import { useNavigate } from "react-router-dom";
-import Button from '@mui/material/Button';
-
 import servicionivel3 from '../../../services/nivel3'
-
-
-//import overbookingData from "./overbooking";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import { COLOR_TEXT, COLOR_MUTED, COLOR_BORDER } from "../../nivel2/detalleclienteIngresos/estilos";
 
 const Historial = () => {
-    //configuracion de Hooks
     const [historial, setHistorial] = useState([]);
-    const navigate = useNavigate();
 
-
-    
-const traer = async() => {
-      
-    const historial = await servicionivel3.traerhistorialvalor()
-   
-    setHistorial(historial)
-  // 
-    
-    };  
-    
+    const traer = async () => {
+        const historial = await servicionivel3.traerhistorialvalor()
+        setHistorial(historial)
+    };
 
     useEffect(() => {
         traer()
     }, [])
-    ///
 
+    const sxTh = {
+        backgroundColor: "#f6f8f9",
+        color: COLOR_TEXT,
+        fontWeight: 700,
+        fontSize: 11.5,
+        letterSpacing: 0.4,
+        borderBottom: `1px solid ${COLOR_BORDER}`,
+        py: 1.25,
+    };
+    const sxTd = { fontSize: 13.5, color: COLOR_TEXT, borderBottom: "1px solid #eef1f3", py: 1.1 };
 
-
- 
-    // definimos las columnas
-    const columns = [
-        {
-            name: "fecha",
-            label: "Fecha",
-
-        },
-        {
-            name: "valormetroparque",
-            label: "Zona",
-
-        },
-        {
-            name: "valormetrocuadrado",
-            label: "Valor Metro Cuadrado",
-        },
-       
-       
-        
-       
- 
-
-    ];
-
-const options = {
-
-    /*    rowsPerPage: 10,
-       download: false, // hide csv download option
-       onTableInit: this.handleTableInit,
-       onTableChange: this.handleTableChange, */
-};
-// renderiza la data table
-return (<>
-
-        
-        </>
-  
-)
+    return (
+        <TableContainer>
+            <Table size="small">
+                <TableHead>
+                    <TableRow>
+                        <TableCell sx={sxTh}>FECHA</TableCell>
+                        <TableCell sx={sxTh}>ZONA</TableCell>
+                        <TableCell sx={sxTh}>VALOR METRO CUADRADO</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {historial.length > 0 ? (
+                        historial.map((item, index) => (
+                            <TableRow key={index} hover sx={{ "&:last-child td": { borderBottom: 0 } }}>
+                                <TableCell sx={sxTd}>{item.fecha}</TableCell>
+                                <TableCell sx={{ ...sxTd, fontWeight: 600 }}>{item.valormetroparque}</TableCell>
+                                <TableCell sx={sxTd}>{item.valormetrocuadrado}</TableCell>
+                            </TableRow>
+                        ))
+                    ) : (
+                        <TableRow>
+                            <TableCell colSpan={3} sx={{ ...sxTd, textAlign: "center", color: COLOR_MUTED, py: 4 }}>
+                                No hay registros.
+                            </TableCell>
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    )
 }
 
 export default Historial;

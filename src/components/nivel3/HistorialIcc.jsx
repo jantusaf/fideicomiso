@@ -1,12 +1,37 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import servicionivel3 from "../../services/nivel3";
-
+import {
+  Box,
+  Paper,
+  Typography,
+  TextField,
+  InputAdornment,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
+  Divider,
+  Button,
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  sxCard,
+  sxBtnPrimary,
+} from "../nivel2/detalleclienteIngresos/estilos";
 
 const Historial = () => {
   const [historial, setHistorial] = useState([]);
   const [busqueda, setBusqueda] = useState("");
-  const [pagina, setPagina] = useState(1);
+  const [pagina, setPagina] = useState(0);
   const [filasPorPagina, setFilasPorPagina] = useState(5);
 
   const navigate = useNavigate();
@@ -14,9 +39,6 @@ const Historial = () => {
   const traer = async () => {
     try {
       const respuesta = await servicionivel3.traerhistorial();
-
-      // Por si el servicio devuelve directamente el array
-      // o devuelve { data: [...] }
       setHistorial(Array.isArray(respuesta) ? respuesta : respuesta?.data || []);
     } catch (error) {
       console.error("Error al traer historial:", error);
@@ -40,127 +62,143 @@ const Historial = () => {
     );
   });
 
-  const totalPaginas = Math.ceil(
-    historialFiltrado.length / filasPorPagina
-  );
-
-  const inicio = (pagina - 1) * filasPorPagina;
-  const historialPaginado = historialFiltrado.slice(
-    inicio,
-    inicio + filasPorPagina
-  );
+  const inicio = pagina * filasPorPagina;
+  const historialPaginado = historialFiltrado.slice(inicio, inicio + filasPorPagina);
 
   const cambiarBusqueda = (e) => {
     setBusqueda(e.target.value);
-    setPagina(1);
+    setPagina(0);
   };
 
-  const cambiarFilas = (e) => {
-    setFilasPorPagina(Number(e.target.value));
-    setPagina(1);
+  const sxTh = {
+    backgroundColor: "#f6f8f9",
+    color: COLOR_TEXT,
+    fontWeight: 700,
+    fontSize: 11.5,
+    letterSpacing: 0.4,
+    borderBottom: `1px solid ${COLOR_BORDER}`,
+    whiteSpace: "nowrap",
+    py: 1.25,
   };
+  const sxTd = { fontSize: 13.5, color: COLOR_TEXT, borderBottom: "1px solid #eef1f3", py: 1.1 };
 
   return (
-    <div className="historial-contenedor">
-      <div className="historial-cabecera">
-        <h2>Historial de ICC</h2>
+    <Box sx={{ maxWidth: 1320, mx: "auto", px: { xs: 0, md: 1 }, pt: { xs: 1, md: 2 }, pb: 6 }}>
+      {/* ENCABEZADO */}
+      <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 } }}>
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 2, flexWrap: "wrap" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <Box
+              sx={{
+                width: 46,
+                height: 46,
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                bgcolor: "rgba(13,58,73,0.08)",
+                flexShrink: 0,
+              }}
+            >
+              <QueryStatsIcon sx={{ color: COLOR_ACCENT }} />
+            </Box>
+            <Box>
+              <Typography variant="h5" sx={{ fontWeight: 700, fontSize: 20, textTransform: "none", color: COLOR_TEXT, m: 0, pt: 0 }}>
+                Historial de ICC
+              </Typography>
+              <Typography variant="body2" sx={{ color: COLOR_MUTED, mt: 0.25 }}>
+                Índices de ajuste cargados por zona, mes y año
+              </Typography>
+            </Box>
+          </Box>
 
-        <button
-          className="boton-nuevo"
-          onClick={() => navigate("/nivel3/agregaricc")}
-        >
-          Nuevo
-        </button>
-      </div>
+          <Button variant="contained" onClick={() => navigate("/nivel3/agregaricc")} sx={sxBtnPrimary}>
+            Nuevo
+          </Button>
+        </Box>
+      </Paper>
 
-      <div className="historial-herramientas">
-        <input
-          type="text"
-          placeholder="Buscar por zona, mes, año o valor..."
-          value={busqueda}
-          onChange={cambiarBusqueda}
-          className="input-busqueda"
+      {/* LISTADO */}
+      <Paper elevation={0} sx={{ ...sxCard, mt: 2.5, overflow: "hidden", width: 0, minWidth: "100%" }}>
+        <Box sx={{ px: { xs: 2, md: 3 }, py: 2 }}>
+          <TextField
+            placeholder="Buscar por zona, mes, año o valor"
+            size="small"
+            value={busqueda}
+            onChange={cambiarBusqueda}
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon sx={{ color: COLOR_MUTED, fontSize: 20 }} />
+                  </InputAdornment>
+                ),
+              },
+            }}
+            sx={{ width: { xs: "100%", md: 380 }, "& .MuiOutlinedInput-root": { borderRadius: 1.5 } }}
+          />
+        </Box>
+
+        <Divider sx={{ borderColor: COLOR_BORDER }} />
+
+        <TableContainer>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                {["ZONA", "MES", "AÑO", "VALOR ICC"].map((h) => (
+                  <TableCell key={h} sx={sxTh}>{h}</TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {historialPaginado.length > 0 ? (
+                historialPaginado.map((item, index) => (
+                  <TableRow key={item.id || `${item.zona}-${item.mes}-${item.anio}-${index}`} hover sx={{ "&:last-child td": { borderBottom: 0 } }}>
+                    <TableCell sx={{ ...sxTd, fontWeight: 600 }}>{item.zona}</TableCell>
+                    <TableCell sx={sxTd}>{item.mes}</TableCell>
+                    <TableCell sx={sxTd}>{item.anio}</TableCell>
+                    <TableCell sx={sxTd}>
+                      {item.ICC !== null && item.ICC !== undefined
+                        ? Number(item.ICC).toLocaleString("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                        : "-"}
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={4} sx={{ ...sxTd, textAlign: "center", color: COLOR_MUTED, py: 4 }}>
+                    No se encontraron registros.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 15, 20]}
+          component="div"
+          count={historialFiltrado.length}
+          rowsPerPage={filasPorPagina}
+          page={pagina}
+          onPageChange={(e, newPage) => setPagina(newPage)}
+          onRowsPerPageChange={(e) => {
+            setFilasPorPagina(parseInt(e.target.value, 10));
+            setPagina(0);
+          }}
+          labelRowsPerPage="Filas por página:"
+          sx={{
+            borderTop: `1px solid ${COLOR_BORDER}`,
+            "& .MuiTablePagination-toolbar": { minHeight: 48 },
+            "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows": {
+              fontSize: 13,
+              color: COLOR_MUTED,
+            },
+          }}
         />
-
-        <div className="filas-por-pagina">
-          <label>Filas por página: </label>
-
-          <select value={filasPorPagina} onChange={cambiarFilas}>
-            <option value={5}>5</option>
-            <option value={10}>10</option>
-            <option value={15}>15</option>
-            <option value={20}>20</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="tabla-responsive">
-        <table className="tabla-historial">
-          <thead>
-            <tr>
-              <th>Zona</th>
-              <th>Mes</th>
-              <th>Año</th>
-              <th>Valor ICC</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {historialPaginado.length > 0 ? (
-              historialPaginado.map((item, index) => (
-                <tr key={item.id || `${item.zona}-${item.mes}-${item.anio}-${index}`}>
-                  <td>{item.zona}</td>
-                  <td>{item.mes}</td>
-                  <td>{item.anio}</td>
-                  <td>
-                    {item.ICC !== null && item.ICC !== undefined
-                      ? Number(item.ICC).toLocaleString("es-AR", {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        })
-                      : "-"}
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="4" className="sin-registros">
-                  No se encontraron registros
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="paginacion">
-        <span>
-          Mostrando {historialFiltrado.length === 0 ? 0 : inicio + 1} a{" "}
-          {Math.min(inicio + filasPorPagina, historialFiltrado.length)} de{" "}
-          {historialFiltrado.length} registros
-        </span>
-
-        <div className="botones-paginacion">
-          <button
-            onClick={() => setPagina((prev) => prev - 1)}
-            disabled={pagina === 1}
-          >
-            Anterior
-          </button>
-
-          <span>
-            Página {pagina} de {totalPaginas || 1}
-          </span>
-
-          <button
-            onClick={() => setPagina((prev) => prev + 1)}
-            disabled={pagina >= totalPaginas || totalPaginas === 0}
-          >
-            Siguiente
-          </button>
-        </div>
-      </div>
-    </div>
+      </Paper>
+    </Box>
   );
 };
 

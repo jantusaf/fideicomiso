@@ -9,8 +9,18 @@ import DialogTitle from '@mui/material/DialogTitle';
 import NativeSelect from '@mui/material/NativeSelect';
 import InputLabel from '@mui/material/InputLabel';
 import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
 import servicioPagos from '../../../services/pagos';
+import {
+  COLOR_TEXT,
+  COLOR_MUTED,
+  sxBtnPrimary,
+  sxBtnOutlined,
+  slotPropsDialog,
+  sxDialogTitle,
+  sxDialogActions,
+} from "../../nivel2/detalleclienteIngresos/estilos";
 
 export default function FormDialog(props) {
   const [open, setOpen] = useState(false);
@@ -47,14 +57,18 @@ export default function FormDialog(props) {
   return (
     <div>
       <Tooltip title="Clasificar" arrow>
-        <button onClick={handleClickOpen}>Clasificar</button>
+        <Button variant="outlined" size="small" onClick={handleClickOpen} sx={{ ...sxBtnOutlined, px: 1.75, whiteSpace: "nowrap" }}>
+          Clasificar
+        </Button>
       </Tooltip>
 
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
-        <DialogTitle>Clasificación del pago</DialogTitle>
-        <DialogContent>
-          <form onSubmit={handleSubmit}>
-            <InputLabel htmlFor="tipo-select">Tipo de pago</InputLabel>
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" slotProps={slotPropsDialog}>
+        <DialogTitle sx={sxDialogTitle}>Clasificación del pago</DialogTitle>
+        <form onSubmit={handleSubmit}>
+          <DialogContent sx={{ px: 3, py: 2.5 }}>
+            <Typography sx={{ mb: 0.75, fontWeight: 600, color: COLOR_TEXT, fontSize: 14 }}>
+              Tipo de pago
+            </Typography>
             <NativeSelect
               id="tipo-select"
               name="tipo"
@@ -78,20 +92,25 @@ export default function FormDialog(props) {
               value={form.detalle}
               onChange={handleChange}
               fullWidth
-              inputProps={{ maxLength: 256 }}
+              slotProps={{ htmlInput: { maxLength: 256 } }}
               variant="outlined"
+              sx={{ mt: 2, "& .MuiOutlinedInput-root": { borderRadius: 1.5 } }}
             />
 
-            <DialogActions>
-              <Button onClick={handleClose} color="secondary">
-                Cancelar
-              </Button>
-              <Button type="submit" variant="contained" color="primary">
-                Confirmar clasificación
-              </Button>
-            </DialogActions>
-          </form>
-        </DialogContent>
+            <Typography sx={{ mt: 0.75, fontSize: 12.5, color: COLOR_MUTED, textAlign: "right" }}>
+              {form.detalle.length} / 256
+            </Typography>
+          </DialogContent>
+
+          <DialogActions sx={sxDialogActions}>
+            <Button onClick={handleClose} variant="outlined" sx={sxBtnOutlined}>
+              Cancelar
+            </Button>
+            <Button type="submit" variant="contained" sx={sxBtnPrimary}>
+              Confirmar clasificación
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );

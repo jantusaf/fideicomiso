@@ -1,38 +1,32 @@
 import * as React from 'react';
-import { useParams } from "react-router-dom"
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Typography from '@mui/material/Typography';
 import { useState } from "react";
 import servicionivel3 from '../../../services/nivel3'
-import NativeSelect from '@mui/material/NativeSelect';
-import InputLabel from '@mui/material/InputLabel';
-
+import {
+  COLOR_TEXT,
+  sxBtnPrimary,
+  sxBtnOutlined,
+  sxBtnDangerOutlined,
+  slotPropsDialog,
+  sxDialogTitle,
+  sxDialogActions,
+} from "../../nivel2/detalleclienteIngresos/estilos";
 
 export default function ModalIcc() {
-
     const [open, setOpen] = React.useState(false);
-    const [form, setForm] = useState({
-
-
-    })
-  
 
     const handleClickOpen = () => {
         setOpen(true);
     };
-    const borrar = async (event) => {
-    
-        const rta = await servicionivel3.borrarhistorial()  
+    const borrar = async () => {
+        const rta = await servicionivel3.borrarhistorial()
         alert(rta.data)
         window.location.reload()
-
         setOpen(false);
-
     };
 
     const handleClose = () => {
@@ -41,27 +35,21 @@ export default function ModalIcc() {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                BORRAR HISTORIAL
+            <Button variant="outlined" onClick={handleClickOpen} sx={sxBtnDangerOutlined}>
+                Borrar historial
             </Button>
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>   </DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        ¿Estas seguro de borrar historial?
-                    </DialogContentText>
-
+            <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth slotProps={slotPropsDialog}>
+                <Typography component="div" sx={sxDialogTitle}>Borrar historial</Typography>
+                <DialogContent sx={{ px: 3, py: 2.5 }}>
+                    <Typography sx={{ color: COLOR_TEXT, fontWeight: 500 }}>
+                        ¿Estás seguro de borrar el historial?
+                    </Typography>
                 </DialogContent>
 
-
-                <Button variant="contained" color="success" onClick={() => {
-    borrar();
-  }}>Si</Button>
-                <Button variant="outlined" color="error"  onClick={() => {
-    handleClose()
-  }}>
-                 No
-                </Button>
+                <DialogActions sx={sxDialogActions}>
+                    <Button variant="outlined" sx={sxBtnOutlined} onClick={handleClose}>No</Button>
+                    <Button variant="contained" sx={sxBtnPrimary} onClick={borrar}>Sí</Button>
+                </DialogActions>
             </Dialog>
         </div>
     );
