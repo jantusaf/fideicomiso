@@ -892,14 +892,14 @@ const toggleTodasLasZonas = () => {
         layer.on({ click: handleFeatureClick });
     };
 
-    const sinInteraccion = ["Barrios", "rutas1", "area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4", "usosuelopit", "lotespit"];
+    const sinInteraccion = ["Barrios", "rutas1", "area1", "area2", "hipico1", "hipico2", "hipico3", "hipico4", "usosuelopit", "lotespit"];
     const crearOnEachFeature = (nombreCapa) => (feature, layer) => {
         if (sinInteraccion.includes(nombreCapa)) {
             layer.options.interactive = false;
             return;
         }
         layer.on({ click: handleFeatureClick });
-        if (["Barrios", "rutas1", "area1", "area2", "area4", "hipico1", "hipico2", "hipico3", "hipico4", "usosuelopit"].includes(nombreCapa)) return;
+        if (["Barrios", "rutas1", "area1", "area2", "hipico1", "hipico2", "hipico3", "hipico4", "usosuelopit"].includes(nombreCapa)) return;
         layer.bindTooltip(() => {
             if (mostrarEtiquetasRef.current) return "";
             const id =
