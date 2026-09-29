@@ -538,8 +538,8 @@ const exportarExcel = () => {
               )}
 
               <Button
-                variant="outlined"
-                sx={sxBtnOutlined}
+                variant="contained"
+                sx={sxBtnPrimary}
                 onClick={() => {
                   window.open("/usuario2/comprobanteief/" + idlote);
                 }}
@@ -547,7 +547,7 @@ const exportarExcel = () => {
                 Imprimir comprobante
               </Button>
 
-              <Button variant="outlined" sx={sxBtnOutlined} onClick={toggleDetalles}>
+              <Button variant="contained" sx={sxBtnPrimary} onClick={toggleDetalles}>
                 {verDetalles ? "Restaurar" : "Ver interés"}
               </Button>
             </Stack>

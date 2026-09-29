@@ -13,6 +13,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { sxBtnPrimary } from './detalleclienteIngresos/estilos';
 
 export default function Borrarcuotas(props) {
   const [open, setOpen] = React.useState(false);
@@ -46,16 +47,8 @@ export default function Borrarcuotas(props) {
     <div>
       {/* Botón principal (tu estilo) */}
       <Button
-        variant="outlined"
-        sx={{
-          px: 2.25,
-          borderRadius: 1.5,
-          textTransform: 'none',
-          fontWeight: 600,
-          color: '#1a303e',
-          borderColor: '#c9d2d8',
-          '&:hover': { borderColor: '#0d3a49', backgroundColor: 'rgba(13, 58, 73, 0.04)' },
-        }}
+        variant="contained"
+        sx={sxBtnPrimary}
         onClick={handleClickOpen}
       >
         Añadir a cuadro de cuotas
