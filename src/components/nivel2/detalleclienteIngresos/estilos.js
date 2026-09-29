@@ -7,9 +7,12 @@ export const COLOR_MUTED = "#6b7a86";
 export const COLOR_OK = "#2e7d32";
 export const COLOR_ERROR = "#c62828";
 
+// Línea de acento arriba de la tarjeta: marca dónde empieza cada sección,
+// sin oscurecer el fondo de la página (que sigue blanco).
 export const sxCard = {
   borderRadius: 2.5,
   border: `1px solid ${COLOR_BORDER}`,
+  borderTop: `3px solid ${COLOR_ACCENT}`,
   backgroundColor: "#fff",
   boxShadow: "0 10px 30px rgba(15, 34, 48, 0.06)",
 };

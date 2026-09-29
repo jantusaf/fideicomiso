@@ -455,15 +455,11 @@ export default function MenuIzq2({ children }) {
         )}
 
         {/* Contenido principal */}
-        {/* Fondo gris muy suave: hace que las tarjetas blancas (sxCard) se
-            distingan como secciones separadas, en vez de fundirse con la
-            página cuando ambas eran blancas. */}
         <Box
           component="main"
           sx={{
             flexGrow: 1,
-            bgcolor: '#f4f6f7',
-            minHeight: '100vh',
+            bgcolor: 'background.default',
             p: 3,
             transition: 'margin 0.3s ease-in-out',
           }}
