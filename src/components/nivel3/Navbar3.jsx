@@ -9,38 +9,26 @@ import {
   Toolbar,
   useMediaQuery,
   useTheme,
-  Typography,
 } from "@mui/material";
-import { alpha } from "@mui/material/styles";
 import DrawerNav from "../DrawerNav";
 
 const Navbar = () => {
   const usuario = useUser().userContext;
 
   const [user, setUser] = useState(null);
-  const [value, setValue] = useState();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
   const navigate = useNavigate();
 
   const islogo = {
-    width: "100px",
+    height: "38px",
+    width: "auto",
     marginRight: "16px",
-    filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.5))",
-    cursor: "pointer",
   };
 
   const handleClick = () => {
     navigate("/login");
-  };
-
-  const irNosotros = () => {
-    navigate("/usuario/nosotros");
-  };
-
-  const irContacto = () => {
-    navigate("/usuario/contacto");
   };
 
   const irAyuda = () => {
@@ -53,110 +41,72 @@ const Navbar = () => {
   };
 
   const inicio = () => {
-    navigate("/usuario/menu");
+    navigate("../Paginas/Nivel3/Principal");
   };
 
-  const navButtonSx = {
-    ml: 1.2,
-    px: 1.8,
-    py: 0.9,
-    minWidth: "auto",
-    borderRadius: "12px",
+  // Barra superior: color sólido (sin degradé) y altura fija de 64px, mismo
+  // criterio que la barra de Nivel 2.
+  const sxBotonBarra = {
+    color: "rgba(255,255,255,0.78)",
     textTransform: "none",
-    fontWeight: 800,
-    fontSize: "0.92rem",
-    color: "#ffffff",
-    border: `1px solid ${alpha("#ffffff", 0.14)}`,
-    backgroundColor: "transparent",
-    transition: "all .18s ease",
-    "&:hover": {
-      backgroundColor: alpha("#ffffff", 0.08),
-      borderColor: alpha("#ffffff", 0.24),
-      transform: "translateY(-1px)",
-    },
+    fontWeight: 600,
+    fontSize: 14,
+    borderRadius: 1.5,
+    px: 1.75,
+    "&:hover": { color: "#fff", backgroundColor: "rgba(255,255,255,0.08)" },
   };
 
-  const primaryActionSx = {
-    ml: 1.2,
-    px: 2,
-    py: 0.95,
-    minWidth: "auto",
-    borderRadius: "12px",
-    textTransform: "none",
-    fontWeight: 800,
-    fontSize: "0.92rem",
-    color: "#ffffff",
-    background: "linear-gradient(90deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.16) 100%)",
-    border: `1px solid ${alpha("#ffffff", 0.16)}`,
-    boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
-    "&:hover": {
-      background: "linear-gradient(90deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.22) 100%)",
-      transform: "translateY(-1px)",
-    },
+  const sxBotonBarraContorno = {
+    ...sxBotonBarra,
+    color: "#fff",
+    border: "1px solid rgba(255,255,255,0.3)",
+    "&:hover": { borderColor: "#fff", backgroundColor: "rgba(255,255,255,0.08)" },
   };
 
   return (
     <React.Fragment>
       <AppBar
+        elevation={0}
         sx={{
-          background:
-            "linear-gradient(90deg, #051821 0%, #051821 30%, #0b2a3a 45%, #01567c 65%, #148D8D 100%)",
-          boxShadow: "0 3px 10px rgba(0,0,0,0.35)",
+          backgroundColor: "#0f2230",
+          backgroundImage: "none",
+          boxShadow: "inset 0 -1px 0 rgba(255,255,255,0.08)",
         }}
       >
-        <Toolbar sx={{ minHeight: "72px !important" }}>
-          <Box
-            component="img"
-            src={logo}
-            alt="logo"
-            style={islogo}
-            onClick={inicio}
-          />
+        <Toolbar sx={{ minHeight: "64px !important", px: { xs: 2, md: 3 } }}>
+          <Box component="img" src={logo} alt="Santa Catalina Fideicomiso" sx={islogo} onClick={inicio} style={{ cursor: "pointer" }} />
 
           {isMatch ? (
             <Box sx={{ ml: "auto" }}>
               <DrawerNav />
             </Box>
           ) : (
-            <>
-              <Box
-                sx={{
-                  ml: "auto",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 0.5,
-                  flexWrap: "wrap",
-                }}
-              >
-                {usuario && (
-                  <Button
-                    sx={navButtonSx}
-                    onClick={() => navigate("../Paginas/Nivel3/Principal")}
-                  >
-                    Inicio
-                  </Button>
-                )}
-
-                <Button sx={navButtonSx} onClick={irAyuda}>
-                  Ayuda
+            <Box sx={{ ml: "auto", display: "flex", alignItems: "center", gap: 0.75 }}>
+              {usuario && (
+                <Button onClick={inicio} sx={sxBotonBarra}>
+                  Inicio
                 </Button>
+              )}
 
-                {usuario && (
-                  <Button onClick={hanleLogout} sx={primaryActionSx}>
-                    Cerrar Sesión
+              <Button onClick={irAyuda} sx={sxBotonBarra}>
+                Ayuda
+              </Button>
+
+              {usuario && (
+                <Button onClick={hanleLogout} variant="outlined" sx={sxBotonBarraContorno}>
+                  Cerrar sesión
+                </Button>
+              )}
+
+              {!usuario && (
+                <>
+                  <Button sx={sxBotonBarra}>Registrarse</Button>
+                  <Button onClick={handleClick} variant="outlined" sx={sxBotonBarraContorno}>
+                    Ingresar
                   </Button>
-                )}
-
-                {!usuario && (
-                  <>
-                    <Button sx={navButtonSx}>Registrarse</Button>
-                    <Button onClick={handleClick} sx={primaryActionSx}>
-                      Ingresar
-                    </Button>
-                  </>
-                )}
-              </Box>
-            </>
+                </>
+              )}
+            </Box>
           )}
         </Toolbar>
       </AppBar>

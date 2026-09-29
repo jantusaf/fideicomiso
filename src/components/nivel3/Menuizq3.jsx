@@ -5,14 +5,11 @@ import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import ListItemButton from "@mui/material/ListItemButton";
+import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
-import { alpha } from "@mui/material/styles";
 
 import NfcIcon from "@mui/icons-material/Nfc";
 import PriceCheckIcon from "@mui/icons-material/PriceCheck";
@@ -23,16 +20,17 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import MoneyOffIcon from "@mui/icons-material/MoneyOff";
 import PaidIcon from "@mui/icons-material/Paid";
 import CloseIcon from "@mui/icons-material/Close";
-import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 
 import { useState, useEffect } from "react";
 import useInusual from "../../hooks/useInusual";
 import servicioPagos from "../../services/pagos";
 import Navbar from "./Navbar3";
+import { COLOR_TEXT, COLOR_BORDER, sxBtnOutlined } from "../nivel2/detalleclienteIngresos/estilos";
 
-const drawerWidth = 240;
+const drawerWidth = 224; // mismo ancho que el menú de nivel 2
 
-export default function MenuIzq2({ children }) {
+export default function MenuIzq3({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -54,266 +52,177 @@ export default function MenuIzq2({ children }) {
     setNotificaciones(notis[0]);
   };
 
-  const hanleLogout = () => {
-    window.localStorage.removeItem("loggedNoteAppUser");
-    window.location.reload(true);
-  };
-
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
 
   const menuItems = [
-    {
-      text: "Lotes",
-      icon: <NfcIcon />,
-      path: "/nivel3/lotes",
-    },
-    {
-      text: "Aprobación de Pagos",
-      icon: <PriceCheckIcon />,
-      path: "/nivel3/aprobacionesdepagos",
-    },
+    { text: "Lotes", icon: <NfcIcon />, path: "/nivel3/lotes" },
+    { text: "Aprobación de Pagos", icon: <PriceCheckIcon />, path: "/nivel3/aprobacionesdepagos" },
     {
       text: "Pagos Inusuales",
       icon: (
         <Badge
           color="error"
           badgeContent={notificaciones > 0 ? notificaciones : null}
-          sx={{
-            "& .MuiBadge-badge": {
-              fontWeight: 800,
-            },
-          }}
+          sx={{ "& .MuiBadge-badge": { fontWeight: 700 } }}
         >
           <PaidIcon />
         </Badge>
       ),
       path: "/nivel3/pagosinusuales",
     },
-    {
-      text: "Agregar ICC",
-      icon: <QueryStatsIcon />,
-      path: "/nivel3/icc",
-    },
-    {
-      text: "Valor Metro Cuadrado",
-      icon: <PlagiarismIcon />,
-      path: "/nivel3/declaraciones",
-    },
-    {
-      text: "Extracto",
-      icon: <GroupAddIcon />,
-      path: "/nivel3/extracto",
-    },
-    {
-      text: "Agregar usuario",
-      icon: <GroupAddIcon />,
-      path: "/nivel3/agregarusuario",
-    },
-    {
-      text: "Pagos Inusuales Mensuales",
-      icon: <MoneyOffIcon />,
-      path: "/nivel3/pagosmensualesinusuales",
-    },
-    {
-      text: "Todos los pagos",
-      icon: <MoneyOffIcon />,
-      path: "/nivel3/pagos",
-    },
-    {
-      text: "Agenda de novedades",
-      icon: <AccountBalanceIcon />,
-      path: "/nivel3/novedades",
-    },
+    { text: "Agregar ICC", icon: <QueryStatsIcon />, path: "/nivel3/icc" },
+    { text: "Valor Metro Cuadrado", icon: <PlagiarismIcon />, path: "/nivel3/declaraciones" },
+    { text: "Extracto", icon: <GroupAddIcon />, path: "/nivel3/extracto" },
+    { text: "Agregar usuario", icon: <GroupAddIcon />, path: "/nivel3/agregarusuario" },
+    { text: "Pagos Inusuales Mensuales", icon: <MoneyOffIcon />, path: "/nivel3/pagosmensualesinusuales" },
+    { text: "Todos los pagos", icon: <MoneyOffIcon />, path: "/nivel3/pagos" },
+    { text: "Agenda de novedades", icon: <AccountBalanceIcon />, path: "/nivel3/novedades" },
   ];
 
-  return (
-    <>
-      <Box
+  // ===== Presentación del menú (compacto, sin degradés; mismo criterio que nivel 2) =====
+  const renderItem = (item) => {
+    const activo = location.pathname === item.path;
+    return (
+      <ListItemButton
+        key={item.text}
+        onClick={() => handleClick(item.path)}
+        selected={activo}
+        disableRipple
         sx={{
-          display: "flex",
-          minHeight: "100vh",
-          background:
-            "linear-gradient(180deg, #eef4f7 0%, #f7fafb 45%, #eef3f5 100%)",
+          position: "relative",
+          mx: 1.25,
+          my: 0.25,
+          px: 1.25,
+          py: 0.75,
+          minHeight: 42,
+          gap: 1.25,
+          borderRadius: 1.5,
+          color: COLOR_TEXT,
+          "&:hover": { backgroundColor: "#f6f8f9" },
+          "&.Mui-selected": {
+            backgroundColor: "rgba(13, 58, 73, 0.07)",
+            "&:hover": { backgroundColor: "rgba(13, 58, 73, 0.10)" },
+          },
+          "&.Mui-selected::before": {
+            content: '""',
+            position: "absolute",
+            left: -10,
+            top: 8,
+            bottom: 8,
+            width: 3,
+            borderRadius: "0 3px 3px 0",
+            backgroundColor: COLOR_TEXT,
+          },
+          "&:hover .flecha-menu": { opacity: 1 },
         }}
       >
-        <CssBaseline />
-
-        {menuVisible && (
-          <Drawer
-            variant="permanent"
-            anchor="left"
-            sx={{
-              width: drawerWidth,
-              flexShrink: 0,
-              "& .MuiDrawer-paper": {
-                width: drawerWidth,
-                boxSizing: "border-box",
-                background: "#ffffff",
-                borderRight: `1px solid ${alpha("#0b4f6c", 0.08)}`,
-                boxShadow: "8px 0 28px rgba(10, 59, 79, 0.06)",
-                overflowX: "hidden",
-              },
-            }}
-          >
-            <Navbar logout={{ hanleLogout }} />
-
-            {/* solo una compensación, no dos */}
-            <Toolbar sx={{ minHeight: "64px !important" }} />
-
-            <Divider sx={{ borderColor: alpha("#0b4f6c", 0.08) }} />
-
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                height: "100%",
-              }}
-            >
-              <List
-                sx={{
-                  px: 1.2,
-                  py: 1,
-                  pt: 0.75,
-                  background: "transparent",
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    mb: 0.5,
-                  }}
-                >
-                  <IconButton
-                    onClick={toggleMenu}
-                    sx={{
-                      color: "#1a303e",
-                      borderRadius: "12px",
-                      "&:hover": {
-                        backgroundColor: alpha("#0b4f6c", 0.06),
-                        color: "#0d3a49",
-                      },
-                    }}
-                  >
-                    <CloseIcon />
-                  </IconButton>
-                </Box>
-
-                {menuItems.map((item) => {
-                  const isActive = location.pathname === item.path;
-
-                  return (
-                    <ListItem
-                      button
-                      key={item.text}
-                      onClick={() => handleClick(item.path)}
-                      sx={{
-                        my: 0.4,
-                        px: 1.25,
-                        py: 1.05,
-                        borderRadius: 2.2,
-                        transition: "all .18s ease",
-                        border: "1px solid transparent",
-                        cursor: "pointer",
-                        backgroundColor: isActive
-                          ? "rgba(20,141,141,0.18)"
-                          : "transparent",
-                        borderColor: isActive
-                          ? "rgba(20,141,141,0.45)"
-                          : "transparent",
-                        boxShadow: isActive
-                          ? "0 12px 26px rgba(20,141,141,0.18)"
-                          : "none",
-                        "&:hover": {
-                          backgroundColor: isActive
-                            ? "rgba(20,141,141,0.22)"
-                            : "rgba(20,141,141,0.08)",
-                          borderColor: "rgba(20,141,141,0.28)",
-                          transform: "translateY(-1px)",
-                        },
-                      }}
-                    >
-                      <ListItemIcon
-                        sx={{
-                          minWidth: 42,
-                          "& svg": {
-                            fontSize: 22,
-                            color: isActive ? "#0d3a49" : "#1a303e",
-                          },
-                        }}
-                      >
-                        {item.icon}
-                      </ListItemIcon>
-
-                      <ListItemText
-                        primary={item.text}
-                        primaryTypographyProps={{
-                          sx: {
-                            fontFamily:
-                              "system-ui, -apple-system, Segoe UI, Roboto, Arial",
-                            fontWeight: isActive ? 800 : 700,
-                            fontSize: 14.2,
-                            color: isActive ? "#0d3a49" : "#0f2230",
-                            letterSpacing: 0.15,
-                          },
-                        }}
-                      />
-                    </ListItem>
-                  );
-                })}
-              </List>
-
-              <Divider
-                sx={{
-                  mt: "auto",
-                  borderColor: alpha("#0b4f6c", 0.08),
-                }}
-              />
-            </Box>
-          </Drawer>
-        )}
-
         <Box
-          component="main"
           sx={{
-            flexGrow: 1,
-            minHeight: "100vh",
-            background: "transparent",
-            p: 3,
-            transition: "all 0.3s ease-in-out",
+            width: 30,
+            height: 30,
+            flexShrink: 0,
+            borderRadius: 1.25,
+            display: "grid",
+            placeItems: "center",
+            backgroundColor: activo ? COLOR_TEXT : "rgba(13, 58, 73, 0.06)",
+            color: activo ? "#fff" : COLOR_TEXT,
+            "& svg": { fontSize: 18, color: "inherit !important" },
           }}
         >
+          {item.icon}
+        </Box>
+
+        <Typography
+          noWrap
+          sx={{ flex: 1, minWidth: 0, fontSize: 14, fontWeight: activo ? 700 : 500, color: COLOR_TEXT }}
+        >
+          {item.text}
+        </Typography>
+
+        <ChevronRightRoundedIcon
+          className="flecha-menu"
+          sx={{ fontSize: 18, color: "#9aa7b0", opacity: activo ? 1 : 0, transition: "opacity .15s ease" }}
+        />
+      </ListItemButton>
+    );
+  };
+
+  return (
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
+
+      {menuVisible && (
+        <Drawer
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+              backgroundColor: "#ffffff",
+              borderRight: `1px solid ${COLOR_BORDER}`,
+              boxShadow: "none",
+            },
+          }}
+          variant="permanent"
+          anchor="left"
+        >
+          <Navbar />
           <Toolbar sx={{ minHeight: "64px !important" }} />
 
-          {!menuVisible && (
-            <Button
-              variant="contained"
-              onClick={toggleMenu}
-              startIcon={<MenuOpenIcon />}
-              sx={{
-                mb: 2,
-                borderRadius: "14px",
-                px: 2.2,
-                py: 1,
-                textTransform: "none",
-                fontWeight: 800,
-                fontSize: "0.95rem",
-                background: "linear-gradient(90deg, #0a3b4f 0%, #148d8d 100%)",
-                boxShadow: "0 10px 22px rgba(11, 79, 108, 0.18)",
-                "&:hover": {
-                  background: "linear-gradient(90deg, #093244 0%, #117878 100%)",
-                },
-              }}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              pl: 2.5,
+              pr: 1.25,
+              pt: 1.5,
+              pb: 0.5,
+            }}
+          >
+            <Typography
+              sx={{ fontSize: 11.5, fontWeight: 700, letterSpacing: 0.8, color: "#6b7a86", textTransform: "uppercase" }}
             >
-              Mostrar menú
-            </Button>
-          )}
+              Menú
+            </Typography>
+            <IconButton
+              size="small"
+              onClick={toggleMenu}
+              title="Ocultar menú"
+              sx={{ color: "#6b7a86", "&:hover": { color: COLOR_TEXT, backgroundColor: "#f6f8f9" } }}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </Box>
 
-          {children}
-        </Box>
+          <List sx={{ py: 0.5 }}>{menuItems.map(renderItem)}</List>
+        </Drawer>
+      )}
+
+      {/* Contenido principal */}
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          bgcolor: "background.default",
+          p: 3,
+          transition: "margin 0.3s ease-in-out",
+        }}
+      >
+        <Navbar />
+        <Toolbar sx={{ minHeight: "64px !important" }} />
+
+        {!menuVisible && (
+          <Button variant="outlined" onClick={toggleMenu} sx={{ ...sxBtnOutlined, mb: 2 }}>
+            Mostrar menú
+          </Button>
+        )}
+
+        {children}
       </Box>
-    </>
+    </Box>
   );
 }
