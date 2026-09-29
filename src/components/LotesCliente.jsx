@@ -445,7 +445,7 @@ const exportarExcel = () => {
                 />
               )}
               <Chip variant="outlined" label={`Registros: ${cantidadRegistros}`} sx={{ fontWeight: 600 }} />
-              <Button variant="outlined" sx={sxBtnOutlined} onClick={exportarExcel}>
+              <Button variant="contained" sx={sxBtnPrimary} onClick={exportarExcel}>
                 Descargar Excel
               </Button>
             </Stack>

@@ -19,7 +19,6 @@ import {
   COLOR_BORDER,
   sxCard,
   sxBtnPrimary,
-  sxBtnOutlined,
 } from "./estilos";
 
 const descargarComprobante = (client) => {
@@ -302,20 +301,20 @@ const FichaAxios = (props) => {
                 Asignar lote
               </Button>
               <Button
-                variant="outlined"
-                sx={sxBtnOutlined}
+                variant="contained"
+                sx={sxBtnPrimary}
                 onClick={() => navigate("/usuario2/legajoscliente/" + props.cuil_cuit)}
               >
                 Ir a legajos
               </Button>
               <Button
-                variant="outlined"
-                sx={sxBtnOutlined}
+                variant="contained"
+                sx={sxBtnPrimary}
                 onClick={() => navigate("/usuario2/modificarcliente/" + props.cuil_cuit)}
               >
                 Modificar cliente
               </Button>
-              <Button variant="outlined" sx={sxBtnOutlined} onClick={() => descargarComprobante(client)}>
+              <Button variant="contained" sx={sxBtnPrimary} onClick={() => descargarComprobante(client)}>
                 Descargar comprobante Repet
               </Button>
               <Ingreso traer={recargar} />

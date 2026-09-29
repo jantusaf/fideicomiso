@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import Cargadetabla from "../../CargaDeTabla";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, sxCard, sxBtnOutlined } from "../detalleclienteIngresos/estilos";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, sxCard, sxBtnPrimary } from "../detalleclienteIngresos/estilos";
 
 import LotesCliente from "../../LotesCliente";
 import InfoCliente from "../detalleclienteIngresos/FichaAxios";
@@ -112,9 +112,9 @@ const DetalleCliente = () => {
 
               {idd && (
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   onClick={() => navigate("/usuario2/actualizarcomporbantes/" + cuil_cuit)}
-                  sx={sxBtnOutlined}
+                  sx={sxBtnPrimary}
                 >
                   Actualizar comprobantes
                 </Button>

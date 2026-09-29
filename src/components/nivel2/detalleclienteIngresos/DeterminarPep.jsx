@@ -12,6 +12,7 @@ import BackupIcon from "@mui/icons-material/Backup";
 import InputLabel from '@mui/material/InputLabel';
 import { useParams } from "react-router-dom"
 import React, {useCallback, useEffect, useState, Fragment } from "react";
+import { sxBtnPrimary } from "./estilos";
 
 
 
@@ -134,15 +135,7 @@ export default function SelectTextFields(props) {
       noValidate
       autoComplete="off"
     >
-      <Button variant="outlined" onClick={handleClickOpen} sx={{
-                      borderRadius: 1.5,
-                      textTransform: "none",
-                      fontWeight: 600,
-                      px: 2.25,
-                      color: "#1a303e",
-                      borderColor: "#c9d2d8",
-                      "&:hover": { borderColor: "#0d3a49", backgroundColor: "rgba(13, 58, 73, 0.04)" },
-                    }}>
+      <Button variant="contained" onClick={handleClickOpen} sx={sxBtnPrimary}>
       Establecer PEP
       </Button>
       <Dialog

@@ -9,7 +9,7 @@ import Cargadetabla from "../../CargaDeTabla";
 
 import { Alert, Box, Button, Chip, Paper, Stack, Typography } from "@mui/material";
 import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, sxCard, sxBtnOutlined, sxBtnPrimary } from "./estilos";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, sxCard, sxBtnPrimary } from "./estilos";
 
 const DetalleCliente = () => {
   const navigate = useNavigate();
@@ -107,9 +107,9 @@ const DetalleCliente = () => {
                 />
 
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   onClick={() => navigate("/usuario2/actualizarcomporbantes/" + cuil_cuit)}
-                  sx={sxBtnOutlined}
+                  sx={sxBtnPrimary}
                 >
                   Actualizar comprobantes
                 </Button>

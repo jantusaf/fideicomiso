@@ -12,6 +12,7 @@ import { useDropzone } from 'react-dropzone'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useParams } from "react-router-dom"
+import { sxBtnPrimary } from "./estilos";
 
 export default function FormDialog(props) {
   let params = useParams()
@@ -93,16 +94,6 @@ export default function FormDialog(props) {
     setOpen(false);
   };
 
-  // ====== estilos (solo frontend) ======
-  const sxPrimaryBtn = {
-    textTransform: 'none',
-    fontWeight: 600,
-    borderRadius: 1.5,
-    px: 2.25,
-    color: '#1a303e',
-    borderColor: '#c9d2d8',
-    '&:hover': { borderColor: '#0d3a49', backgroundColor: 'rgba(13, 58, 73, 0.04)' }
-  };
 
   const sxDialogPaper = {
     borderRadius: 3,
@@ -139,8 +130,8 @@ export default function FormDialog(props) {
   return (
     <div>
       <Button
-        variant="outlined"
-        sx={sxPrimaryBtn}
+        variant="contained"
+        sx={sxBtnPrimary}
         onClick={handleClickOpen}
       >
         Determinar ingresos
