@@ -14,7 +14,8 @@ export const sxCard = {
   boxShadow: "0 10px 30px rgba(15, 34, 48, 0.06)",
 };
 
-// Botón principal (sólido)
+// Botón principal (sólido). Al pasar el mouse se "vacía": queda con fondo
+// blanco y borde/texto del color, para que el hover se note bien claro.
 export const sxBtnPrimary = {
   textTransform: "none",
   fontWeight: 600,
@@ -23,7 +24,14 @@ export const sxBtnPrimary = {
   boxShadow: "none",
   backgroundColor: COLOR_TEXT,
   color: "#fff",
-  "&:hover": { backgroundColor: COLOR_ACCENT, boxShadow: "none" },
+  border: "1px solid transparent",
+  transition: "background-color .15s ease, color .15s ease, border-color .15s ease",
+  "&:hover": {
+    backgroundColor: "#fff",
+    color: COLOR_TEXT,
+    borderColor: COLOR_TEXT,
+    boxShadow: "none",
+  },
 };
 
 // Botón secundario (contorno)
@@ -48,7 +56,7 @@ export const sxBtnDangerOutlined = {
   "&:hover": { borderColor: COLOR_ERROR, backgroundColor: "rgba(198, 40, 40, 0.04)" },
 };
 
-// Botón de acción delicada (relleno rojo)
+// Botón de acción delicada (relleno rojo). Mismo criterio de hover "vacío".
 export const sxBtnDanger = {
   textTransform: "none",
   fontWeight: 600,
@@ -57,7 +65,14 @@ export const sxBtnDanger = {
   boxShadow: "none",
   backgroundColor: COLOR_ERROR,
   color: "#fff",
-  "&:hover": { backgroundColor: "#a81f1f", boxShadow: "none" },
+  border: "1px solid transparent",
+  transition: "background-color .15s ease, color .15s ease, border-color .15s ease",
+  "&:hover": {
+    backgroundColor: "#fff",
+    color: COLOR_ERROR,
+    borderColor: COLOR_ERROR,
+    boxShadow: "none",
+  },
 };
 
 // Diálogos: papel redondeado, título sobrio, sin degradés ni cristal
