@@ -2289,11 +2289,12 @@ useEffect(() => {
                                         key={`${nombre}-${geoJsonKey}`}
                                         data={geojsonData[nombre]}
                                         style={{
-                                            fillColor: "red",
-                                            fillOpacity: 0.25,
-                                            color: "red",
-                                            weight: 1.5,
-                                            opacity: 0.8,
+                                            fillColor: "transparent",
+                                            fillOpacity: 0,
+                                            color: "#ff0000",
+                                            weight: 3.5,
+                                            opacity: 1,
+                                            dashArray: "6 5",
                                         }}
                                         onEachFeature={(feature, layer) => {
                                             layer.options.interactive = false;
@@ -2398,10 +2399,11 @@ useEffect(() => {
                                             if (poligono?.privado === "privado") return { ...DASH, color: "#ff0000" };
                                             if (poligono?.privado === "publico") return { ...DASH, color: "#00ff00" };
                                             if (nombre === "unidad-ejecutora1") {
-                                                const fillColor = poligono ? (coloresPorSubclasificacion[poligono.subclasificacion] || "#cccccc") : "#cccccc";
-                                                return { ...DASH, color: fillColor };
+                                                const fillColor = poligono ? (coloresPorSubclasificacion[poligono.subclasificacion] || "#d9d9d9") : "#d9d9d9";
+                                                const hasSub = poligono?.subclasificacion;
+                                                return { fillColor, fillOpacity: hasSub ? 0.95 : 0.35, color: "#555555", weight: 0.5, opacity: 0.7 };
                                             }
-                                            return { ...DASH, color: "#00ff00" };
+                                            return { fillColor: "transparent", fillOpacity: 0, color: "#00ff00", weight: 1.5, opacity: 0.8 };
                                         }
 
                                         if (!poligono) return { ...DASH, color: "#ff0000" };
