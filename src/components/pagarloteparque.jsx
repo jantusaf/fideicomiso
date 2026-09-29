@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import { useDropzone } from "react-dropzone";
+import { sxBtnDanger } from "./nivel2/detalleclienteIngresos/estilos";
 import serviciocuotas from "../services/cuotas";
 import servicioUsuario1 from "../services/usuario1";
 import { useParams } from "react-router-dom";
@@ -160,16 +161,6 @@ export default function CancelarLoteCompleto(props) {
     "& .MuiInputLabel-root": { fontWeight: 600 },
   };
 
-  // Acción delicada: contorno rojo, sin sombras
-  const sxBtnOpen = {
-    px: 2.25,
-    borderRadius: 1.5,
-    textTransform: "none",
-    fontWeight: 600,
-    color: "#c62828",
-    borderColor: "#e3b5b5",
-    "&:hover": { borderColor: "#c62828", backgroundColor: "rgba(198, 40, 40, 0.04)" },
-  };
 
   const sxBtnCancel = {
     borderRadius: 1.5,
@@ -212,7 +203,7 @@ export default function CancelarLoteCompleto(props) {
   return (
     <>
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button variant="outlined" sx={sxBtnOpen} onClick={() => setOpen(true)}>
+        <Button variant="contained" sx={sxBtnDanger} onClick={() => setOpen(true)}>
           Cancelar lote
         </Button>
       </div>

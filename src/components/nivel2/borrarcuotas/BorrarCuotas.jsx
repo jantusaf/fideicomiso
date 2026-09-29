@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import servicioCuotas from '../../../services/cuotas';
+import { sxBtnDanger } from '../detalleclienteIngresos/estilos';
 
 export default function Borrarcuotas(props) {
   const [open, setOpen] = React.useState(false);
@@ -109,15 +110,7 @@ export default function Borrarcuotas(props) {
 
   return (
     <div>
-      <Button variant="outlined" sx={{
-          px: 2.25,
-          borderRadius: 1.5,
-          textTransform: 'none',
-          fontWeight: 600,
-          color: '#c62828',
-          borderColor: '#e3b5b5',
-          '&:hover': { borderColor: '#c62828', backgroundColor: 'rgba(198, 40, 40, 0.04)' }
-        }} onClick={handleClickOpen}>
+      <Button variant="contained" sx={sxBtnDanger} onClick={handleClickOpen}>
         Borrar cuotas
       </Button>
 

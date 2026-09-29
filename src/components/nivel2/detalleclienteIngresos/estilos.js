@@ -48,6 +48,18 @@ export const sxBtnDangerOutlined = {
   "&:hover": { borderColor: COLOR_ERROR, backgroundColor: "rgba(198, 40, 40, 0.04)" },
 };
 
+// Botón de acción delicada (relleno rojo)
+export const sxBtnDanger = {
+  textTransform: "none",
+  fontWeight: 600,
+  borderRadius: 1.5,
+  px: 2.25,
+  boxShadow: "none",
+  backgroundColor: COLOR_ERROR,
+  color: "#fff",
+  "&:hover": { backgroundColor: "#a81f1f", boxShadow: "none" },
+};
+
 // Diálogos: papel redondeado, título sobrio, sin degradés ni cristal
 export const slotPropsDialog = {
   paper: { sx: { borderRadius: 3 } },
