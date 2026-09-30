@@ -8,6 +8,8 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import IconButton from "@mui/material/IconButton";
 import {
   Table,
   TableBody,
@@ -39,6 +41,8 @@ import {
   COLOR_BRAND_SOFT,
   COLOR_BRAND_WARM,
   sxBtnBrand,
+  sxBtnWarmOutlined,
+  sxSearchField,
 } from "../../detalleclienteIngresos/estilos";
 
 const Lotes = () => {
@@ -73,6 +77,8 @@ const Lotes = () => {
     setFilteredClients(filtered);
     setPage(0);
   };
+
+  const limpiarBusqueda = () => handleSearch({ target: { value: "" } });
 
   const parseCuota = (cuota) => {
     if (!cuota) return 0;
@@ -199,12 +205,16 @@ const Lotes = () => {
                     <SearchIcon sx={{ color: COLOR_MUTED, fontSize: 20 }} />
                   </InputAdornment>
                 ),
+                endAdornment: search ? (
+                  <InputAdornment position="end">
+                    <IconButton size="small" onClick={limpiarBusqueda} sx={{ color: COLOR_MUTED, "&:hover": { color: COLOR_TEXT } }}>
+                      <CloseRoundedIcon sx={{ fontSize: 18 }} />
+                    </IconButton>
+                  </InputAdornment>
+                ) : null,
               },
             }}
-            sx={{
-              width: { xs: "100%", md: 420 },
-              "& .MuiOutlinedInput-root": { borderRadius: 1.5 },
-            }}
+            sx={{ width: { xs: "100%", md: 420 }, ...sxSearchField }}
           />
 
           <Button
@@ -314,7 +324,7 @@ const Lotes = () => {
                             variant="outlined"
                             size="small"
                             onClick={() => navigate(`/usuario2/modificarcliente/${client.cuil_cuit}`)}
-                            sx={{ ...sxBtnOutlined, mr: 1, px: 1.75 }}
+                            sx={{ ...sxBtnWarmOutlined, mr: 1, px: 1.75 }}
                           >
                             Editar
                           </Button>
@@ -325,7 +335,7 @@ const Lotes = () => {
                             variant="contained"
                             size="small"
                             onClick={() => navigate(`/usuario2/detalleclic3/${client.cuil_cuit}`)}
-                            sx={{ ...sxBtnBrand, px: 1.75 }}
+                            sx={{ ...sxBtnBrand, minWidth: 92, px: 1.75 }}
                           >
                             Ver
                           </Button>

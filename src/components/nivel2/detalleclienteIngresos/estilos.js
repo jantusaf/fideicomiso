@@ -108,6 +108,37 @@ export const sxBtnBrand = {
   },
 };
 
+// Botón secundario en el naranja/amarillo de marca (contorno), del mismo
+// tono que los chips de cantidad. Mismo ancho mínimo que sxBtnBrand para que
+// "Editar" y "Ver" queden del mismo tamaño aunque el texto sea más corto.
+export const sxBtnWarmOutlined = {
+  textTransform: "none",
+  fontWeight: 600,
+  borderRadius: 1.5,
+  px: 2.25,
+  minWidth: 92,
+  color: COLOR_BRAND_WARM,
+  borderColor: COLOR_BRAND_WARM,
+  "&:hover": { borderColor: COLOR_BRAND_WARM, backgroundColor: "rgba(201, 121, 26, 0.06)" },
+};
+
+// Barra de búsqueda: pill redondeada, fondo suave, con foco en el celeste de
+// marca —reemplaza el input outline plano de antes por algo más moderno.
+export const sxSearchField = {
+  "& .MuiOutlinedInput-root": {
+    borderRadius: 999,
+    backgroundColor: "#f6f8f9",
+    transition: "background-color .15s ease, box-shadow .15s ease",
+    "& fieldset": { borderColor: "transparent" },
+    "&:hover fieldset": { borderColor: COLOR_BORDER },
+    "&.Mui-focused": {
+      backgroundColor: "#fff",
+      boxShadow: "0 0 0 3px rgba(46, 105, 153, 0.14)",
+    },
+    "&.Mui-focused fieldset": { borderColor: COLOR_BRAND, borderWidth: "1.5px" },
+  },
+};
+
 // Diálogos: papel redondeado, título sobrio, sin degradés ni cristal
 export const slotPropsDialog = {
   paper: { sx: { borderRadius: 3 } },
