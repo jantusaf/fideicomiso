@@ -149,21 +149,19 @@ export default function PagarCuota() {
 
   const enviar = async () => {
 
-    if (!enviarr) {
-      alert('Debe subir un comprobante antes de enviar')
-      return
-    }
-
     setLoading(true)
     try {
+      // Si no se subió comprobante, se envía igual con un FormData vacío.
+      const formData = enviarr || new FormData()
+
       // El backend (pagonivel2) lee estos campos por separado desde req.body.
       // Se usa set() para que un reintento no duplique los campos.
-      enviarr.set('cuil_cuit', pago.cuil_cuit)
-      enviarr.set('id_cuota', pago.id)
-      enviarr.set('pago', pago.monto)
-      enviarr.set('fecha', pago.fecha)
+      formData.set('cuil_cuit', pago.cuil_cuit)
+      formData.set('id_cuota', pago.id)
+      formData.set('pago', pago.monto)
+      formData.set('fecha', pago.fecha)
 
-      const rta = await servicioUsuario1.pagarnivel2(enviarr)
+      const rta = await servicioUsuario1.pagarnivel2(formData)
       console.log(rta)
       alert(rta[0])
       navigate('/usuario2/detallecliente/' + rta[1])
@@ -179,16 +177,13 @@ export default function PagarCuota() {
 
   const enviar2 = async () => {
 
-    if (!enviarr) {
-      alert('Debe subir un comprobante antes de enviar')
-      return
-    }
-
     setLoading(true)
     try {
-      enviarr.append('datos', [pago.cuil_cuit, pago.fecha,pago.id, JSON.stringify(pagosVarios)]);///// aca en forma de array se envian datos del dormulario
+      // Si no se subió comprobante, se envía igual con un FormData vacío.
+      const formData = enviarr || new FormData()
+      formData.append('datos', [pago.cuil_cuit, pago.fecha,pago.id, JSON.stringify(pagosVarios)]);///// aca en forma de array se envian datos del dormulario
 
-      const rta = await servicioUsuario1.pagarnivel2varios(enviarr)
+      const rta = await servicioUsuario1.pagarnivel2varios(formData)
       console.log(rta)
       alert(rta[0])
       navigate('/usuario2/detallecliente/' + rta[1])
@@ -398,7 +393,7 @@ export default function PagarCuota() {
                   <Button
                     variant="contained"
                     onClick={puedeEnviarUna ? enviar : enviar2}
-                    disabled={loading || !enviarr || !(puedeEnviarUna || puedeEnviarVarias)}
+                    disabled={loading || !(puedeEnviarUna || puedeEnviarVarias)}
                     sx={{
                       textTransform: 'none',
                       fontWeight: 600,
