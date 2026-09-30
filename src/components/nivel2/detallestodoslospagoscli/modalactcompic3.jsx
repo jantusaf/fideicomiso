@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 
 import BackupIcon from '@mui/icons-material/Backup';
 import servicioLegajo from '../../../services/legajos'
+import { sxBtnDanger } from "../detalleclienteIngresos/estilos";
 export default function FormDialog(props) {
   let params = useParams();
   let cuil_cuit = params.cuil_cuit;
@@ -128,7 +129,7 @@ id:props.id
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleClose}>Cancelar</Button>
+          <Button onClick={handleClose} variant="contained" sx={sxBtnDanger}>Cancelar</Button>
           {cargando ? (
             <Box sx={{ display: 'flex' }}>
               <Button><CircularProgress /></Button>

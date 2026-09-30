@@ -174,7 +174,7 @@ export default function Borrarcuotas(props) {
         </DialogContent>
 
         <DialogActions sx={sxActions}>
-          <Button onClick={handleClose} variant="outlined" sx={sxCancelBtn}>
+          <Button onClick={handleClose} variant="contained" sx={sxBtnDanger}>
             Cancelar
           </Button>
 

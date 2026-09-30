@@ -23,7 +23,17 @@ import { useDropzone } from "react-dropzone";
 import servicioUsuario1 from "../../../services/usuario1";
 import { useParams } from "react-router-dom";
 import Modalveronline from "../pagarcuota/verpdfcbu";
-import { COLOR_TEXT, COLOR_MUTED, COLOR_BORDER, COLOR_ERROR, sxBtnPrimary, sxBtnOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions } from "../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  COLOR_ERROR,
+  sxBtnPrimary,
+  slotPropsDialog,
+  sxDialogTitle,
+  sxDialogActions,
+  sxBtnDanger,
+} from "../detalleclienteIngresos/estilos";
 
 export default function CancelarLoteCompleto(props) {
   let params = useParams();
@@ -159,8 +169,8 @@ export default function CancelarLoteCompleto(props) {
   return (
     <>
       <Button
-        variant="outlined"
-        sx={{ ...sxBtnOutlined, mb: 2 }}
+        variant="contained"
+        sx={{ ...sxBtnDanger, mb: 2 }}
         onClick={() => setOpen(true)}
       >
         Cancelar lote
@@ -386,8 +396,8 @@ export default function CancelarLoteCompleto(props) {
               setPaso(1);
               setPassword("");
             }}
-            variant="outlined"
-            sx={sxBtnOutlined}
+            variant="contained"
+            sx={sxBtnDanger}
           >
             Cancelar
           </Button>

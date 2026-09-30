@@ -1,5 +1,16 @@
 import React, { useCallback, useState, useEffect, Fragment } from "react";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, COLOR_OK, sxBtnPrimary as sxBtnPrimaryBase, sxBtnOutlined as sxBtnOutlinedBase, sxBtnBrand, slotPropsDialog } from "../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  COLOR_OK,
+  sxBtnPrimary as sxBtnPrimaryBase,
+  sxBtnOutlined as sxBtnOutlinedBase,
+  sxBtnBrand,
+  slotPropsDialog,
+  sxBtnDanger,
+} from "../detalleclienteIngresos/estilos";
 import Box from "@mui/material/Box";
 import {
   Button,
@@ -424,7 +435,7 @@ export default function SelectTextFields(props) {
                         </Box>
 
                         <Stack direction="row" spacing={1.2} useFlexGap sx={{ justifyContent: "flex-end", flexWrap: "wrap" }}>
-                          <Button variant="outlined" sx={sxBtnPrimary} onClick={handleClose}>
+                          <Button variant="contained" sx={sxBtnDanger} onClick={handleClose}>
                             Cancelar
                           </Button>
 
@@ -513,7 +524,7 @@ export default function SelectTextFields(props) {
                         </Box>
 
                         <Stack direction="row" spacing={1.2} useFlexGap sx={{ justifyContent: "flex-end", flexWrap: "wrap" }}>
-                          <Button variant="outlined" sx={sxBtnPrimary} onClick={handleClose}>
+                          <Button variant="contained" sx={sxBtnDanger} onClick={handleClose}>
                             Cancelar
                           </Button>
 

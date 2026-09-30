@@ -13,7 +13,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { sxBtnPrimary } from './detalleclienteIngresos/estilos';
+import { sxBtnPrimary, sxBtnDanger } from './detalleclienteIngresos/estilos';
 
 export default function Borrarcuotas(props) {
   const [open, setOpen] = React.useState(false);
@@ -173,19 +173,8 @@ export default function Borrarcuotas(props) {
           <Button
             autoFocus
             onClick={handleClose}
-            variant="outlined"
-            sx={{
-              borderRadius: 1.5,
-              textTransform: 'none',
-              fontWeight: 600,
-              px: 2.25,
-              borderColor: '#c9d2d8',
-              color: '#1a303e',
-              '&:hover': {
-                borderColor: '#0d3a49',
-                backgroundColor: 'rgba(13, 58, 73, 0.04)',
-              },
-            }}
+            variant="contained"
+            sx={sxBtnDanger}
           >
             Cancelar
           </Button>

@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import servicioPagos from "../../../services/pagos";
+import { sxBtnDanger } from "../detalleclienteIngresos/estilos";
 
 const COLOR_TEXT = "#1a303e";
 const COLOR_ACCENT = "#0d3a49";
@@ -182,7 +183,7 @@ export default function ModalEditarPago({ pago, onGuardado }) {
         </DialogContent>
 
         <DialogActions sx={{ px: 3, pb: 2.5 }}>
-          <Button onClick={cerrar} disabled={guardando} sx={{ textTransform: "none", fontWeight: 700, color: COLOR_TEXT }}>
+          <Button onClick={cerrar} disabled={guardando} variant="contained" sx={sxBtnDanger}>
             Cancelar
           </Button>
           <Button

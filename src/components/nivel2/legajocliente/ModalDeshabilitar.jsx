@@ -9,7 +9,16 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from "react";
 import servicioCliente from '../../../services/clientes'
-import { COLOR_TEXT, COLOR_MUTED, sxBtnPrimary, sxBtnOutlined, sxBtnDangerOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions } from "../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_MUTED,
+  sxBtnPrimary,
+  sxBtnDangerOutlined,
+  slotPropsDialog,
+  sxDialogTitle,
+  sxDialogActions,
+  sxBtnDanger,
+} from "../detalleclienteIngresos/estilos";
 
 export default function Ingresos(props) {
   let params = useParams()
@@ -82,7 +91,7 @@ export default function Ingresos(props) {
         </DialogContent>
 
         <DialogActions sx={sxDialogActions}>
-          <Button onClick={handleClose} variant="outlined" sx={sxBtnOutlined}>
+          <Button onClick={handleClose} variant="contained" sx={sxBtnDanger}>
             Cancelar
           </Button>
 

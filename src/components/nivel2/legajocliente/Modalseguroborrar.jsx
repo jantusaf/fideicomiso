@@ -12,6 +12,7 @@ import ServicioLegajos from '../../../services/legajos'
 import Tooltip from "@mui/material/Tooltip";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import React, { useEffect, useState, Fragment } from "react";
+import { sxBtnDanger } from "../detalleclienteIngresos/estilos";
 const currencies = [
   {
     value: 'CBU',
@@ -96,7 +97,7 @@ export default function SelectTextFields(props) {
             ¿Seguro desea borrar legajo?
         </DialogContent>
         <DialogActions>
-            <Button onClick={handleClose}>Cancelar</Button>
+            <Button onClick={handleClose} variant="contained" sx={sxBtnDanger}>Cancelar</Button>
             <Button onClick={handleDeterminar} >Si </Button>
           </DialogActions>
       </Dialog>

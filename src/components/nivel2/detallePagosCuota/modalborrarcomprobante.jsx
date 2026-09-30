@@ -15,7 +15,16 @@ import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
 
 import servicioAdmin from "../../../services/Administracion";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import { COLOR_TEXT, COLOR_MUTED, sxBtnPrimary, sxBtnOutlined, sxBtnDangerOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions } from "../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_MUTED,
+  sxBtnPrimary,
+  sxBtnDangerOutlined,
+  slotPropsDialog,
+  sxDialogTitle,
+  sxDialogActions,
+  sxBtnDanger,
+} from "../detalleclienteIngresos/estilos";
 
 export default function SelectTextFields(props) {
   const [open, setOpen] = useState(false);
@@ -88,7 +97,7 @@ export default function SelectTextFields(props) {
         </DialogContent>
 
         <DialogActions sx={sxDialogActions}>
-          <Button onClick={handleClose} variant="outlined" sx={sxBtnOutlined}>
+          <Button onClick={handleClose} variant="contained" sx={sxBtnDanger}>
             Cancelar
           </Button>
 

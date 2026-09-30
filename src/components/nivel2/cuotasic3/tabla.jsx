@@ -29,7 +29,6 @@ import {
   COLOR_ERROR,
   sxCard,
   sxBtnPrimary,
-  sxBtnOutlined,
   slotPropsDialog,
   sxDialogTitle,
   sxDialogActions,
@@ -37,7 +36,7 @@ import {
   COLOR_BRAND_SOFT,
   sxBtnBrand,
   COLOR_BRAND_WARM,
-  COLOR_HEADER_BG,
+  sxBtnDanger,
 } from "../detalleclienteIngresos/estilos";
 
 import EditIcon from "@mui/icons-material/Edit";
@@ -50,8 +49,8 @@ import MenuItem from "@mui/material/MenuItem";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: COLOR_HEADER_BG,
-    color: COLOR_TEXT,
+    backgroundColor: COLOR_BRAND_SOFT,
+    color: COLOR_BRAND,
     fontWeight: 700,
     fontSize: 11.5,
     letterSpacing: 0.4,
@@ -395,8 +394,8 @@ const Lotes = (props) => {
                           sx={{
                             px: 2.2,
                             py: 1.3,
-                            backgroundColor: COLOR_HEADER_BG,
-                            color: COLOR_TEXT,
+                            backgroundColor: COLOR_BRAND_SOFT,
+                            color: COLOR_BRAND,
                             borderBottom: `1px solid ${COLOR_BORDER}`,
                           }}
                         >
@@ -766,7 +765,7 @@ const Lotes = (props) => {
         </DialogContent>
 
         <DialogActions sx={sxDialogActions}>
-          <Button onClick={cerrarCompensar} variant="outlined" sx={sxBtnOutlined}>
+          <Button onClick={cerrarCompensar} variant="contained" sx={sxBtnDanger}>
             Cancelar
           </Button>
 

@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import servicioPagos from "../../../services/pagos";
+import { sxBtnDanger } from "../detalleclienteIngresos/estilos";
 
 const COLOR_TEXT = "#1a303e";
 
@@ -56,11 +57,10 @@ export default function ModalCancelarPago({ pago, onCancelado }) {
       <Tooltip title="Cancelar este pago" arrow>
         <Button
           size="small"
-          variant="outlined"
-          color="error"
+          variant="contained"
           startIcon={<DeleteOutlineRoundedIcon fontSize="small" />}
           onClick={abrir}
-          sx={{ textTransform: "none", fontWeight: 700, borderRadius: 1.5 }}
+          sx={{ ...sxBtnDanger, borderRadius: 1.5 }}
         >
           Cancelar
         </Button>

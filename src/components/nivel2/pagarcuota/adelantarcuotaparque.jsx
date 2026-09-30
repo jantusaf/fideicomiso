@@ -8,7 +8,7 @@ import serviciocuotas from '../../../services/cuotas';
 import servicioUsuario1 from "../../../services/usuario1";
 import Modalveronline from '../pagarcuota/verpdfcbu';
 import { useParams } from "react-router-dom"
-import { sxBtnPrimary } from "../detalleclienteIngresos/estilos";
+import { sxBtnPrimary, sxBtnDanger } from "../detalleclienteIngresos/estilos";
 
 export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
     const params = useParams();
@@ -285,16 +285,8 @@ export default function AnticiparCuotas({ id_lote, cuotas, traerr }) {
       >
         <Button
           onClick={() => setOpen(false)}
-          variant="outlined"
-          sx={{
-            textTransform: "none",
-            fontWeight: 600,
-            borderRadius: 1.5,
-            px: 2.25,
-            color: "#1a303e",
-            borderColor: "#c9d2d8",
-            "&:hover": { borderColor: "#0d3a49", backgroundColor: "rgba(13, 58, 73, 0.04)" },
-          }}
+          variant="contained"
+          sx={sxBtnDanger}
         >
           Cancelar
         </Button>

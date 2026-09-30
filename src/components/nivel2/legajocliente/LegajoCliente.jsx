@@ -31,7 +31,6 @@ import {
   COLOR_BRAND_WARM,
   COLOR_BRAND_WARM_SOFT,
   COLOR_BRAND_WARM_BORDER,
-  COLOR_HEADER_BG,
 } from "../detalleclienteIngresos/estilos";
 const thStyle = {
   padding: "12px",
@@ -221,8 +220,8 @@ const LegajoCliente = (props) => {
   };
 
   const sxTh = {
-    backgroundColor: COLOR_HEADER_BG,
-    color: COLOR_TEXT,
+    backgroundColor: COLOR_BRAND_SOFT,
+    color: COLOR_BRAND,
     fontWeight: 700,
     fontSize: 11.5,
     letterSpacing: 0.4,

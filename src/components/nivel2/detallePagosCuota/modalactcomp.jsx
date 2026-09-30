@@ -14,7 +14,18 @@ import { alpha } from "@mui/material/styles";
 import UploadFileRoundedIcon from "@mui/icons-material/UploadFileRounded";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import CloudDownloadRoundedIcon from "@mui/icons-material/CloudDownloadRounded";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_OK, sxBtnPrimary, sxBtnOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions } from "../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_OK,
+  sxBtnPrimary,
+  sxBtnOutlined,
+  slotPropsDialog,
+  sxDialogTitle,
+  sxDialogActions,
+  sxBtnDanger,
+} from "../detalleclienteIngresos/estilos";
 
 
 export default function FormDialog(props) {
@@ -179,7 +190,7 @@ id:props.id
         </DialogContent>
 
         <DialogActions sx={sxDialogActions}>
-          <Button onClick={handleClose} variant="outlined" sx={sxBtnOutlined}>
+          <Button onClick={handleClose} variant="contained" sx={sxBtnDanger}>
             Cancelar
           </Button>
 

@@ -17,7 +17,16 @@ import DialogActions from "@mui/material/DialogActions";
 import Typography from "@mui/material/Typography";
 import { Chip } from "@mui/material";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import { COLOR_TEXT, COLOR_MUTED, sxBtnPrimary, sxBtnOutlined, sxBtnDangerOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions } from "../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_MUTED,
+  sxBtnPrimary,
+  sxBtnDangerOutlined,
+  slotPropsDialog,
+  sxDialogTitle,
+  sxDialogActions,
+  sxBtnDanger,
+} from "../detalleclienteIngresos/estilos";
 const currencies = [
   {
     value: 'CBU',
@@ -135,7 +144,7 @@ export default function SelectTextFields(props) {
         </DialogContent>
 
         <DialogActions sx={sxDialogActions}>
-          <Button onClick={handleClose} variant="outlined" sx={sxBtnOutlined}>
+          <Button onClick={handleClose} variant="contained" sx={sxBtnDanger}>
             Cancelar
           </Button>
 

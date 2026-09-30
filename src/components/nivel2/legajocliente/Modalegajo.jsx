@@ -20,7 +20,18 @@ import { useDropzone } from "react-dropzone";
 import { useParams } from "react-router-dom";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import servicioLegajo from "../../../services/legajos";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_OK, COLOR_ERROR, sxBtnPrimary, sxBtnOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions } from "../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_OK,
+  COLOR_ERROR,
+  sxBtnPrimary,
+  slotPropsDialog,
+  sxDialogTitle,
+  sxDialogActions,
+  sxBtnDanger,
+} from "../detalleclienteIngresos/estilos";
 
 export default function FormDialog(props) {
   const params = useParams();
@@ -291,7 +302,7 @@ export default function FormDialog(props) {
         </DialogContent>
 
         <DialogActions sx={sxDialogActions}>
-          <Button onClick={cerrarModal} disabled={cargando} variant="outlined" sx={sxBtnOutlined}>
+          <Button onClick={cerrarModal} disabled={cargando} variant="contained" sx={sxBtnDanger}>
             Cancelar
           </Button>
 

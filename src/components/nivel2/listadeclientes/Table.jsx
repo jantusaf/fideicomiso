@@ -39,11 +39,9 @@ import {
   COLOR_BRAND_SOFT,
   COLOR_BRAND_WARM,
   sxBtnBrand,
-  sxBtnBrandSoft,
   sxSearchField,
   COLOR_BRAND_WARM_SOFT,
   COLOR_BRAND_WARM_BORDER,
-  COLOR_HEADER_BG,
 } from "../detalleclienteIngresos/estilos";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import IconButton from "@mui/material/IconButton";
@@ -100,8 +98,8 @@ const Lotes = () => {
 
   // Encabezado de tabla: claro y discreto (sin fondos de color)
   const sxTh = {
-    backgroundColor: COLOR_HEADER_BG,
-    color: COLOR_TEXT,
+    backgroundColor: COLOR_BRAND_SOFT,
+    color: COLOR_BRAND,
     fontWeight: 700,
     fontSize: 11.5,
     letterSpacing: 0.4,
@@ -332,10 +330,10 @@ const Lotes = () => {
                       <TableCell sx={{ ...sxTd, whiteSpace: "nowrap", textAlign: "right" }}>
                         <Tooltip title="Editar cliente">
                           <Button
-                            variant="contained"
+                            variant="outlined"
                             size="small"
                             onClick={() => navigate(`/usuario2/modificarcliente/${client.cuil_cuit}`)}
-                            sx={{ ...sxBtnBrandSoft, minWidth: 92, mr: 1, px: 1.75 }}
+                            sx={{ ...sxBtnOutlined, minWidth: 92, mr: 1, px: 1.75 }}
                           >
                             Editar
                           </Button>

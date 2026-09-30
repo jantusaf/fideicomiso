@@ -9,7 +9,18 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Tooltip from "@mui/material/Tooltip";
 import { useDropzone } from 'react-dropzone';
 import { Box, Typography } from "@mui/material";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_OK, sxBtnPrimary, sxBtnOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions } from "./../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_OK,
+  sxBtnPrimary,
+  sxBtnOutlined,
+  slotPropsDialog,
+  sxDialogTitle,
+  sxDialogActions,
+  sxBtnDanger,
+} from "./../detalleclienteIngresos/estilos";
 
 import serviciousuario1 from '../../../services/usuario1';
 
@@ -184,7 +195,7 @@ export default function FormDialog(props) {
           </DialogContent>
 
           <DialogActions sx={sxDialogActions}>
-            <Button onClick={handleClose} variant="outlined" sx={sxBtnOutlined}>
+            <Button onClick={handleClose} variant="contained" sx={sxBtnDanger}>
               Cancelar
             </Button>
 

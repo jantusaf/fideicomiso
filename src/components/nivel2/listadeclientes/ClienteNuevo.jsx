@@ -8,6 +8,7 @@ import {
   Typography
 } from '@mui/material';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import { sxBtnDanger } from "../detalleclienteIngresos/estilos";
 
 export default function ClienteNuevo({ getClients }) {
   let { cuil_cuit } = useParams();
@@ -71,7 +72,7 @@ export default function ClienteNuevo({ getClients }) {
                 ) : (
                   <Typography color="error" sx={{ fontSize: 14 }}>Completar todos los campos</Typography>
                 )}
-                <Button variant="contained" color="error" onClick={handleClose}>Cancelar</Button>
+                <Button variant="contained" sx={sxBtnDanger} onClick={handleClose}>Cancelar</Button>
               </DialogActions>
             </form>
           </DialogContent>

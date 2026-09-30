@@ -13,6 +13,7 @@ import NativeSelect from '@mui/material/NativeSelect';
 import InputLabel from '@mui/material/InputLabel';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { Paper } from '@mui/material';
+import { sxBtnDanger } from "../../detalleclienteIngresos/estilos";
 import Box from "@mui/material/Box";
 
 export default function ClienteNuevo(props) {
@@ -161,7 +162,7 @@ export default function ClienteNuevo(props) {
 
               <DialogActions>
                 {form.cuil_cuit && form.observaciones && form.telefono && form.domicilio && form.tipo_dni && form.Nombre ? <><Button variant="contained" color="primary" type="submit">Crear</Button></> : <><h6 style={{ color: "red" }} >Completar todos los campos</h6></>}
-                <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
+                <Button variant="contained" sx={sxBtnDanger} style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
 
               </DialogActions>
             </form>

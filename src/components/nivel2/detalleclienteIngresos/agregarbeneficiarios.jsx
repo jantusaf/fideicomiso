@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, MenuItem, Select, TextField } from '@mui/material';
 import servicioCliente from '../../../services/clientes';
+import { sxBtnDanger } from "./estilos";
 
 const BeneficiariosDialog = (props) => {
   const [open, setOpen] = useState(false);
@@ -75,7 +76,7 @@ const BeneficiariosDialog = (props) => {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)}>Cancelar</Button>
+          <Button onClick={() => setOpen(false)} variant="contained" sx={sxBtnDanger}>Cancelar</Button>
           <Button onClick={handleSubmit} color="primary">Aceptar</Button>
         </DialogActions>
       </Dialog>

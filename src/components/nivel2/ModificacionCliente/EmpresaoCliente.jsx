@@ -21,6 +21,7 @@ import {
   sxDialogTitle,
   sxDialogActions,
   COLOR_MUTED,
+  sxBtnDanger,
 } from "../detalleclienteIngresos/estilos";
 
 export default function Empresaocliente({ onListo, razonActual }) {
@@ -97,7 +98,7 @@ export default function Empresaocliente({ onListo, razonActual }) {
         </DialogContent>
 
         <DialogActions sx={sxDialogActions}>
-          <Button onClick={handleClose} disabled={guardando} variant="outlined" sx={sxBtnOutlined}>
+          <Button onClick={handleClose} disabled={guardando} variant="contained" sx={sxBtnDanger}>
             Cancelar
           </Button>
           <Button onClick={handleDeterminar} disabled={guardando} variant="contained" sx={sxBtnPrimary}>
