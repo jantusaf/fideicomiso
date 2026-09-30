@@ -34,11 +34,11 @@ const crearEstilos = (c) => ({
   },
 
   dropzone: {
-    border: `2px dashed ${c.BORDER_INPUT}`,
-    borderRadius: 16,
+    border: "2px dashed #e2e6e9",
+    borderRadius: 12,
     padding: 30,
     textAlign: "center",
-    background: c.BG_INPUT,
+    background: "#f9fafb",
     cursor: "pointer",
     transition: "0.2s",
   },
@@ -160,17 +160,17 @@ export default function SubirExcelMovimientos({ onSuccess }) {
 >
  <label
   style={{
-    background: "transparent",
-    color: "#14919B",
+    background: "#ffffff",
+    color: "#1a303e",
 
-    borderRadius: "5px",
-    border: "1.5px solid #9fd4d7",
+    borderRadius: "6px",
+    border: "1px solid #c9d2d8",
 
-    fontWeight: 700,
+    fontWeight: 600,
     fontSize: "13px",
 
     minWidth: 130,
-    height: 25,
+    height: 28,
 
     padding: "0 16px",
 
@@ -184,13 +184,15 @@ export default function SubirExcelMovimientos({ onSuccess }) {
   }}
 
   onMouseOver={(e) => {
+    e.currentTarget.style.borderColor = "#0d3a49";
     e.currentTarget.style.background =
-      "rgba(20,145,155,0.08)";
+      "rgba(13,58,73,0.04)";
   }}
 
   onMouseOut={(e) => {
+    e.currentTarget.style.borderColor = "#c9d2d8";
     e.currentTarget.style.background =
-      "transparent";
+      "#ffffff";
   }}
 >
     Seleccionar archivo
@@ -231,7 +233,7 @@ export default function SubirExcelMovimientos({ onSuccess }) {
                 style={{
                   width: progreso + "%",
                   height: "100%",
-                  background: "#148D8D",
+                  background: "#1a303e",
                   borderRadius: 6,
                   transition: "0.2s",
                 }}
@@ -250,13 +252,13 @@ export default function SubirExcelMovimientos({ onSuccess }) {
   style={{
     marginTop: 20,
 
-    background: "#14919B",
+    background: "#1a303e",
     color: "#fff",
 
-    borderRadius: "10px",
+    borderRadius: "6px",
     border: "none",
 
-    fontWeight: 700,
+    fontWeight: 600,
     fontSize: "13px",
 
     minWidth: 140,
@@ -280,11 +282,11 @@ export default function SubirExcelMovimientos({ onSuccess }) {
   }}
   onMouseEnter={(e) => {
     e.currentTarget.style.background =
-      "#117C85";
+      "#0d3a49";
   }}
   onMouseLeave={(e) => {
     e.currentTarget.style.background =
-      "#14919B";
+      "#1a303e";
   }}
 >
   {loading ? "Subiendo..." : "Subir Excel"}

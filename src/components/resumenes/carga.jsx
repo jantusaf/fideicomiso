@@ -11,19 +11,37 @@ import {
   TextField,
   Typography,
   MenuItem,
-  Card,
-  CardContent,
-  Modal,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  IconButton,
 } from "@mui/material";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import CloseIcon from "@mui/icons-material/Close";
 import { useTemaColores } from "../../context/ModoOscuroContext";
+
+// Mismo criterio visual que los diálogos de nivel 2 (estilos.js):
+// papel blanco redondeado, título con borde inferior y botón X sobrio,
+// sin degradés.
+const sxDialogPaper = { paper: { sx: { borderRadius: 3 } }, backdrop: { sx: { backgroundColor: "rgba(15, 34, 48, 0.45)" } } };
+const sxDialogTitle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  fontWeight: 700,
+  color: "#1a303e",
+  px: 3,
+  py: 2,
+  borderBottom: "1px solid #e2e6e9",
+};
+const sxCloseBtn = { color: "#6b7a86", "&:hover": { color: "#1a303e", backgroundColor: "#f6f8f9" } };
 
 const COLOR_AQUA = "#14b8a6";
 
 export default function FormMovimiento() {
-  const { COLOR_NAVY, COLOR_TEAL, BG_CARD } = useTemaColores();
+  const { COLOR_NAVY, COLOR_TEAL } = useTemaColores();
 
   const [mostrarForm, setMostrarForm] = useState(false);
   const [openExcel, setOpenExcel] = useState(false);
@@ -204,136 +222,42 @@ export default function FormMovimiento() {
       </Box>
 
       {/* MODAL EXCEL */}
-{/* MODAL EXCEL */}
-<Modal
-  open={openExcel}
-  onClose={() => setOpenExcel(false)}
->
-  <Box
-    sx={{
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      width: "100%",
-      maxWidth: 700,
-      px: 2,
-    }}
-  >
-    <Card
-      sx={{
-        borderRadius: "22px",
-        overflow: "hidden",
-        boxShadow: "0 25px 60px rgba(0,0,0,0.25)",
-      }}
-    >
-      {/* HEADER */}
-      <Box
-        sx={{
-          background:
-            "linear-gradient(90deg,#083b5c 0%, #0b5c76 55%, #148a8f 100%)",
-          px: 3,
-          py: 2,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
+      <Dialog
+        open={openExcel}
+        onClose={() => setOpenExcel(false)}
+        maxWidth="sm"
+        fullWidth
+        slotProps={sxDialogPaper}
       >
-        <Typography
-          sx={{
-            color: "#fff",
-            fontWeight: 800,
-            fontSize: 20,
-          }}
-        >
+        <DialogTitle sx={sxDialogTitle}>
           Cargar Excel
-        </Typography>
+          <IconButton size="small" onClick={() => setOpenExcel(false)} sx={sxCloseBtn}>
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </DialogTitle>
 
-        <Button
-          onClick={() => setOpenExcel(false)}
-          sx={{
-            minWidth: "auto",
-            color: "#fff",
-            fontSize: 18,
-          }}
-        >
-          ✕
-        </Button>
-      </Box>
-
-      {/* BODY */}
-      <Box
-        sx={{
-          p: 3,
-          background: BG_CARD,
-        }}
-      >
-        <SubirExcelMovimientos onSuccess={cargarMovimientos} />
-      </Box>
-    </Card>
-  </Box>
-</Modal>
+        <DialogContent sx={{ px: 3, py: 2.5 }}>
+          <SubirExcelMovimientos onSuccess={cargarMovimientos} />
+        </DialogContent>
+      </Dialog>
 
       {/* FORMULARIO */}
       {/* MODAL REGISTRAR MOVIMIENTO */}
-<Modal
-  open={mostrarForm}
-  onClose={() => setMostrarForm(false)}
->
-  <Box
-    sx={{
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      width: "100%",
-      maxWidth: 520,
-      px: 2,
-    }}
-  >
-    <Card
-      sx={{
-        borderRadius: "22px",
-        overflow: "hidden",
-        boxShadow: "0 25px 60px rgba(0,0,0,0.25)",
-      
-      }}
-    >
-      {/* HEADER */}
-      <Box
-        sx={{
-          background:
-            "linear-gradient(90deg,#083b5c 0%, #0b5c76 55%, #148a8f 100%)",
-          px: 3,
-          py: 2,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
+      <Dialog
+        open={mostrarForm}
+        onClose={() => setMostrarForm(false)}
+        maxWidth="xs"
+        fullWidth
+        slotProps={sxDialogPaper}
       >
-        <Typography
-          sx={{
-            color: "#fff",
-            fontWeight: 800,
-            fontSize: 20,
-          }}
-        >
-          Registrar Movimiento
-        </Typography>
+        <DialogTitle sx={sxDialogTitle}>
+          Registrar movimiento
+          <IconButton size="small" onClick={() => setMostrarForm(false)} sx={sxCloseBtn}>
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </DialogTitle>
 
-        <Button
-          onClick={() => setMostrarForm(false)}
-          sx={{
-            minWidth: "auto",
-            color: "#fff",
-            fontSize: 18,
-          }}
-        >
-          ✕
-        </Button>
-      </Box>
-
-      <CardContent sx={{ p: 3 }}>
+        <DialogContent sx={{ px: 3, py: 2.5 }}>
         <Box
           component="form"
           onSubmit={handleSubmit}
@@ -398,9 +322,9 @@ export default function FormMovimiento() {
   variant="contained"
   sx={{
      mt: 1,
-  background: "#14919B",
+  background: "#1a303e",
   color: "#fff",
-  borderRadius: "10px",
+  borderRadius: 1.5,
   textTransform: "none",
   fontWeight: 700,
   fontSize: "13px",
@@ -416,7 +340,7 @@ export default function FormMovimiento() {
   boxShadow: "none",
 
   "&:hover": {
-    background: "#117C85",
+    background: "#0d3a49",
     boxShadow: "none",
     },
   }}
@@ -424,10 +348,8 @@ export default function FormMovimiento() {
   {loadingForm ? "Guardando..." : "Guardar movimiento"}
 </Button>
         </Box>
-      </CardContent>
-    </Card>
-  </Box>
-</Modal>
+        </DialogContent>
+      </Dialog>
 
       {/* ANÁLISIS DE MOVIMIENTOS (KPIs) — altura propia según contenido, sin robarle espacio a la tabla */}
       <Box
