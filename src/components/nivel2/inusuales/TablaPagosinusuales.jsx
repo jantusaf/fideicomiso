@@ -34,6 +34,7 @@ import {
   COLOR_BRAND_WARM,
   COLOR_BRAND_WARM_SOFT,
   COLOR_BRAND_WARM_BORDER,
+  COLOR_HEADER_BG,
 } from "../detalleclienteIngresos/estilos";
 
 const PagosInusuales = () => {
@@ -254,8 +255,8 @@ const pagosFiltrados = pagos.filter((p) => {
     );
 });
     const sxTh = {
-        backgroundColor: COLOR_BRAND_SOFT,
-        color: COLOR_BRAND,
+        backgroundColor: COLOR_HEADER_BG,
+        color: COLOR_TEXT,
         fontWeight: 700,
         fontSize: 11.5,
         letterSpacing: 0.4,

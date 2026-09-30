@@ -20,6 +20,8 @@ import {
   sxBtnPrimary,
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
+  COLOR_BRAND_WARM,
+  COLOR_HEADER_BG,
 } from "../detalleclienteIngresos/estilos";
 import EventAvailableRoundedIcon from "@mui/icons-material/EventAvailableRounded";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
@@ -73,8 +75,8 @@ const Estracto = () => {
             ? (todos.find((o) => String(o.id) === String(fecha?.id))?.fecha || "")
             : "";
     const sxTh = {
-        backgroundColor: COLOR_BRAND_SOFT,
-        color: COLOR_BRAND,
+        backgroundColor: COLOR_HEADER_BG,
+        color: COLOR_TEXT,
         fontWeight: 700,
         fontSize: 11.5,
         letterSpacing: 0.4,

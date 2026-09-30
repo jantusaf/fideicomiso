@@ -27,6 +27,8 @@ import {
   sxBtnOutlined,
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
+  COLOR_BRAND_WARM,
+  COLOR_HEADER_BG,
 } from "../../nivel2/detalleclienteIngresos/estilos";
 
 const COLOR_WARN = "#ed6c02";
@@ -130,8 +132,8 @@ const PagosInusuales = () => {
     }
 
     const sxTh = {
-        backgroundColor: COLOR_BRAND_SOFT,
-        color: COLOR_BRAND,
+        backgroundColor: COLOR_HEADER_BG,
+        color: COLOR_TEXT,
         fontWeight: 700,
         fontSize: 11.5,
         letterSpacing: 0.4,

@@ -36,6 +36,8 @@ import {
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
   sxBtnBrand,
+  COLOR_BRAND_WARM,
+  COLOR_HEADER_BG,
 } from "../detalleclienteIngresos/estilos";
 
 import EditIcon from "@mui/icons-material/Edit";
@@ -48,8 +50,8 @@ import MenuItem from "@mui/material/MenuItem";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: COLOR_BRAND_SOFT,
-    color: COLOR_BRAND,
+    backgroundColor: COLOR_HEADER_BG,
+    color: COLOR_TEXT,
     fontWeight: 700,
     fontSize: 11.5,
     letterSpacing: 0.4,
@@ -393,8 +395,8 @@ const Lotes = (props) => {
                           sx={{
                             px: 2.2,
                             py: 1.3,
-                            backgroundColor: COLOR_BRAND_SOFT,
-                            color: COLOR_BRAND,
+                            backgroundColor: COLOR_HEADER_BG,
+                            color: COLOR_TEXT,
                             borderBottom: `1px solid ${COLOR_BORDER}`,
                           }}
                         >

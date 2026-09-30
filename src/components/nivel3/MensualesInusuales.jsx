@@ -27,6 +27,8 @@ import {
   sxBtnOutlined,
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
+  COLOR_BRAND_WARM,
+  COLOR_HEADER_BG,
 } from "../nivel2/detalleclienteIngresos/estilos";
 
 const MensualInusuales = (props) => {
@@ -64,8 +66,8 @@ const MensualInusuales = (props) => {
     };
     const sxLabel = { fontWeight: 600, fontSize: 13, color: COLOR_TEXT, mb: 0.6 };
     const sxTh = {
-        backgroundColor: COLOR_BRAND_SOFT,
-        color: COLOR_BRAND,
+        backgroundColor: COLOR_HEADER_BG,
+        color: COLOR_TEXT,
         fontWeight: 700,
         fontSize: 11.5,
         letterSpacing: 0.4,

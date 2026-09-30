@@ -19,6 +19,9 @@ export const COLOR_BRAND_WARM = "#c9791a";
 // Relleno suave del mismo tono (amarillo pastel), para el fondo del chip.
 export const COLOR_BRAND_WARM_SOFT = "#f0deac";
 export const COLOR_BRAND_WARM_BORDER = "#e0c583";
+// Encabezado de tabla: tono entre azul y gris (más neutro que COLOR_BRAND_SOFT),
+// con el texto en el mismo azul oscuro que el botón "Agregar cliente" (COLOR_TEXT).
+export const COLOR_HEADER_BG = "#e4e9ee";
 
 // Línea de acento arriba de la tarjeta: marca dónde empieza cada sección,
 // sin oscurecer el fondo de la página (que sigue blanco).
@@ -167,7 +170,7 @@ export const sxBtnGreen = {
 // Botón "Editar": mismo celeste que "Ver" (texto y borde), pero con relleno
 // clarito en vez de sólido, para que se note el par "Editar / Ver" sin que
 // compitan en peso visual.
-export const COLOR_BRAND_TINT = "#e0e9f0";
+export const COLOR_BRAND_TINT = "#eef4f9";
 export const COLOR_BRAND_TINT_HOVER = "#cbdae6";
 export const sxBtnBrandSoft = {
   textTransform: "none",
