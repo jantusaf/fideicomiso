@@ -308,11 +308,11 @@ return (
         fontWeight: 700,
         textTransform: "none",
         color: "#fff",
-        background: COLOR_TEAL,
+        background: "#1a303e",
         borderRadius: "8px",
         px: 1.5,
         minWidth: "auto",
-        "&:hover": { background: COLOR_TEAL, opacity: 0.9 },
+        "&:hover": { background: "#0d3a49" },
       }}
     >
       Imprimir todo
@@ -635,6 +635,9 @@ return (
     borderRadius: "8px",
     px: 1.5,
     boxShadow: "none",
+    backgroundColor: "#1a303e",
+    color: "#fff",
+    "&:hover": { backgroundColor: "#0d3a49" },
   }}
 >
   Editar

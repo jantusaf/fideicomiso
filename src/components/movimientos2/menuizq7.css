@@ -370,7 +370,6 @@
   width: 29px;
   height: 29px;
   border-radius: 9px;
-  color: #ffffff;
 }
 
 .mi-sidebar--n6 .mi-nav-item.active .mi-nav-icon {
@@ -419,4 +418,90 @@
 
 .mi-sidebar--n6 .mi-modo-toggle-btn {
   margin-bottom: 6px;
+}
+
+/* ---------- SIDEBAR NIVEL6: tema blanco (igual que nivel 2) ----------
+   Mismo fondo/bordes/textos que el menú de nivel 2, pero cada item conserva
+   su propio color (--accent / --accent-soft, definidos en menuizq6.jsx). */
+.mi-sidebar--n6 {
+  background: #ffffff;
+  border-right: 1px solid #e2e6e9;
+  box-shadow: none;
+}
+
+.mi-sidebar--n6 .mi-sidebar-close {
+  color: #6b7a86;
+}
+
+.mi-sidebar--n6 .mi-sidebar-close:hover {
+  background: #f6f8f9;
+  color: #1a303e;
+}
+
+.mi-sidebar--n6 .mi-sidebar-divider {
+  background: #e2e6e9;
+}
+
+.mi-sidebar--n6 .mi-nav-item {
+  background: transparent;
+}
+
+.mi-sidebar--n6 .mi-nav-item:hover {
+  background: #f6f8f9;
+}
+
+.mi-sidebar--n6 .mi-nav-item.active {
+  background: linear-gradient(90deg, var(--accent-soft, rgba(20, 141, 141, 0.16)), rgba(0, 0, 0, 0.015));
+}
+
+.mi-sidebar--n6 .mi-nav-icon {
+  color: var(--accent, #148d8d);
+}
+
+.mi-sidebar--n6 .mi-nav-title {
+  color: #1a303e;
+}
+
+.mi-sidebar--n6 .mi-nav-arrow {
+  color: #9aa7b0;
+}
+
+.mi-sidebar--n6 .mi-nav-item.active .mi-nav-arrow,
+.mi-sidebar--n6 .mi-nav-item:hover .mi-nav-arrow {
+  color: var(--accent, #148d8d);
+}
+
+.mi-sidebar--n6 .mi-sidebar-footer {
+  border-top: 1px solid #e2e6e9;
+}
+
+.mi-sidebar--n6 .mi-user-row {
+  background: #f6f8f9;
+}
+
+.mi-sidebar--n6 .mi-user-name {
+  color: #1a303e;
+}
+
+.mi-sidebar--n6 .mi-user-role {
+  color: #6b7a86;
+}
+
+.mi-sidebar--n6 .mi-logout-btn,
+.mi-sidebar--n6 .mi-modo-toggle-btn {
+  border: 1px solid #e2e6e9;
+  background: #ffffff;
+  color: #1a303e;
+}
+
+.mi-sidebar--n6 .mi-logout-btn:hover {
+  background: rgba(220, 38, 38, 0.08);
+  border-color: rgba(220, 38, 38, 0.35);
+  color: #c62828;
+}
+
+.mi-sidebar--n6 .mi-modo-toggle-btn:hover {
+  background: rgba(42, 170, 209, 0.08);
+  border-color: rgba(42, 170, 209, 0.35);
+  color: #0d3a49;
 }
