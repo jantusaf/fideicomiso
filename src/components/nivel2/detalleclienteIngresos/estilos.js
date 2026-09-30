@@ -164,24 +164,23 @@ export const sxBtnGreen = {
   },
 };
 
-// Botón "Editar" (relleno, amarillo medio). Texto oscuro en vez de blanco
-// porque un amarillo claro con letras blancas no se lee bien; se mantiene
-// oscuro también en el hover (el amarillo como texto casi no se ve).
-export const COLOR_YELLOW = "#e0b64a";
-export const sxBtnYellow = {
+// Botón "Editar": mismo celeste que "Ver" (texto y borde), pero con relleno
+// clarito en vez de sólido, para que se note el par "Editar / Ver" sin que
+// compitan en peso visual.
+export const COLOR_BRAND_TINT = "#e0e9f0";
+export const COLOR_BRAND_TINT_HOVER = "#cbdae6";
+export const sxBtnBrandSoft = {
   textTransform: "none",
   fontWeight: 600,
   borderRadius: 1.5,
   px: 2.25,
   boxShadow: "none",
-  backgroundColor: COLOR_YELLOW,
-  color: COLOR_TEXT,
-  border: "1px solid transparent",
-  transition: "background-color .15s ease, border-color .15s ease",
+  backgroundColor: COLOR_BRAND_TINT,
+  color: COLOR_BRAND,
+  border: `1px solid ${COLOR_BRAND}`,
+  transition: "background-color .15s ease",
   "&:hover": {
-    backgroundColor: "#fff",
-    color: COLOR_TEXT,
-    borderColor: COLOR_YELLOW,
+    backgroundColor: COLOR_BRAND_TINT_HOVER,
     boxShadow: "none",
   },
 };
