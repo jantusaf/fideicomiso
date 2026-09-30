@@ -41,7 +41,7 @@ import {
   COLOR_BRAND_SOFT,
   COLOR_BRAND_WARM,
   sxBtnBrand,
-  sxBtnWarm,
+  sxBtnGreen,
   sxSearchField,
 } from "../../detalleclienteIngresos/estilos";
 
@@ -324,7 +324,7 @@ const Lotes = () => {
                             variant="contained"
                             size="small"
                             onClick={() => navigate(`/usuario2/modificarcliente/${client.cuil_cuit}`)}
-                            sx={{ ...sxBtnWarm, minWidth: 92, mr: 1, px: 1.75 }}
+                            sx={{ ...sxBtnGreen, minWidth: 92, mr: 1, px: 1.75 }}
                           >
                             Editar
                           </Button>

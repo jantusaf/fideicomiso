@@ -142,6 +142,25 @@ export const sxBtnWarm = {
   },
 };
 
+// Botón "Editar" (relleno, verde). Mismo criterio de hover "vacío".
+export const sxBtnGreen = {
+  textTransform: "none",
+  fontWeight: 600,
+  borderRadius: 1.5,
+  px: 2.25,
+  boxShadow: "none",
+  backgroundColor: COLOR_OK,
+  color: "#fff",
+  border: "1px solid transparent",
+  transition: "background-color .15s ease, color .15s ease, border-color .15s ease",
+  "&:hover": {
+    backgroundColor: "#fff",
+    color: COLOR_OK,
+    borderColor: COLOR_OK,
+    boxShadow: "none",
+  },
+};
+
 // Barra de búsqueda: pill redondeada, fondo suave y borde visible, con foco
 // en el celeste de marca —reemplaza el input outline plano de antes por
 // algo más moderno sin perder el contorno.
