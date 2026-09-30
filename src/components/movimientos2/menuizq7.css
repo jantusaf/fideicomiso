@@ -420,38 +420,39 @@
   margin-bottom: 6px;
 }
 
-/* ---------- SIDEBAR NIVEL6: tema blanco (igual que nivel 2) ----------
-   Mismo fondo/bordes/textos que el menú de nivel 2, pero cada item conserva
-   su propio color (--accent / --accent-soft, definidos en menuizq6.jsx). */
+/* ---------- SIDEBAR NIVEL6: mismo azul oscuro que el header de nivel 2 ----------
+   Fondo #0f2230 (igual que src/components/Navbar.jsx), texto blanco para
+   contraste; cada item conserva su propio color de acento (--accent /
+   --accent-soft, definidos en menuizq6.jsx) en el ícono. */
 .mi-sidebar--n6 {
-  background: #ffffff;
-  border-right: 1px solid #e2e6e9;
-  box-shadow: none;
+  background: #0f2230;
+  border-right: none;
+  box-shadow: 2px 0 14px rgba(2, 12, 20, 0.18);
 }
 
 .mi-sidebar--n6 .mi-sidebar-close {
-  color: #6b7a86;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .mi-sidebar--n6 .mi-sidebar-close:hover {
-  background: #f6f8f9;
-  color: #1a303e;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
 }
 
 .mi-sidebar--n6 .mi-sidebar-divider {
-  background: #e2e6e9;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
 }
 
 .mi-sidebar--n6 .mi-nav-item {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .mi-sidebar--n6 .mi-nav-item:hover {
-  background: #f6f8f9;
+  background: rgba(255, 255, 255, 0.07);
 }
 
 .mi-sidebar--n6 .mi-nav-item.active {
-  background: linear-gradient(90deg, var(--accent-soft, rgba(20, 141, 141, 0.16)), rgba(0, 0, 0, 0.015));
+  background: linear-gradient(90deg, var(--accent-soft, rgba(20, 141, 141, 0.22)), rgba(255, 255, 255, 0.03));
 }
 
 .mi-sidebar--n6 .mi-nav-icon {
@@ -459,11 +460,11 @@
 }
 
 .mi-sidebar--n6 .mi-nav-title {
-  color: #1a303e;
+  color: #ffffff;
 }
 
 .mi-sidebar--n6 .mi-nav-arrow {
-  color: #9aa7b0;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .mi-sidebar--n6 .mi-nav-item.active .mi-nav-arrow,
@@ -472,36 +473,36 @@
 }
 
 .mi-sidebar--n6 .mi-sidebar-footer {
-  border-top: 1px solid #e2e6e9;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .mi-sidebar--n6 .mi-user-row {
-  background: #f6f8f9;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .mi-sidebar--n6 .mi-user-name {
-  color: #1a303e;
+  color: #ffffff;
 }
 
 .mi-sidebar--n6 .mi-user-role {
-  color: #6b7a86;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .mi-sidebar--n6 .mi-logout-btn,
 .mi-sidebar--n6 .mi-modo-toggle-btn {
-  border: 1px solid #e2e6e9;
-  background: #ffffff;
-  color: #1a303e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .mi-sidebar--n6 .mi-logout-btn:hover {
-  background: rgba(220, 38, 38, 0.08);
-  border-color: rgba(220, 38, 38, 0.35);
-  color: #c62828;
+  background: rgba(220, 38, 38, 0.18);
+  border-color: rgba(220, 38, 38, 0.4);
+  color: #fecaca;
 }
 
 .mi-sidebar--n6 .mi-modo-toggle-btn:hover {
-  background: rgba(42, 170, 209, 0.08);
-  border-color: rgba(42, 170, 209, 0.35);
-  color: #0d3a49;
+  background: rgba(42, 170, 209, 0.18);
+  border-color: rgba(42, 170, 209, 0.4);
+  color: #bfe9f7;
 }
