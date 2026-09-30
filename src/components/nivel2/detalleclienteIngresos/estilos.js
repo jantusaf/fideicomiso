@@ -16,6 +16,9 @@ export const COLOR_BRAND_SOFT = "#eef3f7";
 // Variante cálida del acento (amarillo/naranja), para los chips de cantidad
 // —distinta del celeste de marca, que queda para el encabezado y el botón Ver.
 export const COLOR_BRAND_WARM = "#c9791a";
+// Relleno suave del mismo tono (amarillo pastel), para el fondo del chip.
+export const COLOR_BRAND_WARM_SOFT = "#f0deac";
+export const COLOR_BRAND_WARM_BORDER = "#e0c583";
 
 // Línea de acento arriba de la tarjeta: marca dónde empieza cada sección,
 // sin oscurecer el fondo de la página (que sigue blanco).
@@ -157,6 +160,28 @@ export const sxBtnGreen = {
     backgroundColor: "#fff",
     color: COLOR_OK,
     borderColor: COLOR_OK,
+    boxShadow: "none",
+  },
+};
+
+// Botón "Editar" (relleno, amarillo medio). Texto oscuro en vez de blanco
+// porque un amarillo claro con letras blancas no se lee bien; se mantiene
+// oscuro también en el hover (el amarillo como texto casi no se ve).
+export const COLOR_YELLOW = "#e0b64a";
+export const sxBtnYellow = {
+  textTransform: "none",
+  fontWeight: 600,
+  borderRadius: 1.5,
+  px: 2.25,
+  boxShadow: "none",
+  backgroundColor: COLOR_YELLOW,
+  color: COLOR_TEXT,
+  border: "1px solid transparent",
+  transition: "background-color .15s ease, border-color .15s ease",
+  "&:hover": {
+    backgroundColor: "#fff",
+    color: COLOR_TEXT,
+    borderColor: COLOR_YELLOW,
     boxShadow: "none",
   },
 };

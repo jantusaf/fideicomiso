@@ -19,6 +19,8 @@ import {
   sxBtnPrimary,
   COLOR_BRAND,
   COLOR_BRAND_WARM,
+  COLOR_BRAND_WARM_SOFT,
+  COLOR_BRAND_WARM_BORDER,
 } from '../../../components/nivel2/detalleclienteIngresos/estilos';
 
 import { useEffect, useState } from "react";

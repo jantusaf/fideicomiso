@@ -32,6 +32,8 @@ import {
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
   COLOR_BRAND_WARM,
+  COLOR_BRAND_WARM_SOFT,
+  COLOR_BRAND_WARM_BORDER,
 } from "../detalleclienteIngresos/estilos";
 
 const PagosInusuales = () => {

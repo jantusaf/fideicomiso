@@ -63,6 +63,8 @@ import {
   COLOR_BRAND_SOFT,
   sxBtnBrand,
   COLOR_BRAND_WARM,
+  COLOR_BRAND_WARM_SOFT,
+  COLOR_BRAND_WARM_BORDER,
 } from "./nivel2/detalleclienteIngresos/estilos";
 import { saveAs } from "file-saver";
 
