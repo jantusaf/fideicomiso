@@ -701,30 +701,33 @@ const exportarExcel = () => {
                             </TableCell>
 
                             <TableCell align="right" sx={sxTd}>
-                              <Stack direction="row" spacing={1} sx={{ justifyContent: "flex-end" }}>
-                                <Button
-                                  size="small"
-                                  variant="contained"
-                                  sx={{ ...sxBtnBrand, px: 1.75 }}
-                                  onClick={() => navigate("/usuario2/pagarcuota/" + row.id)}
-                                >
-                                  Pagar
-                                </Button>
+                              <Stack spacing={0.75} sx={{ alignItems: "flex-end" }}>
+                                <Stack direction="row" spacing={1} sx={{ justifyContent: "flex-end" }}>
+                                  <Button
+                                    size="small"
+                                    variant="contained"
+                                    sx={{ ...sxBtnBrand, px: 1.75 }}
+                                    onClick={() => navigate("/usuario2/pagarcuota/" + row.id)}
+                                  >
+                                    Pagar
+                                  </Button>
 
-                                <Button
-                                  size="small"
-                                  variant="outlined"
-                                  sx={{ ...sxBtnOutlined, px: 1.75 }}
-                                  onClick={() => navigate("/usuario2/pagoscuotas/" + row.id)}
-                                >
-                                  Ver pagos
-                                </Button>
+                                  <Button
+                                    size="small"
+                                    variant="outlined"
+                                    sx={{ ...sxBtnOutlined, px: 1.75 }}
+                                    onClick={() => navigate("/usuario2/pagoscuotas/" + row.id)}
+                                  >
+                                    Ver pagos
+                                  </Button>
+                                </Stack>
 
                                 {row.diferencia < 0 && (
                                   <Button
                                     size="small"
                                     variant="outlined"
                                     color="warning"
+                                    fullWidth
                                     sx={{ textTransform: "none", fontWeight: 600, borderRadius: 1.5, px: 1.75 }}
                                     onClick={() => abrirCompensar(row.id)}
                                   >
