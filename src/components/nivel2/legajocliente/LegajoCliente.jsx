@@ -28,6 +28,7 @@ import {
   sxBtnOutlined,
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
+  COLOR_BRAND_WARM,
 } from "../detalleclienteIngresos/estilos";
 const thStyle = {
   padding: "12px",
@@ -279,7 +280,7 @@ const LegajoCliente = (props) => {
           </Box>
 
           <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", alignItems: "center" }}>
-            <Chip variant="outlined" label={`Documentos: ${products ? products[0].length : 0}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+            <Chip variant="outlined" label={`Documentos: ${products ? products[0].length : 0}`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
             {products && (
               <Chip
                 variant="outlined"

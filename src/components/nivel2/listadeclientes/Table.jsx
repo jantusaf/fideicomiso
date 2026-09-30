@@ -37,6 +37,8 @@ import {
   sxBtnOutlined,
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
+  COLOR_BRAND_WARM,
+  sxBtnBrand,
 } from "../detalleclienteIngresos/estilos";
 
 const Lotes = () => {
@@ -157,7 +159,7 @@ const Lotes = () => {
               flexWrap: "wrap",
             }}
           >
-            <Chip variant="outlined" label={`Cantidad: ${clients.length}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+            <Chip variant="outlined" label={`Cantidad: ${clients.length}`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
 
             <Button
               variant="contained"
@@ -331,7 +333,7 @@ const Lotes = () => {
                             variant="contained"
                             size="small"
                             onClick={() => navigate(`/usuario2/detallecliente/${client.cuil_cuit}`)}
-                            sx={{ ...sxBtnPrimary, px: 1.75 }}
+                            sx={{ ...sxBtnBrand, px: 1.75 }}
                           >
                             Ver
                           </Button>

@@ -62,6 +62,7 @@ import {
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
   sxBtnBrand,
+  COLOR_BRAND_WARM,
 } from "./nivel2/detalleclienteIngresos/estilos";
 import { saveAs } from "file-saver";
 
@@ -460,7 +461,7 @@ const exportarExcel = () => {
                   sx={{ fontWeight: 600 }}
                 />
               )}
-              <Chip variant="outlined" label={`Registros: ${cantidadRegistros}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+              <Chip variant="outlined" label={`Registros: ${cantidadRegistros}`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
               <Button variant="contained" sx={sxBtnPrimary} onClick={exportarExcel}>
                 Descargar Excel
               </Button>

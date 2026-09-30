@@ -18,6 +18,7 @@ import {
   sxCard,
   sxBtnPrimary,
   COLOR_BRAND,
+  COLOR_BRAND_WARM,
 } from '../../../components/nivel2/detalleclienteIngresos/estilos';
 
 import { useEffect, useState } from "react";
@@ -156,7 +157,7 @@ export default function MenuUsuario2() {
                     </Box>
                   </Box>
 
-                  <Chip variant="outlined" label={`ID: ${params.id}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+                  <Chip variant="outlined" label={`ID: ${params.id}`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
                 </Box>
               </Paper>
 

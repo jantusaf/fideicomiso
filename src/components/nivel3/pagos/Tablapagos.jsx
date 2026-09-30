@@ -27,6 +27,7 @@ import {
   sxBtnOutlined,
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
+  COLOR_BRAND_WARM,
 } from "../../nivel2/detalleclienteIngresos/estilos";
 import {
   Table,
@@ -447,7 +448,7 @@ const textoOk =
               </Box>
             </Box>
 
-            <Chip variant="outlined" label={`Registros: ${registros}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+            <Chip variant="outlined" label={`Registros: ${registros}`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
           </Box>
         </Paper>
 

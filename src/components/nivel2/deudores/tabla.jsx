@@ -35,6 +35,7 @@ import {
   sxCard,
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
+  COLOR_BRAND_WARM,
 } from "../detalleclienteIngresos/estilos";
 
 const sxTh = {
@@ -303,7 +304,7 @@ const Deudores = () => {
                 label={`Pagadas: ${resumen.pagadas}`}
                 sx={{ fontWeight: 600, color: COLOR_OK, borderColor: COLOR_OK }}
               />
-              <Chip variant="outlined" label={`Total: ${resumen.total}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+              <Chip variant="outlined" label={`Total: ${resumen.total}`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
             </Box>
           )}
         </Box>

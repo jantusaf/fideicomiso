@@ -13,6 +13,10 @@ export const COLOR_ERROR = "#c62828";
 export const COLOR_BRAND = "#2e6999";
 export const COLOR_BRAND_SOFT = "#eef3f7";
 
+// Variante cálida del acento (amarillo/naranja), para los chips de cantidad
+// —distinta del celeste de marca, que queda para el encabezado y el botón Ver.
+export const COLOR_BRAND_WARM = "#c9791a";
+
 // Línea de acento arriba de la tarjeta: marca dónde empieza cada sección,
 // sin oscurecer el fondo de la página (que sigue blanco).
 export const sxCard = {

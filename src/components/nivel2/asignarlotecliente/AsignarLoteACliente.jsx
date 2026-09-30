@@ -25,6 +25,7 @@ import {
   sxCard,
   sxBtnPrimary,
   COLOR_BRAND,
+  COLOR_BRAND_WARM,
 } from "../detalleclienteIngresos/estilos";
 
 import ModalLote from "./ModalSeguro";
@@ -109,7 +110,7 @@ const AsignarLoteACliente = () => {
             </Box>
           </Box>
 
-          <Chip variant="outlined" label={`CUIT/CUIL: ${cuil_cuit}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+          <Chip variant="outlined" label={`CUIT/CUIL: ${cuil_cuit}`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
         </Box>
       </Paper>
 

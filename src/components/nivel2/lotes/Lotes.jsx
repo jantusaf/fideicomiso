@@ -38,6 +38,7 @@ import {
   sxCard,
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
+  COLOR_BRAND_WARM,
 } from "../detalleclienteIngresos/estilos";
 
 
@@ -237,14 +238,14 @@ const filteredClients = clients[0]?.filter((item) => {
                                 </Box>
 
                                 <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", alignItems: "center" }}>
-                                    <Chip variant="outlined" label={`Total: ${clients[0].length}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+                                    <Chip variant="outlined" label={`Total: ${clients[0].length}`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
                                     <Chip
                                         variant="outlined"
                                         label={`Disponibles: ${clients[1]}`}
                                         sx={{ fontWeight: 600, color: COLOR_OK, borderColor: COLOR_OK }}
                                     />
-                                    <Chip variant="outlined" label={`Parque: ${clients[2]}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
-                                    <Chip variant="outlined" label={`IC3: ${clients[3]}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+                                    <Chip variant="outlined" label={`Parque: ${clients[2]}`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
+                                    <Chip variant="outlined" label={`IC3: ${clients[3]}`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
                                 </Box>
                             </Box>
                         </Paper>

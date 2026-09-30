@@ -35,6 +35,7 @@ import {
   sxDialogActions,
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
+  sxBtnBrand,
 } from "../detalleclienteIngresos/estilos";
 
 import EditIcon from "@mui/icons-material/Edit";
@@ -651,17 +652,12 @@ const Lotes = (props) => {
                                   size="small"
                                   onClick={() => navigate("/usuario2/pagoscuotasic3/" + row.id)}
                                   sx={{
+                                    ...sxBtnBrand,
                                     px: 1.1,
                                     py: 0.35,
                                     minHeight: 26,
-                                    borderRadius: 1.5,
-                                    textTransform: "none",
-                                    fontWeight: 600,
                                     fontSize: "0.72rem",
-                                    background: COLOR_TEXT,
-                                    boxShadow: "none",
                                     whiteSpace: "nowrap",
-                                    "&:hover": { background: COLOR_ACCENT, boxShadow: "none" },
                                   }}
                                 >
                                   Ver

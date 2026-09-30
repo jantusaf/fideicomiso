@@ -25,6 +25,7 @@ import {
   sxCard,
   sxBtnPrimary,
   COLOR_BRAND,
+  COLOR_BRAND_WARM,
 } from '../detalleclienteIngresos/estilos';
 
 
@@ -234,8 +235,8 @@ const AgregarVarias = () => {
 
                     {todos && (
                         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                            <Chip variant="outlined" label={`Parque: ${valores.valorparque} / m²`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
-                            <Chip variant="outlined" label={`IC: ${valores.valorotro} / m²`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+                            <Chip variant="outlined" label={`Parque: ${valores.valorparque} / m²`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
+                            <Chip variant="outlined" label={`IC: ${valores.valorotro} / m²`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
                             <Chip label={`Total: ${total}`} sx={{ fontWeight: 700, bgcolor: COLOR_TEXT, color: '#fff' }} />
                         </Box>
                     )}

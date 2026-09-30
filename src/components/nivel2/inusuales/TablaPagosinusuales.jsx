@@ -31,6 +31,7 @@ import {
   sxBtnPrimary,
   COLOR_BRAND,
   COLOR_BRAND_SOFT,
+  COLOR_BRAND_WARM,
 } from "../detalleclienteIngresos/estilos";
 
 const PagosInusuales = () => {
@@ -314,7 +315,7 @@ const pagosFiltrados = pagos.filter((p) => {
                         </Box>
                     </Box>
 
-                    <Chip variant="outlined" label={`Registros: ${pagos.length}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+                    <Chip variant="outlined" label={`Registros: ${pagos.length}`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
                 </Box>
             </Paper>
 
