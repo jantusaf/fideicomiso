@@ -7,6 +7,12 @@ export const COLOR_MUTED = "#6b7a86";
 export const COLOR_OK = "#2e7d32";
 export const COLOR_ERROR = "#c62828";
 
+// Color de marca (el celeste/azul de las letras del logo). Se usa como
+// acento puntual —encabezados de tabla, chips de cantidad, botón Pagar—
+// para que la interfaz no sea 100% gris/blanco.
+export const COLOR_BRAND = "#2e6999";
+export const COLOR_BRAND_SOFT = "#eef3f7";
+
 // Línea de acento arriba de la tarjeta: marca dónde empieza cada sección,
 // sin oscurecer el fondo de la página (que sigue blanco).
 export const sxCard = {
@@ -74,6 +80,26 @@ export const sxBtnDanger = {
     backgroundColor: "#fff",
     color: COLOR_ERROR,
     borderColor: COLOR_ERROR,
+    boxShadow: "none",
+  },
+};
+
+// Botón "Pagar" (relleno, en el celeste de marca). Mismo criterio de hover
+// "vacío" que sxBtnPrimary/sxBtnDanger.
+export const sxBtnBrand = {
+  textTransform: "none",
+  fontWeight: 600,
+  borderRadius: 1.5,
+  px: 2.25,
+  boxShadow: "none",
+  backgroundColor: COLOR_BRAND,
+  color: "#fff",
+  border: "1px solid transparent",
+  transition: "background-color .15s ease, color .15s ease, border-color .15s ease",
+  "&:hover": {
+    backgroundColor: "#fff",
+    color: COLOR_BRAND,
+    borderColor: COLOR_BRAND,
     boxShadow: "none",
   },
 };

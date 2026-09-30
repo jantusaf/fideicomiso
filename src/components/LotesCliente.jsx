@@ -46,7 +46,23 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import * as XLSX from "xlsx";
-import { COLOR_TEXT, COLOR_MUTED, COLOR_BORDER, COLOR_OK, COLOR_ERROR, sxCard, sxBtnPrimary, sxBtnOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions, moneda } from "./nivel2/detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  COLOR_OK,
+  COLOR_ERROR,
+  sxCard,
+  sxBtnPrimary,
+  sxBtnOutlined,
+  slotPropsDialog,
+  sxDialogTitle,
+  sxDialogActions,
+  moneda,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
+  sxBtnBrand,
+} from "./nivel2/detalleclienteIngresos/estilos";
 import { saveAs } from "file-saver";
 
 const LotesCliente = (props) => {
@@ -356,8 +372,8 @@ const exportarExcel = () => {
   const fmt = (n) => new Intl.NumberFormat("de-DE").format(n);
 
   const sxTh = {
-    backgroundColor: "#f6f8f9",
-    color: COLOR_TEXT,
+    backgroundColor: COLOR_BRAND_SOFT,
+    color: COLOR_BRAND,
     fontWeight: 700,
     fontSize: 11.5,
     letterSpacing: 0.4,
@@ -444,7 +460,7 @@ const exportarExcel = () => {
                   sx={{ fontWeight: 600 }}
                 />
               )}
-              <Chip variant="outlined" label={`Registros: ${cantidadRegistros}`} sx={{ fontWeight: 600 }} />
+              <Chip variant="outlined" label={`Registros: ${cantidadRegistros}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
               <Button variant="contained" sx={sxBtnPrimary} onClick={exportarExcel}>
                 Descargar Excel
               </Button>
@@ -676,7 +692,7 @@ const exportarExcel = () => {
                                 <Button
                                   size="small"
                                   variant="contained"
-                                  sx={{ ...sxBtnPrimary, px: 1.75 }}
+                                  sx={{ ...sxBtnBrand, px: 1.75 }}
                                   onClick={() => navigate("/usuario2/pagarcuota/" + row.id)}
                                 >
                                   Pagar

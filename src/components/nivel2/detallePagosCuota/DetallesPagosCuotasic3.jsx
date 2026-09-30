@@ -34,6 +34,8 @@ import {
   COLOR_ERROR,
   sxCard,
   sxBtnOutlined,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
 } from "../detalleclienteIngresos/estilos";
 
 export default function DetallesPagoic3s(props) {
@@ -168,8 +170,8 @@ export default function DetallesPagoic3s(props) {
   }
 
   const sxTh = {
-    backgroundColor: "#f6f8f9",
-    color: COLOR_TEXT,
+    backgroundColor: COLOR_BRAND_SOFT,
+    color: COLOR_BRAND,
     fontWeight: 700,
     fontSize: 11.5,
     letterSpacing: 0.4,
@@ -233,7 +235,7 @@ export default function DetallesPagoic3s(props) {
             </Box>
           </Box>
 
-          <Chip variant="outlined" label={`Registros: ${pagos.length}`} sx={{ fontWeight: 600 }} />
+          <Chip variant="outlined" label={`Registros: ${pagos.length}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
         </Box>
       </Paper>
 

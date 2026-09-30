@@ -33,6 +33,8 @@ import {
   sxBtnPrimary,
   sxDialogTitle,
   sxDialogActions,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
 } from "../../nivel2/detalleclienteIngresos/estilos";
 
 const COLOR_WARN = "#ed6c02";
@@ -108,8 +110,8 @@ const MainMenu = () => {
   const riesgosEmpresa = riesgos.filter((item) => String(item.tipo).toLowerCase().includes("empresa"));
 
   const sxTh = {
-    backgroundColor: "#f6f8f9",
-    color: COLOR_TEXT,
+    backgroundColor: COLOR_BRAND_SOFT,
+    color: COLOR_BRAND,
     fontWeight: 700,
     fontSize: 11.5,
     letterSpacing: 0.4,

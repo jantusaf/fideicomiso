@@ -10,7 +10,15 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Alert, Checkbox, FormControlLabel, Typography, Chip } from '@mui/material';
 import PlaylistAddOutlinedIcon from '@mui/icons-material/PlaylistAddOutlined';
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, sxCard, sxBtnPrimary } from '../../../components/nivel2/detalleclienteIngresos/estilos';
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  sxCard,
+  sxBtnPrimary,
+  COLOR_BRAND,
+} from '../../../components/nivel2/detalleclienteIngresos/estilos';
 
 import { useEffect, useState } from "react";
 import servicioCuotas from '../../../services/cuotas';
@@ -148,7 +156,7 @@ export default function MenuUsuario2() {
                     </Box>
                   </Box>
 
-                  <Chip variant="outlined" label={`ID: ${params.id}`} sx={{ fontWeight: 600 }} />
+                  <Chip variant="outlined" label={`ID: ${params.id}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
                 </Box>
               </Paper>
 

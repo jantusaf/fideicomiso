@@ -26,6 +26,8 @@ import {
   COLOR_BORDER,
   sxCard,
   sxBtnPrimary,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
 } from "../nivel2/detalleclienteIngresos/estilos";
 
 const Historial = () => {
@@ -71,8 +73,8 @@ const Historial = () => {
   };
 
   const sxTh = {
-    backgroundColor: "#f6f8f9",
-    color: COLOR_TEXT,
+    backgroundColor: COLOR_BRAND_SOFT,
+    color: COLOR_BRAND,
     fontWeight: 700,
     fontSize: 11.5,
     letterSpacing: 0.4,

@@ -17,7 +17,15 @@ import {
   Divider,
 } from "@mui/material";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, sxCard, sxBtnPrimary } from "../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  sxCard,
+  sxBtnPrimary,
+  COLOR_BRAND,
+} from "../detalleclienteIngresos/estilos";
 
 import ModalLote from "./ModalSeguro";
 
@@ -101,7 +109,7 @@ const AsignarLoteACliente = () => {
             </Box>
           </Box>
 
-          <Chip variant="outlined" label={`CUIT/CUIL: ${cuil_cuit}`} sx={{ fontWeight: 600 }} />
+          <Chip variant="outlined" label={`CUIT/CUIL: ${cuil_cuit}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
         </Box>
       </Paper>
 

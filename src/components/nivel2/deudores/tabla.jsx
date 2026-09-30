@@ -33,11 +33,13 @@ import {
   COLOR_OK,
   COLOR_ERROR,
   sxCard,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
 } from "../detalleclienteIngresos/estilos";
 
 const sxTh = {
-  backgroundColor: "#f6f8f9",
-  color: COLOR_TEXT,
+  backgroundColor: COLOR_BRAND_SOFT,
+  color: COLOR_BRAND,
   fontWeight: 700,
   fontSize: 11.5,
   letterSpacing: 0.4,
@@ -301,7 +303,7 @@ const Deudores = () => {
                 label={`Pagadas: ${resumen.pagadas}`}
                 sx={{ fontWeight: 600, color: COLOR_OK, borderColor: COLOR_OK }}
               />
-              <Chip variant="outlined" label={`Total: ${resumen.total}`} sx={{ fontWeight: 600 }} />
+              <Chip variant="outlined" label={`Total: ${resumen.total}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
             </Box>
           )}
         </Box>

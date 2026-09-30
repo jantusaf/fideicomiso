@@ -28,7 +28,17 @@ import Modaldetalles from './modalver'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, COLOR_OK, COLOR_ERROR, sxCard } from "../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  COLOR_OK,
+  COLOR_ERROR,
+  sxCard,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
+} from "../detalleclienteIngresos/estilos";
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -171,8 +181,8 @@ const filteredClients = clients[0]?.filter((item) => {
         selectableRows: false, // Deshabilita los checkboxes
     };
     const sxTh = {
-        backgroundColor: "#f6f8f9",
-        color: COLOR_TEXT,
+        backgroundColor: COLOR_BRAND_SOFT,
+        color: COLOR_BRAND,
         fontWeight: 700,
         fontSize: 11.5,
         letterSpacing: 0.4,
@@ -227,14 +237,14 @@ const filteredClients = clients[0]?.filter((item) => {
                                 </Box>
 
                                 <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", alignItems: "center" }}>
-                                    <Chip variant="outlined" label={`Total: ${clients[0].length}`} sx={{ fontWeight: 600 }} />
+                                    <Chip variant="outlined" label={`Total: ${clients[0].length}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
                                     <Chip
                                         variant="outlined"
                                         label={`Disponibles: ${clients[1]}`}
                                         sx={{ fontWeight: 600, color: COLOR_OK, borderColor: COLOR_OK }}
                                     />
-                                    <Chip variant="outlined" label={`Parque: ${clients[2]}`} sx={{ fontWeight: 600 }} />
-                                    <Chip variant="outlined" label={`IC3: ${clients[3]}`} sx={{ fontWeight: 600 }} />
+                                    <Chip variant="outlined" label={`Parque: ${clients[2]}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+                                    <Chip variant="outlined" label={`IC3: ${clients[3]}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
                                 </Box>
                             </Box>
                         </Paper>

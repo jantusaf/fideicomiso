@@ -17,7 +17,18 @@ import ModalSeguro from "./Modalseguroborrar";
 import ModalEditarDescripcion from "./modaleditarc";
 import { Box, Paper, Typography, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import FolderOpenOutlinedIcon from "@mui/icons-material/FolderOpenOutlined";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, COLOR_OK, COLOR_ERROR, sxCard, sxBtnOutlined } from "../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  COLOR_OK,
+  COLOR_ERROR,
+  sxCard,
+  sxBtnOutlined,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
+} from "../detalleclienteIngresos/estilos";
 const thStyle = {
   padding: "12px",
   textAlign: "left",
@@ -206,8 +217,8 @@ const LegajoCliente = (props) => {
   };
 
   const sxTh = {
-    backgroundColor: "#f6f8f9",
-    color: COLOR_TEXT,
+    backgroundColor: COLOR_BRAND_SOFT,
+    color: COLOR_BRAND,
     fontWeight: 700,
     fontSize: 11.5,
     letterSpacing: 0.4,
@@ -268,7 +279,7 @@ const LegajoCliente = (props) => {
           </Box>
 
           <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", alignItems: "center" }}>
-            <Chip variant="outlined" label={`Documentos: ${products ? products[0].length : 0}`} sx={{ fontWeight: 600 }} />
+            <Chip variant="outlined" label={`Documentos: ${products ? products[0].length : 0}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
             {products && (
               <Chip
                 variant="outlined"

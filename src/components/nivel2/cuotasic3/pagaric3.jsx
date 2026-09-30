@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect, Fragment } from "react";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, COLOR_OK, sxBtnPrimary as sxBtnPrimaryBase, sxBtnOutlined as sxBtnOutlinedBase, slotPropsDialog } from "../detalleclienteIngresos/estilos";
+import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, COLOR_OK, sxBtnPrimary as sxBtnPrimaryBase, sxBtnOutlined as sxBtnOutlinedBase, sxBtnBrand, slotPropsDialog } from "../detalleclienteIngresos/estilos";
 import Box from "@mui/material/Box";
 import {
   Button,
@@ -217,7 +217,7 @@ export default function SelectTextFields(props) {
          <Button
                   variant="contained"
                   size="small"
-                  sx={{ ...sxBtnPrimaryBase, px: 1.1, py: 0.35, minHeight: 26, fontSize: "0.72rem" }}
+                  sx={{ ...sxBtnBrand, px: 1.1, py: 0.35, minHeight: 26, fontSize: "0.72rem" }}
                   onClick={handleClickOpen}
                 >
                   Pagar

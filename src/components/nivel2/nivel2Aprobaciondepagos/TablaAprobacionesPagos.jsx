@@ -26,11 +26,13 @@ import {
 } from "@mui/material";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import {
-    COLOR_TEXT,
-    COLOR_ACCENT,
-    COLOR_MUTED,
-    COLOR_BORDER,
-    sxCard,
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  sxCard,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
 } from "../../nivel2/detalleclienteIngresos/estilos";
 
 const TablaAprobaciones = () => {
@@ -74,8 +76,8 @@ const TablaAprobaciones = () => {
     }
 
     const sxTh = {
-        backgroundColor: "#f6f8f9",
-        color: COLOR_TEXT,
+        backgroundColor: COLOR_BRAND_SOFT,
+        color: COLOR_BRAND,
         fontWeight: 700,
         fontSize: 11.5,
         letterSpacing: 0.4,
@@ -110,7 +112,7 @@ const TablaAprobaciones = () => {
                         </Box>
                     </Box>
 
-                    <Chip variant="outlined" icon={<PendingActionsRoundedIcon />} label={`Pendientes: ${pendientes.length}`} sx={{ fontWeight: 600 }} />
+                    <Chip variant="outlined" icon={<PendingActionsRoundedIcon />} label={`Pendientes: ${pendientes.length}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
                 </Box>
             </Paper>
 

@@ -17,7 +17,15 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { Box, Paper, Typography, Chip, Divider } from '@mui/material';
 import ViewListOutlinedIcon from '@mui/icons-material/ViewListOutlined';
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, sxCard, sxBtnPrimary } from '../detalleclienteIngresos/estilos';
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  sxCard,
+  sxBtnPrimary,
+  COLOR_BRAND,
+} from '../detalleclienteIngresos/estilos';
 
 
 
@@ -226,8 +234,8 @@ const AgregarVarias = () => {
 
                     {todos && (
                         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                            <Chip variant="outlined" label={`Parque: ${valores.valorparque} / m²`} sx={{ fontWeight: 600 }} />
-                            <Chip variant="outlined" label={`IC: ${valores.valorotro} / m²`} sx={{ fontWeight: 600 }} />
+                            <Chip variant="outlined" label={`Parque: ${valores.valorparque} / m²`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
+                            <Chip variant="outlined" label={`IC: ${valores.valorotro} / m²`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
                             <Chip label={`Total: ${total}`} sx={{ fontWeight: 700, bgcolor: COLOR_TEXT, color: '#fff' }} />
                         </Box>
                     )}

@@ -11,7 +11,16 @@ import Stack from "@mui/material/Stack";
 import MuiAlert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
 import { Box, Paper, Typography, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, sxCard, sxBtnPrimary } from "../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  sxCard,
+  sxBtnPrimary,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
+} from "../detalleclienteIngresos/estilos";
 import EventAvailableRoundedIcon from "@mui/icons-material/EventAvailableRounded";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 
@@ -64,8 +73,8 @@ const Estracto = () => {
             ? (todos.find((o) => String(o.id) === String(fecha?.id))?.fecha || "")
             : "";
     const sxTh = {
-        backgroundColor: "#f6f8f9",
-        color: COLOR_TEXT,
+        backgroundColor: COLOR_BRAND_SOFT,
+        color: COLOR_BRAND,
         fontWeight: 700,
         fontSize: 11.5,
         letterSpacing: 0.4,

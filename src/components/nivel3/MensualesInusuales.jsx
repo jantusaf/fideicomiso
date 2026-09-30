@@ -18,13 +18,15 @@ import Divider from '@mui/material/Divider';
 import { Typography } from '@mui/material';
 import MoneyOffIcon from "@mui/icons-material/MoneyOff";
 import {
-    COLOR_TEXT,
-    COLOR_ACCENT,
-    COLOR_MUTED,
-    COLOR_BORDER,
-    sxCard,
-    sxBtnPrimary,
-    sxBtnOutlined,
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  sxCard,
+  sxBtnPrimary,
+  sxBtnOutlined,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
 } from "../nivel2/detalleclienteIngresos/estilos";
 
 const MensualInusuales = (props) => {
@@ -62,8 +64,8 @@ const MensualInusuales = (props) => {
     };
     const sxLabel = { fontWeight: 600, fontSize: 13, color: COLOR_TEXT, mb: 0.6 };
     const sxTh = {
-        backgroundColor: "#f6f8f9",
-        color: COLOR_TEXT,
+        backgroundColor: COLOR_BRAND_SOFT,
+        color: COLOR_BRAND,
         fontWeight: 700,
         fontSize: 11.5,
         letterSpacing: 0.4,

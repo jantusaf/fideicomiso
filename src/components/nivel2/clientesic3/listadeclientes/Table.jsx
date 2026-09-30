@@ -35,6 +35,8 @@ import {
   sxCard,
   sxBtnPrimary,
   sxBtnOutlined,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
 } from "../../detalleclienteIngresos/estilos";
 
 const Lotes = () => {
@@ -86,8 +88,8 @@ const Lotes = () => {
 
   // Encabezado de tabla: claro y discreto (sin fondos de color)
   const sxTh = {
-    backgroundColor: "#f6f8f9",
-    color: COLOR_TEXT,
+    backgroundColor: COLOR_BRAND_SOFT,
+    color: COLOR_BRAND,
     fontWeight: 700,
     fontSize: 11.5,
     letterSpacing: 0.4,
@@ -154,7 +156,7 @@ const Lotes = () => {
               flexWrap: "wrap",
             }}
           >
-            <Chip variant="outlined" label={`Cantidad: ${clients.length}`} sx={{ fontWeight: 600 }} />
+            <Chip variant="outlined" label={`Cantidad: ${clients.length}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
 
             <Button
               variant="contained"

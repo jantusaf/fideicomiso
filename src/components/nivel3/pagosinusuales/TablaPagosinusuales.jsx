@@ -17,14 +17,16 @@ import ReportProblemRoundedIcon from "@mui/icons-material/ReportProblemRounded";
 import Modalveronline from './modalveronline'
 import Modalveronline2 from './modalveronline2'
 import {
-    COLOR_TEXT,
-    COLOR_ACCENT,
-    COLOR_MUTED,
-    COLOR_BORDER,
-    COLOR_OK,
-    COLOR_ERROR,
-    sxCard,
-    sxBtnOutlined,
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  COLOR_OK,
+  COLOR_ERROR,
+  sxCard,
+  sxBtnOutlined,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
 } from "../../nivel2/detalleclienteIngresos/estilos";
 
 const COLOR_WARN = "#ed6c02";
@@ -128,8 +130,8 @@ const PagosInusuales = () => {
     }
 
     const sxTh = {
-        backgroundColor: "#f6f8f9",
-        color: COLOR_TEXT,
+        backgroundColor: COLOR_BRAND_SOFT,
+        color: COLOR_BRAND,
         fontWeight: 700,
         fontSize: 11.5,
         letterSpacing: 0.4,

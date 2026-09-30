@@ -17,7 +17,17 @@ import {
   InputAdornment
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, sxCard, sxBtnPrimary, sxBtnOutlined } from "../../nivel2/detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  sxCard,
+  sxBtnPrimary,
+  sxBtnOutlined,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
+} from "../../nivel2/detalleclienteIngresos/estilos";
 import {
   Table,
   TableBody,
@@ -380,8 +390,8 @@ const textoOk =
   };
 
   const sxTh = {
-    backgroundColor: "#f6f8f9",
-    color: COLOR_TEXT,
+    backgroundColor: COLOR_BRAND_SOFT,
+    color: COLOR_BRAND,
     fontWeight: 700,
     fontSize: 11.5,
     letterSpacing: 0.4,
@@ -437,7 +447,7 @@ const textoOk =
               </Box>
             </Box>
 
-            <Chip variant="outlined" label={`Registros: ${registros}`} sx={{ fontWeight: 600 }} />
+            <Chip variant="outlined" label={`Registros: ${registros}`} sx={{ fontWeight: 600, color: COLOR_BRAND, borderColor: COLOR_BRAND }} />
           </Box>
         </Paper>
 

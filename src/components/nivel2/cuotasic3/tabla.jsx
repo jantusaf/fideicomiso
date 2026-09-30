@@ -20,7 +20,22 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Skeleton from "@mui/material/Skeleton";
 import { styled, alpha } from "@mui/material/styles";
-import { COLOR_TEXT, COLOR_ACCENT, COLOR_MUTED, COLOR_BORDER, COLOR_OK, COLOR_ERROR, sxCard, sxBtnPrimary, sxBtnOutlined, slotPropsDialog, sxDialogTitle, sxDialogActions } from "../detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_ACCENT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  COLOR_OK,
+  COLOR_ERROR,
+  sxCard,
+  sxBtnPrimary,
+  sxBtnOutlined,
+  slotPropsDialog,
+  sxDialogTitle,
+  sxDialogActions,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
+} from "../detalleclienteIngresos/estilos";
 
 import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
@@ -32,8 +47,8 @@ import MenuItem from "@mui/material/MenuItem";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#f6f8f9",
-    color: COLOR_TEXT,
+    backgroundColor: COLOR_BRAND_SOFT,
+    color: COLOR_BRAND,
     fontWeight: 700,
     fontSize: 11.5,
     letterSpacing: 0.4,
@@ -377,8 +392,8 @@ const Lotes = (props) => {
                           sx={{
                             px: 2.2,
                             py: 1.3,
-                            backgroundColor: "#f6f8f9",
-                            color: COLOR_TEXT,
+                            backgroundColor: COLOR_BRAND_SOFT,
+                            color: COLOR_BRAND,
                             borderBottom: `1px solid ${COLOR_BORDER}`,
                           }}
                         >

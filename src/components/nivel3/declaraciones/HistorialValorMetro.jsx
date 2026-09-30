@@ -9,7 +9,13 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { COLOR_TEXT, COLOR_MUTED, COLOR_BORDER } from "../../nivel2/detalleclienteIngresos/estilos";
+import {
+  COLOR_TEXT,
+  COLOR_MUTED,
+  COLOR_BORDER,
+  COLOR_BRAND,
+  COLOR_BRAND_SOFT,
+} from "../../nivel2/detalleclienteIngresos/estilos";
 
 const Historial = () => {
     const [historial, setHistorial] = useState([]);
@@ -24,8 +30,8 @@ const Historial = () => {
     }, [])
 
     const sxTh = {
-        backgroundColor: "#f6f8f9",
-        color: COLOR_TEXT,
+        backgroundColor: COLOR_BRAND_SOFT,
+        color: COLOR_BRAND,
         fontWeight: 700,
         fontSize: 11.5,
         letterSpacing: 0.4,
