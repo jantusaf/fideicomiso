@@ -122,15 +122,36 @@ export const sxBtnWarmOutlined = {
   "&:hover": { borderColor: COLOR_BRAND_WARM, backgroundColor: "rgba(201, 121, 26, 0.06)" },
 };
 
-// Barra de búsqueda: pill redondeada, fondo suave, con foco en el celeste de
-// marca —reemplaza el input outline plano de antes por algo más moderno.
+// Botón "Editar" (relleno, en el naranja/amarillo de marca). Mismo criterio
+// de hover "vacío" que sxBtnPrimary/sxBtnBrand/sxBtnDanger.
+export const sxBtnWarm = {
+  textTransform: "none",
+  fontWeight: 600,
+  borderRadius: 1.5,
+  px: 2.25,
+  boxShadow: "none",
+  backgroundColor: COLOR_BRAND_WARM,
+  color: "#fff",
+  border: "1px solid transparent",
+  transition: "background-color .15s ease, color .15s ease, border-color .15s ease",
+  "&:hover": {
+    backgroundColor: "#fff",
+    color: COLOR_BRAND_WARM,
+    borderColor: COLOR_BRAND_WARM,
+    boxShadow: "none",
+  },
+};
+
+// Barra de búsqueda: pill redondeada, fondo suave y borde visible, con foco
+// en el celeste de marca —reemplaza el input outline plano de antes por
+// algo más moderno sin perder el contorno.
 export const sxSearchField = {
   "& .MuiOutlinedInput-root": {
     borderRadius: 999,
     backgroundColor: "#f6f8f9",
-    transition: "background-color .15s ease, box-shadow .15s ease",
-    "& fieldset": { borderColor: "transparent" },
-    "&:hover fieldset": { borderColor: COLOR_BORDER },
+    transition: "background-color .15s ease, box-shadow .15s ease, border-color .15s ease",
+    "& fieldset": { borderColor: COLOR_BORDER },
+    "&:hover fieldset": { borderColor: "#c9d2d8" },
     "&.Mui-focused": {
       backgroundColor: "#fff",
       boxShadow: "0 0 0 3px rgba(46, 105, 153, 0.14)",

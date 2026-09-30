@@ -41,7 +41,7 @@ import {
   COLOR_BRAND_SOFT,
   COLOR_BRAND_WARM,
   sxBtnBrand,
-  sxBtnWarmOutlined,
+  sxBtnWarm,
   sxSearchField,
 } from "../../detalleclienteIngresos/estilos";
 
@@ -321,10 +321,10 @@ const Lotes = () => {
                       <TableCell sx={{ ...sxTd, whiteSpace: "nowrap", textAlign: "right" }}>
                         <Tooltip title="Editar cliente">
                           <Button
-                            variant="outlined"
+                            variant="contained"
                             size="small"
                             onClick={() => navigate(`/usuario2/modificarcliente/${client.cuil_cuit}`)}
-                            sx={{ ...sxBtnWarmOutlined, mr: 1, px: 1.75 }}
+                            sx={{ ...sxBtnWarm, minWidth: 92, mr: 1, px: 1.75 }}
                           >
                             Editar
                           </Button>
