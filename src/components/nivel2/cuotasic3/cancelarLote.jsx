@@ -170,7 +170,7 @@ export default function CancelarLoteCompleto(props) {
     <>
       <Button
         variant="contained"
-        sx={{ ...sxBtnDanger, mb: 2 }}
+        sx={sxBtnDanger}
         onClick={() => setOpen(true)}
       >
         Cancelar lote

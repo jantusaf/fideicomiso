@@ -65,6 +65,7 @@ import {
   COLOR_BRAND_WARM,
   COLOR_BRAND_WARM_SOFT,
   COLOR_BRAND_WARM_BORDER,
+  sxBtnGreen,
 } from "./nivel2/detalleclienteIngresos/estilos";
 import { saveAs } from "file-saver";
 
@@ -464,7 +465,7 @@ const exportarExcel = () => {
                 />
               )}
               <Chip variant="outlined" label={`Registros: ${cantidadRegistros}`} sx={{ fontWeight: 600, color: COLOR_BRAND_WARM, borderColor: COLOR_BRAND_WARM }} />
-              <Button variant="contained" sx={sxBtnPrimary} onClick={exportarExcel}>
+              <Button variant="contained" sx={sxBtnGreen} onClick={exportarExcel}>
                 Descargar Excel
               </Button>
             </Stack>
@@ -512,9 +513,20 @@ const exportarExcel = () => {
         ========================== */}
         {act ? (
           <Paper elevation={0} sx={{ ...sxCard, p: { xs: 2.5, md: 3 } }}>
-            <Typography variant="h6" sx={{ fontWeight: 700, color: COLOR_TEXT }}>
-              Resumen y acciones
-            </Typography>
+            <Stack
+              direction={{ xs: "column", md: "row" }}
+              spacing={1.25}
+              sx={{ alignItems: { md: "flex-start" }, justifyContent: "space-between" }}
+            >
+              <Typography variant="h6" sx={{ fontWeight: 700, color: COLOR_TEXT }}>
+                Resumen y acciones
+              </Typography>
+
+              <Stack direction="row" spacing={1.25} useFlexGap sx={{ alignItems: "center", flexWrap: "wrap" }}>
+                <BorrarCuotas id={idlote} />
+                <CancelarLote id_lote={idlote} cuotas={cuotas} />
+              </Stack>
+            </Stack>
             <Typography variant="body2" sx={{ color: COLOR_MUTED, mb: 2.5 }}>
               {selectedValue ? selectedValue : "Seleccioná un lote para ver datos."}
             </Typography>
@@ -539,8 +551,6 @@ const exportarExcel = () => {
 
               {/* Estos componentes ya existen: no se cambia su lógica */}
               <AgregaraCuotas id_origen={idlote} lotes={lotes} />
-              <BorrarCuotas id={idlote} />
-              <CancelarLote id_lote={idlote} cuotas={cuotas} />
 
               {cuotas && (
                 <Adelantar

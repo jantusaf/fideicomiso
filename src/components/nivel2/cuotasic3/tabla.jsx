@@ -394,6 +394,11 @@ const Lotes = (props) => {
                           sx={{
                             px: 2.2,
                             py: 1.3,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            gap: 1.5,
+                            flexWrap: "wrap",
                             backgroundColor: COLOR_BRAND_SOFT,
                             color: COLOR_BRAND,
                             borderBottom: `1px solid ${COLOR_BORDER}`,
@@ -402,6 +407,8 @@ const Lotes = (props) => {
                           <Typography sx={{ fontWeight: 700, fontSize: 14 }}>
                             Estado Financiero del Cliente {selectedClient}
                           </Typography>
+
+                          <CancelarLote id_cliente={selectedClient} cuotas={filteredCuotas} />
                         </Box>
 
                         <Box sx={{ p: 2, display: "grid", gap: 1.1 }}>
@@ -460,16 +467,6 @@ const Lotes = (props) => {
                       </Paper>
                     );
                   })()}
-
-                  <Box
-                    sx={{
-                      pt: 2,
-                      display: "flex",
-                      justifyContent: "flex-end",
-                    }}
-                  >
-                    <CancelarLote id_cliente={selectedClient} cuotas={filteredCuotas} />
-                  </Box>
                 </Box>
 
                 {/* TABLA */}
@@ -553,7 +550,7 @@ const Lotes = (props) => {
                               <StyledTableCell>
                                 {row.excedente < 0 ? (
                                   <Box sx={{ display: "flex", flexDirection: "column", gap: 0.2 }}>
-                                    <Typography sx={{ fontWeight: 900, color: COLOR_ERROR }}>
+                                    <Typography sx={{ fontWeight: 700, fontSize: "inherit", color: COLOR_ERROR }}>
                                       {new Intl.NumberFormat("de-DE").format(row.excedente)}
                                     </Typography>
 
@@ -569,7 +566,7 @@ const Lotes = (props) => {
                                     })()}
                                   </Box>
                                 ) : (
-                                  <Typography sx={{ fontWeight: 700, color: COLOR_OK }}>
+                                  <Typography sx={{ fontWeight: 700, fontSize: "inherit", color: COLOR_OK }}>
                                     {new Intl.NumberFormat("de-DE").format(row.excedente)}
                                   </Typography>
                                 )}
