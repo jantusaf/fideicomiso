@@ -727,8 +727,7 @@ const exportarExcel = () => {
                                     size="small"
                                     variant="outlined"
                                     color="warning"
-                                    fullWidth
-                                    sx={{ textTransform: "none", fontWeight: 600, borderRadius: 1.5, px: 1.75 }}
+                                    sx={{ textTransform: "none", fontWeight: 600, borderRadius: 1.5, px: 1.5, fontSize: 12 }}
                                     onClick={() => abrirCompensar(row.id)}
                                   >
                                     Compensar
