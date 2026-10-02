@@ -95,6 +95,8 @@ import Resumeness5 from '../Paginas/nivel6/resumen5'
 import Resumeness6 from '../Paginas/nivel6/resumen6'
 import ComparativoNiv6 from '../Paginas/nivel6/comparativo'
 import FlujoPitNiv6 from '../Paginas/nivel6/flujopit'
+import FlujoProyectadoNiv6 from '../Paginas/nivel6/flujoproyectado'
+import FlujoDiferenciaNiv6 from '../Paginas/nivel6/flujodiferencia'
 
 const Rutas = [
 	<Navbar/> ,
@@ -176,6 +178,8 @@ const Rutas = [
 			{ path: '/nivel6/comparativo', element: <ComparativoNiv6 /> },
 			{ path: '/nivel6/carga', element: <Cargaa1 /> },
 			{ path: '/nivel6/flujopit', element: <FlujoPitNiv6 /> },
+			{ path: '/nivel6/flujoproyectado', element: <FlujoProyectadoNiv6 /> },
+			{ path: '/nivel6/flujodiferencia', element: <FlujoDiferenciaNiv6 /> },
 		],
 	},
 
