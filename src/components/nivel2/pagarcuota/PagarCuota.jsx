@@ -113,6 +113,18 @@ export default function PagarCuota() {
 
 
 
+  // Deja guardado el lote de la cuota pagada para que, al volver al detalle del cliente,
+  // el cuadro de cuotas se abra solo (LotesCliente lee esta misma clave, con el CUIT sin guiones).
+  const recordarLote = (cuit, idLote) => {
+    try {
+      if (cuit && idLote) {
+        window.sessionStorage.setItem(`lote_seleccionado_${String(cuit).replace(/\D/g, '')}`, String(idLote))
+      }
+    } catch {
+      // sin sessionStorage simplemente no se recuerda
+    }
+  }
+
   const designar = async (event) => {
     event.preventDefault()
 
@@ -164,6 +176,7 @@ export default function PagarCuota() {
       const rta = await servicioUsuario1.pagarnivel2(formData)
       console.log(rta)
       alert(rta[0])
+      recordarLote(rta[1], rta[2])
       navigate('/usuario2/detallecliente/' + rta[1])
     } catch (error) {
       console.error(error)
@@ -186,6 +199,7 @@ export default function PagarCuota() {
       const rta = await servicioUsuario1.pagarnivel2varios(formData)
       console.log(rta)
       alert(rta[0])
+      recordarLote(rta[1], rta[2])
       navigate('/usuario2/detallecliente/' + rta[1])
     } catch (error) {
       console.error(error)

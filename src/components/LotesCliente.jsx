@@ -98,7 +98,9 @@ const [loteSeleccionado, setLoteSeleccionado] = useState(null);
 
   // Se recuerda el lote elegido por cliente para que, al ir a pagar y volver
   // (o al volver con "atrás"), el cuadro de cuotas siga abierto sin reseleccionar.
-  const claveLote = `lote_seleccionado_${props.cuil_cuit}`;
+  // El CUIT se normaliza sin guiones: tras pagar, el backend devuelve el CUIT sin
+  // guiones y la URL del detalle cambia de formato, pero debe encontrar el mismo lote.
+  const claveLote = `lote_seleccionado_${String(props.cuil_cuit ?? "").replace(/\D/g, "")}`;
 
   const valorLote = (item) =>
     `Fraccion: ${item.fraccion} - Manzana: ${item.manzana} - Parcela: ${item.parcela}${
