@@ -177,7 +177,7 @@ export default function PagarCuota() {
       console.log(rta)
       alert(rta[0])
       recordarLote(rta[1], rta[2])
-      navigate('/usuario2/detallecliente/' + rta[1])
+      navigate('/usuario2/detallecliente/' + rta[1] + (rta[2] ? '?lote=' + rta[2] : ''))
     } catch (error) {
       console.error(error)
       alert('No se pudo enviar el pago. Puede ser un problema de conexión con el servidor — probá de nuevo en unos segundos.')
@@ -200,7 +200,7 @@ export default function PagarCuota() {
       console.log(rta)
       alert(rta[0])
       recordarLote(rta[1], rta[2])
-      navigate('/usuario2/detallecliente/' + rta[1])
+      navigate('/usuario2/detallecliente/' + rta[1] + (rta[2] ? '?lote=' + rta[2] : ''))
     } catch (error) {
       console.error(error)
       alert('No se pudo enviar el pago. Puede ser un problema de conexión con el servidor — probá de nuevo en unos segundos.')

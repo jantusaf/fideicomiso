@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import servicioLotes from "../services/lotes";
 import servicioCuotas from "../services/cuotas";
 import servicioAdmin from "../services/Administracion";
@@ -73,6 +73,7 @@ const LotesCliente = (props) => {
   let params = useParams();
   let cuil_cuit = params.cuil_cuit;
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     traer();
@@ -119,6 +120,15 @@ const vercuotas = async (index, loteDirecto) => {
   } catch {
     // sin sessionStorage simplemente no se recuerda la selección
   }
+  // El lote también queda en la URL (?lote=ID): así sobrevive a "atrás", a recargar y a abrir en otra pestaña.
+  setSearchParams(
+    (prev) => {
+      const nuevos = new URLSearchParams(prev);
+      nuevos.set("lote", String(index));
+      return nuevos;
+    },
+    { replace: true }
+  );
 
   verief(index);
   setOpen(false);
@@ -165,14 +175,20 @@ const vercuotas = async (index, loteDirecto) => {
     console.log(lotes);
     setLotes(lotes);
 
-    let guardado = null;
-    try {
-      guardado = window.sessionStorage.getItem(claveLote);
-    } catch {
-      guardado = null;
+    let guardado = searchParams.get("lote");
+    if (!guardado) {
+      try {
+        guardado = window.sessionStorage.getItem(claveLote);
+      } catch {
+        guardado = null;
+      }
     }
-    if (guardado && Array.isArray(lotes)) {
-      const lote = lotes.find((l) => l && typeof l === "object" && String(l.id) === guardado);
+    if (Array.isArray(lotes)) {
+      const validos = lotes.filter((l) => l && typeof l === "object");
+      // Lote recordado; si no hay ninguno y el cliente tiene un solo lote, se abre directo.
+      const lote =
+        validos.find((l) => guardado && String(l.id) === guardado) ||
+        (validos.length === 1 && validos[0].tiene_cuotas === "Si" ? validos[0] : null);
       if (lote) {
         setSelectedValue(valorLote(lote));
         vercuotas(lote.id, lote);

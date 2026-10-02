@@ -181,7 +181,7 @@ export default function SelectTextFields(props) {
     const rta = await servicioUsuario1.pagarrapidoic3(enviarr);
     console.log(rta);
     alert(rta[0]);
-    navigate("/usuario2/detallecliente/" + rta[1]);
+    navigate("/usuario2/detalleclic3/" + rta[1]);
   };
 
   const handleChange = (e) => {

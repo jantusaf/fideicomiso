@@ -117,6 +117,7 @@ const Lotes = (props) => {
   const [cuotaOrigen, setCuotaOrigen] = useState(null);
   const [cuotaCompensada, setCuotaCompensada] = useState("");
   const navigate = useNavigate();
+  const claveCliente = `cliente_ic3_seleccionado_${String(props.cuil_cuit ?? "").replace(/\D/g, "")}`;
 
   useEffect(() => {
     getClients();
@@ -130,6 +131,29 @@ const Lotes = (props) => {
     const clients = [...new Set(response.map((cuota) => cuota.id_cliente))];
     setUniqueClients(clients);
     setLoading(false);
+
+    // Se recuerda el cliente elegido (por CUIT) para que, al volver de "Ver pagos" o de
+    // pagar, el cuadro siga abierto; si hay un solo cliente se abre directo.
+    let guardado = null;
+    try {
+      guardado = window.sessionStorage.getItem(claveCliente);
+    } catch {
+      guardado = null;
+    }
+    const elegido =
+      guardado === "ALL"
+        ? "ALL"
+        : clients.find((id) => guardado && String(id) === guardado) ?? (clients.length === 1 ? clients[0] : undefined);
+    if (elegido !== undefined) {
+      setShowCuotas(true);
+      if (elegido === "ALL") {
+        setSelectedClient(null);
+        setFilteredCuotas(response);
+      } else {
+        setSelectedClient(elegido);
+        setFilteredCuotas(response.filter((cuota) => cuota.id_cliente === elegido));
+      }
+    }
   };
 
   const abrirCompensar = (id_cuota) => {
@@ -174,6 +198,11 @@ const Lotes = (props) => {
   const handleClientFilter = (id_cliente) => {
     setShowCuotas(true);
     setSelectedClient(id_cliente);
+    try {
+      window.sessionStorage.setItem(claveCliente, id_cliente === null ? "ALL" : String(id_cliente));
+    } catch {
+      // sin sessionStorage simplemente no se recuerda la selección
+    }
 
     if (id_cliente === null) {
       setFilteredCuotas(cuotas);
