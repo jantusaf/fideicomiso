@@ -96,13 +96,27 @@ const [loteSeleccionado, setLoteSeleccionado] = useState(null);
   const [cuotaCompensada, setCuotaCompensada] = useState("");
   const toggleDetalles = () => setVerDetalles(!verDetalles);
 
-const vercuotas = async (index) => {
+  // Se recuerda el lote elegido por cliente para que, al ir a pagar y volver
+  // (o al volver con "atrás"), el cuadro de cuotas siga abierto sin reseleccionar.
+  const claveLote = `lote_seleccionado_${props.cuil_cuit}`;
+
+  const valorLote = (item) =>
+    `Fraccion: ${item.fraccion} - Manzana: ${item.manzana} - Parcela: ${item.parcela}${
+      item.tiene_cuotas === "Si" ? " - Cuotas" : ""
+    }`;
+
+const vercuotas = async (index, loteDirecto) => {
   const cuotas = await servicioCuotas.vercuotas(index);
   setCuotas(cuotas);
   setIdlote(index);
   setAct(true);
-  const lote = lotes.find((l) => l.id == index);
+  const lote = loteDirecto || lotes.find((l) => l.id == index);
   setLoteSeleccionado(lote);
+  try {
+    window.sessionStorage.setItem(claveLote, String(index));
+  } catch {
+    // sin sessionStorage simplemente no se recuerda la selección
+  }
 
   verief(index);
   setOpen(false);
@@ -148,6 +162,20 @@ const vercuotas = async (index) => {
     const lotes = await servicioLotes.lotesCliente(props.cuil_cuit);
     console.log(lotes);
     setLotes(lotes);
+
+    let guardado = null;
+    try {
+      guardado = window.sessionStorage.getItem(claveLote);
+    } catch {
+      guardado = null;
+    }
+    if (guardado && Array.isArray(lotes)) {
+      const lote = lotes.find((l) => l && typeof l === "object" && String(l.id) === guardado);
+      if (lote) {
+        setSelectedValue(valorLote(lote));
+        vercuotas(lote.id, lote);
+      }
+    }
   };
 
   const borrar = async (id) => {
@@ -489,9 +517,7 @@ const exportarExcel = () => {
                   {lotesValidos.map((item, index) => (
                     <MenuItem
                       key={item.id ?? index}
-                      value={`Fraccion: ${item.fraccion} - Manzana: ${item.manzana} - Parcela: ${item.parcela}${
-                        item.tiene_cuotas === "Si" ? " - Cuotas" : ""
-                      }`}
+                      value={valorLote(item)}
                       onClick={() => vercuotas(item.id)}
                     >
                       Fraccion: {item.fraccion} - Manzana: {item.manzana} - Parcela: {item.parcela}
