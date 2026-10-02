@@ -412,6 +412,7 @@ const exportarExcel = () => {
     borderBottom: `1px solid ${COLOR_BORDER}`,
     whiteSpace: "nowrap",
     py: 1.5,
+    px: 1.25,
   };
 
   const sxTd = {
@@ -419,6 +420,7 @@ const exportarExcel = () => {
     color: COLOR_TEXT,
     borderBottom: "1px solid #eef1f3",
     py: 1.4,
+    px: 1.25,
     whiteSpace: "nowrap",
     fontVariantNumeric: "tabular-nums",
   };
@@ -626,7 +628,7 @@ const exportarExcel = () => {
               {!cuotas ? (
                 <Skeleton />
               ) : (
-                <Table stickyHeader size="small" sx={{ minWidth: 1100 }}>
+                <Table stickyHeader size="small" sx={{ minWidth: 860 }}>
                   <TableHead>
                     <TableRow>
                       <TableCell sx={sxTh}>FECHA</TableCell>
