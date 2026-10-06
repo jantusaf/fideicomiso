@@ -2,6 +2,7 @@ import { useState } from "react";
 import Ic3 from "./soloic3";
 import PIT from "./soloparque";
 import * as React from "react";
+import CuadroReferencias from "./CuadroReferencias";
 
 const MAPAS = [
     { value: "1", label: "IC3" },
@@ -10,6 +11,7 @@ const MAPAS = [
 
 const Lotes = () => {
     const [mapa, setMapa] = useState("");
+    const [verReferencias, setVerReferencias] = useState(false);
 
     const mapaActual = MAPAS.find((m) => m.value === mapa);
 
@@ -59,7 +61,24 @@ const Lotes = () => {
                             color: "#6b7a86", fontSize: 11,
                         }}>▼</span>
                     </div>
+
+                    <label style={{
+                        display: "flex", alignItems: "center", gap: 7, cursor: "pointer",
+                        fontWeight: 600, fontSize: 14, color: "#1a303e", userSelect: "none",
+                    }}>
+                        <input
+                            type="checkbox"
+                            checked={verReferencias}
+                            onChange={() => setVerReferencias((v) => !v)}
+                            style={{ width: 16, height: 16, cursor: "pointer", accentColor: "#1a303e" }}
+                        />
+                        Ver referencias
+                    </label>
                 </div>
+            )}
+
+            {mapa && verReferencias && (
+                <CuadroReferencias mapa={mapa} onCerrar={() => setVerReferencias(false)} />
             )}
 
             {/* Contenido */}

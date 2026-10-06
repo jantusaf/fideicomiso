@@ -113,6 +113,17 @@ export default function PagarCuota() {
 
 
 
+  // Texto del error real que devolvió el servidor (o la causa de red), para no quedarse con un aviso genérico.
+  const detalleError = (error) => {
+    const data = error?.response?.data
+    if (data?.error || data?.detalle) {
+      return [data.error, data.detalle].filter(Boolean).join(': ')
+    }
+    if (typeof data === 'string' && data.trim()) return data.trim().slice(0, 200)
+    if (error?.response) return 'El servidor respondió con el error ' + error.response.status + '.'
+    return 'El servidor no respondió (problema de conexión o archivo demasiado grande). Probá de nuevo en unos segundos.'
+  }
+
   // Deja guardado el lote de la cuota pagada para que, al volver al detalle del cliente,
   // el cuadro de cuotas se abra solo (LotesCliente lee esta misma clave, con el CUIT sin guiones).
   const recordarLote = (cuit, idLote) => {
@@ -180,7 +191,7 @@ export default function PagarCuota() {
       navigate('/usuario2/detallecliente/' + rta[1] + (rta[2] ? '?lote=' + rta[2] : ''))
     } catch (error) {
       console.error(error)
-      alert('No se pudo enviar el pago. Puede ser un problema de conexión con el servidor — probá de nuevo en unos segundos.')
+      alert('No se pudo enviar el pago.' + String.fromCharCode(10) + detalleError(error))
     } finally {
       setLoading(false)
     }
@@ -203,7 +214,7 @@ export default function PagarCuota() {
       navigate('/usuario2/detallecliente/' + rta[1] + (rta[2] ? '?lote=' + rta[2] : ''))
     } catch (error) {
       console.error(error)
-      alert('No se pudo enviar el pago. Puede ser un problema de conexión con el servidor — probá de nuevo en unos segundos.')
+      alert('No se pudo enviar el pago.' + String.fromCharCode(10) + detalleError(error))
     } finally {
       setLoading(false)
     }

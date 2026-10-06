@@ -10,6 +10,7 @@ import serviciolotes from "../../services/lotes";
 import { centerOfMass, pointOnFeature, booleanPointInPolygon, union, featureCollection } from "@turf/turf";
 import TablaReferencias from "./tablaReferencias";
 import TablaReferencias2 from "./TablaReferencias2";
+import TablaReferenciasMensuras from "./TablaReferenciasMensuras";
 import { useAuth } from "../../auth/AuthContext";
 
 const MapaConCapas = () => {
@@ -98,6 +99,7 @@ const MapaConCapas = () => {
         otras: false,
         fraccionIC: false,
         fraccionIG: false,
+        fraccionIG2: false,
         invicomontana: false,
         nuevazona: false,
         fraccionIE: false,
@@ -157,12 +159,12 @@ const clavesZonas = [
   "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3", "unidad-ejecutora2y3",
   "ib2", "ib3", "area5", "ib5", "area6",
   "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "area1", "area2", "zonaesperanza", "area4",
-  "mensura31548Unuevo", "Mensura30922U", "fraccionIE", "clubesHipico", "zona-arroyo",
+  "mensura31548Unuevo", "Mensura30922U", "fraccionIE", "clubesHipico", "zona-arroyo", "zona_municipal",
 ];
-const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras", "fraccionIG", "ZRU Predios La Caja"].every((key) => !!capasActivas[key]);
+const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras", "fraccionIG", "fraccionIG2", "ZRU Predios La Caja"].every((key) => !!capasActivas[key]);
 const zonasActivasCount = clavesZonas.filter((k) => !!capasActivas[k]).length;
 const planEspecialCount = Object.values(subCapasActivas).filter(Boolean).length;
-const otrosCount = ["calleYRutas", "zona_municipal", "Manzanas", "Zonificación Sta Catalina"].filter((k) => !!capasActivas[k]).length;
+const otrosCount = ["calleYRutas", "Manzanas", "Zonificación Sta Catalina"].filter((k) => !!capasActivas[k]).length;
 
 const toggleTodasLasZonas = () => {
   const nuevoEstado = !todasLasZonasActivas;
@@ -172,6 +174,7 @@ const toggleTodasLasZonas = () => {
     IB: nuevoEstado,
     otras: nuevoEstado,
     fraccionIG: nuevoEstado,
+    fraccionIG2: nuevoEstado,
     "ZRU Predios La Caja": nuevoEstado,
     nuevazona: nuevoEstado,
     ejercitoarg: nuevoEstado,
@@ -447,6 +450,7 @@ const toggleTodasLasZonas = () => {
     const [verReferencias, setVerReferencias] = useState(false);
     const [verReferenciasTabla, setVerReferenciasTabla] = useState(false);
     const [verReferenciasTabla2, setVerReferenciasTabla2] = useState(false);
+    const [verReferenciasMensuras, setVerReferenciasMensuras] = useState(false);
     const [mostrarEtiquetas, setMostrarEtiquetas] = useState(false);
     const mostrarEtiquetasRef = React.useRef(false);
     useEffect(() => { mostrarEtiquetasRef.current = mostrarEtiquetas; }, [mostrarEtiquetas]);
@@ -949,9 +953,11 @@ const toggleTodasLasZonas = () => {
                 updates["unidad-ejecutora2"] = nuevoEstado;
                 updates["unidad-ejecutora3"] = nuevoEstado;
                 updates["unidad-ejecutora2y3"] = nuevoEstado;
+                updates.mensura31548Unuevo = nuevoEstado;
             }
             if (nombre === "ic4") {
                 updates.ic42 = nuevoEstado;
+                updates.mensura31548Unuevo = nuevoEstado;
                 if (nuevoEstado) {
                     updates["unidad-ejecutora1"] = true;
                     updates["unidad-ejecutora2"] = true;
@@ -980,13 +986,15 @@ const toggleTodasLasZonas = () => {
                 updates.parc2 = nuevoEstado;
                 updates.parc3 = nuevoEstado;
             }
+            if (nombre === "fraccionIG2") {
+                updates.zona_municipal = nuevoEstado;
+            }
             if (nombre === "otras") {
                 updates.invicoresidencial = nuevoEstado;
                 updates.area1 = nuevoEstado;
                 updates.area2 = nuevoEstado;
                 updates.zonaesperanza = nuevoEstado;
                 updates.area4 = nuevoEstado;
-                updates.mensura31548Unuevo = nuevoEstado;
                 updates.Mensura30922U = nuevoEstado;
                 updates["ZRU Predios La Caja"] = nuevoEstado;
                 updates["Planificación Sección Sur"] = nuevoEstado;
@@ -1369,6 +1377,16 @@ useEffect(() => {
                         <label>
                             <input
                                 type="checkbox"
+                                checked={verReferenciasMensuras}
+                                onChange={() => setVerReferenciasMensuras((v) => !v)}
+                            />
+                            <strong>Ver referencias de mensuras</strong>
+                        </label>
+                    </div>
+                    <div className="capa-item">
+                        <label>
+                            <input
+                                type="checkbox"
                                 checked={mostrarEtiquetas}
                                 onChange={() => setMostrarEtiquetas(p => !p)}
                             />
@@ -1619,49 +1637,6 @@ useEffect(() => {
     </div>
   </div>
 
-  {/* Otras con subcapas */}
-  <div className="capa-item">
-    <label>
-      <input
-        type="checkbox"
-        checked={!!capasActivas.otras}
-        onChange={() => toggleCapaPrincipal("otras")}
-      />
-      <strong>Otras</strong>
-    </label>
-    <div className="subcapas">
-      {[
-        { key: "invicoresidencial", label: "Invico - Residencial" },
-        { key: "invico2", label: "Invico 2" },
-        { key: "mensura31548Unuevo", label: "Mensura 31548-U" },
-        { key: "Mensura30922U", label: "Mensura 30922-U" },
-        { key: "zona-arroyo", label: "Zona Arroyo" },
-        { key: "zonaesperanza", label: "Zona Esperanza" },
-      ].map(({ key, label }) => (
-        <div key={key}>
-          <label>
-            <input
-              type="checkbox"
-              checked={!!capasActivas[key]}
-              onChange={() => toggleCapaPrincipal(key)}
-            />
-            {label}
-          </label>
-        </div>
-      ))}
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={!!capasActivas["ZRU Predios La Caja"]}
-            onChange={() => toggleCapaPrincipal("ZRU Predios La Caja")}
-          />
-          ZRU
-        </label>
-      </div>
-    </div>
-  </div>
-
   {/* Fracción IE */}
   <div className="capa-item">
     <label>
@@ -1672,6 +1647,30 @@ useEffect(() => {
       />
       <strong>Fracción IE</strong>
     </label>
+  </div>
+
+  {/* Fracción IG (solo Zona Municipal) */}
+  <div className="capa-item">
+    <label>
+      <input
+        type="checkbox"
+        checked={!!capasActivas.fraccionIG2}
+        onChange={() => toggleCapaPrincipal("fraccionIG2")}
+      />
+      <strong>Fracción IG</strong>
+    </label>
+    <div className="subcapas">
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas.zona_municipal}
+            onChange={() => toggleCapaPrincipal("zona_municipal")}
+          />
+          Zona Municipal
+        </label>
+      </div>
+    </div>
   </div>
 
   {/* ── CLUBES ── */}
@@ -1710,6 +1709,48 @@ useEffect(() => {
       </div>
     );
   })()}
+
+  {/* Otras con subcapas */}
+  <div className="capa-item">
+    <label>
+      <input
+        type="checkbox"
+        checked={!!capasActivas.otras}
+        onChange={() => toggleCapaPrincipal("otras")}
+      />
+      <strong>Otras</strong>
+    </label>
+    <div className="subcapas">
+      {[
+        { key: "invicoresidencial", label: "Invico - Residencial" },
+        { key: "invico2", label: "Invico 2" },
+        { key: "Mensura30922U", label: "Mensura 30922-U" },
+        { key: "zona-arroyo", label: "Zona Arroyo" },
+        { key: "zonaesperanza", label: "Zona Esperanza" },
+      ].map(({ key, label }) => (
+        <div key={key}>
+          <label>
+            <input
+              type="checkbox"
+              checked={!!capasActivas[key]}
+              onChange={() => toggleCapaPrincipal(key)}
+            />
+            {label}
+          </label>
+        </div>
+      ))}
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["ZRU Predios La Caja"]}
+            onChange={() => toggleCapaPrincipal("ZRU Predios La Caja")}
+          />
+          ZRU
+        </label>
+      </div>
+    </div>
+  </div>
 
 </div>
 
@@ -1811,17 +1852,6 @@ useEffect(() => {
                         <label>
                             <input
                                 type="checkbox"
-                                checked={!!capasActivas.zona_municipal}
-                                onChange={() => toggleCapaPrincipal("zona_municipal")}
-                            />
-                            Zona Municipal
-                        </label>
-                    </div>
-
-                    <div className="capa-item">
-                        <label>
-                            <input
-                                type="checkbox"
                                 checked={!!capasActivas.Manzanas}
                                 onChange={() => toggleCapaPrincipal("Manzanas")}
                             />
@@ -1875,10 +1905,11 @@ useEffect(() => {
 
             </div>
 
-            {(verReferenciasTabla || verReferenciasTabla2 || capasActivas["Zonificación Sta Catalina"]) && (
+            {(verReferenciasTabla || verReferenciasTabla2 || verReferenciasMensuras || capasActivas["Zonificación Sta Catalina"]) && (
                 <div className="tabla-referencias-flotante tabla-referencias-doble">
                     {(verReferenciasTabla || capasActivas["Zonificación Sta Catalina"]) && <TablaReferencias />}
                     {verReferenciasTabla2 && <TablaReferencias2 />}
+                    {verReferenciasMensuras && <TablaReferenciasMensuras />}
                 </div>
             )}
 
