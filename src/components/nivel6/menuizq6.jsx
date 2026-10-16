@@ -7,12 +7,9 @@ import ModoOscuroContext, { PALETA_CLARA, PALETA_OSCURA } from "../../context/Mo
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import TrendingDownIcon from '@mui/icons-material/TrendingDown';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
-import EventNoteIcon from '@mui/icons-material/EventNote';
-import DifferenceIcon from '@mui/icons-material/Difference';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CloseIcon from '@mui/icons-material/Close';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -34,47 +31,28 @@ const menuItems = [
     accent: '#148d8d',
     accentSoft: 'rgba(20, 141, 141, 0.22)',
   },
- {
-    text: 'Flujo Real',
+  {
+    text: 'Flujo de Fondos',
     icon: <CompareArrowsIcon fontSize="small" />,
-    path: '/nivel6/comparativo',
     accent: '#9b8bd4',
     accentSoft: 'rgba(155, 139, 212, 0.22)',
+    children: [
+      { text: 'Real', path: '/nivel6/comparativo', accent: '#9b8bd4', accentSoft: 'rgba(155, 139, 212, 0.22)' },
+      { text: 'Proyectado', path: '/nivel6/flujoproyectado', accent: '#c98a3e', accentSoft: 'rgba(201, 138, 62, 0.22)' },
+      { text: 'Diferencia', path: '/nivel6/flujodiferencia', accent: '#5c8dd6', accentSoft: 'rgba(92, 141, 214, 0.22)' },
+    ],
   },
   {
-    text: 'Flujo Proyectado',
-    icon: <EventNoteIcon fontSize="small" />,
-    path: '/nivel6/flujoproyectado',
-    accent: '#c98a3e',
-    accentSoft: 'rgba(201, 138, 62, 0.22)',
-  },
-  {
-    text: 'Flujo Diferencia',
-    icon: <DifferenceIcon fontSize="small" />,
-    path: '/nivel6/flujodiferencia',
-    accent: '#5c8dd6',
-    accentSoft: 'rgba(92, 141, 214, 0.22)',
-  },
- {
-    text: 'Flujo de Fondos PIT',
+    text: 'PIT',
     icon: <AccountBalanceIcon fontSize="small" />,
-    path: '/nivel6/flujopit',
     accent: '#148d8d',
     accentSoft: 'rgba(20, 141, 141, 0.22)',
+    children: [
+      { text: 'Flujo de fondos', path: '/nivel6/flujopit', accent: '#148d8d', accentSoft: 'rgba(20, 141, 141, 0.22)' },
+      { text: 'Deudores', path: '/nivel6/flujodeudores', accent: '#d9534f', accentSoft: 'rgba(217, 83, 79, 0.22)' },
+    ],
   },
   {
-    text: 'Ingresos',
-    icon: <TrendingUpIcon fontSize="small" />,
-    path: '/nivel6/resumen6',
-    accent: '#15803d',
-    accentSoft: 'rgba(21, 128, 61, 0.18)',
-  }, {
-    text: 'Egresos',
-    icon: <TrendingDownIcon fontSize="small" />,
-    path: '/nivel6/resumen2',
-    accent: '#dc2626',
-    accentSoft: 'rgba(220, 38, 38, 0.18)',
-  }, {
     text: 'General/Mensual',
     icon: <SummarizeIcon fontSize="small" />,
     path: '/nivel6/resumen1',
@@ -99,6 +77,11 @@ export default function MenuIzq2({ children }) {
   const [user, setUser] = useState();
   const drawerWidth = SIDEBAR_WIDTH;
   const [menuVisible, setMenuVisible] = useState(true);
+  // Grupos desplegables: se abren al apoyar el mouse (vista previa) o con click (queda fijo);
+  // un nuevo click lo cierra aunque el mouse siga encima, hasta que el mouse salga del grupo.
+  const [grupoFijo, setGrupoFijo] = useState({});
+  const [grupoHover, setGrupoHover] = useState(null);
+  const [grupoCerrado, setGrupoCerrado] = useState(null);
 
   // Modo oscuro/claro de la sección nivel6. Por defecto arranca en claro;
   // se recuerda en localStorage para que no se resetee al navegar entre páginas
@@ -144,6 +127,14 @@ export default function MenuIzq2({ children }) {
     setUser(useer)
   }, [])
 
+  useEffect(() => {
+    menuItems.forEach((item) => {
+      if (item.children && item.children.some((c) => c.path === location.pathname)) {
+        setGrupoFijo((prev) => ({ ...prev, [item.text]: true }));
+      }
+    });
+  }, [location.pathname]);
+
   const handleClick = (path) => {
     navigate(path);
   };
@@ -183,6 +174,52 @@ export default function MenuIzq2({ children }) {
           {user && (
             <nav className="mi-sidebar-nav">
               {menuItems.map((item) => {
+                if (item.children) {
+                  const hijoActivo = item.children.some((c) => location.pathname === c.path);
+                  const abierto = !!grupoFijo[item.text] || (grupoHover === item.text && grupoCerrado !== item.text);
+                  return (
+                    <div
+                      key={item.text}
+                      className="mi-nav-group"
+                      onMouseEnter={() => setGrupoHover(item.text)}
+                      onMouseLeave={() => {
+                        setGrupoHover(null);
+                        setGrupoCerrado(null);
+                      }}
+                    >
+                      <div
+                        className={`mi-nav-item${hijoActivo ? " active" : ""}`}
+                        style={{ "--accent": item.accent, "--accent-soft": item.accentSoft }}
+                        onClick={() => {
+                          if (abierto) {
+                            setGrupoFijo((prev) => ({ ...prev, [item.text]: false }));
+                            setGrupoCerrado(item.text);
+                          } else {
+                            setGrupoFijo((prev) => ({ ...prev, [item.text]: true }));
+                            setGrupoCerrado(null);
+                          }
+                        }}
+                      >
+                        <span className="mi-nav-icon">{item.icon}</span>
+                        <span className="mi-nav-title">{item.text}</span>
+                        <ExpandMoreIcon className={`mi-nav-arrow mi-nav-arrow--group${abierto ? " open" : ""}`} />
+                      </div>
+                      <div className={`mi-nav-sub${abierto ? " open" : ""}`}>
+                        {item.children.map((hijo) => (
+                          <div
+                            key={hijo.path}
+                            className={`mi-nav-subitem${location.pathname === hijo.path ? " active" : ""}`}
+                            style={{ "--accent": hijo.accent, "--accent-soft": hijo.accentSoft }}
+                            onClick={() => handleClick(hijo.path)}
+                          >
+                            <span className="mi-nav-dot" />
+                            {hijo.text}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
                 const active = location.pathname === item.path;
                 return (
                   <div

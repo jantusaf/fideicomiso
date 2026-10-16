@@ -506,3 +506,60 @@
   border-color: rgba(42, 170, 209, 0.4);
   color: #bfe9f7;
 }
+
+/* ---------- SIDEBAR NIVEL6: grupo desplegable (Flujo de Fondos) ---------- */
+.mi-sidebar--n6 .mi-nav-arrow--group {
+  transition: transform 0.2s ease, color 0.15s ease;
+}
+
+.mi-sidebar--n6 .mi-nav-item .mi-nav-arrow--group.open {
+  transform: rotate(180deg);
+  color: var(--accent, #9b8bd4);
+}
+
+.mi-sidebar--n6 .mi-nav-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.2s ease, opacity 0.15s ease, margin-top 0.2s ease;
+}
+
+.mi-sidebar--n6 .mi-nav-sub.open {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: 4px;
+}
+
+.mi-sidebar--n6 .mi-nav-subitem {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 10px 7px 50px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.78);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.mi-sidebar--n6 .mi-nav-subitem:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+}
+
+.mi-sidebar--n6 .mi-nav-subitem.active {
+  background: var(--accent-soft, rgba(155, 139, 212, 0.22));
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.mi-sidebar--n6 .mi-nav-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent, #9b8bd4);
+  flex-shrink: 0;
+}

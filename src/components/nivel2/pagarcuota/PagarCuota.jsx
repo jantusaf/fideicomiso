@@ -204,8 +204,19 @@ export default function PagarCuota() {
     setLoading(true)
     try {
       // Si no se subió comprobante, se envía igual con un FormData vacío.
+      if (cuotasConMonto.length === 0) {
+        alert('Ingresá el monto de al menos una cuota.')
+        return
+      }
+
       const formData = enviarr || new FormData()
-      formData.append('datos', [pago.cuil_cuit, pago.fecha,pago.id, JSON.stringify(pagosVarios)]);///// aca en forma de array se envian datos del dormulario
+
+      // El backend lee estos campos por separado (igual que el pago de una cuota).
+      // `pagos` lleva solo las cuotas con monto: [{ id_cuota, monto }].
+      formData.set('cuil_cuit', pago.cuil_cuit)
+      formData.set('id_cuota', pago.id)
+      formData.set('fecha', pago.fecha)
+      formData.set('pagos', JSON.stringify(cuotasConMonto))
 
       const rta = await servicioUsuario1.pagarnivel2varios(formData)
       console.log(rta)
@@ -235,8 +246,14 @@ export default function PagarCuota() {
     setpagosVarios({ ...pagosVarios, [e.target.name]: e.target.value })
   }
 
+  // Cuotas con monto cargado en el modo "varias cuotas": [{ id_cuota, monto }]
+  const cuotasConMonto = Object.entries(pagosVarios || {})
+    .map(([id, monto]) => ({ id_cuota: Number(id), monto: parseFloat(monto) }))
+    .filter((c) => Number.isFinite(c.monto) && c.monto > 0)
+  const totalVarias = cuotasConMonto.reduce((acc, c) => acc + c.monto, 0)
+
   const puedeEnviarUna = eleccion.tipo === '1' && pago.monto > 0 && pago.fecha
-  const puedeEnviarVarias = eleccion.tipo === 'varias' && pago.fecha
+  const puedeEnviarVarias = eleccion.tipo === 'varias' && pago.fecha && cuotasConMonto.length > 0
 
   return (
 
@@ -345,8 +362,13 @@ export default function PagarCuota() {
                     <Typography variant="subtitle2" sx={{ fontWeight: 600, color: COLOR_TEXT }}>
                       Cuotas a pagar
                     </Typography>
-                    {cuotas.map((option) => (
-                      <CampoConLabel key={option.id} label={"Cuota " + option.nro_cuota}>
+                    {[...cuotas]
+                      .sort((a, b) => a.anio - b.anio || a.mes - b.mes)
+                      .map((option) => (
+                      <CampoConLabel
+                        key={option.id}
+                        label={'Cuota ' + option.nro_cuota + (option.mes ? ' - ' + String(option.mes).padStart(2, '0') + '/' + option.anio : '')}
+                      >
                         <TextField
                           size="medium"
                           fullWidth
@@ -364,6 +386,10 @@ export default function PagarCuota() {
                         />
                       </CampoConLabel>
                     ))}
+                    <Typography variant="body2" sx={{ fontWeight: 600, color: COLOR_TEXT, textAlign: 'right' }}>
+                      Total a cargar: {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(totalVarias)}
+                      {cuotasConMonto.length > 0 ? ' en ' + cuotasConMonto.length + (cuotasConMonto.length === 1 ? ' cuota' : ' cuotas') : ''}
+                    </Typography>
                   </Stack>
                 )}
 

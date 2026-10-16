@@ -283,6 +283,18 @@ const agregarbeneficiarios= async  (etc) => {
   
     return data 
 } 
-export default {deudores, agregarbeneficiarios,clientehabilitadoic3,listaic3,borrarcbu,ventaLoteleg,crear2,modificarclientelegales,lista2,modificarCuil,determinarEmpresa,enviarmailprueba,lista,infocantidad,datoslegajo, clientehabilitado,listacbupendientes,cliente,modificarCliente,deshabilitar, determinarIngreso,ventaLote,traerLejagos,crear,habilitar};
+// Deudores del Parque (nivel2): una fila por cliente habilitado con cuotas vigentes
+const deudoresParque = async () => {
+
+    const { data } = await axios.get(baseURL + 'deudoresparque/', config)
+    if (data === 'error login') {
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+    }
+
+    return data
+}
+
+export default {deudoresParque, deudores, agregarbeneficiarios,clientehabilitadoic3,listaic3,borrarcbu,ventaLoteleg,crear2,modificarclientelegales,lista2,modificarCuil,determinarEmpresa,enviarmailprueba,lista,infocantidad,datoslegajo, clientehabilitado,listacbupendientes,cliente,modificarCliente,deshabilitar, determinarIngreso,ventaLote,traerLejagos,crear,habilitar};
 
 

@@ -27,6 +27,7 @@ import Inusualesniv2 from '../Paginas/Usuario2/inusuales';
 import NuevoCliente from '../Paginas/Usuario2/nuevocliente';
 import Pagos2 from '../Paginas/Usuario2/pagos3';
 import Deudores from '../Paginas/Usuario2/deudores';
+import DeudoresParque from '../Paginas/Usuario2/deudoresparque';
 
 import PagosInusuales from "../Paginas/Nivel3/PagosInusuales"
 import PagosInusualesMensuales from "../Paginas/Nivel3/PagosInusualesMensuales"
@@ -97,6 +98,7 @@ import ComparativoNiv6 from '../Paginas/nivel6/comparativo'
 import FlujoPitNiv6 from '../Paginas/nivel6/flujopit'
 import FlujoProyectadoNiv6 from '../Paginas/nivel6/flujoproyectado'
 import FlujoDiferenciaNiv6 from '../Paginas/nivel6/flujodiferencia'
+import FlujoDeudoresNiv6 from '../Paginas/nivel6/flujodeudores'
 
 const Rutas = [
 	<Navbar/> ,
@@ -140,6 +142,7 @@ const Rutas = [
 			{ path: '/usuario2/nuevocliente', element: <NuevoCliente /> },
 			{ path: '/usuario2/pagos', element: <Pagos2 /> },
 			{ path: '/usuario2/deudores', element: <Deudores /> },
+			{ path: '/usuario2/deudoresparque', element: <DeudoresParque /> },
 		],
 	},
 
@@ -180,6 +183,7 @@ const Rutas = [
 			{ path: '/nivel6/flujopit', element: <FlujoPitNiv6 /> },
 			{ path: '/nivel6/flujoproyectado', element: <FlujoProyectadoNiv6 /> },
 			{ path: '/nivel6/flujodiferencia', element: <FlujoDiferenciaNiv6 /> },
+			{ path: '/nivel6/flujodeudores', element: <FlujoDeudoresNiv6 /> },
 		],
 	},
 

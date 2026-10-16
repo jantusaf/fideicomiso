@@ -148,6 +148,11 @@ export default function MenuIzq2({ children }) {
       icon: <WarningAmberIcon style={{ color: "#1a303e" }} />,
       path: '/usuario2/deudores'
     },
+    {
+      text: 'Deudores Parque',
+      icon: <PriceCheckIcon style={{ color: "#1a303e" }} />,
+      path: '/usuario2/deudoresparque'
+    },
    /*  {
       text: 'Aprobación de CBU',
       icon: <div><Badge badgeContent={notificacionescbus} color="error">

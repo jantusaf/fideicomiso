@@ -6,6 +6,9 @@ import servicio360 from "../services/pagos360";
 import AgregarIcc from "./nivel2/Icc_cuota/AgregarICCCuota";
 import AgregaraCuotas from "./nivel2/Asignarcuotasalote";
 import BorrarCuotas from "./nivel2/borrarcuotas/BorrarCuotas";
+import DarDeBajaCuadro, { MARCA_BAJA } from "./nivel2/borrarcuotas/DarDeBajaCuadro";
+import ImportarPagosExcel from "./nivel2/importarpagos/ImportarPagosExcel";
+import Alert from "@mui/material/Alert";
 import CancelarLote from "./pagarloteparque";
 import Tooltip from "@mui/material/Tooltip";
 import Dialog from "@mui/material/Dialog";
@@ -419,6 +422,10 @@ const exportarExcel = () => {
   const cargandoLotes = Array.isArray(lotes) && lotes.length === 1 && lotes[0] === "";
   const cantidadRegistros =
     Array.isArray(cuotas) && cuotas.length > 0 && cuotas[0] !== "" ? cuotas.length : 0;
+  const cuadroDadoDeBaja =
+    Array.isArray(cuotas) &&
+    cuotas.some((c) => c && c.cuota_cancelada === MARCA_BAJA) &&
+    !cuotas.some((c) => c && c.cuota_cancelada === "No");
   const fmt = (n) => new Intl.NumberFormat("de-DE").format(n);
 
   const sxTh = {
@@ -569,6 +576,22 @@ const exportarExcel = () => {
               </Typography>
 
               <Stack direction="row" spacing={1.25} useFlexGap sx={{ alignItems: "center", flexWrap: "wrap" }}>
+                <ImportarPagosExcel
+                  id_lote={idlote}
+                  cuotas={cuotas}
+                  descripcion={selectedValue}
+                  onListo={async () => {
+                    await vercuotas(idlote, loteSeleccionado);
+                  }}
+                />
+                <DarDeBajaCuadro
+                  id_lote={idlote}
+                  cuotas={cuotas}
+                  descripcion={selectedValue}
+                  onListo={async () => {
+                    await vercuotas(idlote, loteSeleccionado);
+                  }}
+                />
                 <BorrarCuotas id={idlote} />
                 <CancelarLote id_lote={idlote} cuotas={cuotas} />
               </Stack>
@@ -576,6 +599,12 @@ const exportarExcel = () => {
             <Typography variant="body2" sx={{ color: COLOR_MUTED, mb: 2.5 }}>
               {selectedValue ? selectedValue : "Seleccioná un lote para ver datos."}
             </Typography>
+
+            {cuadroDadoDeBaja ? (
+              <Alert severity="warning" sx={{ mb: 2.5, borderRadius: 1.5 }}>
+                Este cuadro está <b>dado de baja</b>: sus cuotas se conservan como historial pero no cuentan como deuda.
+              </Alert>
+            ) : null}
 
             {act2 && cuotas !== "" ? (
               <Grid container spacing={2.5}>
@@ -735,10 +764,12 @@ const exportarExcel = () => {
                                   </Box>
                                 ) : (
                                   <Box sx={{ textAlign: "right" }}>
-                                    Cuota cancelada
-                                    <Typography variant="caption" sx={{ display: "block", color: COLOR_MUTED }}>
-                                      ID: {row.cuota_cancelada}
-                                    </Typography>
+                                    {row.cuota_cancelada === MARCA_BAJA ? "Cuadro dado de baja" : "Cuota cancelada"}
+                                    {row.cuota_cancelada === MARCA_BAJA ? null : (
+                                      <Typography variant="caption" sx={{ display: "block", color: COLOR_MUTED }}>
+                                        ID: {row.cuota_cancelada}
+                                      </Typography>
+                                    )}
                                   </Box>
                                 )
                               ) : (

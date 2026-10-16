@@ -324,4 +324,53 @@ const flujoPit = async (anio) => {
     return data
 }
 
-export default {compensaric3, compensar, cancelarlote,traercuotasic3,vercuotas4,iefgralleg, traercuotasdisponiblesporlote,asignarloteacuotas,vercuotas2,modificarmontotal,borrarpago,agregarCuotasleg, traercuotaselcliente, agregarCuotasVarios,actualizarcuota,traercuota, listavarios, asignarICC, traercuotasdisponibles, vercuotas, agregarCuotas, cuotasDeUnLote, borrarcuota, verief,verief2, borrarcuotas, flujoPit };
+// Flujo de fondos de deudores (nivel6) — deuda del Parque en plata, por mes de un año
+const flujoDeudores = async (anio) => {
+
+    const { data } = await axios.get(baseUrl + 'flujodeudores/' + anio, config)
+    if (data === 'error login') {
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+    }
+
+    return data
+}
+
+// Dar de baja un cuadro de cuotas: no borra, lo archiva (deja de contar como deuda)
+const bajaCuadro = async (datos) => {
+
+    const { data } = await axios.post(baseUrl + 'bajacuadro/', datos, config)
+
+    return data
+}
+
+const restaurarCuadro = async (datos) => {
+
+    const { data } = await axios.post(baseUrl + 'restaurarcuadro/', datos, config)
+
+    return data
+}
+
+// Importar pagos desde un Excel: vista previa (no guarda), confirmar y deshacer
+const importarPagosVista = async (datos) => {
+
+    const { data } = await axios.post(baseUrl + 'importarpagos/vista', datos, config)
+
+    return data
+}
+
+const importarPagosConfirmar = async (datos) => {
+
+    const { data } = await axios.post(baseUrl + 'importarpagos/confirmar', datos, config)
+
+    return data
+}
+
+const importarPagosDeshacer = async (datos) => {
+
+    const { data } = await axios.post(baseUrl + 'importarpagos/deshacer', datos, config)
+
+    return data
+}
+
+export default {importarPagosVista, importarPagosConfirmar, importarPagosDeshacer, bajaCuadro, restaurarCuadro, flujoDeudores, compensaric3, compensar, cancelarlote,traercuotasic3,vercuotas4,iefgralleg, traercuotasdisponiblesporlote,asignarloteacuotas,vercuotas2,modificarmontotal,borrarpago,agregarCuotasleg, traercuotaselcliente, agregarCuotasVarios,actualizarcuota,traercuota, listavarios, asignarICC, traercuotasdisponibles, vercuotas, agregarCuotas, cuotasDeUnLote, borrarcuota, verief,verief2, borrarcuotas, flujoPit };

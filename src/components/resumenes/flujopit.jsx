@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import servicioCuotas from "../../services/cuotas";
 import { useTemaColores } from "../../context/ModoOscuroContext";
+import datos from "./flujoproyectadoData";
+import { crearEstilos, CabeceraSeccion } from "./flujoproyectado";
 
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
+import PaidIcon from "@mui/icons-material/Paid";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-
-const FONT_FORMAL = "'Helvetica Neue', Helvetica, Arial, sans-serif";
-
-const MESES = [
-  "Ene", "Feb", "Mar", "Abr", "May", "Jun",
-  "Jul", "Ago", "Sep", "Oct", "Nov", "Dic",
-];
 
 const formatoMoneda = (valor) => {
   const n = Number(valor) || 0;
@@ -24,24 +21,27 @@ const formatoPorcentaje = (valor) => {
   return (Number(valor) * 100).toFixed(1) + "%";
 };
 
-// Definición de las filas del cuadro: label, key de datos, formateador,
-// y un color de fondo suave para diferenciar cada bloque (mismo criterio
-// visual que el cuadro de referencia en Excel).
-const crearFilas = (c) => [
-  { label: "Devengado", key: "devengado", formato: formatoMoneda, bg: c.MODO === "dark" ? "rgba(79,195,247,0.10)" : "rgba(8,59,92,0.05)" },
-  { label: "Total ingresado por pagos", key: "totalIngresadoPorPagos", formato: formatoMoneda, bg: c.MODO === "dark" ? "rgba(34,197,94,0.16)" : "rgba(21,128,61,0.10)" },
-  { label: "Cobrado (Cuotas)", key: "cobradoCuotas", formato: formatoMoneda, bg: c.MODO === "dark" ? "rgba(34,197,94,0.10)" : "rgba(21,128,61,0.06)" },
-  { label: "Cuotas Impagas", key: "cuotasImpagas", formato: formatoMoneda, bg: c.MODO === "dark" ? "rgba(240,85,74,0.10)" : "rgba(220,38,38,0.05)" },
-  { label: "TOTAL MENSUAL", key: "totalMensual", formato: formatoMoneda, bg: c.MODO === "dark" ? "rgba(79,195,247,0.16)" : "rgba(8,59,92,0.09)", negrita: true },
-  { label: "% Cobranza", key: "porcentajeCobranza", formato: formatoPorcentaje, bg: c.MODO === "dark" ? "rgba(224,164,88,0.14)" : "rgba(201,138,62,0.10)" },
-  { label: "Diferencia Dev.", key: "diferenciaDev", formato: formatoMoneda, bg: "transparent" },
-  { label: "Importe a cuotas del mes", key: "importeACuotasDelMes", formato: formatoMoneda, bg: c.MODO === "dark" ? "rgba(224,164,88,0.18)" : "rgba(201,138,62,0.14)" },
-  { label: "Total ingresado en el mes", key: "totalIngresadoEnElMes", formato: formatoMoneda, bg: c.MODO === "dark" ? "rgba(240,85,74,0.14)" : "rgba(220,38,38,0.09)" },
-  { label: "Diferencia", key: "diferencia", formato: formatoMoneda, bg: "transparent" },
+// Filas del cuadro, en dos bloques. `destacada` resalta las filas clave y
+// `total` define cómo se resume el año ("suma" o "ratio" para el porcentaje).
+const FILAS_CUOTAS = [
+  { label: "Devengado", key: "devengado", formato: formatoMoneda },
+  { label: "Cobrado (Cuotas)", key: "cobradoCuotas", formato: formatoMoneda },
+  { label: "Cuotas Impagas", key: "cuotasImpagas", formato: formatoMoneda, destacada: true },
+  { label: "% Cobranza", key: "porcentajeCobranza", formato: formatoPorcentaje, total: "ratio" },
+  { label: "Diferencia Dev.", key: "diferenciaDev", formato: formatoMoneda },
+];
+
+const FILAS_INGRESOS = [
+  { label: "Total ingresado por pagos", key: "totalIngresadoPorPagos", formato: formatoMoneda },
+  { label: "TOTAL MENSUAL", key: "totalMensual", formato: formatoMoneda, destacada: true },
+  { label: "Importe a cuotas del mes", key: "importeACuotasDelMes", formato: formatoMoneda },
+  { label: "Total ingresado en el mes", key: "totalIngresadoEnElMes", formato: formatoMoneda },
+  { label: "Diferencia", key: "diferencia", formato: formatoMoneda, destacada: true },
 ];
 
 export default function FlujoPit() {
   const c = useTemaColores();
+  const s = crearEstilos(c);
   const anioActual = new Date().getFullYear();
 
   const [anio, setAnio] = useState(anioActual);
@@ -78,255 +78,156 @@ export default function FlujoPit() {
     };
   }, [anio]);
 
-  const filas = crearFilas(c);
+  const sumaAnual = (key) => (meses ? meses.reduce((acc, m) => acc + (m[key] || 0), 0) : 0);
 
   // Total anual por fila: suma para los montos, recalculado para el %.
   const totalAnual = (fila) => {
     if (!meses) return null;
-    if (fila.key === "porcentajeCobranza") {
-      const totalDevengado = meses.reduce((acc, m) => acc + (m.devengado || 0), 0);
-      const totalCobrado = meses.reduce((acc, m) => acc + (m.cobradoCuotas || 0), 0);
-      return totalDevengado > 0 ? totalCobrado / totalDevengado : null;
+    if (fila.total === "ratio") {
+      const devengado = sumaAnual("devengado");
+      return devengado > 0 ? sumaAnual("cobradoCuotas") / devengado : null;
     }
-    return meses.reduce((acc, m) => acc + (m[fila.key] || 0), 0);
+    return sumaAnual(fila.key);
   };
 
-  const estilos = {
-    contenedor: {
-      fontFamily: FONT_FORMAL,
-      background: c.BG_PAGE,
-      padding: 24,
-      minHeight: "100vh",
-      boxSizing: "border-box",
-    },
-    header: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      flexWrap: "wrap",
-      gap: 16,
-      marginBottom: 24,
-    },
-    headerIzq: {
-      display: "flex",
-      alignItems: "center",
-      gap: 12,
-    },
-    iconWrap: {
-      width: 42,
-      height: 42,
-      borderRadius: 13,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      background: c.COLOR_TEAL,
-      flexShrink: 0,
-    },
-    titulo: {
-      margin: 0,
-      fontSize: 18,
-      fontWeight: 700,
-      color: c.COLOR_NAVY,
-    },
-    subtitulo: {
-      marginTop: 2,
-      fontSize: 12.5,
-      color: c.TEXT_MUTED,
-      fontWeight: 600,
-    },
-    selectorAnio: {
-      display: "flex",
-      alignItems: "center",
-      gap: 6,
-      background: c.BG_CARD,
-      border: `1px solid ${c.BORDER}`,
-      borderRadius: 10,
-      padding: "6px 10px",
-      boxShadow: c.SHADOW_CARD,
-    },
-    botonAnio: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      width: 26,
-      height: 26,
-      borderRadius: 8,
-      border: "none",
-      background: "transparent",
-      color: c.COLOR_NAVY,
-      cursor: "pointer",
-    },
-    anioTexto: {
-      fontSize: 15,
-      fontWeight: 700,
-      color: c.TEXT_FUERTE,
-      minWidth: 46,
-      textAlign: "center",
-    },
-    card: {
-      background: c.BG_PAGE,
-      overflow: "hidden",
-    },
-    tablaWrap: {
-      width: "100%",
-    },
-    tabla: {
-      borderCollapse: "collapse",
-      tableLayout: "fixed",
-      width: "100%",
-      fontSize: 10.5,
-    },
-    thConcepto: {
-      width: "10.5%",
-      textAlign: "left",
-      padding: "6.4px 6.4px",
-      background: c.BG_INPUT,
-      color: c.TEXT_FUERTE,
-      fontWeight: 800,
-      fontSize: 11,
-      borderBottom: `2px solid ${c.COLOR_TEAL}`,
-      whiteSpace: "normal",
-      wordBreak: "break-word",
-      lineHeight: 1.2,
-    },
-    th: {
-      width: "6.6%",
-      textAlign: "right",
-      padding: "6.4px 4px",
-      background: c.BG_INPUT,
-      color: c.TEXT_FUERTE,
-      fontWeight: 800,
-      fontSize: 11,
-      borderBottom: `2px solid ${c.COLOR_TEAL}`,
-      whiteSpace: "normal",
-    },
-    thTotal: {
-      width: "9.3%",
-      textAlign: "right",
-      padding: "6.4px 6.4px",
-      background: c.BG_INPUT,
-      color: c.TEXT_FUERTE,
-      fontWeight: 800,
-      fontSize: 11,
-      borderBottom: `2px solid ${c.COLOR_TEAL}`,
-      whiteSpace: "normal",
-    },
-    tdConcepto: {
-      textAlign: "left",
-      padding: "5px 6px",
-      fontWeight: 700,
-      color: c.TEXT_FUERTE,
-      whiteSpace: "normal",
-      wordBreak: "break-word",
-      lineHeight: 1.2,
-      borderBottom: `1px solid ${c.BORDER}`,
-    },
-    td: {
-      textAlign: "right",
-      padding: "5px 3px",
-      color: c.TEXT_FUERTE,
-      borderBottom: `1px solid ${c.BORDER}`,
-      whiteSpace: "normal",
-      wordBreak: "break-word",
-    },
-    tdTotal: {
-      textAlign: "right",
-      padding: "5px 6px",
-      fontWeight: 800,
-      color: c.TEXT_FUERTE,
-      borderBottom: `1px solid ${c.BORDER}`,
-      background: c.MODO === "dark" ? "rgba(32,178,178,0.10)" : "rgba(20,141,141,0.06)",
-      whiteSpace: "normal",
-      wordBreak: "break-word",
-    },
-    mensajeEstado: {
-      padding: 40,
-      textAlign: "center",
-      color: c.TEXT_MUTED,
-      fontWeight: 600,
-    },
-    nota: {
-      marginTop: 14,
-      fontSize: 11.5,
-      color: c.TEXT_MUTED,
-      lineHeight: 1.5,
-    },
+  const tabla = (filas) => (
+    <div style={s.tablaWrap}>
+      <table style={s.tabla}>
+        <thead>
+          <tr>
+            <th style={{ ...s.th, ...s.thConcepto }}>Concepto</th>
+            {datos.meses.map((m) => (
+              <th key={m} style={s.th}>{m}</th>
+            ))}
+            <th style={s.th}>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filas.map((fila) => {
+            const extra = fila.destacada ? s.filaTotal : {};
+            return (
+              <tr key={fila.key} style={fila.destacada ? s.filaTotal : undefined}>
+                <td style={{ ...s.td, ...s.tdConcepto, ...extra }}>{fila.label}</td>
+                {meses.map((m) => (
+                  <td key={m.mes} style={{ ...s.td, ...extra }}>
+                    {fila.formato(m[fila.key])}
+                  </td>
+                ))}
+                <td style={{ ...s.td, ...s.tdTotalCol, ...extra }}>{fila.formato(totalAnual(fila))}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+
+  const tarjeta = ({ titulo, valor, detalle, color }) => (
+    <div style={{ ...s.section, marginBottom: 0, padding: "14px 18px", flex: "1 1 260px" }}>
+      <div style={{ fontSize: 12.5, fontWeight: 700, color: c.TEXT_MUTED }}>{titulo}</div>
+      <div style={{ fontSize: 22, fontWeight: 800, color: c.TEXT_FUERTE, margin: "4px 0 6px" }}>{valor}</div>
+      <div style={{ fontSize: 12, color: c.TEXT_MUTED }}>{detalle}</div>
+      <div style={{ height: 3, borderRadius: 3, background: color, marginTop: 10, opacity: 0.7 }} />
+    </div>
+  );
+
+  const selectorAnio = {
+    marginLeft: "auto",
+    display: "flex",
+    alignItems: "center",
+    gap: 6,
+    background: c.BG_CARD,
+    border: `1px solid ${c.BORDER}`,
+    borderRadius: 10,
+    padding: "6px 10px",
+    boxShadow: c.SHADOW_CARD,
   };
+  const botonAnio = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 26,
+    height: 26,
+    borderRadius: 8,
+    border: "none",
+    background: "transparent",
+    color: c.COLOR_NAVY,
+    cursor: "pointer",
+  };
+
+  const devengadoAnual = sumaAnual("devengado");
+  const cobradoAnual = sumaAnual("cobradoCuotas");
 
   return (
-    <div style={estilos.contenedor}>
-      <div style={estilos.header}>
-        <div style={estilos.headerIzq}>
-          <div style={estilos.iconWrap}>
-            <AccountBalanceIcon sx={{ color: "#fff", fontSize: 22 }} />
-          </div>
-          <div>
-            <p style={estilos.titulo}>Flujo de Fondos PIT</p>
-            <p style={estilos.subtitulo}>
-              Cobranzas de todos los clientes del Parque, agregadas por mes
-            </p>
-          </div>
+    <div style={s.page}>
+      <div style={s.pageHeader}>
+        <div style={s.pageIcon}><AccountBalanceIcon /></div>
+        <div>
+          <h2 style={s.pageTitle}>Flujo de Fondos PIT</h2>
+          <div style={s.pageSubtitle}>Cobranzas de todos los clientes del Parque, agregadas por mes · {anio}</div>
         </div>
 
-        <div style={estilos.selectorAnio}>
-          <button style={estilos.botonAnio} onClick={() => setAnio((a) => a - 1)} title="Año anterior">
+        <div style={selectorAnio}>
+          <button style={botonAnio} onClick={() => setAnio((a) => a - 1)} title="Año anterior">
             <ChevronLeftIcon fontSize="small" />
           </button>
-          <span style={estilos.anioTexto}>{anio}</span>
-          <button style={estilos.botonAnio} onClick={() => setAnio((a) => a + 1)} title="Año siguiente">
+          <span style={{ fontSize: 15, fontWeight: 700, color: c.TEXT_FUERTE, minWidth: 46, textAlign: "center" }}>{anio}</span>
+          <button style={botonAnio} onClick={() => setAnio((a) => a + 1)} title="Año siguiente">
             <ChevronRightIcon fontSize="small" />
           </button>
         </div>
       </div>
 
-      <div style={estilos.card}>
-        {cargando ? (
-          <div style={estilos.mensajeEstado}>Cargando...</div>
-        ) : error ? (
-          <div style={estilos.mensajeEstado}>{error}</div>
-        ) : (
-          <div style={estilos.tablaWrap}>
-            <table style={estilos.tabla}>
-              <thead>
-                <tr>
-                  <th style={estilos.thConcepto}>CONCEPTO</th>
-                  {MESES.map((m) => (
-                    <th key={m} style={estilos.th}>{m}</th>
-                  ))}
-                  <th style={estilos.thTotal}>TOTAL</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filas.map((fila) => (
-                  <tr key={fila.key} style={{ background: fila.bg }}>
-                    <td style={estilos.tdConcepto}>{fila.label}</td>
-                    {meses.map((m) => (
-                      <td
-                        key={m.mes}
-                        style={{
-                          ...estilos.td,
-                          fontWeight: fila.negrita ? 800 : 600,
-                          whiteSpace: fila.negrita ? "nowrap" : estilos.td.whiteSpace,
-                        }}
-                      >
-                        {fila.formato(m[fila.key])}
-                      </td>
-                    ))}
-                    <td
-                      style={{
-                        ...estilos.tdTotal,
-                        whiteSpace: fila.negrita ? "nowrap" : estilos.tdTotal.whiteSpace,
-                      }}
-                    >
-                      {fila.formato(totalAnual(fila))}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      {cargando ? (
+        <div style={s.section}><div style={{ padding: 28, textAlign: "center", color: c.TEXT_MUTED }}>Cargando…</div></div>
+      ) : error ? (
+        <div style={s.section}><div style={{ padding: 28, textAlign: "center", color: c.COLOR_RED }}>{error}</div></div>
+      ) : (
+        <>
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 22 }}>
+            {tarjeta({
+              titulo: "Devengado del año",
+              valor: formatoMoneda(devengadoAnual),
+              detalle: "Cuotas que vencían en el año",
+              color: c.COLOR_TEAL,
+            })}
+            {tarjeta({
+              titulo: "Cobrado (cuotas)",
+              valor: formatoMoneda(cobradoAnual),
+              detalle: `${formatoPorcentaje(devengadoAnual > 0 ? cobradoAnual / devengadoAnual : null)} del devengado`,
+              color: c.COLOR_GREEN,
+            })}
+            {tarjeta({
+              titulo: "Total ingresado por pagos",
+              valor: formatoMoneda(sumaAnual("totalIngresadoPorPagos")),
+              detalle: "Toda la plata que entró, con excedentes",
+              color: c.COLOR_NAVY,
+            })}
           </div>
-        )}
-      </div>
+
+          <div style={s.section}>
+            <CabeceraSeccion
+              s={s}
+              icono={<RequestQuoteIcon />}
+              color={c.COLOR_TEAL}
+              titulo="Devengado y cobranza de cuotas"
+              subtitulo="Lo que se devengó cada mes contra lo cobrado, sin contar los excedentes"
+            />
+            <div style={s.sectionBody}>{tabla(FILAS_CUOTAS)}</div>
+          </div>
+
+          <div style={s.section}>
+            <CabeceraSeccion
+              s={s}
+              icono={<PaidIcon />}
+              color={c.COLOR_GREEN}
+              titulo="Ingresos por pagos"
+              subtitulo="Toda la plata que entró cada mes, con excedentes, y cuánto fue a las cuotas del mes"
+            />
+            <div style={s.sectionBody}>{tabla(FILAS_INGRESOS)}</div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
