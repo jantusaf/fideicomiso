@@ -22,7 +22,7 @@ const REFERENCIAS = {
         items: [
           { texto: "IC3 - MENSURA" },
           { texto: "IC4 - MENSURA 31548 - U" },
-          { texto: "ZONA SUR - MENSURA 33041 - U", sub: true },
+          { texto: "IC4 ZONA SUR - MENSURA 33041 - U", sub: true },
           { texto: "UNIDAD EJECUTORA 1 - MENSURA 32861 - U", sub: true },
         ],
       },
@@ -39,6 +39,12 @@ const REFERENCIAS = {
       {
         titulo: "FRACCION IG",
         items: [{ texto: "ZONA MUNICIPAL - MENSURA 28791 - U" }],
+      },
+      {
+        titulo: "PLANIFICACIÓN SECCIÓN SUR",
+        items: [
+          { texto: "PARQUE INDUSTRIAL TECNOLÓGICO - MENSURA 30161 - U" },
+        ],
       },
     ],
   },

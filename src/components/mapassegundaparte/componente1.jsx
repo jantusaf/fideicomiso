@@ -85,6 +85,7 @@ const MapaConCapas = () => {
         Mensura30922U: false,
         mensura31548Unuevo: false,
         "zona-arroyo": false,
+        "ic4gral": false,
         ib5: false,
         ib2: false,
         ib3: false,
@@ -159,7 +160,7 @@ const clavesZonas = [
   "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3", "unidad-ejecutora2y3",
   "ib2", "ib3", "area5", "ib5", "area6",
   "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "area1", "area2", "zonaesperanza", "area4",
-  "mensura31548Unuevo", "Mensura30922U", "fraccionIE", "clubesHipico", "zona-arroyo", "zona_municipal",
+  "mensura31548Unuevo", "Mensura30922U", "fraccionIE", "clubesHipico", "zona-arroyo", "zona_municipal", "ic4gral",
 ];
 const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras", "fraccionIG", "fraccionIG2", "ZRU Predios La Caja"].every((key) => !!capasActivas[key]);
 const zonasActivasCount = clavesZonas.filter((k) => !!capasActivas[k]).length;
@@ -471,7 +472,7 @@ const toggleTodasLasZonas = () => {
         "PLC-C": false,
         "PLC-F": false
     });
-    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo", "ic4gral"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
 
@@ -786,6 +787,14 @@ const toggleTodasLasZonas = () => {
                 setGeojsonData((prev) => ({ ...prev, "zona-arroyo": normalizado }));
             })
             .catch(console.error);
+
+        fetch("/ic4gral.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "ic4gral");
+                setGeojsonData((prev) => ({ ...prev, "ic4gral": normalizado }));
+            })
+            .catch(console.error);
         fetch("/rutas1.geojson")
 
             .then((r) => r.json())
@@ -991,11 +1000,8 @@ const toggleTodasLasZonas = () => {
             }
             if (nombre === "otras") {
                 updates.invicoresidencial = nuevoEstado;
-                updates.area1 = nuevoEstado;
-                updates.area2 = nuevoEstado;
                 updates.zonaesperanza = nuevoEstado;
-                updates.area4 = nuevoEstado;
-                updates.Mensura30922U = nuevoEstado;
+                updates["zona-arroyo"] = nuevoEstado;
                 updates["ZRU Predios La Caja"] = nuevoEstado;
                 updates["Planificación Sección Sur"] = nuevoEstado;
             }
@@ -1405,6 +1411,130 @@ useEffect(() => {
                <div className="grupo-capas">
   <div className="grupo-titulo">ZONAS <span className={`grupo-badge${zonasActivasCount === 0 ? " cero" : ""}`}>{zonasActivasCount}</span></div>
 
+  {/* ── MENSURAS ── */}
+  <div className="capa-item">
+    <label><strong>MENSURAS</strong></label>
+    <div className="subcapas">
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["ic4gral"]}
+            onChange={() => toggleCapaPrincipal("ic4gral")}
+          />
+          M 31548 U
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["clubesHipico"]}
+            onChange={() => toggleCapaPrincipal("clubesHipico")}
+          />
+          M 29640 U
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["Mensura30922U"]}
+            onChange={() => {
+              const v = !capasActivas["Mensura30922U"];
+              setCapasActivas(prev => ({ ...prev, "Mensura30922U": v, area4: v }));
+            }}
+          />
+          M 30922 U
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["zona_municipal"]}
+            onChange={() => toggleCapaPrincipal("zona_municipal")}
+          />
+          M 28791 U
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["area4"]}
+            onChange={() => toggleCapaPrincipal("area4")}
+          />
+          M 31710 U
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["ic42"]}
+            onChange={() => toggleCapaPrincipal("ic42")}
+          />
+          M 33041 U
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["unidad-ejecutora1"]}
+            onChange={() => toggleCapaPrincipal("unidad-ejecutora1")}
+          />
+          M 32861 U
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["Planificación Sección Sur"] && !!subCapasSur.PIT && !!subCapasSur["PLC-C"] && !!subCapasSur["PLC-F"]}
+            onChange={() => {
+              const v = !(capasActivas["Planificación Sección Sur"] && subCapasSur.PIT && subCapasSur["PLC-C"] && subCapasSur["PLC-F"]);
+              setCapasActivas(prev => ({ ...prev, "Planificación Sección Sur": v }));
+              setSubCapasSur(prev => ({ ...prev, PIT: v, "PLC-C": v, "PLC-F": v }));
+            }}
+          />
+          M 30161 U
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["area5"]}
+            onChange={() => toggleCapaPrincipal("area5")}
+          />
+          M 27338 U
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["ib5"]}
+            onChange={() => toggleCapaPrincipal("ib5")}
+          />
+          M 27339 U
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["area6"]}
+            onChange={() => toggleCapaPrincipal("area6")}
+          />
+          M 29591 U
+        </label>
+      </div>
+    </div>
+  </div>
+
   {/* ── PARQUE INDUSTRIAL TECNOLÓGICO ── */}
   {(() => {
     const pitPlanActivo = !!capasActivas["Planificación Sección Sur"];
@@ -1678,10 +1808,17 @@ useEffect(() => {
     const todosClubes = !!capasActivas.clubesHipico && !!capasActivas.area2 && !!capasActivas.area4;
     const toggleTodosClubes = () => {
       const v = !todosClubes;
-      setCapasActivas(prev => ({ ...prev, clubesHipico: v, area2: v, area4: v }));
-      if (v) {
-        setCapasActivas(prev => ({ ...prev, hipico1: true, hipico2: true, hipico3: true, hipico4: true }));
-      }
+      setCapasActivas(prev => ({
+        ...prev,
+        clubesHipico: v,
+        area1: v,
+        area2: v,
+        area4: v,
+        hipico1: v,
+        hipico2: v,
+        hipico3: v,
+        hipico4: v,
+      }));
     };
     return (
       <div className="capa-item" style={{borderLeft:"3px solid #9ca3af", paddingLeft:8, marginTop:4}}>
@@ -1724,7 +1861,6 @@ useEffect(() => {
       {[
         { key: "invicoresidencial", label: "Invico - Residencial" },
         { key: "invico2", label: "Invico 2" },
-        { key: "Mensura30922U", label: "Mensura 30922-U" },
         { key: "zona-arroyo", label: "Zona Arroyo" },
         { key: "zonaesperanza", label: "Zona Esperanza" },
       ].map(({ key, label }) => (
@@ -2304,7 +2440,7 @@ useEffect(() => {
                         ) : null
                     )}
 
-                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo"].map(
+                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo", "ic4gral"].map(
                         (nombre) => {
                             // verdumzalazar se muestra cuando mensura31548Unuevo está activa
                             if (nombre === "verdumzalazar") {
