@@ -81,6 +81,7 @@ const MapaConCapas = () => {
         ic3: false,
         ic4: false,
         ic42: false,
+        arenera: false,
         restante: false,
         Mensura30922U: false,
         mensura31548Unuevo: false,
@@ -160,7 +161,7 @@ const clavesZonas = [
   "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3", "unidad-ejecutora2y3",
   "ib2", "ib3", "area5", "ib5", "area6",
   "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "area1", "area2", "zonaesperanza", "area4",
-  "mensura31548Unuevo", "Mensura30922U", "fraccionIE", "clubesHipico", "zona-arroyo", "zona_municipal", "ic4gral",
+  "mensura31548Unuevo", "Mensura30922U", "fraccionIE", "clubesHipico", "zona-arroyo", "zona_municipal", "ic4gral", "arenera",
 ];
 const todasLasZonasActivas = [...clavesZonas, "fraccionIC", "IB", "otras", "fraccionIG", "fraccionIG2", "ZRU Predios La Caja"].every((key) => !!capasActivas[key]);
 const zonasActivasCount = clavesZonas.filter((k) => !!capasActivas[k]).length;
@@ -472,7 +473,7 @@ const toggleTodasLasZonas = () => {
         "PLC-C": false,
         "PLC-F": false
     });
-    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo", "ic4gral"].includes(nombreCapaSeleccionada
+    const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo", "ic4gral", "arenera"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
 
@@ -654,6 +655,13 @@ const toggleTodasLasZonas = () => {
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "ic42");
                 setGeojsonData((prev) => ({ ...prev, ic42: normalizado }));
+            })
+            .catch(console.error);
+        fetch("/arenera.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                const normalizado = normalizarGeojsonConIds(data, "arenera");
+                setGeojsonData((prev) => ({ ...prev, arenera: normalizado }));
             })
             .catch(console.error);
         fetch("/mensura31548Unuevo.geojson")
@@ -967,6 +975,7 @@ const toggleTodasLasZonas = () => {
             if (nombre === "ic4") {
                 updates.ic42 = nuevoEstado;
                 updates.mensura31548Unuevo = nuevoEstado;
+                updates.arenera = nuevoEstado;
                 if (nuevoEstado) {
                     updates["unidad-ejecutora1"] = true;
                     updates["unidad-ejecutora2"] = true;
@@ -1532,6 +1541,16 @@ useEffect(() => {
           M 29591 U
         </label>
       </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={!!capasActivas["arenera"]}
+            onChange={() => toggleCapaPrincipal("arenera")}
+          />
+          M 29503 U
+        </label>
+      </div>
     </div>
   </div>
 
@@ -1687,6 +1706,7 @@ useEffect(() => {
             { key: "unidad-ejecutora1", label: "Unidad Ejecutora 1" },
             { key: "unidad-ejecutora2", label: "Unidad Ejecutora 2" },
             { key: "unidad-ejecutora3", label: "Unidad Ejecutora 3" },
+            { key: "arenera", label: "Zona Arenera" },
           ].map(({ key, label }) => (
             <div key={key}>
               <label>
@@ -2440,7 +2460,7 @@ useEffect(() => {
                         ) : null
                     )}
 
-                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo", "ic4gral"].map(
+                    {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo", "ic4gral", "arenera"].map(
                         (nombre) => {
                             // verdumzalazar se muestra cuando mensura31548Unuevo está activa
                             if (nombre === "verdumzalazar") {
@@ -2512,6 +2532,18 @@ useEffect(() => {
                                                 dashArray: "6 5",
                                             };
                                         }}
+                                        onEachFeature={crearOnEachFeature(nombre)}
+                                    />
+                                );
+                            }
+
+                            // IC4 General y Zona Arenera — azul punteado
+                            if (nombre === "ic4gral" || nombre === "arenera") {
+                                return (
+                                    <GeoJSON
+                                        key={`${nombre}-${geoJsonKey}`}
+                                        data={geojsonData[nombre]}
+                                        style={{ fillColor: "transparent", fillOpacity: 0, color: "#1565C0", weight: 3.5, opacity: 1, dashArray: "6 5" }}
                                         onEachFeature={crearOnEachFeature(nombre)}
                                     />
                                 );
