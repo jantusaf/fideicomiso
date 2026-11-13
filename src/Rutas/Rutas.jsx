@@ -107,9 +107,9 @@ const Rutas = [
 	{ path: '/', element: <Login /> },
 	{ path: '/login', element: <Login /> },
 
-	// ───────── Mapa general · Niveles 2 y 5 ─────────
+	// ───────── Mapa general · Niveles 2 y 5 (el nivel 8 ve solo el PIT) ─────────
 	{
-		element: <RutaProtegida niveles={[2, 5]} />,
+		element: <RutaProtegida niveles={[2, 5, 8]} />,
 		children: [
 			{ path: '/mapasegundaparte', element: <Mapassegundaparte /> },
 		],

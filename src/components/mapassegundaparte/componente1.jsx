@@ -13,8 +13,21 @@ import TablaReferencias2 from "./TablaReferencias2";
 import TablaReferenciasMensuras from "./TablaReferenciasMensuras";
 import { useAuth } from "../../auth/AuthContext";
 
+// Nivel 8 = visor PIT: solo puede ver las capas del Parque Industrial Tecnologico.
+// Los archivos que no estan en esta lista no se descargan (se devuelve una capa vacia).
+const NIVEL_VISOR_PIT = 8;
+const ARCHIVOS_PIT = ["usosuelopit", "lotespit", "pitdisponible", "pitnodisponible", "pitreservado", "pitactualizado", "plc-c", "plc-f"];
+const crearFetchGeo = (soloPIT) => (url, ...resto) => {
+    if (!soloPIT) return fetch(url, ...resto);
+    const nombre = String(url).replace(/^\//, "").replace(/\.geojson$/, "");
+    if (ARCHIVOS_PIT.includes(nombre)) return fetch(url, ...resto);
+    return Promise.resolve({ json: () => Promise.resolve({ type: "FeatureCollection", features: [] }) });
+};
+
 const MapaConCapas = () => {
-    const { logout } = useAuth();
+    const { logout, nivel } = useAuth();
+    const soloPIT = Number(nivel) === NIVEL_VISOR_PIT;
+    const fetchGeo = crearFetchGeo(soloPIT);
     //  Helper: inyecta properties.id si no existe (para area1..4 y cualquier capa que venga sin id)
     const normalizarGeojsonConIds = (data, nombreCapa) => {
         if (!data?.features) return data;
@@ -63,7 +76,7 @@ const MapaConCapas = () => {
         Manzanas: false,
         "Plan Especial": false,
         Barrios: false,
-        "Planificación Sección Sur": false,
+        "Planificación Sección Sur": soloPIT,
         "Zonificación Sta Catalina": false,
         "ZRU Predios La Caja": false,
 
@@ -108,11 +121,11 @@ const MapaConCapas = () => {
         ejercitoarg: false,
         area2contorno: false,
         area4contorno: false,
-        usosuelopit: false,
-        lotespit: false,
-        pitdisponible: false,
-        pitnodisponible: false,
-        pitreservado: false,
+        usosuelopit: soloPIT,
+        lotespit: soloPIT,
+        pitdisponible: soloPIT,
+        pitnodisponible: soloPIT,
+        pitreservado: soloPIT,
         clubesHipico: false,
         hipico1: false,
         hipico2: false,
@@ -469,9 +482,9 @@ const toggleTodasLasZonas = () => {
     const [vendido, setVendido] = useState(false);
     const esVendido = (v) => v === true || v === "true" || v === 1 || v === "1";
     const [subCapasSur, setSubCapasSur] = useState({
-        PIT: false,
-        "PLC-C": false,
-        "PLC-F": false
+        PIT: soloPIT,
+        "PLC-C": soloPIT,
+        "PLC-F": soloPIT
     });
     const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo", "ic4gral", "arenera"].includes(nombreCapaSeleccionada
     );
@@ -480,7 +493,7 @@ const toggleTodasLasZonas = () => {
 
 
  useEffect(() => {
-  fetch("/juicios-poligonos.geojson")
+  fetchGeo("/juicios-poligonos.geojson")
     .then((r) => r.json())
     .then((data) => {
       const normalizado = normalizarGeojsonConIds(data, "judicializados");
@@ -492,6 +505,7 @@ const toggleTodasLasZonas = () => {
     .catch(console.error);
 }, []);
     useEffect(() => {
+        if (soloPIT) return;
         serviciolotes
             .poligonosguardados()
             .then((data) => {
@@ -504,7 +518,7 @@ const toggleTodasLasZonas = () => {
     // Carga de geojson
     useEffect(() => {
         // Manzanas
-        fetch("/manazanasmates.geojson")
+        fetchGeo("/manazanasmates.geojson")
             .then((r) => r.json())
             .then((data) => {
                 // manzanas normalmente ya trae id; igual no molesta normalizar
@@ -516,7 +530,7 @@ const toggleTodasLasZonas = () => {
         // Planes especiales
         const planesEspeciales = ["planespecial1", "planespecial2", "planespecial3", "planespecial4", "planespecial5"];
         planesEspeciales.forEach((plan) => {
-            fetch(`/${plan}.geojson`)
+            fetchGeo(`/${plan}.geojson`)
                 .then((r) => r.json())
                 .then((data) => {
                     const normalizado = normalizarGeojsonConIds(data, plan);
@@ -526,7 +540,7 @@ const toggleTodasLasZonas = () => {
         });
      
         // Barrios / Calles
-        fetch("/calles.geojson")
+        fetchGeo("/calles.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "Barrios");
@@ -535,7 +549,7 @@ const toggleTodasLasZonas = () => {
             .catch(console.error);
 
         //  Areas nuevas (NO traen properties.id: lo inyectamos)
-        fetch("/area1.geojson")
+        fetchGeo("/area1.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "area1");
@@ -543,14 +557,14 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/hipico_zonificacion.geojson")
+        fetchGeo("/hipico_zonificacion.geojson")
             .then((r) => r.json())
             .then((data) => {
                 setGeojsonData((prev) => ({ ...prev, hipico_zonificacion: data }));
             })
             .catch(console.error);
 
-        fetch("/area2.geojson")
+        fetchGeo("/area2.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "area2");
@@ -558,7 +572,7 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/zonaesperanza.geojson")
+        fetchGeo("/zonaesperanza.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "zonaesperanza");
@@ -566,28 +580,28 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/nueva%20zona.geojson")
+        fetchGeo("/nueva%20zona.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "nuevazona");
                 setGeojsonData((prev) => ({ ...prev, nuevazona: normalizado }));
             })
             .catch(console.error);
-        fetch("/ejercitoarg.geojson")
+        fetchGeo("/ejercitoarg.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "ejercitoarg");
                 setGeojsonData((prev) => ({ ...prev, ejercitoarg: normalizado }));
             })
             .catch(console.error);
-        fetch("/usosuelopit.geojson")
+        fetchGeo("/usosuelopit.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "usosuelopit");
                 setGeojsonData((prev) => ({ ...prev, usosuelopit: normalizado }));
             })
             .catch(console.error);
-        fetch("/lotespit.geojson")
+        fetchGeo("/lotespit.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "lotespit");
@@ -595,7 +609,7 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
         ["pitdisponible", "pitnodisponible", "pitreservado"].forEach((nombre) => {
-            fetch(`/${nombre}.geojson`)
+            fetchGeo(`/${nombre}.geojson`)
                 .then((r) => r.json())
                 .then((data) => {
                     const normalizado = normalizarGeojsonConIds(data, nombre);
@@ -604,7 +618,7 @@ const toggleTodasLasZonas = () => {
                 .catch(console.error);
         });
         ["hipico1", "hipico2", "hipico3", "hipico4"].forEach((nombre) => {
-            fetch(`/${nombre}.geojson`)
+            fetchGeo(`/${nombre}.geojson`)
                 .then((r) => r.json())
                 .then((data) => {
                     const normalizado = normalizarGeojsonConIds(data, nombre);
@@ -613,21 +627,21 @@ const toggleTodasLasZonas = () => {
                 .catch(console.error);
         });
 
-        fetch("/area4.geojson")
+        fetchGeo("/area4.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "area4");
                 setGeojsonData((prev) => ({ ...prev, area4: normalizado }));
             })
             .catch(console.error);
-        fetch("/area5.geojson")
+        fetchGeo("/area5.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "area5");
                 setGeojsonData((prev) => ({ ...prev, area5: normalizado }));
             })
             .catch(console.error);
-        fetch("/area6.geojson")
+        fetchGeo("/area6.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "area6");
@@ -635,7 +649,7 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
         // Otras capas
-        fetch("/ic3.geojson")
+        fetchGeo("/ic3.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "ic3");
@@ -643,35 +657,35 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/ic4.geojson")
+        fetchGeo("/ic4.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "ic4");
                 setGeojsonData((prev) => ({ ...prev, ic4: normalizado }));
             })
             .catch(console.error);
-        fetch("/ic42.geojson")
+        fetchGeo("/ic42.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "ic42");
                 setGeojsonData((prev) => ({ ...prev, ic42: normalizado }));
             })
             .catch(console.error);
-        fetch("/arenera.geojson")
+        fetchGeo("/arenera.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "arenera");
                 setGeojsonData((prev) => ({ ...prev, arenera: normalizado }));
             })
             .catch(console.error);
-        fetch("/mensura31548Unuevo.geojson")
+        fetchGeo("/mensura31548Unuevo.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "mensura31548Unuevo");
                 setGeojsonData((prev) => ({ ...prev, mensura31548Unuevo: normalizado }));
             })
             .catch(console.error);
-        fetch("/verdumzalazar.geojson")
+        fetchGeo("/verdumzalazar.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "verdumzalazar");
@@ -679,59 +693,59 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/ib5.geojson")
+        fetchGeo("/ib5.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "ib5");
                 setGeojsonData((prev) => ({ ...prev, ib5: normalizado }));
             })
             .catch(console.error);
-   fetch("/ib2.geojson")
+   fetchGeo("/ib2.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "ib2");
                 setGeojsonData((prev) => ({ ...prev, ib2: normalizado }));
             })
             .catch(console.error);
-            fetch("/ib3.geojson")
+            fetchGeo("/ib3.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "ib3");
                 setGeojsonData((prev) => ({ ...prev, ib3: normalizado }));
             })
-                fetch("/unidad-ejecutora1.geojson")
+                fetchGeo("/unidad-ejecutora1.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "unidad-ejecutora1");
                 setGeojsonData((prev) => ({ ...prev, "unidad-ejecutora1": normalizado }));
             })
-                fetch("/unidad-ejecutora2.geojson")
+                fetchGeo("/unidad-ejecutora2.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "unidad-ejecutora2");
                 setGeojsonData((prev) => ({ ...prev, "unidad-ejecutora2": normalizado }));
             })
-                fetch("/unidad-ejecutora3.geojson")
+                fetchGeo("/unidad-ejecutora3.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "unidad-ejecutora3");
                 setGeojsonData((prev) => ({ ...prev, "unidad-ejecutora3": normalizado }));
             })
-                  fetch("/unidad2y3.geojson")
+                  fetchGeo("/unidad2y3.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "unidad-ejecutora2y3");
                 setGeojsonData((prev) => ({ ...prev, "unidad-ejecutora2y3": normalizado }));
             })
             .catch(console.error);
-               fetch("/zona_municipal.geojson")
+               fetchGeo("/zona_municipal.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "zona_municipal");
                 setGeojsonData((prev) => ({ ...prev, zona_municipal: normalizado }));
             })
             .catch(console.error);
-                       fetch("/invico2.geojson")
+                       fetchGeo("/invico2.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "invico2");
@@ -739,7 +753,7 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/invicomontaña.geojson")
+        fetchGeo("/invicomontaña.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "invicomontana");
@@ -747,7 +761,7 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/parc1.geojson")
+        fetchGeo("/parc1.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "parc1");
@@ -755,7 +769,7 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/parc2.geojson")
+        fetchGeo("/parc2.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "parc2");
@@ -763,7 +777,7 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/parc3.geojson")
+        fetchGeo("/parc3.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "parc3");
@@ -771,7 +785,7 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/invicoresidencial.geojson")
+        fetchGeo("/invicoresidencial.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "invicoresidencial");
@@ -780,7 +794,7 @@ const toggleTodasLasZonas = () => {
             .catch(console.error);
 
 
-        fetch("/Mensura30922U.geojson")
+        fetchGeo("/Mensura30922U.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "Mensura30922U");
@@ -788,7 +802,7 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/zona-arroyo.geojson")
+        fetchGeo("/zona-arroyo.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "zona-arroyo");
@@ -796,14 +810,14 @@ const toggleTodasLasZonas = () => {
             })
             .catch(console.error);
 
-        fetch("/ic4gral.geojson")
+        fetchGeo("/ic4gral.geojson")
             .then((r) => r.json())
             .then((data) => {
                 const normalizado = normalizarGeojsonConIds(data, "ic4gral");
                 setGeojsonData((prev) => ({ ...prev, "ic4gral": normalizado }));
             })
             .catch(console.error);
-        fetch("/rutas1.geojson")
+        fetchGeo("/rutas1.geojson")
 
             .then((r) => r.json())
             .then((data) => {
@@ -823,7 +837,7 @@ const toggleTodasLasZonas = () => {
         ];
 
         capasSeccionSur.forEach((capa) => {
-            fetch(`/${capa.archivo}`)
+            fetchGeo(`/${capa.archivo}`)
                 .then((r) => r.json())
                 .then((data) => {
                     const normalizado = normalizarGeojsonConIds(data, capa.nombre);
@@ -833,7 +847,7 @@ const toggleTodasLasZonas = () => {
         });
 
         nuevasCapas.forEach((capa) => {
-            fetch(`/${capa.archivo}`)
+            fetchGeo(`/${capa.archivo}`)
                 .then((r) => r.json())
                 .then((data) => {
                     const normalizado = normalizarGeojsonConIds(data, capa.nombre);
@@ -1364,7 +1378,7 @@ useEffect(() => {
                             </button>
                         </div>
                     </div>
-                    <div className="capa-item">
+{!soloPIT && (<>                    <div className="capa-item">
     <label>
         <input
             type="checkbox"
@@ -1408,6 +1422,7 @@ useEffect(() => {
                             <strong>Mostrar leyenda</strong>
                         </label>
                     </div>
+                    </>)}
 
                 </div>
 
@@ -1421,6 +1436,7 @@ useEffect(() => {
   <div className="grupo-titulo">ZONAS <span className={`grupo-badge${zonasActivasCount === 0 ? " cero" : ""}`}>{zonasActivasCount}</span></div>
 
   {/* ── MENSURAS ── */}
+  {!soloPIT && (<>
   <div className="capa-item">
     <label><strong>MENSURAS</strong></label>
     <div className="subcapas">
@@ -1554,6 +1570,7 @@ useEffect(() => {
     </div>
   </div>
 
+  </>)}
   {/* ── PARQUE INDUSTRIAL TECNOLÓGICO ── */}
   {(() => {
     const pitPlanActivo = !!capasActivas["Planificación Sección Sur"];
@@ -1659,7 +1676,7 @@ useEffect(() => {
       </div>
     );
   })()}
-
+  {!soloPIT && (<>
   <div className="capa-item capa-item-todas-zonas">
     <label>
       <input
@@ -1908,9 +1925,11 @@ useEffect(() => {
     </div>
   </div>
 
+</>)}
 </div>
 
 
+                {!soloPIT && (<>
                 {/* PLAN ESPECIAL */}
 
                 <div className="grupo-capas">
@@ -2030,10 +2049,12 @@ useEffect(() => {
                 </div>
 
 
+                </>)}
                 <hr />
 
 
                 {/* REFERENCIAS */}
+                {!soloPIT && (<>
 
                 <div className="capa-item">
 
@@ -2051,6 +2072,7 @@ useEffect(() => {
 
                 </div>
 
+                </>)}
                 {/* Toggle solo mobile: barra al pie del panel */}
                 <button
                     className="panel-toggle-mobile"

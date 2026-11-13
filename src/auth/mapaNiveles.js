@@ -5,6 +5,7 @@
 //   5  = visor de mapas       -> /usuariomapas/inicio
 //   6  = flujo de fondos      -> /nivel6/*
 //   7  = control de IC4       -> /mov2/*
+//   8  = visor PIT            -> /mapasegundaparte (solo capas del Parque Industrial Tecnológico)
 // Niveles 1, 4 y 10 no se usan por ahora (se ignoran).
 
 export const HOME_POR_NIVEL = {
@@ -13,6 +14,7 @@ export const HOME_POR_NIVEL = {
   5: '/mapasegundaparte',
   6: '/nivel6/carga',
   7: '/mov2/remax',
+  8: '/mapasegundaparte',
 };
 
 // Devuelve la ruta inicial del nivel. Si el nivel no está mapeado,
