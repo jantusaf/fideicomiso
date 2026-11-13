@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { MapContainer, TileLayer, GeoJSON, Marker, useMap } from "react-leaflet";
 import { useMapEvents } from "react-leaflet";
 
@@ -12,6 +12,33 @@ import TablaReferencias from "./tablaReferencias";
 import TablaReferencias2 from "./TablaReferencias2";
 import TablaReferenciasMensuras from "./TablaReferenciasMensuras";
 import { useAuth } from "../../auth/AuthContext";
+import servicioPitLotes from "../../services/pitLotes";
+import EditorLotePIT from "./EditorLotePIT";
+import FichaLotePIT from "./FichaLotePIT";
+import { ESTADOS_PIT, estadoPit, resumenFlags } from "./pitLotesUtil";
+
+// Datos de un pin leidos de su ficha de texto (origen: los .geojson). Se usan mientras el pin
+// no tenga datos propios en la base, y como respaldo de los campos que la carga inicial no pudo leer.
+const parsearDescripcionPit = (desc) => {
+    const get = (label) => {
+        // Solo la misma linea y desde su inicio: con \s* un rotulo vacio ("Empresa") tomaba el renglon
+        // siguiente, y sin el ancla "Lote" tambien coincidia dentro de "Estado lote".
+        const m = desc.match(new RegExp("^[ \\t]*" + label + "[=:\\t ]*([^\\n]*)", "im"));
+        return m && m[1].trim() ? m[1].trim() : null;
+    };
+    // "Empresa con Boleto" sin nombre: la etiqueta "Empresa" sola coincide con esa linea y devolveria "con Boleto".
+    const empresa = (get("Empresa con Boleto") || get("Empresa con Usufructo") || get("Empresa") || "")
+        .replace(/^con\s+(boleto|usufructo)\s*/i, "")
+        .trim();
+    return {
+        mz: get("Mz") || get("Manzana") || get("MZ"),
+        lote: get("Lote"),
+        sup: get("Superficie m2"),
+        medidas: get("medidas") || get("MEDIDAS") || get("Medidas"),
+        estado: get("Estado lote"),
+        empresa: empresa || null,
+    };
+};
 
 // Nivel 8 = visor PIT: solo puede ver las capas del Parque Industrial Tecnologico.
 // Los archivos que no estan en esta lista no se descargan (se devuelve una capa vacia).
@@ -27,6 +54,7 @@ const crearFetchGeo = (soloPIT) => (url, ...resto) => {
 const MapaConCapas = () => {
     const { logout, nivel } = useAuth();
     const soloPIT = Number(nivel) === NIVEL_VISOR_PIT;
+    const puedeEditarPIT = Number(nivel) === NIVEL_VISOR_PIT; // el visor PIT (nivel 8) es quien edita los lotes
     const fetchGeo = crearFetchGeo(soloPIT);
     //  Helper: inyecta properties.id si no existe (para area1..4 y cualquier capa que venga sin id)
     const normalizarGeojsonConIds = (data, nombreCapa) => {
@@ -486,6 +514,86 @@ const toggleTodasLasZonas = () => {
         "PLC-C": soloPIT,
         "PLC-F": soloPIT
     });
+
+    // Datos editados de los lotes del PIT (clave = id del pin). Si un pin no esta aca, se ve como siempre.
+    const [pitInfo, setPitInfo] = useState({});
+    const [pitVersion, setPitVersion] = useState(0); // fuerza a redibujar los pins al guardar un cambio
+    const [editorAbierto, setEditorAbierto] = useState(false);
+    const [editorFoco, setEditorFoco] = useState(null); // campo que recibe el cursor al abrir el formulario (ej: "empresa")
+
+    // Nombres de empresa ya cargados, para elegirlos de una lista al editar (evita variantes del mismo nombre).
+    const empresasSugeridas = useMemo(
+        () => [...new Set(Object.values(pitInfo).map((f) => f.empresa).filter(Boolean))].sort((a, b) => a.localeCompare(b)),
+        [pitInfo]
+    );
+
+    useEffect(() => {
+        servicioPitLotes
+            .lista()
+            .then((filas) => setPitInfo(Object.fromEntries(filas.map((f) => [f.id_mapa, f]))))
+            .catch(console.error);
+    }, []);
+
+    // Pins agrupados por su estado ACTUAL: el de la base si fue editado, y si no el del archivo de origen.
+    const pinsPorEstado = useMemo(() => {
+        const grupos = Object.fromEntries(ESTADOS_PIT.map((e) => [e.valor, []]));
+        for (const { capa, valor } of ESTADOS_PIT) {
+            for (const f of geojsonData[capa]?.features || []) {
+                const estado = pitInfo[f.properties?.id]?.estado;
+                (grupos[estado] || grupos[valor]).push(f);
+            }
+        }
+        return Object.fromEntries(
+            Object.entries(grupos).map(([k, features]) => [k, { type: "FeatureCollection", features }])
+        );
+    }, [geojsonData, pitInfo]);
+
+    // Datos que muestran el tooltip y la ficha de un pin.
+    const datosPin = (feature, estadoGrupo) => {
+        const desc = feature.properties.description || "";
+        const texto = parsearDescripcionPit(desc);
+        const info = pitInfo[feature.properties.id];
+        if (!info) {
+            return { ...texto, estado: estadoPit(estadoGrupo)?.etiqueta || texto.estado, empresaTipo: null, acceso: [], servicios: [], observaciones: null, desc, info: null, estadoClave: estadoGrupo };
+        }
+        // Si el pin ya fue editado, un campo vacio es intencional: no se rellena con la ficha de texto.
+        const editado = !!info.actualizado_en;
+        const val = (campo, clave) => info[campo] ?? (editado ? null : texto[clave]);
+        return {
+            mz: val("manzana", "mz"),
+            lote: val("lote", "lote"),
+            sup: val("superficie", "sup"),
+            medidas: val("medidas", "medidas"),
+            estado: estadoPit(info.estado)?.etiqueta || info.estado,
+            empresa: val("empresa", "empresa"),
+            empresaTipo: info.empresa_tipo,
+            acceso: resumenFlags(info, "Acceso"),
+            servicios: resumenFlags(info, "Servicios"),
+            observaciones: info.observaciones,
+            desc,
+            info,
+            estadoClave: info.estado,
+        };
+    };
+
+    const valoresEditor = (m) => ({
+        ...(m.info || {}),
+        estado: m.estadoClave,
+        manzana: m.mz ?? "",
+        lote: m.lote ?? "",
+        medidas: m.medidas ?? "",
+        superficie: m.sup ?? "",
+        empresa: m.empresa ?? "",
+        empresa_tipo: m.empresaTipo ?? "",
+        observaciones: m.observaciones ?? "",
+    });
+
+    const alGuardarLote = (fila) => {
+        setPitInfo((prev) => ({ ...prev, [fila.id_mapa]: fila }));
+        setPitVersion((v) => v + 1);
+        setEditorAbierto(false);
+        setModalPIT(null); // se cierra la ficha para ver el cambio de color en el mapa
+    };
     const esAreaEspecial = ["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "ib5","ib2","ib3", "unidad-ejecutora1", "unidad-ejecutora2", "unidad-ejecutora3","unidad-ejecutora2y3", "zona_municipal", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "Mensura30922U", "nuevazona", "ejercitoarg", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo", "ic4gral", "arenera"].includes(nombreCapaSeleccionada
     );
     // Carga inicial de datos guardados desde backend
@@ -1250,72 +1358,28 @@ useEffect(() => {
         <div className="mapa-contenedor">
             {/* Modal info lote PIT */}
             {modalPIT && (
-                <div onClick={() => setModalPIT(null)} style={{
-                    position:"fixed", inset:0, zIndex:9999,
-                    background:"rgba(0,0,0,0.45)", display:"flex",
-                    alignItems:"center", justifyContent:"center",
-                }}>
-                    <div onClick={e => e.stopPropagation()} style={{
-                        background:"#fff", borderRadius:14, width:360, maxWidth:"92vw",
-                        boxShadow:"0 8px 40px rgba(0,0,0,0.22)", overflow:"hidden",
-                        fontFamily:"inherit",
-                    }}>
-                        {/* Cabecera coloreada */}
-                        <div style={{
-                            background: modalPIT.color, padding:"16px 20px 14px",
-                            display:"flex", alignItems:"center", justifyContent:"space-between",
-                        }}>
-                            <div>
-                                <div style={{color:"#fff", fontWeight:700, fontSize:17, letterSpacing:0.2}}>
-                                    {modalPIT.mz ? `Manzana ${modalPIT.mz}` : "Lote PIT"}
-                                    {modalPIT.lote ? ` · Lote ${modalPIT.lote}` : ""}
-                                </div>
-                                {modalPIT.estado && (
-                                    <div style={{color:"rgba(255,255,255,0.85)", fontSize:12, marginTop:2, fontWeight:500}}>
-                                        {modalPIT.estado}
-                                    </div>
-                                )}
-                            </div>
-                            <button onClick={() => setModalPIT(null)} style={{
-                                background:"rgba(255,255,255,0.25)", border:"none", borderRadius:8,
-                                color:"#fff", fontSize:18, lineHeight:1, width:32, height:32,
-                                cursor:"pointer", fontWeight:700, display:"flex", alignItems:"center", justifyContent:"center",
-                            }}>×</button>
-                        </div>
-                        {/* Cuerpo */}
-                        <div style={{padding:"16px 20px 20px"}}>
-                            {[
-                                { label:"Superficie", value: modalPIT.sup ? `${modalPIT.sup} m²` : null },
-                                { label:"Medidas",    value: modalPIT.medidas },
-                                { label:"Empresa",    value: modalPIT.empresa },
-                            ].filter(r => r.value).map(({ label, value }) => (
-                                <div key={label} style={{
-                                    display:"flex", justifyContent:"space-between",
-                                    padding:"8px 0", borderBottom:"1px solid #f0f0f0",
-                                    fontSize:13,
-                                }}>
-                                    <span style={{color:"#888", fontWeight:600}}>{label}</span>
-                                    <span style={{color:"#222", fontWeight:500, textAlign:"right", maxWidth:"60%"}}>{value}</span>
-                                </div>
-                            ))}
-                            {/* Descripción completa */}
-                            {modalPIT.desc && (
-                                <details style={{marginTop:12}}>
-                                    <summary style={{cursor:"pointer", fontSize:12, color:"#888", fontWeight:600}}>
-                                        Ver ficha completa
-                                    </summary>
-                                    <pre style={{
-                                        marginTop:8, fontSize:11, color:"#555",
-                                        whiteSpace:"pre-wrap", lineHeight:1.6,
-                                        background:"#f8f8f8", borderRadius:6,
-                                        padding:"8px 10px", maxHeight:200, overflowY:"auto",
-                                    }}>{modalPIT.desc}</pre>
-                                </details>
-                            )}
-                        </div>
-                    </div>
-                </div>
+                <FichaLotePIT
+                    datos={modalPIT}
+                    puedeEditar={puedeEditarPIT}
+                    onEditar={(campo) => { setEditorFoco(campo || null); setEditorAbierto(true); }}
+                    onCerrar={() => setModalPIT(null)}
+                />
             )}
+
+            {editorAbierto && modalPIT && (
+
+                <EditorLotePIT
+
+                    lote={{ id: modalPIT.id, valores: valoresEditor(modalPIT) }}
+
+                    onCerrar={() => setEditorAbierto(false)}
+
+                    onGuardado={alGuardarLote} enfocar={editorFoco} empresasSugeridas={empresasSugeridas}
+
+                />
+
+            )}
+
 
             <div className={`panel-lateral${panelColapsado ? " panel-colapsado" : ""}`}>
 
@@ -2421,16 +2485,13 @@ useEffect(() => {
                         />
                     )}
 
-                    {/* PIT Puntos por estado: disponible (verde), no disponible (rojo), reservado (amarillo) */}
-                    {[
-                        { capa: "pitdisponible",    color: "#22c55e", borde: "#15803d" },
-                        { capa: "pitnodisponible",  color: "#ef4444", borde: "#b91c1c" },
-                        { capa: "pitreservado",     color: "#eab308", borde: "#a16207" },
-                    ].map(({ capa, color, borde }) =>
-                        capasActivas[capa] && geojsonData[capa] ? (
+                    {/* PIT Puntos por estado: disponible (verde), no disponible (rojo), reservado (amarillo).
+                        El estado sale de la base si el lote fue editado; si no, del archivo de origen. */}
+                    {ESTADOS_PIT.map(({ valor, capa, color, borde }) =>
+                        capasActivas[capa] && pinsPorEstado[valor].features.length > 0 ? (
                             <GeoJSON
-                                key={`${capa}-${geoJsonKey}`}
-                                data={geojsonData[capa]}
+                                key={`${capa}-${geoJsonKey}-${pitVersion}`}
+                                data={pinsPorEstado[valor]}
                                 pointToLayer={(feature, latlng) => {
                                     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36" width="11" height="16">
                                         <path d="M12 0C7.16 0 3 4.16 3 9c0 6.75 9 21 9 21s9-14.25 9-21c0-4.84-4.16-9-9-9z" fill="${color}" stroke="${borde}" stroke-width="1.5"/>
@@ -2446,24 +2507,14 @@ useEffect(() => {
                                     return L.marker(latlng, { icon });
                                 }}
                                 onEachFeature={(feature, layer) => {
-                                    const desc = feature.properties.description || "";
-                                    const get = (label) => {
-                                        const m = desc.match(new RegExp(label + "[=:\\t\\s]*([^\\n]+)", "i"));
-                                        return m ? m[1].trim() : null;
-                                    };
-                                    const mz      = get("Mz") || get("Manzana") || get("MZ");
-                                    const lote    = get("Lote");
-                                    const sup     = get("Superficie m2");
-                                    const medidas = get("medidas") || get("MEDIDAS") || get("Medidas");
-                                    const estado  = get("Estado lote");
-                                    const empresa = get("Empresa con Boleto") || get("Empresa con Usufructo") || get("Empresa");
+                                    const datos = datosPin(feature, valor);
                                     // Tooltip hover
                                     const tooltip = [
-                                        mz      ? `<b>Manzana:</b> ${mz}`   : null,
-                                        lote    ? `<b>Lote:</b> ${lote}`     : null,
-                                        sup     ? `<b>Sup.:</b> ${sup} m²`   : null,
-                                        estado  ? `<b>Estado:</b> ${estado}` : null,
-                                        empresa ? `<b>Empresa:</b> ${empresa}`: null,
+                                        datos.mz      ? `<b>Manzana:</b> ${datos.mz}`   : null,
+                                        datos.lote    ? `<b>Lote:</b> ${datos.lote}`     : null,
+                                        datos.sup     ? `<b>Sup.:</b> ${datos.sup} m²`   : null,
+                                        datos.estado  ? `<b>Estado:</b> ${datos.estado}` : null,
+                                        datos.empresa ? `<b>Empresa:</b> ${datos.empresa}`: null,
                                     ].filter(Boolean).join("<br/>");
                                     if (tooltip) {
                                         layer.bindTooltip(tooltip, {
@@ -2475,12 +2526,13 @@ useEffect(() => {
                                     }
                                     // Click → modal
                                     layer.on("click", () => {
-                                        setModalPIT({ mz, lote, sup, medidas, estado, empresa, desc, color });
+                                        setModalPIT({ ...datos, id: feature.properties.id, color });
                                     });
                                 }}
                             />
                         ) : null
                     )}
+
 
                     {["area1", "area2", "zonaesperanza", "area4", "area5", "area6", "rutas1", "ic3", "ic4", "ic42", "mensura31548Unuevo", "verdumzalazar", "invicoresidencial", "invico2", "invicomontana", "parc1", "parc2", "parc3", "nuevazona", "ejercitoarg", "ib5", "ib2", "ib3","unidad-ejecutora1","unidad-ejecutora2","unidad-ejecutora3","unidad-ejecutora2y3","zona_municipal", "Mensura30922U", "hipico1", "hipico2", "hipico3", "hipico4", "zona-arroyo", "ic4gral", "arenera"].map(
                         (nombre) => {
