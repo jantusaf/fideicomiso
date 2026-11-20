@@ -1,5 +1,8 @@
 import { useEffect } from "react";
-import { GRUPOS_FLAGS } from "./pitLotesUtil";
+import { GRUPOS_FLAGS, situacionPit } from "./pitLotesUtil";
+
+// "5000" -> "5000 m²"; si el dato ya trae la unidad ("15641.46M2", "6000 m²") no se repite.
+const conUnidad = (sup) => (/m\s*2|m²/i.test(sup) ? sup : `${sup} m²`);
 
 const GRIS = "#6b7a86";
 const TINTA = "#1a303e";
@@ -122,9 +125,24 @@ export default function FichaLotePIT({ datos, puedeEditar, onEditar, onCerrar })
                 {/* Cuerpo */}
                 <div style={{ padding: "16px 18px 18px", overflowY: "auto" }}>
                     <div style={{ display: "flex", gap: 8 }}>
-                        <Dato etiqueta="Superficie" valor={datos.sup ? `${datos.sup} m²` : null} />
+                        <Dato etiqueta="Superficie" valor={datos.sup ? conUnidad(datos.sup) : null} />
                         <Dato etiqueta="Medidas" valor={datos.medidas} />
                     </div>
+
+                    {/* Situación: un dato más. Quien edita la ve siempre (para saber que puede cargarla). */}
+                    {(datos.situacion || puedeEditar) && (
+                        <div style={{ marginTop: 10, border: "1px solid #e3e8ec", borderRadius: 10, padding: "9px 12px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+                            <div style={{ fontSize: 10.5, fontWeight: 700, color: GRIS, textTransform: "uppercase", letterSpacing: 0.4 }}>Situación</div>
+                            {datos.situacion ? (
+                                <span style={{
+                                    background: situacionPit(datos.situacion)?.fondo || "#eceff1", color: situacionPit(datos.situacion)?.texto || "#546e7a",
+                                    borderRadius: 999, padding: "3px 12px", fontSize: 12.5, fontWeight: 700,
+                                }}>{datos.situacion}</span>
+                            ) : (
+                                <span style={{ fontSize: 13, color: "#b5bec6", fontStyle: "italic" }}>Sin definir</span>
+                            )}
+                        </div>
+                    )}
 
                     {/* Quien edita ve siempre la tarjeta (para poder agregar el nombre); el resto solo si hay empresa */}
                     {(datos.empresa || puedeEditar) && (

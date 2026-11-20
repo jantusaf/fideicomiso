@@ -9,6 +9,17 @@ export const ESTADOS_PIT = [
 
 export const estadoPit = (valor) => ESTADOS_PIT.find((e) => e.valor === valor) || null;
 
+// Situación del lote: un dato más (NO cambia el color del pin, que depende solo del estado).
+// Colores propios y suaves, distintos de los del estado, para no confundirlos.
+export const SITUACIONES_PIT = [
+    { valor: "Con boleto", fondo: "#e8f1fb", texto: "#1565c0" },
+    { valor: "Con obra", fondo: "#f3e8fd", texto: "#7b1fa2" },
+    { valor: "Operando", fondo: "#e0f5f3", texto: "#00796b" },
+    { valor: "Caducado", fondo: "#eceff1", texto: "#546e7a" },
+];
+
+export const situacionPit = (valor) => SITUACIONES_PIT.find((s) => s.valor === valor) || null;
+
 export const GRUPOS_FLAGS = [
     {
         titulo: "Acceso",

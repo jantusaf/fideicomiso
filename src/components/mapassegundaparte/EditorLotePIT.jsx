@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import servicioPitLotes from "../../services/pitLotes";
-import { ESTADOS_PIT, GRUPOS_FLAGS } from "./pitLotesUtil";
+import { ESTADOS_PIT, GRUPOS_FLAGS, SITUACIONES_PIT } from "./pitLotesUtil";
 
 const TEXTOS = ["manzana", "lote", "medidas", "superficie", "empresa", "observaciones"];
 const FLAGS = GRUPOS_FLAGS.flatMap((g) => g.campos.map((c) => c.campo));
@@ -43,7 +43,7 @@ export default function EditorLotePIT({ lote, onCerrar, onGuardado, enfocar, emp
         setGuardando(true);
         setError("");
         try {
-            const cambios = { estado: form.estado, empresa_tipo: form.empresa_tipo || "" };
+            const cambios = { estado: form.estado, empresa_tipo: form.empresa_tipo || "", situacion: form.situacion || "" };
             TEXTOS.forEach((c) => { cambios[c] = form[c] ?? ""; });
             FLAGS.forEach((c) => { cambios[c] = Number(form[c]) === 1; });
             const fila = await servicioPitLotes.guardar(lote.id, cambios);
@@ -90,6 +90,14 @@ export default function EditorLotePIT({ lote, onCerrar, onGuardado, enfocar, emp
                             );
                         })}
                     </div>
+
+                    <label style={{ display: "block", marginBottom: 14 }}>
+                        <span style={estiloEtiqueta}>Situación (dato adicional, no cambia el color)</span>
+                        <select style={estiloInput} value={form.situacion || ""} onChange={(e) => cambiar("situacion", e.target.value)}>
+                            <option value="">— Sin definir —</option>
+                            {SITUACIONES_PIT.map((s) => <option key={s.valor} value={s.valor}>{s.valor}</option>)}
+                        </select>
+                    </label>
 
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 10 }}>
                         {[["manzana", "Manzana"], ["lote", "Lote"], ["medidas", "Medidas"], ["superficie", "Superficie (m²)"]].map(([campo, etiqueta]) => (
